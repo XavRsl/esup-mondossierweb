@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<ui:composition template="/stylesheets/template/template-ens.xhtml">
+	<ui:define name="titre">
+		Liste des Composantes
+	</ui:define>
+	<ui:define name="icones">
+		<span>
+			<h:commandLink id="linkretourrecherche" action="navigationRechercheArborescence">
+				<t:graphicImage value='/media/images/CMonDossierWeb/find.gif' align='absmiddle' alt='Nouvelle recherche' title='Nouvelle recherche' />
+			Nouvelle recherche
+			</h:commandLink>
+			</span>
+	</ui:define>
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+		</ui:define>
+	
+	<ui:define name="body">
+	
+	
+		<h:form rendered="#{rechercheController.objcourant.typeFils == rechercheController.typeComposante}">
+
+ <table class="portlet-table">
+
+<c:forEach var="comp" items="#{rechercheController.composantes.listeFils}" >
+<tr><td>
+	<h:commandLink action="#{rechercheController.chercheDiplomes}">
+  			<f:param name="co1de" value="#{comp.cod_cmp}"/>
+		<t:graphicImage value='/media/images/CMonDossierWeb/foldermini.gif' style= " border:0 ; " alt='voir diplômes'/>
+   		</h:commandLink>
+   		</td><td>
+   		<h:commandLink action="#{rechercheController.chercheDiplomes}">
+  			<f:param name="code" value="#{comp.cod_cmp}"/>
+		<h:outputText value="#{comp.cod_cmp}"/>
+		</h:commandLink>
+		</td><td>
+		<h:commandLink action="#{rechercheController.chercheDiplomes}">
+  			<f:param name="code" value="#{comp.cod_cmp}"/>
+			<div class="grasSouligne"><h:outputText value="#{comp.lib_cmp}"/></div>
+		</h:commandLink>
+	</td>	</tr>
+</c:forEach>
+</table>
+</h:form>
+		
+		<h:outputText rendered="#{rechercheController.objcourant.typeFils != rechercheController.typeComposante}">
+			<ui:include src="/stylesheets/error/actualisation-message.xhtml" />
+		</h:outputText>
+		
+<hr class='clear' />
+
+
+	</ui:define>
+</ui:composition></div>

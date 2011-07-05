@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"><ui:composition
+	template="/stylesheets/template/template-etu.xhtml">
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<div class="portlet-section-header">
+			<h:form>
+			<div style="float:right;" class="portlet-block-right">	
+				
+				<ui:include src="/stylesheets/etu/lienafficheridentite.xhtml"/>
+				
+			</div>
+			
+			Calendrier des examens
+			
+				<h:commandLink id="linkCalPdf" action="#{calendrierController.exportPdf}" rendered="#{config.calendrierPDF}">
+					<t:graphicImage value="/media/images/CMonDossierWeb/docpdf.gif"  />
+				</h:commandLink> 
+				
+			</h:form>
+		</div>
+
+		<div  id="identiteEtudiant" style="display:none;">
+			<ui:include src="/stylesheets/etu/identite.xhtml"/>
+			<br />
+		</div>
+
+		<br />
+		
+		<div class="portlet-table-header">
+			CALENDRIER
+		</div>
+
+
+		<h:outputText rendered="#{etudiant.existeExam}">
+
+
+			<h:form>
+				<t:dataTable value="#{etudiant.calendrier}" var="ex" cellpadding="5"
+					border="0" width="100%"
+					styleClass="portlet-table"
+					headerClass="portlet-table-header"
+					rowClasses="portlet-table-body, portlet-table-alternate">
+
+					<h:column>
+						<f:facet name="header">
+							Date
+						</f:facet>
+						<h:outputText value="#{ex.date}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							Heure
+						</f:facet>
+						<h:outputText value="#{ex.heure}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							Durée
+						</f:facet>
+						<h:outputText value="#{ex.duree}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							Bâtiment
+						</f:facet>
+						<h:outputText value="#{ex.batiment}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							Salle
+						</f:facet>
+						<h:outputText value="#{ex.salle}" />
+					</h:column>
+					<h:column rendered="#{config.affNumPlaceExamen}">
+						<f:facet name="header">
+							Place
+						</f:facet>
+						<h:outputText value="#{ex.place}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+						Examen
+						</f:facet>
+						<h:outputText value="#{ex.epreuve}" />
+					</h:column>
+				</t:dataTable>
+			</h:form>
+
+
+		</h:outputText>
+
+		<h:outputText rendered="#{!etudiant.existeExam}">
+			<table width='98%' border='0'>
+				<tr
+					onMouseOver="javascript:this.className='uportal-background-highlight'"
+					onMouseOut="javascript:this.className='uportal-background-content'"
+					class="uportal-background-content" >
+					<td>Pas de calendrier disponible</td>
+				</tr>
+			</table>
+		</h:outputText>
+			<h:outputText rendered="#{etudiant.existeExam}">
+			<table width='98%' border='0'>
+				<tr>
+					<hr size="1" />
+					<td><b>#{config.cmtCalExamen}</b></td>
+				</tr>
+			</table>
+		</h:outputText>
+		
+		
+
+	</ui:define>
+</ui:composition></div>

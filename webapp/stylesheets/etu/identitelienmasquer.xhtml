@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+		
+		<h:outputText rendered="#{!sessionController.enseignant}">
+				Masquer mon identité
+		</h:outputText>
+		<h:outputText rendered="#{sessionController.enseignant}">
+				Masquer l'identité de l'étudiant
+		</h:outputText>
+		    
+	</div>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	
+	<ui:composition
+	template="/stylesheets/template/template-etu.xhtml">
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<div class="portlet-section-header">
+			<div  style="float:right;" class="portlet-block">	
+				<ui:include src="/stylesheets/etu/lienafficheridentite.xhtml"/>
+			</div>	
+			Calendrier des examens	
+		</div>	
+		
+
+		<div  id="identiteEtudiant" style="display:none;">
+			<ui:include src="/stylesheets/etu/identite.xhtml"/>
+			<br />
+		</div>
+		<br />
+		<div class="portlet-table-header">
+			Calendrier	
+		</div>	
+
+
+		<h:outputText rendered="#{etudiant.existeExamEtape}">
+
+		<t:htmlTag value="ul" styleClass="portlet-section-subheader2">
+			<t:dataList value="#{etudiant.calendrierEtape}" var="caletp"
+				layout="simple">
+				<t:htmlTag value="li"
+					styleClass="portlet-section-subheader2">
+					<h:outputText value="#{caletp.etape}" /> - <h:outputText value="#{caletp.libEtape}" />
+					<h:outputText value="#{caletp.infos}" styleClass="portlet-msg-info" escape="false" />
+					<t:dataTable value="#{caletp.calendrierExamensEtape}" var="calexetp" 
+						styleClass="portlet-table"
+						headerClass="portlet-table-header"
+						rowClasses="portlet-table-body, portlet-table-alternate" >					
+						<t:column>
+							<f:facet name="header">
+								Date
+							</f:facet>
+							<h:outputText value="#{calexetp.date}" />
+						</t:column>
+						<t:column>
+							<f:facet name="header">
+								Heure
+							</f:facet>
+							<h:outputText value="#{calexetp.heure}" />
+						</t:column>
+						<t:column>
+							<f:facet name="header">
+								Durée
+							</f:facet>
+							<h:outputText value="#{calexetp.duree}" />
+						</t:column>
+						<t:column>
+							<f:facet name="header">
+								Epreuve
+							</f:facet>
+							<h:outputText value="#{calexetp.epreuve}" />
+						</t:column>
+						<t:column>
+							<f:facet name="header">
+								Lieu
+							</f:facet>
+							<h:outputText value="#{calexetp.salle}" /> - <h:outputText value="#{calexetp.batiment}" />
+						</t:column>
+					</t:dataTable>
+
+
+				</t:htmlTag>
+			</t:dataList>
+		</t:htmlTag>
+
+		</h:outputText>
+
+		<h:outputText rendered="#{!etudiant.existeExamEtape}">
+			<div class="portlet-msg-info">
+				Pas de calendrier disponible
+			</div>
+		</h:outputText>
+		<h:outputText rendered="#{etudiant.existeExamEtape}">
+			<div class="portlet-msg-info">
+				#{config.cmtCalExamen}
+			</div>
+		</h:outputText>
+		
+		
+
+	</ui:define>
+</ui:composition>
+</div>

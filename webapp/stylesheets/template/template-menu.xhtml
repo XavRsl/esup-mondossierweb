@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<h:form id="formMenu">
+			
+		<span>
+			<h:commandLink id="linketacivil1" style="text-decoration:underline" action="#{etatCivilController.enter}">
+						<t:graphicImage value="/media/images/CMonDossierWeb/info.gif" align='absmiddle' style= " border:0 ; "/>
+						Etat-Civil
+					</h:commandLink>
+			</span>
+				<span>
+					<h:commandLink id="linkadresses1" style="text-decoration:underline" action="#{adressesController.enter}">
+						<t:graphicImage align='absmiddle'  value="/media/images/CMonDossierWeb/home.gif"
+							style= " border:0 ; " />
+					 Adresses
+		 			</h:commandLink>
+			</span>
+			<h:outputText rendered="#{config.affInscriptions}">	
+				
+				<span>
+					<h:commandLink id="linkinscriptions1" style="text-decoration:underline" action="#{inscriptionsController.enter}">
+						<t:graphicImage align='absmiddle'  value="/media/images/CMonDossierWeb/modify.gif"
+							style= " border:0 ; " />
+					 Inscriptions
+		 			</h:commandLink>
+				</span>
+			</h:outputText>
+			
+			<h:outputText rendered="#{config.affCalendrier}">
+				<span>
+					<h:commandLink id="linkcalendrier1" style="text-decoration:underline" action="#{calendrierController.enter}">
+						<t:graphicImage value="/media/images/CMonDossierWeb/paste.gif"
+							align='absmiddle' style= " border:0 ; " />
+					 Calendrier des examens
+					 </h:commandLink>
+				</span>
+			</h:outputText>
+			
+			<h:outputText rendered="#{config.affCalendrierRentree}">
+				<span>
+					<h:commandLink id="linkcalendrierRent1" style="text-decoration:underline" action="#{calendrierRentreeController.enter}">
+						<t:graphicImage value="/media/images/CMonDossierWeb/paste.gif"
+							align='absmiddle' style= " border:0 ; " />
+					 Calendrier de rentrée
+					 </h:commandLink>
+				</span>
+			</h:outputText>
+			
+			<h:outputText rendered="#{config.affNotes}">
+				<span>
+					<h:commandLink id="linknotes1" style="text-decoration:underline" action="#{notesController.enter}">
+						<t:graphicImage value="/media/images/CMonDossierWeb/folder.gif"
+							align='absmiddle' style= " border:0 ; " />
+					Notes et résultats
+					 </h:commandLink>
+				</span>
+			</h:outputText>
+		
+	</h:form>
+</div>

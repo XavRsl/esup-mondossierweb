@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Diplomes">
+
+<resultMap id="resultDiplome" class="org.esupportail.mondossierweb.domain.beans.Diplome">
+<result property="cod_cmp" column="cod_cmp"/>
+<result property="lib_cmp" column="lib_cmp"/>
+<result property="cod_dip" column="cod_dip"/>
+<result property="cod_tpd_etb" column="cod_tpd_etb"/>
+<result property="cod_vrs_vdi" column="cod_vrs_vdi"/>
+<result property="lib_web_vdi" column="lib_web_vdi"/>
+</resultMap>
+
+
+
+<select id="getDiplomes" resultMap="resultDiplome">
+select distinct chv.cod_cmp, lib_cmp, vfv.cod_dip, vfv.cod_vrs_vdi, vdi.lib_web_vdi, dip.cod_tpd_etb
+from cmp_habiliter_vdi chv, vdi_fractionner_vet vfv, version_diplome vdi, composante, diplome dip  
+where (#anneeencours# >= vfv.DAA_DEB_RCT_VET and vfv.DAA_FIN_RCT_VET >= #anneeencours#) 
+and chv.cod_dip = vfv.cod_dip and chv.cod_vrs_vdi = vfv.cod_vrs_vdi 
+and chv.TEM_EN_SVE_CVD = 'O' and vdi.cod_dip = vfv.cod_dip 
+and vdi.cod_vrs_vdi = vfv.cod_vrs_vdi and chv.cod_cmp = #code# and chv.cod_cmp = composante.cod_cmp
+and vfv.cod_dip = dip.cod_dip
+order by vdi.lib_web_vdi 
+</select>
+
+<select id="getDiplome" resultClass="java.lang.String">
+select vdi.lib_web_vdi 
+from version_diplome vdi
+where vdi.cod_dip = #code#
+and vdi.cod_vrs_vdi = #version#
+</select>
+
+ <select id="getCodeTypeDiplome" resultClass="java.lang.String">
+        select dip.cod_tpd_etb 
+        from diplome dip 
+        where dip.cod_dip=#value#
+</select>
+    
+<!--<select id="getDiplomeByEtape" resultMap="resultDiplome">
+select chv.cod_cmp, lib_cmp, vfv.cod_dip, vfv.cod_vrs_vdi, vdi.lib_web_vdi, dip.cod_tpd_etb 
+from cmp_habiliter_vdi chv, vdi_fractionner_vet vfv, version_diplome vdi, etape e, composante, diplome dip 
+where chv.cod_dip = vfv.cod_dip and chv.cod_vrs_vdi = vfv.cod_vrs_vdi 
+and vdi.cod_dip = vfv.cod_dip and vdi.cod_vrs_vdi = vfv.cod_vrs_vdi 
+and chv.cod_cmp = composante.cod_cmp
+and vfv.cod_dip = dip.cod_dip
+and e.cod_etp = vfv.cod_etp and vfv.cod_etp = #code# 
+and vfv.cod_vrs_vet = #version#
+order by vdi.lib_web_vdi 
+</select>-->
+
+</sqlMap>
+
+	

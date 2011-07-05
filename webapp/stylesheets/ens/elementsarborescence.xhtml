@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<ui:composition template="/stylesheets/template/template-ens.xhtml">
+	<ui:define name="titre">
+		Liste des Eléments
+	</ui:define>
+	<ui:define name="icones">
+		<span>
+			<h:commandLink id="linkretourrecherche" action="navigationRechercheArborescence">
+				<t:graphicImage value='/media/images/CMonDossierWeb/find.gif' align='absmiddle' alt='Nouvelle recherche' title='Nouvelle recherche' />
+			Nouvelle recherche
+			</h:commandLink>
+			</span>
+	</ui:define>
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+		</ui:define>
+	<ui:define name="body">
+
+<h:form>
+<h:messages id="champMessages" errorStyle="color: red"  />
+<table>
+<tr>
+<td align="center">
+	<h:commandLink action="#{rechercheController.chercher}">	
+		<u>Liste des composantes</u>
+	</h:commandLink>
+</td>
+	<c:forEach items="#{rechercheController.chemin}" var="objet" begin="0" end="#{rechercheController.finchemin}">
+	<td>&gt;</td>
+	<td align="center"><u>
+	<h:commandLink action="#{rechercheController.chercherRetour}">
+	<f:param name="rang" value="#{objet.position}"/>
+	<f:param name="code" value="#{objet.code}"/>
+	<f:param name="version" value="#{objet.version}"/>
+	#{objet.libelle}
+	</h:commandLink>
+	</u></td>
+	</c:forEach>
+	<td>&gt;</td>
+	<td class='uportal-channel-table-header'>#{rechercheController.objcourant.libelle}</td>
+</tr>
+</table>
+</h:form>
+
+		<h:form rendered="#{rechercheController.objcourant.typeFils == rechercheController.typeElp}">
+
+ <table class="portlet-table">
+<c:forEach var="el" items="#{rechercheController.objcourant.listeFils}" >
+<tr><td>
+	<h:commandLink action="#{rechercheController.chercheElementsDepuisElement}">
+  			<f:param name="code" value="#{el.code}"/>
+  			<f:param name="select" value="false"/>
+			<f:param name="vers" value="element"/>
+  			<f:param name="longueurchemin" value="#{rechercheController.finchemin}"/>
+  			<f:param name="codeobjcourant" value="#{rechercheController.objcourant.code}"/>
+  			<f:param name="versobjcourant" value="#{rechercheController.objcourant.version}"/>
+		<t:graphicImage style= " border:0 ; " alt='voir diplômes' value='/media/images/CMonDossierWeb/foldermini.gif' />
+   		</h:commandLink>
+   		</td><td>
+   			<h:commandLink style= " text-decoration:underline ; " action="#{rechercheController.chercheElementsDepuisElement}">
+  			<f:param name="code" value="#{el.code}"/>
+  			<f:param name="select" value="false"/>
+			<f:param name="vers" value="element"/>
+  			<f:param name="longueurchemin" value="#{rechercheController.finchemin}"/>
+  			<f:param name="codeobjcourant" value="#{rechercheController.objcourant.code}"/>
+  			<f:param name="versobjcourant" value="#{rechercheController.objcourant.version}"/>
+		  <h:outputText value="#{el.code}"/> 
+    		</h:commandLink>
+		</td><td>
+			<h:commandLink style= " font-weight:bold ; text-decoration:underline ; " action="#{rechercheController.chercheElementsDepuisElement}">
+  			<f:param name="code" value="#{el.code}"/>
+  			<f:param name="select" value="false"/>
+			<f:param name="vers" value="element"/>
+  			<f:param name="longueurchemin" value="#{rechercheController.finchemin}"/>
+  			<f:param name="codeobjcourant" value="#{rechercheController.objcourant.code}"/>
+  			<f:param name="versobjcourant" value="#{rechercheController.objcourant.version}"/>
+		<h:outputText value="#{el.libelle}"/>
+		</h:commandLink>
+		</td><td>
+			<h:commandLink style= " text-decoration:underline ; " action="#{rechercheController.chercheElementsDepuisElement}">
+  			<f:param name="code" value="#{el.code}"/>
+  			<f:param name="select" value="true"/>
+			<f:param name="vers" value="element"/>
+  			<f:param name="longueurchemin" value="#{rechercheController.finchemin}"/>
+  			<f:param name="codeobjcourant" value="#{rechercheController.objcourant.code}"/>
+  			<f:param name="versobjcourant" value="#{rechercheController.objcourant.version}"/>
+    			&gt; Sélectionner
+    	</h:commandLink>
+	</td></tr>
+</c:forEach>
+</table>
+</h:form>
+
+<h:outputText rendered="#{rechercheController.aucunFils}">
+		<div class="portlet-msg-info">
+			<p>Aucun résultat disponible</p>
+		</div>
+</h:outputText>
+
+		<h:outputText rendered="#{rechercheController.objcourant.typeFils != rechercheController.typeElp}">
+			<ui:include src="/stylesheets/error/actualisation-message.xhtml" />
+		</h:outputText>
+		
+<hr class='clear' />
+
+
+
+	</ui:define>
+</ui:composition></div>

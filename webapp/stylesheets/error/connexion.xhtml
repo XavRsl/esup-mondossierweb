@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/stylesheets/template/template.xhtml">
+	<ui:define name="body">
+	
+	<table width="98%"> 
+		<tr>
+			<td align="center">
+	#{config.msgConnexion}<br />
+	<h:form id="lienConnexion">	
+			<h:commandButton class='uportal-button' id="linkconnexion" action="navigationLogin" value="Se Connecter"/>
+			<h:commandLink id="link2connexion" action="navigationLogin"></h:commandLink>
+	</h:form>
+	</td></tr></table>
+	<script language="JavaScript">
+			function restartfunction(){
+			document.getElementById("lienConnexion:link2connexion").onclick();
+			}
+			restartfunction();
+			</script>
+	</ui:define>
+	</ui:composition>
+</div>

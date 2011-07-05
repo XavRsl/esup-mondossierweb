@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+		
+    <br />
+    <script language='javascript'>
+        function afficherIdentite() {
+        document.getElementById('identiteEtudiant').style.display='';
+        document.getElementById('lienmasquerid').style.display='';
+        document.getElementById('lienafficherid').style.display='none'; 			
+        } 
+        
+        function masquerIdentite() {
+        document.getElementById('identiteEtudiant').style.display='none';
+        document.getElementById('lienmasquerid').style.display='none';
+        document.getElementById('lienafficherid').style.display=''; 
+        } 
+    </script>
+    <div class="portlet-table-header">
+            <span>Etudiant</span>
+		</div>
+      
+      <table border="0" cellpadding="2" cellspacing="0" width="98%"> 
+      
+      	<ui:include src="/stylesheets/etu/etatcivilidentite.xhtml"/>
+      
+      </table>
+		   
+		   
+	</div>

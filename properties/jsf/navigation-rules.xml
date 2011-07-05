@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE faces-config PUBLIC "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+                              "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+<!--
+	/properties/jsf/navigation-rules.xml
+	The configuration file of Java Server Faces that gives
+	the navigation rules between views.
+	This file is referenced by /webapp/WEB-INF/web.xml.
+	It should not be modified but by the developers.
+-->
+
+<faces-config>
+
+	<navigation-rule>
+		<display-name>index.jsp -> welcome.jsp</display-name>
+		<from-view-id>/index.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>welcome</from-outcome>
+			<to-view-id>/stylesheets/welcome.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>applicationRestarted</from-outcome>
+			<to-view-id>/stylesheets/welcome.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationWelcome</from-outcome>
+			<to-view-id>/stylesheets/welcome.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationEtatCivil</from-outcome>
+			<to-view-id>/stylesheets/etu/etatcivil.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationAdresses</from-outcome>
+			<to-view-id>/stylesheets/etu/adresses.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationModifierAdresses</from-outcome>
+			<to-view-id>/stylesheets/etu/modifieradresses.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationInscriptions</from-outcome>
+			<to-view-id>/stylesheets/etu/inscriptions.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationInscriptionPedagogique</from-outcome>
+			<to-view-id>/stylesheets/etu/inscriptionPedagogique.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationCalendrier</from-outcome>
+			<to-view-id>/stylesheets/etu/calendrier.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+<!--
+	Affichage calendrier examens par etapes (style Rennes 1)
+-->		
+ 
+		<navigation-case>
+			<from-outcome>navigationCalendrierEtape</from-outcome>
+			<to-view-id>/stylesheets/etu/calendrierEtape.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+
+<!--
+	Affichage calendrier de rentree
+-->		
+
+		<navigation-case>
+			<from-outcome>navigationCalendrierRentree</from-outcome>
+			<to-view-id>/stylesheets/etu/calendrierRentree.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		
+		<navigation-case>
+			<from-outcome>navigationNotes</from-outcome>
+			<to-view-id>/stylesheets/etu/notes.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+			<navigation-case>
+			<from-outcome>navigationDetailNotes</from-outcome>
+			<to-view-id>/stylesheets/etu/detailnotes.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationIndexEns</from-outcome>
+			<to-view-id>/stylesheets/ens/welcome.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationIndexEtu</from-outcome>
+			<to-view-id>/stylesheets/etu/welcome.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationLogin</from-outcome>
+			<to-view-id>/stylesheets/login.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationRechercheNumero</from-outcome>
+			<to-view-id>/stylesheets/ens/recherchenumero.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationRechercheAnnuaire</from-outcome>
+			<to-view-id>/stylesheets/ens/rechercheannuaire.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationResultatRechercheAnnuaire</from-outcome>
+			<to-view-id>/stylesheets/ens/resultatrechercheannuaire.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationSelectionRechercheAnnuaire</from-outcome>
+			<to-view-id>/stylesheets/ens/selectionrechercheannuaire.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationRechercheArborescence</from-outcome>
+			<to-view-id>/stylesheets/ens/recherchearborescence.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationComposantsArborescence</from-outcome>
+			<to-view-id>/stylesheets/ens/composantsarborescence.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationDiplomesArborescence</from-outcome>
+			<to-view-id>/stylesheets/ens/diplomesarborescence.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationElementsArborescence</from-outcome>
+			<to-view-id>/stylesheets/ens/elementsarborescence.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationEtapesArborescence</from-outcome>
+			<to-view-id>/stylesheets/ens/etapesarborescence.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationInscritsArborescence</from-outcome>
+			<to-view-id>/stylesheets/ens/inscritsarborescence.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationInscritsTrombinoscope</from-outcome>
+			<to-view-id>/stylesheets/ens/trombinoscope.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationRechercheCodeArborescence</from-outcome>
+			<to-view-id>/stylesheets/ens/recherchecodearborescence.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationResultatRechercheGroupes</from-outcome>
+			<to-view-id>/stylesheets/ens/resultatrecherchegroupes.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>error</from-outcome>
+			<to-view-id>/stylesheets/error/acces-interdit.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>exceptionError</from-outcome>
+			<to-view-id>/stylesheets/error/exception.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>error-connexion</from-outcome>
+			<to-view-id>/stylesheets/error/connexion.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>error-bdd</from-outcome>
+			<to-view-id>/stylesheets/error/exceptionBdd.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>error-ldap</from-outcome>
+			<to-view-id>/stylesheets/error/exceptionLdap.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>maintenance</from-outcome>
+			<to-view-id>/stylesheets/error/maintenance.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+	</navigation-rule>
+
+</faces-config>

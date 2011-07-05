@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/stylesheets/template/template-etu.xhtml">
+	<ui:define name="body">
+		<ui:define name="titre">
+		Accueil
+		</ui:define>
+		<ui:define name="icones">
+			<ui:include src="/stylesheets/template/template-contact.xhtml" />
+		</ui:define>
+		<h:messages id="champMessages" errorStyle="color: red" />
+		<div class="portlet-msg-info">
+			<p>
+			<ul>Ce canal a pour but de vous permettre de consulter votre dossier Etudiant. En accédant à votre dossier, vous trouverez les informations suivantes :
+			
+				<li><u>Etat-civil :</u> Nom, prénoms, 
+				date de naissance, numéro de dossier, baccalauréat...</li>
+	
+				<li><u>Adresses :</u> Adresse annuelle, Adresse fixe</li>
+	
+				<li><u>Inscriptions :</u> La liste de toutes vos inscriptions à l'Université...</li>
+	
+				<li><u>Calendrier des examens :</u> Dates, Salles, Durées...</li>
+	
+				<li><u>Notes et résultats :</u> Tous vos résultats aux diplômes, 
+				années intermédiaires, éléments pédagogiques et épreuves.  <!-- Decommenter la ligne ci dessous et commenter celle ci dessus en cas d utilisation du plugin Resultat -->
+				<!--
+	         <li>Notes et resultats : Vos notes et resultats de l'annee en cours
+				--> <br /><br />
+				<b>Remarque :</b> Les résultats sont visibles dès leur 
+				publication par les Scolarités.</li>
+			</ul>
+			</p>
+		</div>
+		<div align="right" style="color: silver; font-size: 90%; text-decoration: none">#{config.version}</div>
+		
+	</ui:define>
+</ui:composition></div>

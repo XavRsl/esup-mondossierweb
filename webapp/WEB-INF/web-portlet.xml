@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+
+<!-- 
+	/webapp/WEB-INF/web-portlet-example.xml
+	The main configuration file of the application for portlet installations.
+	Copy this file to /webapp/WEB-INF/web.xml and edit if needed (the default
+	configuration provided should fit to almost everybody).
+-->
+
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>esup-mondossierweb</display-name>
+	
+	<context-param>
+		<description>
+			The location of the main configuration file of the Spring framework. 
+		</description>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:/properties/applicationContext.xml
+		</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>esup-mondossierweb</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>
+			classpath:/log4j.properties
+		</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>
+			org.springframework.web.util.Log4jConfigListener
+		</listener-class>
+	</listener>
+	
+	<context-param>
+		<description>
+			The location of the main configuration file of the JSF framework.
+		</description>
+		<param-name>javax.faces.CONFIG_FILES</param-name>
+		<param-value>
+			/WEB-INF/classes/properties/jsf/commons-render-kit.xml,/WEB-INF/classes/properties/jsf/navigation-rules.xml,/WEB-INF/classes/properties/jsf/application.xml,/WEB-INF/classes/properties/jsf/fck-faces-config.xml
+		</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>facelets.LIBRARIES</param-name>
+		<param-value>/WEB-INF/tomahawk.taglib.xml</param-value>
+	</context-param>
+	
+	<!--<context-param>
+		<description>
+		The location of the custom configuration for FCK editor.
+		</description>
+		<param-name>org.fckfaces.CUSTOM_CONFIGURATIONS_PATH</param-name>
+		<param-value>/media/FCKeditor/custom-fckconfig.js</param-value>
+		</context-param>-->
+	
+	<context-param>
+		<param-name>org.apache.myfaces.PRETTY_HTML</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>org.apache.myfaces.ALLOW_JAVASCRIPT</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>org.apache.myfaces.DETECT_JAVASCRIPT</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>org.apache.myfaces.AUTO_SCROLL</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>org.apache.myfaces.ADD_RESOURCE_CLASS</param-name>
+		<param-value>org.apache.myfaces.renderkit.html.util.DefaultAddResource</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>org.apache.myfaces.CHECK_EXTENSIONS_FILTER</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>onload-config</param-name>
+		<param-value>/WEB-INF/onload-config.xml</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	<!-- Listener, that does all the startup work (configuration, init). -->
+	<listener>
+		<listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
+	</listener>
+
+	
+	<filter>
+		<description>
+			This filter is needed to use some Tomahawk extentions.
+		</description>
+		<display-name>MyFacesExtensionsFilter</display-name>
+		<filter-name>MyFacesExtensionsFilter</filter-name>
+		<filter-class>
+			org.apache.myfaces.webapp.filter.ExtensionsFilter
+		</filter-class>
+		<init-param>
+			<description>
+				The maximum size of uploaded files.
+			</description>
+			<param-name>maxFileSize</param-name>
+			<param-value>20m</param-value>
+		</init-param>
+	</filter>
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+	<!--<filter-mapping>
+		<filter-name>MyFacesExtensionsFilter</filter-name>
+		<servlet-name>esup-mondossierweb</servlet-name>
+		</filter-mapping>
+		<filter-mapping>
+		<filter-name>MyFacesExtensionsFilter</filter-name>
+		<url-pattern>/faces/myFacesExtensionResource/*</url-pattern>
+		</filter-mapping>-->
+	
+	<servlet>
+		<servlet-name>Download Servlet</servlet-name>
+		<servlet-class>
+			org.esupportail.commons.web.servlet.DownloadServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Download Servlet</servlet-name>
+		<url-pattern>/download</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>The esup-mondossierweb portlet servlet</description>
+		<display-name>esup-mondossierweb</display-name>
+		<servlet-name>esup-mondossierweb</servlet-name>
+		<servlet-class>
+			org.apache.pluto.core.PortletServlet
+		</servlet-class>
+		<init-param>
+			<param-name>portlet-class</param-name>
+			<param-value>
+				org.apache.portals.bridges.portletfilter.FilterPortlet
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>portlet-name</param-name>
+			<param-value>esup-mondossierweb</param-value>
+		</init-param>
+		<init-param>
+			<param-name>portlet-guid</param-name>
+			<param-value>esup-mondossierweb.esup-mondossierweb</param-value>
+		</init-param>
+		<init-param>
+			<param-name>default-view</param-name>
+			<param-value>/stylesheets/welcome.faces</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>esup-mondossierweb</servlet-name>
+		<url-pattern>/esup-mondossierweb/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>esup-mondossierweb</servlet-name>
+		<url-pattern>/PlutoInvoker/esup-mondossierweb</url-pattern>
+	</servlet-mapping>
+	
+	<security-constraint>
+		<display-name>Protection of the raw XHTML pages</display-name>
+		<web-resource-collection>
+			<web-resource-name>Raw JSF XHTML Pages</web-resource-name>
+			<description>
+				All the XHTML pages of the application.
+			</description>
+			<url-pattern>/stylesheets/etu/*</url-pattern>
+			<url-pattern>/stylesheets/ens/*</url-pattern>
+			<url-pattern>/stylesheets/error/*</url-pattern>
+			<url-pattern>/stylesheets/template/*</url-pattern>
+			<url-pattern>/stylesheets/error/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>No roles, so no direct access</description>
+		</auth-constraint>
+	</security-constraint>
+	
+</web-app>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Signataire">
+
+	<resultMap id="signataire"
+		class="org.esupportail.mondossierweb.domain.beans.Signataire">
+		<result property="cod_sig" column="COD_SIG" />
+		<result property="nom_sig" column="NOM_SIG" />
+		<result property="qua_sig" column="QUA_SIG" />
+		<result property="img_sig_std" column="IMG_SIG_STD" jdbcType="BLOB" />
+	</resultMap>
+
+	<!--<select id="getSignataire" resultMap="signataire">
+		select sig.COD_SIG, sig.NOM_SIG, sig.QUA_SIG, PKB_CRY1.decryptLob(std.IMG_SIG_STD,UTL_RAW.cast_to_raw('CLEFAPOGEE123456')) as IMG_SIG_STD
+		from APOGEE.SIGNATAIRE sig, APOGEE.SIGN_TAMP_DIGITALISE std
+		where sig.COD_SIG = std.COD_SIG
+		and sig.COD_SIG = #value#
+	</select>-->
+	
+	<select id="getSignataire" resultMap="signataire">
+		select sig.COD_SIG, sig.NOM_SIG, sig.QUA_SIG, PKB_CRY1.decryptLob(decode(std.TEM_CES_STD,'T',std.IMG_TAM_STD,std.IMG_SIG_STD),UTL_RAW.cast_to_raw('CLEFAPOGEE123456')) as IMG_SIG_STD
+		from APOGEE.SIGNATAIRE sig, APOGEE.SIGN_TAMP_DIGITALISE std
+		where sig.COD_SIG = std.COD_SIG
+		and sig.COD_SIG = #value#
+	</select>
+	
+	
+
+</sqlMap>

@@ -1,0 +1,105 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /**<a name="line.1"></a>
+<FONT color="green">002</FONT>     * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.<a name="line.2"></a>
+<FONT color="green">003</FONT>     */<a name="line.3"></a>
+<FONT color="green">004</FONT>    package org.esupportail.commons.services.application; <a name="line.4"></a>
+<FONT color="green">005</FONT>    <a name="line.5"></a>
+<FONT color="green">006</FONT>    import org.esupportail.commons.exceptions.EsupException;<a name="line.6"></a>
+<FONT color="green">007</FONT>    <a name="line.7"></a>
+<FONT color="green">008</FONT>    /**<a name="line.8"></a>
+<FONT color="green">009</FONT>     * This esxception is thrown when the upgrade task should be recalled (a commit is needed before).<a name="line.9"></a>
+<FONT color="green">010</FONT>     */<a name="line.10"></a>
+<FONT color="green">011</FONT>    public class RecallUpgradeException extends EsupException {<a name="line.11"></a>
+<FONT color="green">012</FONT>    <a name="line.12"></a>
+<FONT color="green">013</FONT>            /**<a name="line.13"></a>
+<FONT color="green">014</FONT>             * the id for serialization.<a name="line.14"></a>
+<FONT color="green">015</FONT>             */<a name="line.15"></a>
+<FONT color="green">016</FONT>            private static final long serialVersionUID = -3783878224084865299L;<a name="line.16"></a>
+<FONT color="green">017</FONT>            <a name="line.17"></a>
+<FONT color="green">018</FONT>            /**<a name="line.18"></a>
+<FONT color="green">019</FONT>             * The new upgrade state.<a name="line.19"></a>
+<FONT color="green">020</FONT>             */<a name="line.20"></a>
+<FONT color="green">021</FONT>            private final String newUpgradeState;<a name="line.21"></a>
+<FONT color="green">022</FONT>    <a name="line.22"></a>
+<FONT color="green">023</FONT>            /**<a name="line.23"></a>
+<FONT color="green">024</FONT>             * Bean constructor.<a name="line.24"></a>
+<FONT color="green">025</FONT>             * @param newUpgradeState <a name="line.25"></a>
+<FONT color="green">026</FONT>             */<a name="line.26"></a>
+<FONT color="green">027</FONT>            public RecallUpgradeException(final String newUpgradeState) {<a name="line.27"></a>
+<FONT color="green">028</FONT>                    super();<a name="line.28"></a>
+<FONT color="green">029</FONT>                    this.newUpgradeState = newUpgradeState;<a name="line.29"></a>
+<FONT color="green">030</FONT>            }<a name="line.30"></a>
+<FONT color="green">031</FONT>    <a name="line.31"></a>
+<FONT color="green">032</FONT>            /**<a name="line.32"></a>
+<FONT color="green">033</FONT>             * @return the newUpgradeState<a name="line.33"></a>
+<FONT color="green">034</FONT>             */<a name="line.34"></a>
+<FONT color="green">035</FONT>            public String getNewUpgradeState() {<a name="line.35"></a>
+<FONT color="green">036</FONT>                    return newUpgradeState;<a name="line.36"></a>
+<FONT color="green">037</FONT>            }<a name="line.37"></a>
+<FONT color="green">038</FONT>    <a name="line.38"></a>
+<FONT color="green">039</FONT>    }<a name="line.39"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

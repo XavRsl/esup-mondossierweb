@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DossierEtudiant">
+
+
+
+<resultMap id="significationResultat" class="org.esupportail.mondossierweb.dto.SignificationResultatDTO">
+<result property="cod_tre" column="cod_tre"/>
+<result property="lib_tre" column="lib_tre"/>
+</resultMap>
+
+<resultMap id="resElpDispense" class="org.esupportail.mondossierweb.dto.ResElpDTO">
+<result property="note" column="NOTE"/>
+<result property="res" column="RES"/>
+<result property="cod_anu" column="COD_ANU"/>
+</resultMap>
+
+<resultMap id="resElp" class="org.esupportail.mondossierweb.dto.ResElpDTO">
+<result property="cod_ses" column="COD_SES"/>
+<result property="note" column="NOTE"/>
+<result property="res" column="RES"/>
+<result property="cod_anu" column="COD_ANU"/>
+</resultMap>
+
+<resultMap id="resVet" class="org.esupportail.mondossierweb.dto.ResVetDTO">
+<result property="note" column="NOTE"/>
+<result property="res" column="RES"/>
+<result property="eta_avc_vet" column="ETA_AVC_VET"/>
+</resultMap>
+
+<resultMap id="epreuve" class="org.esupportail.mondossierweb.dto.EpreuveDTO">
+<result property="cod_epr" column="COD_EPR"/>
+<result property="cod_anu" column="COD_ANU"/>
+<result property="lib_epr" column="LIB_EPR"/>
+<result property="cod_ses" column="COD_SES"/>
+<result property="note" column="NOTE"/>
+</resultMap>
+
+<resultMap id="ip" class="org.esupportail.mondossierweb.dto.IpDTO">
+<result property="level" column="LEVEL"/>
+<result property="cod_elp" column="COD_ELP"/>
+<result property="cod_anu" column="COD_ANU"/>
+<result property="tem_prc_ice" column="TEM_PRC_ICE"/>
+<result property="cod_lcc_ice" column="COD_LCC_ICE"/>
+</resultMap>
+
+<resultMap id="notesResultats" class="org.esupportail.mondossierweb.dto.NotesResultatsDTO">
+<result property="cod_ses" column="COD_SES"/>
+<result property="note" column="NOTE"/>
+<result property="res" column="RES"/>
+<result property="cod_adm" column="COD_ADM"/>
+</resultMap>
+
+<resultMap id="etape" class="org.esupportail.mondossierweb.dto.EtapeDTO">
+<result property="anu" column="ANU"/>
+<result property="vet" column="VET"/>
+ <result property="lib_etp" column="lib_web_vet"/>
+<result property="cod_anu" column="COD_ANU"/>
+<result property="cod_etp" column="COD_ETP"/>
+</resultMap>
+
+
+<resultMap id="diplome" class="org.esupportail.mondossierweb.dto.DiplomeDTO">
+<result property="anu" column="ANU"/>
+<result property="vdi" column="VDI"/>
+<result property="lic_vdi" column="LIC_VDI"/>
+<result property="cod_anu" column="COD_ANU"/>
+<result property="cod_dip" column="COD_DIP"/>
+</resultMap>
+
+<resultMap id="pinscription" class="org.esupportail.mondossierweb.dto.InscriptionDTO">
+<result property="cod_anu" column="cod_anu"/>
+<result property="lib_etb" column="LIB_ETB"/>
+</resultMap>
+
+<resultMap id="inscriptionIAE" class="org.esupportail.mondossierweb.dto.InscriptionDTO">
+<result property="cod_anu" column="cod_anu"/>
+<result property="cod_etp" column="cod_etp"/>
+<result property="cod_vrs_vet" column="cod_vrs_vet"/>
+ <result property="lib_etp" column="lib_web_vet"/>
+</resultMap>
+
+<resultMap id="inscriptionDAC" class="org.esupportail.mondossierweb.dto.InscriptionDTO">
+<result property="cod_anu" column="COD_ANU"/>
+<result property="cod_dac" column="cod_dac"/>
+<result property="lib_cmt_dac" column="lib_cmt_dac"/>
+<result property="lib_etb" column="lib_etb"/>
+<result property="res" column="RES"/>
+</resultMap>
+
+
+
+<resultMap id="adresse" class="org.esupportail.mondossierweb.dto.AdresseDTO">
+<result property="lib_ad1" column="lib_ad1"/>
+<result property="lib_ad2" column="lib_ad2"/>
+<result property="lib_ad3" column="lib_ad3"/>
+<result property="num_tel" column="num_tel"/>
+<result property="lib_ade" column="lib_ade"/>
+<result property="cod_bdi" column="cod_bdi"/>
+<result property="lib_ach" column="lib_ach"/>
+<result property="pays" column="PAYS"/>
+<result property="lic_anu" column="lic_anu"/>
+<result property="num_tel_port" column="NUM_TEL_PORT"/>
+<result property="adr_mail" column="ADR_MAIL"/>
+<result property="lib_thb" column="LIB_THB"/>
+</resultMap>
+ 
+
+<resultMap id="bac" class="org.esupportail.mondossierweb.dto.BacDTO">
+<result property="lib_bac" column="lib_bac"/>
+<result property="daa_obt_bac_iba" column="daa_obt_bac_iba"/>
+<result property="cod_mnb" column="cod_mnb"/>
+<result property="cod_tpe" column="cod_tpe"/>
+<result property="cod_etb" column="cod_etb"/>
+<result property="cod_dep" column="cod_dep"/>
+</resultMap>
+
+
+<resultMap id="generalitesEtatCivil" class="org.esupportail.mondossierweb.dto.GeneralitesEtatCivilDTO">
+<result property="cod_etu" column="cod_etu"/>
+<result property="cod_nne_ind" column="cod_nne_ind"/>
+<result property="cod_cle_nne_ind" column="cod_cle_nne_ind"/>
+<result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+<result property="lib_nom_usu_ind" column="lib_nom_usu_ind"/>
+<result property="lib_pr1_ind" column="lib_pr1_ind"/>
+<result property="lib_pr2_ind" column="lib_pr2_ind"/>
+<result property="lib_pr3_ind" column="lib_pr3_ind"/>
+<result property="date_nai_ind" column="DATE_NAI_IND"/>
+<result property="lib_vil_nai_etu" column="lib_vil_nai_etu"/>
+<result property="cod_dep_pay_nai" column="cod_dep_pay_nai"/>
+<result property="daa_ent_etb" column="daa_ent_etb"/>
+<result property="cod_typ_dep_pay_nai" column="cod_typ_dep_pay_nai"/>
+<result property="cod_pay_nat" column="cod_pay_nat"/>
+<result property="cod_etb" column="cod_etb"/> 
+</resultMap>
+
+<resultMap id="resExtr" class="org.esupportail.mondossierweb.dto.ResExtractionR1DTO">
+<result property="barNotTrv" column="BAR_NOT_TRV"/>
+<result property="codAnu" column="COD_ANU"/>
+<result property="codInd" column="COD_IND"/>
+<result property="codMen" column="COD_MEN"/>
+<result property="codAnuObjMnp" column="COD_ANU_OBJ_MNP"/>
+<result property="codObjMnp" column="COD_OBJ_MNP"/>
+<result property="codAdmObjMnp" column="COD_ADM_OBJ_MNP"/>
+<result property="codRvn" column="COD_RVN"/>
+<result property="codSesObjMnp" column="COD_SES_OBJ_MNP"/>
+<result property="codTre" column="COD_TRE"/>
+<result property="codVrsObjMnp" column="COD_VRS_OBJ_MNP"/>
+<result property="decObjMnp" column="DEC_OBJ_MNP"/>
+<result property="libCmtTrv" column="LIB_CMT_TRV"/>
+<result property="libMen" column="LIB_MEN"/>
+<result property="licMen" column="LIC_MEN"/>
+<result property="licTre" column="LIC_TRE"/>
+<result property="notPntJurTrv" column="NOT_PNT_JUR_TRV"/>
+<result property="notTrv" column="NOT_TRV"/>
+<result property="numRngObjMnp" column="NUM_RNG_OBJ_MNP"/>
+<result property="typObjMnp" column="TYP_OBJ_MNP"/>
+<result property="nbrRngEtuTrv" column="NBR_RNG_ETU_TRV"/>
+<result property="nbrTotRngTrv" column="NBR_TOT_RNG_TRV"/>
+<result property="nbrCrdObjMnp" column="NBR_CRD_OBJ_MNP"/>
+</resultMap>
+
+<select id="getGeneralitesEtatCivil" resultMap="generalitesEtatCivil">
+select i.cod_etu,i.cod_nne_ind,i.cod_cle_nne_ind,i.lib_nom_pat_ind,i.lib_nom_usu_ind, 
+i.lib_pr1_ind,i.lib_pr2_ind,i.lib_pr3_ind, 	
+to_char(i.date_nai_ind,'DD/MM/YYYY') "DATE_NAI_IND", i.lib_vil_nai_etu,
+i.cod_dep_pay_nai, i.daa_ent_etb, i.cod_typ_dep_pay_nai, i.cod_pay_nat, i.cod_etb 
+from apogee.individu i
+where i.cod_ind = #value# 
+</select>
+
+<select id="getNationalite" resultClass="java.lang.String">
+select LIB_NAT from apogee.pays where cod_pay = #value#
+</select>
+
+<select id="getDepartement" resultClass="java.lang.String">
+select LIB_DEP from apogee.departement where cod_dep =  #value#
+</select>
+
+<select id="getPays" resultClass="java.lang.String">
+select LIB_PAY from apogee.pays where cod_pay = #value#
+</select>
+
+<select id="getEtb" resultClass="java.lang.String">
+select LIB_ETB from apogee.etablissement where cod_etb = #value#
+</select>
+
+<select id="getBacs" resultMap="bac">
+select b.lib_bac,ib.daa_obt_bac_iba,ib.cod_mnb,ib.cod_tpe,ib.cod_etb ,ib.cod_dep 
+from apogee.bac_oux_equ b, apogee.ind_bac ib
+where ib.cod_ind = #value#
+and b.cod_bac = ib.cod_bac
+</select>
+
+<select id="getMentionBac" resultClass="java.lang.String">
+select lib_men from apogee.mention where cod_men = #value#
+</select>
+
+<select id="getTypeEtb" resultClass="java.lang.String">
+select lib_tpe from apogee.typ_etb where cod_tpe = #value#
+</select>
+
+<select id="getAdresseAnnuelle" resultMap="adresse">
+select a.lib_ad1,a.lib_ad2,a.lib_ad3,a.num_tel, 
+a.lib_ade,a.cod_bdi,cb.lib_ach, 
+p.lib_pay "PAYS", au.lic_anu,a.NUM_TEL_PORT, a.ADR_MAIL, thb.LIB_THB
+from apogee.adresse a,apogee.com_bdi cb,apogee.pays p, apogee.annee_uni au,apogee.INS_INFO_ANU ianu, apogee.TYP_HEBERGEMENT thb
+where cod_ind_ina = #chaine1# and cod_anu_ina = #chaine2#
+and   cb.cod_com (+) = a.cod_com and   cb.cod_bdi (+) = a.cod_bdi 
+and   p.cod_pay = a.cod_pay
+and   cod_anu_ina = au.cod_anu
+and   ianu.COD_IND=cod_ind_ina
+and   ianu.COD_ANU=cod_anu_ina
+and   thb.COD_THB=ianu.COD_THB
+</select>
+
+<select id="getAnneeDerniereInscription" resultClass="java.lang.String">
+select max(cod_anu) as COD_ANU from apogee.ins_adm_anu 
+where cod_ind = #value#
+</select>
+
+<select id="getAdresseFixe" resultMap="adresse">
+select   a.lib_ad1,a.lib_ad2,a.lib_ad3,a.num_tel,
+a.lib_ade,a.cod_bdi,cb.lib_ach,
+p.lib_pay "PAYS", a.cod_anu_ina "lic_anu",a.NUM_TEL_PORT, a.ADR_MAIL, '' "LIB_THB"
+from apogee.adresse a,apogee.com_bdi cb,apogee.pays p
+where a.cod_ind = #value# and cb.cod_com (+) = a.cod_com
+and cb.cod_bdi (+) = a.cod_bdi and   p.cod_pay = a.cod_pay
+</select>
+
+<select id="getPremiereInscription" resultMap="pinscription">
+select i.daa_ent_etb cod_anu, e.LIB_ETB
+from apogee.individu i, apogee.etablissement e
+where i.cod_ind= #value#
+and e.COD_ETB=i.COD_ETB
+</select>
+
+<select id="getInscriptionIAE" resultMap="inscriptionIAE">
+ select iae.cod_anu||'/'||to_char(to_number(iae.cod_anu)+1) "COD_ANU",
+ iae.cod_etp, iae.cod_vrs_vet, VE.LIB_WEB_VET
+ from apogee.ins_adm_etp iae, apogee.etape e, version_etape ve
+ where iae.cod_ind = #value# 
+ and VE.COD_ETP = E.COD_ETP
+ and VE.COD_VRS_VET = IAE.COD_VRS_VET
+ and iae.eta_iae = 'E' 
+ and e.cod_etp = iae.cod_etp
+ order by cod_anu desc,iae.cod_etp
+</select>
+
+<select id="getInscriptionDAC" resultMap="inscriptionDAC">
+select d.daa_uni_dac||'/'||to_char(to_number(d.daa_uni_dac)+1) "COD_ANU",
+d.cod_dac,d.lib_cmt_dac,e.lib_etb,decode(d.tem_obt_dac,'N','AJOURNE','OBTENU') "RES" 
+from apogee.ind_dac d, apogee.etablissement e
+where d.cod_ind = #value# and e.cod_etb = d.cod_etb and e.cod_tpe = d.cod_tpe
+order by d.daa_uni_dac desc
+</select>
+
+<select id="getDiplomes" resultMap="diplome">
+select distinct r.cod_anu || '/' || to_char(to_number(r.cod_anu)+1) "ANU", 
+to_char(r.cod_vrs_vdi) "VDI",vdi.lic_vdi,r.cod_anu,r.cod_dip 
+from apogee.resultat_vdi r,apogee.version_diplome vdi
+where r.cod_ind =#value#
+and (r.not_vdi is not null or r.not_sub_vdi is not null or r.cod_tre is not null)
+and vdi.cod_dip = r.cod_dip
+and vdi.cod_vrs_vdi = r.cod_vrs_vdi
+order by r.cod_anu desc,r.cod_dip
+</select>
+
+<select id="getNotesResultatsDiplome" resultMap="notesResultats">
+select r.cod_ses,decode(decode(#chaine4#,'O','E',g.eta_avc_vdi),'A',' ',nvl(to_char(r.not_vdi) ||  
+decode(NOT_PNT_JUR_VDI,null,null,' (+' || to_char(NOT_PNT_JUR_VDI,'990D999')|| ')'), 
+r.not_sub_vdi)) "NOTE", g.cod_adm, decode(decode(#chaine4#,'O','E',g.eta_avc_vdi),'A',' ',r.cod_tre) "RES" 
+from apogee.grp_resultat_vdi g, apogee.resultat_vdi r
+where g.cod_dip = #chaine2# and g.cod_anu = #chaine3# 
+and r.cod_ind = #chaine1#
+and   (r.not_vdi is not null or r.not_sub_vdi is not null or r.cod_tre is not null) 
+and   g.cod_dip = r.cod_dip 
+and   g.cod_vrs_vdi = r.cod_vrs_vdi
+and   g.cod_ses = r.cod_ses 
+and   g.cod_adm = r.cod_adm 
+and   g.cod_anu = r.cod_anu
+</select>
+
+<select id="getEtapes" resultMap="etape">
+ select distinct ANU, VET,lib_web_vet,cod_anu,e.cod_etp
+ from (select cod_anu || '/' || to_char(to_number(cod_anu)+1) ANU, 
+ to_char(cod_vrs_vet) VET,cod_anu,cod_etp 
+ from ins_adm_etp 
+ where cod_ind = #value#
+ and   eta_iae = 'E' 
+ union 
+ select cod_anu || '/' || to_char(to_number(cod_anu)+1) ANU, 
+ to_char(cod_vrs_vet) VET, cod_anu,cod_etp 
+ from ins_pedagogi_etp 
+ where cod_ind = #value# and cod_typ_ipe != 'N') ins, etape e, version_etape ve 
+ where e.cod_etp = ins.cod_etp 
+ and ve.cod_etp = e.cod_etp
+ and ve.cod_vrs_vet = ins.VET
+ order by cod_anu desc, cod_etp 
+ </select>
+ 
+ <select id="getNotesResultatsEtape" resultMap="notesResultats">
+select r.cod_ses,decode(decode(#chaine4#,'O','E',g.eta_avc_vet),'A',' ',nvl(to_char(r.not_vet) || 
+decode(NOT_PNT_JUR_VET,null,null,' (+' || to_char(NOT_PNT_JUR_VET,'990D999')|| ')'), 
+r.not_sub_vet)) "NOTE",
+decode(decode(#chaine4#,'O','E',g.eta_avc_vet),'A',' ',r.cod_tre) "RES",g.cod_adm
+from apogee.resultat_vet r,apogee.grp_resultat_vet g 
+where r.cod_ind = #chaine1#
+and g.cod_etp = #chaine2# and g.cod_anu = #chaine3#
+and   g.cod_etp = r.cod_etp 
+and   g.cod_vrs_vet = r.cod_vrs_vet 
+and   g.cod_ses = r.cod_ses
+and   g.cod_adm = r.cod_adm
+and   g.cod_anu = r.cod_anu
+</select>
+
+<select id="getSignificationCodeResultat" resultMap="significationResultat">
+select cod_tre, lib_tre from typ_resultat order by 1
+</select>
+
+ <select id="getEtapeIP" resultMap="etape">
+  select (cod_anu || '/' || to_char(to_number(cod_anu)+1)) "ANU",i.cod_anu,i.cod_etp,i.cod_vrs_vet "VET",ve.lib_web_vet 
+from apogee.ins_pedagogi_etp i,apogee.etape e, version_etape ve 
+where i.cod_ind = #chaine1#
+and e.cod_etp = #chaine2#
+and i.cod_vrs_vet = #chaine3#
+and i.cod_anu =#chaine4#
+and e.cod_etp = i.cod_etp 
+and ve.cod_etp = e.cod_etp
+and VE.COD_VRS_VET = i.cod_vrs_vet
+order by i.cod_anu desc,i.cod_etp,i.cod_vrs_vet
+</select>
+
+
+<select id="getIPvet" resultMap="ip">
+select level,cod_elp,cod_anu,tem_prc_ice,COD_LCC_ICE
+FROM APOGEE.IND_CONTRAT_ELP CONNECT BY prior COD_ELP = COD_ELP_SUP
+AND COD_ANU= #chaine4#
+AND COD_IND= #chaine1#
+AND COD_ETP= #chaine2#
+AND COD_VRS_VET=#chaine3#
+START WITH COD_ELP_SUP IS NULL 
+AND COD_ANU= #chaine4#
+AND COD_IND= #chaine1#
+AND COD_ETP=  #chaine2#
+order siblings by COD_ELP
+</select>
+
+<select id="getElpName" resultClass="java.lang.String">
+select decode(cod_nel,'FICM','FICM',lib_elp) "LIB"
+from apogee.element_pedagogi
+where cod_elp = #value#
+</select>
+
+<select id="getCodAnuMax" resultClass="java.lang.String">
+select max(cod_anu) "COD_ANU"
+from apogee.resultat_elp
+where cod_ind = #chaine1#
+and   cod_elp = #chaine2#
+and   cod_anu &lt; #chaine3#
+and   (not_elp is not null or not_sub_elp is not null 
+or cod_tre is not null)
+</select>
+
+<select id="getCodAnuDispenseElp" resultClass="java.lang.String">
+select cod_anu from apogee.ind_dispense_elp 
+where cod_ind =  #chaine1#
+and cod_elp = #chaine2#
+and cod_anu &lt;= #chaine3#
+</select>
+
+<select id="getNoteResEpr" resultMap="epreuve">
+select r.cod_epr, r.cod_anu,e.lib_epr,r.cod_ses, 
+ case 
+	 when 
+	 case
+	 when g.eta_avc_elp = 'A' then 
+  		case 
+			when #chaine4# = 'O' then 'N' 
+			else e.tem_ctl_val_cad_epr 
+ 		end 
+	else 'N' 
+    end 
+ = 'N' then nvl(to_char(r.not_epr),r.not_sub_epr) 
+else ' ' 
+end "NOTE" 
+from apogee.grp_resultat_elp g,apogee.resultat_epr r,apogee.epr_sanctionne_elp ese,apogee.epreuve e 
+				   where ese.cod_elp = #chaine2#
+				   and   ese.cod_ses = r.cod_ses 
+				   and   ese.tem_sus_epr_ses = 'N' 
+				   and   r.cod_ind = #chaine1#
+				   and   r.cod_epr = ese.cod_epr 
+				   and   r.cod_anu = #chaine3#
+				   and   (r.not_epr is not null or r.not_sub_epr is not null) 
+				   and   TEM_IND_CRN_EPR = 'CS' and e.cod_epr = r.cod_epr
+				   and   g.cod_elp = ese.cod_elp and g.cod_ses = r.cod_ses 
+				   and   g.cod_adm = r.cod_adm and g.cod_anu = r.cod_anu 
+				   order by r.cod_epr,r.cod_ses
+</select>
+
+
+<select id="getLibEpr" resultClass="java.lang.String">
+select lib_epr from apogee.epreuve where cod_epr = #value#
+</select>
+
+
+<select id="getResVet" resultMap="resVet">
+select decode(decode(#chaine4#,'O','E',g.eta_avc_vet),'A',' ',nvl(to_char(r.not_vet) ||
+decode(NOT_PNT_JUR_Vet,null,null,' (+' || to_char(NOT_PNT_JUR_VET,'990D999') || ')'),
+r.not_sub_vet)) "NOTE",
+decode(decode(#chaine4#,'O','E',g.eta_avc_vet),'A',' ',r.cod_tre) "RES", g.eta_avc_vet 
+ from apogee.resultat_vet r,apogee.grp_resultat_vet g 
+ where r.cod_ind = #chaine1#
+and   r.cod_anu = #chaine5#
+ and   r.cod_etp = #chaine2#
+ and   r.cod_vrs_vet = #chaine3#
+ and   r.cod_ses = #chaine6#
+ and   (r.not_vet is not null or r.not_sub_vet is not null or r.cod_tre is not null) 
+ and   g.cod_etp = r.cod_etp and   g.cod_vrs_vet = r.cod_vrs_vet
+ and   g.cod_ses = r.cod_ses and   g.cod_adm = r.cod_adm
+and   g.cod_anu = r.cod_anu
+</select>
+
+<select id="getResElp" resultMap="resElp">
+select r.cod_ses,decode(decode(#chaine4#,'O','E',g.eta_avc_elp),'A',' ',nvl(to_char(r.not_elp) ||
+decode(NOT_PNT_JUR_ELP,null,null,' (+' || to_char(NOT_PNT_JUR_ELP,'990D999') || ')'),
+nvl(r.not_sub_elp,' '))) "NOTE",
+decode(decode(#chaine4#,'O','E',g.eta_avc_elp),'A',' ',nvl(r.cod_tre,' ')) "RES",r.cod_anu
+from apogee.resultat_elp r,apogee.grp_resultat_elp g
+ where r.cod_ind = #chaine1#
+and   r.cod_anu = #chaine3#
+ and   r.tem_ind_crn_elp = 'CS' 
+and   r.tem_not_rpt_elp = 'N' 
+and   r.cod_elp = #chaine2#
+ and   (r.not_elp is not null or r.not_sub_elp is not null or r.cod_tre is not null) 
+ and   g.cod_elp = r.cod_elp and   g.cod_ses = r.cod_ses 
+and   g.cod_adm = r.cod_adm and   g.cod_anu = r.cod_anu
+</select>
+
+
+<select id="getResDispenseElp1" resultMap="resElpDispense">
+select 'VAC' "NOTE",' ' "RES",cod_anu
+ from apogee.ind_dispense_elp
+ where cod_ind = "chaine1"
+and   cod_elp = "chaine2"
+</select>
+
+<select id="getResDispenseElp2" resultMap="resElpDispense">
+select 'VAC' "NOTE",' ' "RES",cod_anu
+ from apogee.ind_dispense_elp
+ where cod_ind =#chaine1#
+and   cod_elp = #chaine2#
+ and   cod_etp =#chaine3#
+and   cod_vrs_vet = #chaine4#
+</select>
+
+<select id="getResExtr" resultMap="resExtr">
+SELECT COD_IND, TRAV_EXT_RVM_RES.COD_RVN, COD_ANU, COD_ANU_OBJ_MNP, COD_ADM_OBJ_MNP, COD_SES_OBJ_MNP
+, TYP_OBJ_MNP, COD_OBJ_MNP, COD_VRS_OBJ_MNP
+, to_char(NOT_TRV) NOT_TRV, BAR_NOT_TRV, to_char(NOT_PNT_JUR_TRV,'990.999') NOT_PNT_JUR_TRV
+, RELEVE_NOTE.LIB_RVN LIB_CMT_TRV,  DEC_OBJ_MNP, NUM_RNG_OBJ_MNP
+, NBR_RNG_ETU_TRV, NBR_TOT_RNG_TRV
+, TRAV_EXT_RVM_RES.COD_MEN, MENTION.LIC_MEN, MENTION.LIB_MEN
+, TRAV_EXT_RVM_RES.COD_TRE, TYP_RESULTAT.LIB_TRE,TYP_RESULTAT.LIC_TRE
+, NBR_CRD_OBJ_MNP
+FROM DUAL, MENTION, TYP_RESULTAT,TRAV_EXT_RVM_RES, RELEVE_NOTE
+WHERE TRAV_EXT_RVM_RES.COD_MEN = MENTION.COD_MEN(+)
+ AND TRAV_EXT_RVM_RES.COD_IND = #chaine1#
+ AND TRAV_EXT_RVM_RES.COD_ANU = #chaine2#
+ AND TRAV_EXT_RVM_RES.cod_tre=TYP_RESULTAT.cod_tre(+)
+ AND NUM_OCC_OBJ_OBJ_MNP &lt; 0
+ AND RELEVE_NOTE.COD_RVN = TRAV_EXT_RVM_RES.COD_RVN
+ AND sysdate between DAT_DEB_VAL AND DAT_FIN_VAL
+</select>
+
+<select id="getResExtrDetail" resultMap="resExtr">
+SELECT COD_IND, COD_RVN, COD_ANU, COD_ANU_OBJ_MNP, COD_ADM_OBJ_MNP, COD_SES_OBJ_MNP
+, TYP_OBJ_MNP, COD_OBJ_MNP, COD_VRS_OBJ_MNP
+, to_char(NOT_TRV) NOT_TRV, BAR_NOT_TRV, to_char(NOT_PNT_JUR_TRV,'990.999') NOT_PNT_JUR_TRV
+, LIB_CMT_TRV,  DEC_OBJ_MNP, NUM_RNG_OBJ_MNP
+, NBR_RNG_ETU_TRV, NBR_TOT_RNG_TRV
+, TRAV_EXT_RVM_RES.COD_MEN, MENTION.LIC_MEN, MENTION.LIB_MEN
+, TRAV_EXT_RVM_RES.COD_TRE, TYP_RESULTAT.LIB_TRE,TYP_RESULTAT.LIC_TRE
+, NBR_CRD_OBJ_MNP
+FROM MENTION, TYP_RESULTAT,TRAV_EXT_RVM_RES
+WHERE TRAV_EXT_RVM_RES.COD_MEN = MENTION.COD_MEN(+) AND TRAV_EXT_RVM_RES.COD_TRE = TYP_RESULTAT.COD_TRE(+)
+ AND TRAV_EXT_RVM_RES.COD_IND = #chaine1# 
+ AND TRAV_EXT_RVM_RES.COD_ANU = #chaine2#
+ AND TRAV_EXT_RVM_RES.COD_RVN = #chaine3#
+ AND TRAV_EXT_RVM_RES.NUM_OCC_OBJ_OBJ_MNP &gt; 0
+ORDER BY NUM_RNG_OBJ_MNP
+</select>
+
+
+</sqlMap>
+
+	

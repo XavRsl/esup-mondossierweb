@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition>
+		<div class="portlet-title">
+			
+			<div style="float:right;" class="portlet-title-right">
+				<h:form id="formIcones">
+					
+					<ui:insert name="icones"></ui:insert>
+					<ui:insert name="iconesommaire"></ui:insert>
+					
+				</h:form>
+			</div>
+			
+			<div class="portlet-title-left">
+				<ui:insert name="menu"></ui:insert>
+			</div>
+			
+		</div>
+		
+		<br />
+		<div class="portlet-body">
+			<ui:insert name="body">Page Body</ui:insert>
+		</div>
+
+	</ui:composition>
+</div>

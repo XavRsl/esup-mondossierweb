@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:e="http://commons.esup-portail.org"
+		xmlns:t="http://myfaces.apache.org/tomahawk"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+ 
+<ui:composition template="/stylesheets/template/template.xhtml">
+	<ui:define name="icones">
+		<h:outputText rendered="#{sessionController.enseignant}">
+
+		
+			<span>
+				<h:commandLink id="linkretourliste" action="navigationInscritsArborescence" rendered="#{etatCivilController.vientDuneListe}">
+					<t:graphicImage align='absmiddle' style= " border:0 ; " value='/media/images/CMonDossierWeb/back.gif' alt='Retour à la liste' title='Retour à la liste' />
+					Retour à la liste
+				</h:commandLink>
+				<h:commandLink id="linkretourtrombi" action="navigationInscritsTrombinoscope" rendered="#{etatCivilController.vientDuTrombi}">
+					<t:graphicImage align='absmiddle' style= " border:0 ; " value='/media/images/CMonDossierWeb/back.gif' alt='Retour à la liste' title='Retour à la liste' />
+					Retour à la liste
+				</h:commandLink>
+				<h:commandLink id="linkretourrecherche" action="navigationRechercheNumero" rendered="#{etatCivilController.vientDuNumero}">
+					<t:graphicImage align='absmiddle' style= " border:0 ; " value='/media/images/CMonDossierWeb/find.gif' alt='Nouvelle recherche' title='Nouvelle recherche' />
+					Nouvelle recherche
+				</h:commandLink>
+				<h:commandLink id="linkretourrechercheannu" action="navigationResultatRechercheAnnuaire" rendered="#{etatCivilController.vientDeAnnuaire}">
+					<t:graphicImage align='absmiddle' style= " border:0 ; " value='/media/images/CMonDossierWeb/back.gif' alt='Retour à la liste' title='Retour à la liste' />
+					Retour à la liste
+				</h:commandLink>
+				</span>
+			
+			<h:outputText rendered="#{!sessionController.enseignant}">
+				<span>
+						<ui:include src="/stylesheets/template/template-contact.xhtml"/>
+					</span>
+			</h:outputText>
+		
+		</h:outputText>
+	</ui:define>
+	<ui:define name="menu">
+		<ui:include src="/stylesheets/template/template-menu.xhtml"/>
+	</ui:define>
+</ui:composition>
+  
+</div>

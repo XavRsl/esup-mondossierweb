@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	>
+	
+	<!--<bean id="authenticator" lazy-init="true"
+		class="org.esupportail.blank.services.authentication.AuthenticatorImpl">
+		<property name="authenticationService" ref="delegatingAuthenticationService" />
+		<property name="domainService" ref="domainService" />
+	</bean>
+	-->
+	
+	
+	
+	
+	<bean id="delegatingAuthenticationService" 
+		class="org.esupportail.commons.services.authentication.DelegatingAuthenticationService">
+		<property name="authenticationServices" >
+			<list>
+				<bean id="portletAuthenticationService" 
+					class="org.esupportail.commons.services.authentication.CasifiedPortalAuthenticationService">
+					<property name="uidPortalAttribute" value="uid" />
+				</bean>
+				<bean id="servletAuthenticationService" 
+					class="org.esupportail.commons.services.authentication.CasFilterAuthenticationService">
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!--
+	<bean id="portletOrServeltAuthenticationService" lazy-init="true"
+		class="org.esupportail.commons.services.authentication.PortalOrCasFilterAuthenticationService">
+		<property name="uidPortalAttribute" value="uid" />
+	</bean>
+	-->
+</beans>

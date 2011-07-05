@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<ui:composition template="/stylesheets/template/template-etu.xhtml">
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+	
+		<div class="portlet-section-header">
+			<div style="float:right;" class="portlet-block-right">	
+				
+				<ui:include src="/stylesheets/etu/lienafficheridentite.xhtml"/>
+				
+			</div>
+			
+			Inscriptions
+			
+		</div>
+		
+		<div  id="identiteEtudiant" style="display:none;">
+			<ui:include src="/stylesheets/etu/identite.xhtml"/>
+				<br />
+		</div>
+		<br />
+<h:outputText rendered="#{etudiant.inscriptionsRenseignees}">
+	<div class="portlet-table-header">
+			<span>#{etudiant.lib_etb}</span>
+		</div>
+<br />
+<h:form>
+	<t:dataTable id="tableiae" value="#{etudiant.linsciae}" var="ins" width="98%"
+		rowIndexVar="rowindex" styleClass="portlet-table"
+		headerClass="portlet-table-header"
+		rowClasses="portlet-table-body, portlet-table-alternate" >					
+	
+		<t:column>
+			<f:facet name="header">Année</f:facet>
+			<h:outputText value="#{ins.cod_anu}"/>
+	    </t:column> 
+	    
+	    <t:column>
+	    	<f:facet name="header">Code</f:facet>
+			<h:outputText value="#{ins.cod_etp}"/>
+	    </t:column> 
+	    
+	    <t:column>
+	    	<f:facet name="header">Vers.</f:facet>
+			<h:outputText value="#{ins.cod_vrs_vet}"/>
+	    </t:column> 
+	    
+	    <t:column>
+	    	<f:facet name="header">Etape</f:facet>
+			
+	    	<h:outputText value="#{ins.lib_etp}"/> 
+	    	<h:commandLink rendered="#{inscriptionsController.ipAutorisations[ins.codEtpCodAnuConcat]}" action="#{inscriptionsController.preciserEtapeInscription}">
+	    		<u>_Inscription Pédagogique_</u>
+	    		<f:param name="row" value="#{rowindex}"/>
+	    	</h:commandLink>
+	    	
+	    	<t:div rendered="#{inscriptionsController.certScolAutorisations[ins.codEtpCodAnuConcat]}" >
+	    		<h:commandLink action="#{inscriptionsController.exportPdf}">
+	    			Téléchargez le certificat de scolarité 
+	    			<t:graphicImage value="/media/images/CMonDossierWeb/docpdf.gif" style= " border:0 ; " />
+	    			<f:param name="row" value="#{rowindex}"/>
+	    		</h:commandLink>
+	    	</t:div>
+	    </t:column> 
+	    
+	</t:dataTable> 
+</h:form>
+	<br />
+	<div class="portlet-table-header">
+			<span>AUTRES CURSUS</span>
+		</div>
+<br />
+<h:form>
+	<t:dataTable id="tabledac" value="#{etudiant.linscdac}" var="insd" rendered="#{etudiant.existeInsDac}" width="98%"
+		styleClass="portlet-table"
+		headerClass="portlet-table-header"
+		rowClasses="portlet-table-body, portlet-table-alternate" >					
+
+		<t:column>
+			<f:facet name="header">Année</f:facet>
+			<h:outputText value="#{insd.cod_anu}"/>
+	    </t:column> 
+	    
+	    <t:column>
+	    	<f:facet name="header">Type</f:facet>
+			<h:outputText value="#{insd.cod_dac}"/>
+	    </t:column> 
+	    
+	    <t:column>
+	    	<f:facet name="header">Spécialité</f:facet>
+			<h:outputText value="#{insd.lib_cmt_dac}"/>
+	    </t:column> 
+	    
+	    <t:column>
+	    	<f:facet name="header">Etablissement</f:facet>
+			<h:outputText value="#{insd.lib_etb}"/>
+	    </t:column> 
+	    
+	    <t:column>
+	    	<f:facet name="header">Résultat</f:facet>
+			<h:outputText value="#{insd.res}"/>
+	    </t:column> 
+	    
+	</t:dataTable>
+
+	<h:outputText rendered="#{!etudiant.existeInsDac}">
+		<div class="portlet-msg-info">
+			<span>Pas de cursus universitaire effectué en dehors de #{etudiant.lib_etb}</span>
+		</div>
+	</h:outputText>
+
+</h:form>
+	<br />
+	<div class="portlet-table-header">
+			<span>PREMIERE INSCRIPTION UNIVERSITE</span>
+		</div>
+
+<table width='98%' class="portlet-table" >
+				
+	<tr>
+		<td width='150' class='portlet-table-body,'>
+			Année
+		</td>
+		<td class='portlet-table-body,'>
+			<b>#{etudiant.anneePremiereInscrip}</b>
+		</td>
+	</tr>
+	 <tr>
+		<td class='portlet-table-body,'>
+			Etablissement
+		</td>
+		<td class='portlet-table-body,'>
+		<b>#{etudiant.etbPremiereInscrip}</b>
+		</td>
+	</tr>
+</table>
+</h:outputText>
+
+<h:outputText rendered="#{!etudiant.inscriptionsRenseignees}">
+	<div class="portlet-msg-info">
+		<ui:include src="/stylesheets/template/template-erreurbdd.xhtml"/>
+	</div>
+</h:outputText>
+
+
+		
+</ui:define>
+	</ui:composition>
+
+
+</div>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/stylesheets/template/template.xhtml">
+		<ui:define name="body">
+		
+			<hr size="1" />
+
+
+			<table width='98%' cellspacing='0' cellpadding='5' border='0'>
+				<tr class='uportal-background-semidark'>
+					<td width='98%' height='25' class='uportal-channel-strong' align="center">
+						Un problème est survenu<br />
+						Veuillez réessayer ultérieurement<br />
+						<h:form id="formRestart">
+						<h:commandLink id="buttonRestart" action="#{exceptionController.restart}">restart</h:commandLink>
+						</h:form>
+					</td>
+				</tr>
+			</table>
+
+			<hr size="1" />
+			<hr size="1" />
+			<script language="JavaScript">
+			function restartfunction(){
+			document.getElementById("formRestart:buttonRestart").onclick();
+			}
+			restartfunction();
+			</script>
+		</ui:define>
+	</ui:composition>
+	
+</div>

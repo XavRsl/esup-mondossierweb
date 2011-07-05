@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<ui:composition template="/stylesheets/template/template-ens.xhtml">
+	<ui:define name="titre">
+		Résultat de la recherche
+	</ui:define>
+	<ui:define name="icones">
+		<span>
+				<h:commandLink id="linkmodifrecherche2" action="#{rechercheAnnuaireController.enter}">
+					<t:graphicImage align='absmiddle' value='/media/images/CMonDossierWeb/modify.gif' alt='Modifier la recherche' title='Modifier la recherche' />					
+						Modifier la recherche
+				</h:commandLink>
+			</span>
+
+	</ui:define>
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+
+
+<h:form id="formAnnuary">
+	<h:messages id="champMessages" errorStyle="color: red" />
+	<div class="portlet-msg-info">
+		<p>
+		<b>Recherche sur : </b>#{rechercheAnnuaireController.nom} 
+		<h:commandLink id="linkexcel1"  action="#{rechercheAnnuaireController.exportExcel}">
+			Télécharger en format Excel
+		<t:graphicImage value='/media/images/CMonDossierWeb/docxls.gif' alt='Exporter en excel' title='Exporter en excel' />
+		</h:commandLink>
+		</p>
+	</div><br />
+<t:dataTable value="#{rechercheAnnuaireController.listeInscrits}" var="ins" rowIndexVar="rowindex"
+		styleClass="portlet-table"
+		headerClass="portlet-table-header"
+		rowClasses="portlet-table-body, portlet-table-alternate" >					
+
+<t:column>
+<h:commandLink action="#{rechercheAnnuaireController.choisir}">
+  			<f:param name="row" value="#{rowindex}"/>
+			<t:graphicImage alt='Dossier Etudiant' value='/media/images/CMonDossierWeb/folderopen.gif' />
+</h:commandLink>
+</t:column>
+	
+<t:column>
+	<f:facet name="header">Login</f:facet>
+	<h:commandLink action="#{rechercheAnnuaireController.choisir}">
+  			<f:param name="row" value="#{rowindex}"/>
+				#{ins.login}
+    </h:commandLink>
+</t:column> 
+
+<t:column>
+	<f:facet name="header">Nom</f:facet>
+   		<h:commandLink action="#{rechercheAnnuaireController.choisir}">
+  			<f:param name="row" value="#{rowindex}"/>
+   			<div class="grasSouligne">#{ins.lib_nom_pat_ind}</div>
+   		</h:commandLink>
+</t:column>
+
+<t:column>
+	<f:facet name="header">Email</f:facet>
+   		<a href="mailto:#{ins.email}"><u>#{ins.email}</u></a>
+</t:column>
+   	
+<t:column>
+	<f:facet name="header">Formation</f:facet>
+   		#{ins.lib_etp}
+</t:column>
+   	
+</t:dataTable>
+
+<br />
+
+</h:form>
+<hr class='clear' />
+
+
+</ui:define>
+</ui:composition>
+</div>

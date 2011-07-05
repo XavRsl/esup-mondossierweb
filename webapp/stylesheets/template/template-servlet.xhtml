@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<link rel="stylesheet" type="text/css"
+		href="${facesContext.externalContext.request.contextPath}/media/style/esup-mondossierweb.css" />
+	<head>
+		<title><ui:insert name="pageTitle">MonDossierWeb</ui:insert></title>
+	</head>
+	<body>
+		<div class="channel">
+			<div class="esup-mondossierweb">	
+		<h:outputText rendered="#{config.banniereServlet}">
+		<table width='98%' cellspacing='0' cellpadding='5' border='0'>
+			<tr>
+				<td valign='absmiddle' align='center'>
+					<t:graphicImage
+						value="/media/images/CMonDossierWeb/banniere.gif"
+						style= " border:0 ; " />
+				</td>
+				<td>
+				
+				<h:form id="formlogout">
+					<h:commandLink id="linklogout" action="#{sessionController.logout}">
+						<t:graphicImage
+							value="/media/images/CMonDossierWeb/logout.gif"
+							style= " border:0 ; " />
+					</h:commandLink>
+				</h:form>
+				
+				</td>
+			</tr>
+		</table>
+		</h:outputText>
+		<div class='channel-content'>
+			<ui:decorate template="/stylesheets/template/template-page.xhtml">
+
+			</ui:decorate>
+		</div>
+		<br />
+		</div>
+		</div>
+	</body>
+</html>

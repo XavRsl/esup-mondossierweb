@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<ui:composition template="/stylesheets/template/template-etu.xhtml">
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+	 <div class="portlet-section-header">
+			Adresses
+		</div>
+		<br />
+	
+		
+<h:form id="formAdresse">
+<h:messages id="champMessages" errorStyle="color: red"  />	
+<table width='98%' cellspacing='0' cellpadding='5' border='0'>
+ <tr class='portlet-table-header'>
+ <td>
+ADRESSE ANNUELLE #{etudiant.anu} - 
+<h:selectOneMenu id="selectTypehebergement" onchange="javascript:majHebergement();"
+ value="#{adressesController.typehebergement}">
+  <f:selectItems
+   value="#{adressesController.ltypehebergement}" />
+</h:selectOneMenu> 
+</td>
+<td>
+<h:commandLink id="reloader" value="-" action="#{adressesController.reload}" style="visibility:hidden"/>
+<h:selectBooleanCheckbox
+ id="adresseIdentique"  style="visibility:hidden"
+  value="#{adressesController.adresseIdentique}" >
+</h:selectBooleanCheckbox>
+</td>
+</tr>
+</table>
+<h:outputText rendered="#{!adressesController.adresseIdentique}">
+<table width='98%' cellspacing='0' cellpadding='2' border='0'>
+<tr>
+<td width='150' class='uportal-text'>
+Adresse
+</td>
+<td>
+ <h:inputText id="ada1" value ="#{adressesController.adan1}" size='32'  maxlength='32' class='uportal-input-text'/>
+</td>
+</tr>
+<tr>
+<td></td>
+<td>
+ <h:inputText id="ada2" value ="#{adressesController.adan2}" size='32'  maxlength='32' class='uportal-input-text'/>
+</td>
+</tr>
+<tr>
+<td></td>
+<td>
+ <h:inputText id="ada3" value ="#{adressesController.adan3}" size='32'  maxlength='32' class='uportal-input-text'/>
+</td>
+</tr>
+
+<tr>
+<td class='uportal-text'>
+Pays
+</td>
+<td>
+<h:commandLink id="majpaysan" value="" action="#{adressesController.changementPaysAnnuel}" style="visibility:hidden"/>
+
+<h:selectOneMenu id="selectPaysAnnuelle" onchange="javascript:majPaysAnnuel();"
+ value="#{adressesController.adanpays}">
+  <f:selectItems
+   value="#{adressesController.lpays}" />
+</h:selectOneMenu> 
+</td>
+</tr>
+
+<tr>
+<td class='uportal-text'>
+Ville
+</td>
+<td>
+
+<h:outputText rendered="#{!adressesController.boolAnEtranger}">
+<h:inputText id="adacp" value ="#{adressesController.adancp}" size='5' maxlength='5' class='uportal-input-text' onkeyup="javascript:actualiserVilleAnnuelle();"/>
+
+<h:commandLink id="actuavilleannuelle" action="#{adressesController.actualiserVilleAnnuelle}">
+<u>-&gt;Actualiser--&gt;</u>
+</h:commandLink>
+
+<h:commandLink id="majcpan" value="-" action="#{adressesController.majCpVilleAnnuelle}" style="visibility:hidden"/>
+
+
+
+<h:selectOneMenu id="selectVilleAnnuelle" onchange="javascript:majCodePostalAnnuel();"
+ value="#{adressesController.adanville}">
+  <f:selectItems
+   value="#{adressesController.lvillesan}" />
+</h:selectOneMenu> 
+</h:outputText>
+
+<h:outputText rendered="#{adressesController.boolAnEtranger}">
+
+ <h:inputText id="adaetr" value ="#{adressesController.adanEtranger}" size='32'  maxlength='32' class='uportal-input-text'/>
+
+</h:outputText>
+</td>
+</tr>
+
+
+<tr>
+<td class='uportal-text'>
+Téléphone
+</td>
+<td>
+ <h:inputText id="adatel" value ="#{adressesController.adantel}" size='15'  maxlength='15' class='uportal-input-text'/>
+</td>
+</tr>
+</table>
+</h:outputText>
+
+
+<h:outputText rendered="#{adressesController.adresseIdentique}">
+<table width='98%' cellspacing='0' cellpadding='2' border='0'>
+<tr>
+<td width='150' class='uportal-text' align="center">
+	Domicile parental donc identique à l'adresse fixe ci-dessous
+</td>
+</tr>
+</table>
+</h:outputText>
+
+<br />
+
+<table width='98%' cellspacing='0' cellpadding='5' border='0'>
+ <tr class='portlet-table-header'>
+<td width='100%'>
+ADRESSE FIXE
+</td>
+</tr>
+</table>
+
+
+<table width='98%' cellspacing='0' cellpadding='2' border='0'>
+<tr>
+<td width='150' class='uportal-text'>
+Adresse
+</td>
+<td>
+ <h:inputText id="adf1" value ="#{adressesController.adfixe1}" size='32'  maxlength='32' class='uportal-input-text'/>
+</td>
+</tr>
+<tr>
+<td></td>
+<td>
+ <h:inputText id="adf2" value ="#{adressesController.adfixe2}" size='32'  maxlength='32' class='uportal-input-text'/>
+</td>
+</tr>
+<tr>
+<td></td>
+<td>
+ <h:inputText id="adf3" value ="#{adressesController.adfixe3}" size='32'  maxlength='32' class='uportal-input-text'/>
+</td>
+</tr>
+
+<tr>
+<td class='uportal-text'>
+Pays
+</td>
+<td>
+<h:commandLink id="majpaysfixe" value="" action="#{adressesController.changementPaysFixe}" style="visibility:hidden"/>
+
+<h:selectOneMenu id="selectPaysFixe" onchange="javascript:majPaysFixe();"
+ value="#{adressesController.adfixepays}">
+  <f:selectItems
+   value="#{adressesController.lpays}" />
+</h:selectOneMenu> 
+</td>
+</tr>
+
+
+<tr>
+<td class='uportal-text'>
+Ville
+</td>
+<td>
+
+
+<h:outputText rendered="#{!adressesController.boolFixeEtranger}">
+
+
+<h:inputText id="adfcp" value ="#{adressesController.adfixecp}" size='5' maxlength='5' class='uportal-input-text' onkeyup="javascript:actualiserVilleFixe();"/>
+
+<h:commandLink id="actufixe" action="#{adressesController.actualiserVilleFixe}">
+<u>-&gt;Actualiser--&gt;</u>
+</h:commandLink>
+
+<h:commandLink id="majcpfixe" value="-" action="#{adressesController.majCpVilleFixe}" style="visibility:hidden"/>
+
+
+<h:selectOneMenu id="selectVilleFixe" onchange="javascript:majCodePostalFixe();"
+ value="#{adressesController.adfixeville}">
+  <f:selectItems
+   value="#{adressesController.lvillesfixe}" />
+</h:selectOneMenu> 
+
+
+</h:outputText>
+
+<h:outputText rendered="#{adressesController.boolFixeEtranger}">
+
+ <h:inputText id="adfixeetr" value ="#{adressesController.adfixeEtranger}" size='32'  maxlength='32' class='uportal-input-text'/>
+
+</h:outputText>
+</td>
+</tr>
+
+
+<tr>
+<td class='uportal-text'>
+Téléphone
+</td>
+<td>
+ <h:inputText id="adftel" value ="#{adressesController.adfixetel}" size='15'  maxlength='15' class='uportal-input-text'/>
+</td>
+</tr>
+</table>
+ 
+ <br />
+ 
+ <br />
+<table width='98%' cellspacing='0' cellpadding='5' border='0'>
+ <tr class='portlet-table-header'>
+		<td width='100%'>
+		AUTRES
+		</td>
+	</tr>
+</table>
+
+<table width='98%' cellspacing='0' cellpadding='2' border='0'>
+	<tr>
+		<td width='150' class='uportal-text'>
+		Email personnel
+		</td>
+		<td>
+		 <h:inputText id="emailperso" value ="#{adressesController.emailPerso}" size='40'  maxlength='200' class='uportal-input-text'/>
+		</td>
+	</tr>
+	<tr>
+		<td width='150' class='uportal-text'>
+		Tel. portable
+		</td>
+		<td>
+		 <h:inputText id="telportable" value ="#{adressesController.telPortable}" size='15'  maxlength='15' class='uportal-input-text'/>
+		</td>
+	</tr>
+</table>
+
+
+<table width='98%' cellspacing='0' cellpadding='5' border='0'>
+<tr class='uportal-background-semidark'>
+<td width='100%' height='25' class='uportal-channel-strong'>
+<h:commandButton class='uportal-button' action="#{adressesController.enregistrerModif}" value="ENREGISTRER LES MODIFICATIONS" />
+<h:commandButton class='uportal-button' action="#{adressesController.enter}" value="ANNULER" />
+</td>
+</tr>
+</table>
+</h:form>
+
+
+<script language='javascript'>
+
+function actualiserVilleFixe(){
+	if ((document.getElementById("formAdresse:adfcp").value).length > 4 ){
+		document.getElementById("formAdresse:actufixe").onclick();
+	}
+}
+
+function actualiserVilleAnnuelle(){
+	if ((document.getElementById("formAdresse:adacp").value).length > 4 ){
+		document.getElementById("formAdresse:actuavilleannuelle").onclick();
+	}
+}
+
+function majCodePostalAnnuel(){
+	document.getElementById("formAdresse:majcpan").onclick();
+}
+	
+function majCodePostalFixe(){
+	document.getElementById("formAdresse:majcpfixe").onclick();
+}
+	
+function majPaysAnnuel(){
+	document.getElementById("formAdresse:majpaysan").onclick();
+}
+
+function majPaysFixe(){
+	document.getElementById("formAdresse:majpaysfixe").onclick();
+}
+function majHebergement(){
+	if (document.getElementById("formAdresse:selectTypehebergement").value == "Domicile parental"){
+		document.getElementById("formAdresse:adresseIdentique").checked = true;
+	}else{
+		document.getElementById("formAdresse:adresseIdentique").checked = false;
+
+	}
+	document.getElementById("formAdresse:reloader").onclick();
+}
+
+</script>
+
+	</ui:define>
+</ui:composition></div>

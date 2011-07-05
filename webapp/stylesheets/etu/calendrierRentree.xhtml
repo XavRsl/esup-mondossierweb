@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	
+	<ui:composition
+	template="/stylesheets/template/template-etu.xhtml">
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<div class="portlet-section-header">
+			<div style="float:right;" class="portlet-block">	
+				<ui:include src="/stylesheets/etu/lienafficheridentite.xhtml"/>
+			</div>	
+			Calendrier de rentrée	
+		</div>	
+		
+
+		<div  id="identiteEtudiant" style="display:none;">
+			<ui:include src="/stylesheets/etu/identite.xhtml"/>
+			<br />
+		</div>
+		<br />
+		<div class="portlet-table-header">
+			Calendrier	
+		</div>	
+
+
+		<h:outputText rendered="#{etudiant.existeCalendrierRentree}">
+
+		<t:htmlTag value="ul" styleClass="portlet-section-subheader2">
+			<t:dataList value="#{etudiant.calendrierRentree}" var="calrentree"
+				layout="simple">
+				<t:htmlTag value="li"
+					styleClass="portlet-section-subheader2">
+					<h:outputText value="#{calrentree.codEtp}" /> - <h:outputText value="#{calrentree.libEtp}" />
+					<h:outputText value="#{calrentree.pageInfos}" styleClass="portlet-msg-info" escape="false" />
+					<table class="portlet-table">
+						<thead>
+							<tr>
+								<th class="portlet-table-header">
+									Date
+								</th>
+								<th class="portlet-table-header">
+									Heure
+								</th>
+								<th class="portlet-table-header">
+									Lieu
+								</th>
+								<th class="portlet-table-header">
+									Commentaires
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="portlet-table-body">
+								<td>
+									<h:outputText value="#{calrentree.date}" />
+								</td>
+								<td>
+									<h:outputText value="#{calrentree.heure}" />h<h:outputText value="#{calrentree.minute}" />
+								</td>
+								<td>
+									<h:outputText value="#{calrentree.lieu}" />
+								</td>
+								<td>
+									<h:outputText value="#{calrentree.commentaire}" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</t:htmlTag>
+			</t:dataList>
+		</t:htmlTag>
+
+		</h:outputText>
+
+		<h:outputText rendered="#{!etudiant.existeCalendrierRentree}">
+			<div class="ortlet-msg-info">
+				Pas de calendrier de rentrée disponible
+			</div>
+		</h:outputText>
+		<h:outputText rendered="#{etudiant.existeCalendrierRentree}">
+			<div class="portlet-msg-info">
+				#{config.cmtCalRentree}
+			</div>
+		</h:outputText>
+		
+		
+
+	</ui:define>
+</ui:composition>
+</div>

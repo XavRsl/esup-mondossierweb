@@ -1,0 +1,168 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /**<a name="line.1"></a>
+<FONT color="green">002</FONT>     * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.<a name="line.2"></a>
+<FONT color="green">003</FONT>     */<a name="line.3"></a>
+<FONT color="green">004</FONT>    package org.esupportail.commons.services.ldap;<a name="line.4"></a>
+<FONT color="green">005</FONT>    <a name="line.5"></a>
+<FONT color="green">006</FONT>    import java.io.Serializable;<a name="line.6"></a>
+<FONT color="green">007</FONT>    import java.util.ArrayList;<a name="line.7"></a>
+<FONT color="green">008</FONT>    import java.util.Collections;<a name="line.8"></a>
+<FONT color="green">009</FONT>    import java.util.Iterator;<a name="line.9"></a>
+<FONT color="green">010</FONT>    import java.util.List;<a name="line.10"></a>
+<FONT color="green">011</FONT>    import java.util.Set;<a name="line.11"></a>
+<FONT color="green">012</FONT>    <a name="line.12"></a>
+<FONT color="green">013</FONT>    import javax.naming.NamingEnumeration;<a name="line.13"></a>
+<FONT color="green">014</FONT>    import javax.naming.NamingException;<a name="line.14"></a>
+<FONT color="green">015</FONT>    import javax.naming.directory.Attribute;<a name="line.15"></a>
+<FONT color="green">016</FONT>    import javax.naming.directory.Attributes;<a name="line.16"></a>
+<FONT color="green">017</FONT>    <a name="line.17"></a>
+<FONT color="green">018</FONT>    import org.springframework.ldap.AttributesMapper;<a name="line.18"></a>
+<FONT color="green">019</FONT>    <a name="line.19"></a>
+<FONT color="green">020</FONT>    /**<a name="line.20"></a>
+<FONT color="green">021</FONT>     * Class which allows to retrieve user attributes from a LDAP directory.<a name="line.21"></a>
+<FONT color="green">022</FONT>     */<a name="line.22"></a>
+<FONT color="green">023</FONT>    <a name="line.23"></a>
+<FONT color="green">024</FONT>    public class LdapAttributesMapper implements AttributesMapper, Serializable {<a name="line.24"></a>
+<FONT color="green">025</FONT>            <a name="line.25"></a>
+<FONT color="green">026</FONT>            /**<a name="line.26"></a>
+<FONT color="green">027</FONT>             * The serialization id.<a name="line.27"></a>
+<FONT color="green">028</FONT>             */<a name="line.28"></a>
+<FONT color="green">029</FONT>            private static final long serialVersionUID = 9222929097200132160L;<a name="line.29"></a>
+<FONT color="green">030</FONT>    <a name="line.30"></a>
+<FONT color="green">031</FONT>            /**<a name="line.31"></a>
+<FONT color="green">032</FONT>             * The attributes. <a name="line.32"></a>
+<FONT color="green">033</FONT>             */<a name="line.33"></a>
+<FONT color="green">034</FONT>            private List&lt;String&gt; attributes;<a name="line.34"></a>
+<FONT color="green">035</FONT>            <a name="line.35"></a>
+<FONT color="green">036</FONT>            /**<a name="line.36"></a>
+<FONT color="green">037</FONT>             * The name of the attirbute that contains the uid.<a name="line.37"></a>
+<FONT color="green">038</FONT>             */<a name="line.38"></a>
+<FONT color="green">039</FONT>            private String uidAttribute;<a name="line.39"></a>
+<FONT color="green">040</FONT>    <a name="line.40"></a>
+<FONT color="green">041</FONT>    <a name="line.41"></a>
+<FONT color="green">042</FONT>            /**<a name="line.42"></a>
+<FONT color="green">043</FONT>             * Bean constructor.<a name="line.43"></a>
+<FONT color="green">044</FONT>             * @param uidAttribute <a name="line.44"></a>
+<FONT color="green">045</FONT>             * @param attributes <a name="line.45"></a>
+<FONT color="green">046</FONT>             */<a name="line.46"></a>
+<FONT color="green">047</FONT>            public LdapAttributesMapper(<a name="line.47"></a>
+<FONT color="green">048</FONT>                            final String uidAttribute, <a name="line.48"></a>
+<FONT color="green">049</FONT>                            final List&lt;String&gt; attributes) {<a name="line.49"></a>
+<FONT color="green">050</FONT>                    this.uidAttribute = uidAttribute;<a name="line.50"></a>
+<FONT color="green">051</FONT>                    this.attributes = attributes;<a name="line.51"></a>
+<FONT color="green">052</FONT>            }<a name="line.52"></a>
+<FONT color="green">053</FONT>            <a name="line.53"></a>
+<FONT color="green">054</FONT>            /**<a name="line.54"></a>
+<FONT color="green">055</FONT>             * @return the attributes names<a name="line.55"></a>
+<FONT color="green">056</FONT>             */<a name="line.56"></a>
+<FONT color="green">057</FONT>            public List&lt;String&gt; getAttributes() {<a name="line.57"></a>
+<FONT color="green">058</FONT>                    return attributes;<a name="line.58"></a>
+<FONT color="green">059</FONT>            }<a name="line.59"></a>
+<FONT color="green">060</FONT>    <a name="line.60"></a>
+<FONT color="green">061</FONT>            /**<a name="line.61"></a>
+<FONT color="green">062</FONT>             * Performs mapping after an LDAP query for a set of user attributes. Takes each key in the ldap<a name="line.62"></a>
+<FONT color="green">063</FONT>             * to ldapUser attribute Map and tries to find it in the returned Attributes set. For each found<a name="line.63"></a>
+<FONT color="green">064</FONT>             * Attribute the value is added to the attribute Map as the value or in the value Set with the<a name="line.64"></a>
+<FONT color="green">065</FONT>             * ldapUser attribute name as the key. String and byte[] may be values.<a name="line.65"></a>
+<FONT color="green">066</FONT>             * @see org.springframework.ldap.AttributesMapper#mapFromAttributes(javax.naming.directory.Attributes)<a name="line.66"></a>
+<FONT color="green">067</FONT>             */<a name="line.67"></a>
+<FONT color="green">068</FONT>            @SuppressWarnings("unchecked")<a name="line.68"></a>
+<FONT color="green">069</FONT>            public Object mapFromAttributes(final Attributes attrs) throws NamingException {<a name="line.69"></a>
+<FONT color="green">070</FONT>                    LdapUserImpl ldapUser = new LdapUserImpl();<a name="line.70"></a>
+<FONT color="green">071</FONT>                    Attribute uidAttr = attrs.get(uidAttribute);<a name="line.71"></a>
+<FONT color="green">072</FONT>                    if (uidAttr == null) {<a name="line.72"></a>
+<FONT color="green">073</FONT>                            return ldapUser;<a name="line.73"></a>
+<FONT color="green">074</FONT>                    }<a name="line.74"></a>
+<FONT color="green">075</FONT>                    ldapUser.setId(uidAttr.get().toString());<a name="line.75"></a>
+<FONT color="green">076</FONT>                    for (String ldapAttributeName : attributes) {<a name="line.76"></a>
+<FONT color="green">077</FONT>                            Attribute attribute = attrs.get(ldapAttributeName);<a name="line.77"></a>
+<FONT color="green">078</FONT>                            List&lt;String&gt; listAttr = new ArrayList&lt;String&gt;();<a name="line.78"></a>
+<FONT color="green">079</FONT>                            // The attribute exists<a name="line.79"></a>
+<FONT color="green">080</FONT>                            if (attribute != null) {<a name="line.80"></a>
+<FONT color="green">081</FONT>                                    NamingEnumeration&lt;Object&gt; attrValueEnum = <a name="line.81"></a>
+<FONT color="green">082</FONT>                                            (NamingEnumeration&lt;Object&gt;) attribute.getAll();<a name="line.82"></a>
+<FONT color="green">083</FONT>                                    while (attrValueEnum.hasMore()) {<a name="line.83"></a>
+<FONT color="green">084</FONT>                                            Object attributeValue = attrValueEnum.next();<a name="line.84"></a>
+<FONT color="green">085</FONT>                                            // Convert everything except byte[] to String<a name="line.85"></a>
+<FONT color="green">086</FONT>                                            if (!(attributeValue instanceof byte[])) {<a name="line.86"></a>
+<FONT color="green">087</FONT>                                                    attributeValue = attributeValue.toString();<a name="line.87"></a>
+<FONT color="green">088</FONT>                                                    listAttr.add(attributeValue.toString());<a name="line.88"></a>
+<FONT color="green">089</FONT>                                            }<a name="line.89"></a>
+<FONT color="green">090</FONT>                                    }<a name="line.90"></a>
+<FONT color="green">091</FONT>                                    Set attributeNames = Collections.singleton(ldapAttributeName);<a name="line.91"></a>
+<FONT color="green">092</FONT>                                    // Run through the mapped attribute names<a name="line.92"></a>
+<FONT color="green">093</FONT>                                    for (Iterator attrNameItr = attributeNames .iterator(); attrNameItr.hasNext();) {<a name="line.93"></a>
+<FONT color="green">094</FONT>                                            String attributeName = (String) attrNameItr .next();<a name="line.94"></a>
+<FONT color="green">095</FONT>                                            ldapUser.getAttributes().put(attributeName.toString(), listAttr);<a name="line.95"></a>
+<FONT color="green">096</FONT>                                    }<a name="line.96"></a>
+<FONT color="green">097</FONT>                            }<a name="line.97"></a>
+<FONT color="green">098</FONT>                    }<a name="line.98"></a>
+<FONT color="green">099</FONT>                    return ldapUser;<a name="line.99"></a>
+<FONT color="green">100</FONT>            }<a name="line.100"></a>
+<FONT color="green">101</FONT>    }<a name="line.101"></a>
+<FONT color="green">102</FONT>    <a name="line.102"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	
+		
+	<t:column>
+
+ 
+  		<h:commandLink action="#{etatCivilController.lienEnter}">
+  			<f:param name="idparam" value="#{ins.cod_etu}"/>
+			<t:graphicImage alt='Dossier Etudiant' value='/media/images/CMonDossierWeb/folderopen.gif' />
+		</h:commandLink>
+	
+	
+	
+    </t:column> 
+    
+    
+<t:column>
+ <f:facet name="header">Dossier</f:facet>
+		
+  		<h:commandLink action="#{etatCivilController.lienEnter}">
+  			<f:param name="idparam" value="#{ins.cod_etu}"/>
+     <h:outputText value="#{ins.cod_etu}"/>
+     </h:commandLink>
+	
+    </t:column> 
+
+ <t:column>
+  <f:facet name="header">Nom</f:facet>
+		  <b> <h:outputText value="#{ins.lib_nom_pat_ind}"/></b>
+    </t:column> 
+    
+    <t:column>
+     <f:facet name="header">Prénom</f:facet>
+		 <b>  <h:outputText value="#{ins.lib_pr1_ind}"/></b>
+    </t:column>
+    
+     <t:column>
+      <f:facet name="header">Naissance</f:facet>
+     <h:outputText value="#{ins.date_nai_ind}"/>
+     </t:column>
+     
+     <t:column>
+      <f:facet name="header">Messagerie</f:facet>
+     <a href="mailto:#{ins.email}"><u>#{ins.email}</u></a>
+     </t:column>
+     
+     <t:column rendered="#{listeInscritsController.traiteEtape}">
+      <f:facet name="header">IAE</f:facet>
+     <h:outputText value="#{ins.iae}"/>
+     </t:column>
+     
+     <t:column rendered="#{listeInscritsController.etape}">
+      <f:facet name="header">Code</f:facet>
+     <h:outputText value="#{ins.cod_etp}"/>
+     </t:column>
+     
+      <t:column rendered="#{listeInscritsController.etape}">
+       <f:facet name="header">Version</f:facet>
+     <h:outputText value="#{ins.cod_vrs_vet}"/>
+     </t:column>
+     
+      <t:column rendered="#{listeInscritsController.etape}">
+       <f:facet name="header">Etape</f:facet>
+     <h:outputText value="#{ins.lib_etp}"/>
+     </t:column>
+     
+     <t:column rendered="#{listeInscritsController.session1}">
+      <f:facet name="header">Note1</f:facet>
+     <h:outputText value="#{ins.notej}"/>
+     </t:column>
+     
+     <t:column rendered="#{listeInscritsController.session1}">
+      <f:facet name="header">Résultat1</f:facet>
+     <h:outputText value="#{ins.resj}"/>
+     </t:column>
+     
+      <t:column rendered="#{listeInscritsController.session2}">
+       <f:facet name="header">Note2</f:facet>
+     <h:outputText value="#{ins.notes}"/>
+     </t:column>
+     
+     <t:column rendered="#{listeInscritsController.session2}">
+      <f:facet name="header">Résultat2</f:facet>
+     <h:outputText value="#{ins.ress}"/>
+     </t:column>
+     
+     
+     
+     
+ 
+     <f:facet name="footer">
+
+<t:dataScroller id="scroll_1"
+for="datatable"
+pageCountVar="pageCount"
+pageIndexVar="pageIndex"
+paginator="true"
+fastStep="10"
+style="text-align:center;"
+styleClass="portlet-table"
+paginatorActiveColumnClass="uportal-channel-strong"
+paginatorColumnClass="uportal-text"
+paginatorTableClass="uportal-channel-strong"
+immediate="true"
+rendered="#{listeInscritsController.afficheScroller}"
+>
+<f:facet name="first" >
+|&lt;-
+</f:facet>
+<f:facet name="last">
+-&gt;|
+</f:facet>
+<f:facet name="previous">
+&lt;
+</f:facet>
+<f:facet name="next">
+&gt;
+</f:facet>
+</t:dataScroller>
+
+</f:facet>
+
+		   
+		   
+	</div>

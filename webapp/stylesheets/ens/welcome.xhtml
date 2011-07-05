@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/stylesheets/template/template-ens.xhtml">
+		<ui:define name="titre">
+		Accueil
+		</ui:define>
+		<ui:define name="icones">
+			<ui:include src="/stylesheets/template/template-contact.xhtml" />
+		</ui:define>
+		<ui:define name="body">
+		<div class="portlet-msg-info"><p>
+			Ce canal regroupe l'ensemble des fonctionnalités qui ont été développées spécialement pour les enseignants.
+				<br />
+		</p></div><br />
+		<h:form id="formDossier">
+			<div class="portlet-section-subheader">
+				<h:commandLink id="link0" action="navigationRechercheNumero">
+					<t:graphicImage style= " border:0 ; "
+						value="/media/images/CMonDossierWeb/folder.gif"
+						alt='Dossier Etudiant' />
+				</h:commandLink>
+				<h:commandLink id="link1" style="text-decoration:underline" action="#{rechercheAnnuaireController.enter}">
+					Le dossier étudiant
+				</h:commandLink>
+			</div>
+		</h:form>
+			<div class="portlet-sub-section"><blockquote>
+			Il vous permettra d'accéder aux informations individuelles d'un
+			étudiant concernant son état civil, ses inscriptions, ses
+			résultats. Chaque étudiant peut accéder au même type
+			d'information en ce qui le concerne.
+			<br /><br />
+			<h:form id="formLienAnnuaire">
+				Pour ce faire, vous pouvez soit 
+				<h:commandLink id="linkannuaire" style="text-decoration:underline" action="#{rechercheAnnuaireController.enter}">
+				rechercher l'étudiant dans l'annuaire
+				</h:commandLink>
+				, soit 
+				<h:commandLink id="linknumero" style="text-decoration:underline" action="#{rechercheNumeroController.enter}">
+				saisir directement son numéro étudiant.
+				</h:commandLink>
+			</h:form><br />
+			<div class="portlet-msg-info">
+				<p>
+					<b> Remarques : </b>
+				<ul>
+					<li>
+						L'annuaire ne contient que les étudiants actuellement inscrits
+						pour l'année universitaire en cours.
+					</li>
+					<li>
+						La recherche par numéro étudiant permet de retrouver une
+						personne quelle que soit son année d'inscription. Si vous ne
+						connaissez pas ce numéro mais sa dernière formation suivie,
+						vous pouvez retrouver l'étudiant en passant par la partie
+						"Liste d'inscrits aux diplômes...".
+					</li>
+				</ul>
+				</p>
+			</div>
+				
+			</blockquote>
+		</div>
+		<h:form id="formtitrearbo">
+			<div class="portlet-section-subheader">
+				<h:commandLink id="linkrecherchearbo1"
+					action="navigationRechercheArborescence">
+					<t:graphicImage style= " border:0 ; "
+						value="/media/images/CMonDossierWeb/group.gif"
+						alt='Liste dinscrits' />
+				</h:commandLink>
+				<h:commandLink id="linkrecherchearbo2" style="text-decoration:underline" action="#{rechercheController.enter}">
+				La liste d'inscrits aux diplômes ou aux enseignements
+				</h:commandLink>
+			</div>
+		</h:form>
+			<div class="portlet-sub-section"><blockquote>
+			<h:form id="formmenuarbo">
+				Elle vous propose de constituer des listes d'étudiants par élément pédagogique. Les listes pourront ensuite être récupérées sous Excel ou d'autres logiciels de bureautique (trombinoscope en PDF). 
+				<br />
+				<br />
+				Pour ce faire, vous pouvez soit
+				<h:commandLink id="linkrecherchearbo3" style="text-decoration:underline" action="#{rechercheController.enter}"> parcourir l'arborescence </h:commandLink>
+				, soit
+				<h:commandLink id="linkrecherchearbo4" style="text-decoration:underline" action="#{rechercheCodeController.enter}"> saisir directement le code de l'élément recherché.</h:commandLink>
+			</h:form>
+				</blockquote>
+			</div>
+			<div align="right" style="color: silver; font-size: 90%; text-decoration: none">#{config.version}</div>
+		</ui:define>
+	</ui:composition>
+</div>

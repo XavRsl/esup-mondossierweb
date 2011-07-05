@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- Decommenter et configurer les url du WS apo-cri-web pour utiliser
+ -->
+
+
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	>
+<!--
+	<bean id="calendrierRentreeController"
+		class="org.esupportail.mondossierweb.web.controllers.CalendrierRentreeController"
+		parent="abstractContextAwareController" scope="session">
+		<description>
+			A bean to manage the rentree calendar page.
+		</description>
+		<property name="etatcivilcontroller"
+			ref="etatCivilController">
+			<description>le controlleur de l'état civil</description>
+		</property>
+	</bean>
+	
+
+	<bean id="remoteCriApogeeRennes1"
+		lazy-init="true"
+		class="org.codehaus.xfire.spring.remoting.XFireClientFactoryBean">
+		<property name="serviceClass" value="org.esupportail.apogee.services.remote.ReadRennes1" />
+		<property name="wsdlDocumentUrl" value="http://levain.univ-rennes1.fr:8870/xfire/ReadRennes1?WSDL" />
+	</bean>
+
+	<bean id="remoteCriApogeeReferentiel"
+		lazy-init="true"
+		class="org.codehaus.xfire.spring.remoting.XFireClientFactoryBean">
+		<property name="serviceClass" value="org.esupportail.apogee.services.remote.ReadReferentiel" />
+		<property name="wsdlDocumentUrl" value="http://levain.univ-rennes1.fr:8870/xfire/ReadReferentiel?WSDL" />
+	</bean>
+	
+	<bean id="remoteCriApogeeEnseignement"
+		lazy-init="true"
+		class="org.codehaus.xfire.spring.remoting.XFireClientFactoryBean">
+		<property name="serviceClass" value="org.esupportail.apogee.services.remote.ReadEnseignement" />
+		<property name="wsdlDocumentUrl" value="http://levain.univ-rennes1.fr:8870/xfire/ReadEnseignement?WSDL" />
+	</bean>
+	
+	-->
+</beans>
+

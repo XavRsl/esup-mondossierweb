@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<onload-config xmlns="urn:onload-config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:onload-config onload-config.xsd">
+
+	<navigation-rule>
+		<view-id>/stylesheets/ens/*</view-id>
+		<action>#{sessionController.isEns}</action>
+	</navigation-rule>
+
+
+	<navigation-rule>
+		<view-id>/stylesheets/ens/welcome.faces</view-id>
+		<action>#{sessionController.isEns}</action>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<view-id>/stylesheets/etu/*</view-id>
+		<action>#{sessionController.isLoggue}</action>
+	</navigation-rule>
+
+	<navigation-rule>
+		<view-id>/stylesheets/welcome.*</view-id>
+		<action>#{sessionController.accueil}</action>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<view-id>/stylesheets/login.*</view-id>
+		<action>#{sessionController.accueil}</action>
+	</navigation-rule>
+
+</onload-config>

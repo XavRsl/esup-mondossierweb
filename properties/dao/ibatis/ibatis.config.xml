@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<settings useStatementNamespaces="true" />
+	<sqlMap resource="properties/dao/ibatis/mapping/Mellogin.xml" />
+	<sqlMap resource="properties/dao/ibatis/mapping/Utilisateur.xml" />
+	<sqlMap resource="properties/dao/ibatis/mapping/Etudiant.xml" />
+	<sqlMap resource="properties/dao/ibatis/mapping/Etape.xml" />
+	<sqlMap resource="properties/dao/ibatis/mapping/Diplomes.xml" /> 
+	<sqlMap	resource="properties/dao/ibatis/mapping/ElementPedagogique.xml" />
+	<sqlMap resource="properties/dao/ibatis/mapping/Annees.xml" />
+	<sqlMap resource="properties/dao/ibatis/mapping/Calendrier.xml" />
+	<sqlMap resource="properties/dao/ibatis/mapping/Composantes.xml" />
+	<sqlMap resource="properties/dao/ibatis/mapping/Inscriptions.xml" />
+	<sqlMap resource="properties/dao/ibatis/mapping/DossierEtudiant.xml" />
+	<sqlMap resource="properties/dao/ibatis/mapping/Groupes.xml" />
+	<sqlMap resource="properties/dao/ibatis/mapping/Signataire.xml" />
+</sqlMapConfig>
+

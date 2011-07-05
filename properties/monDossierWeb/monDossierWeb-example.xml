@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	>
+
+	<!-- 
+		/properties/web/controllers.xml
+		This file declares the visual beans used by the web interface.
+		It should not be modified but by the developers.
+		This file is referenced by /properties/applicationContext.xml.
+	-->
+
+	<bean id="config"
+		class="org.esupportail.mondossierweb.domain.beans.Config">
+		<description>
+			un bean pour stocker configuration de l'application.
+		</description>
+		<property name="version">
+			<description>recuperation de la version dans version.properties, provenant de build-devel.xml</description>
+			<value>v${app.version}-${app.release}</value>
+		</property>
+		<property name="activation">
+			<description>true pour activer la portlet. A false un message 'en maintenance' s'affiche. Peut être utile, notemment via JMX</description>
+			<value>true</value>
+		</property>
+		<property name="partieEnseignant">
+			<description>true pour que les enseignants aient accès</description>
+			<value>true</value>
+		</property>
+		<property name="partieEtudiant">
+			<description>true pour que les étudiants aient accès à leur dossier</description>
+			<value>true</value>
+		</property>
+		<property name="logConnexion">
+			<description>true pour logguer les connexions : login - typeAcces - IP  (voir log4j.properties)</description>
+			<value>false</value>
+		</property>
+		<property name="utiliserTrombinoscope">
+			<description>true pour activer le trombinoscope
+					si le bean Photo ne retourne rien, le trombinoscope ne sera 
+					de toute façon pas utilisé </description>
+			<value>false</value>
+		</property>
+		<property name="nbEtudiantsParPageAfficheeDuTrombinoscope">
+			<description>fixe le nombre d'étudiants visibles dans chaque page (du navigateur) du trombinoscope
+			Lors de la génération du Pdf, seuls les étudiants de cette page s'y trouveront.
+			Cela permet de réduire le temps de chargement (à l'affichage et à la génération du pdf)
+			pouvant régler par la même occasion les problèmes de serveur photo lors de la création d'un pdf pour une promotion très volumineuse.
+			Mettre 0 pour afficher tous les etudiants sur une seule page</description>
+			<value>100</value>
+		</property>
+		<property name="lienContactActif">
+			<description>vrai si on veut afficher le lien 'nous contacter'</description>
+			<value>true</value>
+		</property>
+		<property name="extMail">
+			<description>l'extension au login pour l'e-mail des étudiants</description>
+			<value>@univ-nancy2.fr</value>
+		</property>
+		<property name="lienContact" value="${contact.mail}">
+			<description>l'e-mail du lien 'nous contacter'</description>
+		</property>
+		<property name="msgMaintenance">
+			<description>Message de maintenance (quand activation=false).</description>
+			<value>canal en maintenance. Veuillez réessayer ultérieurement.</value>
+		</property>
+		<property name="msgConnexion">
+			<description>le message d'erreur de connexion</description>
+			<value>Vous n'êtes pas connecté</value>
+		</property>
+		<property name="msgRefusAcces">
+			<description>le message d'interdiction d'accès</description>
+			<value>Vous n'avez pas accès à cette partie.</value>
+		</property>
+		<property name="msgResultatsNonDefinitifs">
+			<description>le message informant que les résultats ne sont pas dénitifs. 
+			Affiché dans le détail des notes d'une étape dont la délibération n'est pas à "T", pour terminée, dans Apogée </description>
+			<value>Notes données à titre informatif dans l'attente de la validation par le jury de diplôme</value>
+		</property>
+		<property name="affInscriptions">
+			<description>affichage de l'onglet 'inscriptions' dans le dossier Etudiant</description>
+			<value>true</value>
+		</property>
+		<property name="affCalendrier">
+			<description>affichage de l'onglet 'calendrier' dans le dossier Etudiant</description>
+			<value>true</value>
+		</property>
+		<property name="calendrierPDF">
+			<description>Pour le calendrier Standard,possibilité de télécharger le calendrier des examens en pdf</description>
+			<value>true</value>
+		</property>
+		<!-- Ajout affichage calendrier Rentree -->
+		<property name="affCalendrierEtape">
+			<description>si affCalendrier=true, mettre affCalendrierEtape a true pour afficher le calendrier des examens version Etape (type rennes1)
+				Attention il faut également activer les beans Rennes1 pour que cela fonctionne</description>
+			<value>false</value>
+		</property>
+		<property name="affCalendrierRentree">
+			<description>affichage de l'onglet 'calendrier de rentree' dans le dossier Etudiant</description>
+			<value>false</value>
+		</property>
+		<!-- Fin Ajout Rennes 1 -->
+		<property name="affNotes">
+			<description>affichage de l'onglet 'notes et résultats' dans le dossier Etudiant</description>
+			<value>true</value>
+		</property>
+		<property name="listeScrollable">
+			<description>utiliser un dataScroller pour afficher la liste des étudiants</description>
+			<value>true</value>
+		</property>
+		<property name="nbEtudiantsParPage">
+			<description>nombre d'étudiants par page durant l'utilisation d'un dataScroller</description>
+			<value>15</value>
+		</property>
+		<property name="recupAnnuaire">
+			<description>[avec WS amue seulement] true pour que l'email de l'étudiant (état-civil) soit récupéré par le WS dans l'annuaire.
+						false pour que ce soir iBATIS qui s'en charge
+						Note : à true, pkb_annu et TEM_ACC_ANNUAIRE doivent être actifs dans APOGEE</description>
+			<value>false</value>
+		</property>
+		<property name="modificationAdresses">
+			<description>[avec WS amue seulement] true pour que l'étudiant puisse modifier son adresse. False sinon</description>
+			<value>true</value>
+		</property>
+		<property name="sourceResultats">
+			<description>[avec WS amue seulement] Source de résultats pour la récupération des notes. 'Apogee' par defaut</description>
+			<value>Apogee</value>
+		</property>
+		<property name="temoinNotesEtudiant">
+			<description>[avec WS amue seulement] etat de délibération des notes et résultats visibles par l'étudiant (A : avant delibération, E: en cours, T : terminée). T par defaut</description>
+			<value>T</value>
+		</property>
+		<property name="temoinNotesEnseignant">
+			<description>[avec WS amue seulement] etat de délibération des notes et résultats visibles par les enseignants (A : avant delibération, E: en cours, T : terminée). AET par defaut</description>
+			<value>AET</value>
+		</property>
+		<property name="temoinCtlValCadEpr">
+			<description>Valeur du témoin (O ou N) temoinCtlValCadEpr (Témoin modalités contrôle validées) pour laquelle on veut que les notes aux épreuves soient visibles même si l'état de délibération n'est pas dans la liste de ceux définis ci-dessus. 
+				Laisser vide pour ne pas prendre en compte ce témoin dans l'affichage des notes aux épreuves</description>
+			<value>N</value>
+		</property>
+		<property name="temoinFictif">
+			<description>(O/N) Si temoinFictif est renseigné, seuls les éléments dont tem_fictif est égal à témoinFictif seront affichés dans l'écran du détail des notes</description>
+			<value></value>
+		</property>
+		<property name="affRangEtudiant">
+			<description>[avec WS amue seulement] affichage ou non du rang de l'étudiant aux diplomes , épreuves et elp sur les pages de 'Notes et Résultats' du dossier</description>
+			<value>false</value>
+		</property>
+		<property name="affECTSEtudiant">
+			<description>[avec WS amue seulement] affichage ou non des informations crédits ECTS par la page du détail des notes</description>
+			<value>false</value>
+		</property>
+		<property name="affMentionEtudiant">
+			<description>[avec WS amue seulement] affichage ou non de la mention aux diplomes et étapes à la page des notes</description>
+			<value>false</value>
+		</property>
+		<property name="notesPDF">
+		<description>Edition pdf des notes : true pour l'activer, false sinon </description>
+		<value>true</value>
+		</property>
+		<property name="insertionFiligranePdfNotes">
+			<description>insertion d'un filigrane dans le pdf des notes</description>
+			<value>false</value>
+		</property>
+		<property name="certificatScolaritePDF">
+		<description>Edition pdf des certificats de scolarité : true pour l'activer, false sinon </description>
+		<value>false</value>
+		</property>
+		<property name="certScolAutorisePersonnel">
+		<description>Autoriser les personnels à imprimer les certificats de scolarité.</description>
+		<value>true</value>
+		</property>
+		<property name="certScolCodeSignataire">
+		<description>Code du signataire des certificats de scolarité</description>
+		<value></value>
+		</property>
+		<property name="certScolLieuEdition">
+		<description>Lieu d'édition des certificats de scolarité</description>
+		<value>NANCY</value>
+		</property>
+		<property name="certScolUtiliseLogo">
+		<description>Ajoute le logo de l'université dans les certificats de scolarité générés.</description>
+		<value>true</value>
+		</property>
+		<property name="certScolTypDiplomeDesactive">
+		<description>Liste des codes de types de diplomes pour lesquels la generation de certificat est desactivee. (balises value)</description>
+			<list>
+			</list>
+		</property>
+		<property name="logoUniversitePdf">
+		<description>url vers le logo de l'université pour le pdf. A laisser vide pour ne pas importer de logo.</description>
+		 <value></value>
+		</property>
+		<property name="banniereServlet">
+			<description>vrai si on veut voir la banniere (/media/images/HC/banniere.JPG) avec l'image et le bouton de déconnexion en mode servlet</description>
+			<value>false</value>
+		</property>
+		<property name="affNumPlaceExamen">
+			<description>Affichage du numéro de place dans le calendrier des examens : true pour l'activer, false sinon</description>
+			<value>false</value>
+		</property>
+		<property name="cmtCalExamen">
+			<description>Message complémentaire concernant le calendrier des examens</description>
+			<value>Les dates d'épreuves orales ne figurent pas sur ce calendrier. Consultez le panneau d'affichage de votre composante pour connaître vos dates d'oraux.</value>
+		</property>
+		<property name="cmtCalRentree">
+			<description>Message complémentaire concernant le calendrier de rentrée</description>
+			<value>Message complémentaire concernant le calendrier de rentrée.</value>
+		</property>
+		<property name="idEtudiantTest">
+		<description>l'identifiant (login) de l'étudiant pour lequel on souhaite se faire passer pour un test. 
+		laisser vide pour ne pas utiliser cette fonction.</description>
+		<value></value>
+		</property>
+		<property name="idLoginTest">
+		<description>l'identifiant que l'on souhaite substituer à celui d'un étudiant : 'idEtudiantTest'</description>
+		<value></value>
+		</property>
+		<property name="listeLoginExclus">
+			<description>La liste des logins qu'on exclu de l'application</description>
+			<list>
+				<value>toto</value>
+				<value>hacker</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="security"
+		class="org.esupportail.mondossierweb.services.authentification.Security">
+		<description>
+			bean pour stocker la configuration de l'accès à l'application.
+		</description>
+		<property name="service" ref="daoService">
+			<description>Le service d'accès à la base de donnée</description>
+		</property>
+		<property name="ldapService" ref="ldapService">
+			<description>le service ldap</description>
+		</property>
+		<property name="portalService" ref="portalService">
+			<description>le service uportal</description>
+		</property>
+		<property name="attributLdapEtudiant">
+			<description>La propriete ldap du contact désignant son type (typeEtudiantLdap ou pas )</description>
+			<value>edupersonprimaryaffiliation</value>
+		</property>
+		<property name="attributLdapCodEtu">
+			<description>La propriete ldap du contact désignant son codetu</description>
+			<value>supannetuid</value>
+		</property> 
+		<property name="typeEtudiantLdap">
+			<description>Le type ldap designant un etudiant</description>
+			<value>student</value>
+		</property>
+		<property name="listeGroupesPortal">
+			<description>La liste des groupe uportal autorisant l'acces à mondossierWeb en tant qu'enseignant. Mettre une liste vide (sans 'value') pour ne pas utiliser cette fonctionnalité (peut être utile en servlet par exemple)</description>
+			<list>
+				<value>Centre de Ressources Informatiques (PERS_957)</value>
+			</list>
+		</property>
+		<property name="loginApogee">
+			<description>Utilisation de la table Utilisateur d'Apogee pour l'acces au canal. Mettre false pour ne pas utiliser cette fonctionnalite</description>			
+			<value>true</value>
+		</property>
+	</bean>
+
+
+<!-- Utilisation des habilitations Apogée
+	Décommenter et commenter celui du dessus pour utiliser -->
+
+<!-- 
+	<bean id="security"
+		class="org.esupportail.mondossierweb.services.authentification.SecurityHabilitationApogee">
+		<description>
+			bean pour stocker la configuration de l'accès à l'application avec gestion habilitations Apogée
+		</description>
+		<property name="service" ref="daoService">
+			<description>Le service d'accès à la base de donnée</description>
+		</property>
+		<property name="ldapService" ref="ldapService">
+			<description>le service ldap</description>
+		</property>
+		<property name="portalService" ref="portalService">
+			<description>le service uportal</description>
+		</property>
+		<property name="attributLdapEtudiant">
+			<description>La propriete ldap du contact désignant son type (typeEtudiantLdap ou pas )</description>
+			<value>edupersonprimaryaffiliation</value>
+		</property>
+		<property name="attributLdapCodEtu">
+			<description>La propriete ldap du contact désignant son codetu</description>
+			<value>supannetuid</value>
+		</property> 
+		<property name="typeEtudiantLdap">
+			<description>Le type ldap designant un etudiant</description>
+			<value>student</value>
+		</property>
+		<property name="listeGroupesPortal">
+			<description>La liste des groupe uportal autorisant l'acces à mondossierWeb en tant qu'enseignant</description>
+			<list>
+				<value>Centre de Ressources Informatiques (PERS_957)</value>
+			</list>
+		</property>
+		<property name="loginApogee">
+			<description>Utilisation de la table Utilisateur d'Apogee pour l'acces au canal. Mettre false pour ne pas utiliser cette fonctionnalite</description>			
+				<value>true</value>
+		</property>
+	</bean>
+-->
+
+	<bean id="etudiant"
+		class="org.esupportail.mondossierweb.domain.beans.Etudiant"
+		scope="session">
+		<description>
+			bean pour stocker toute les informations sur l'étudiant dont on consulte le dossier
+		</description>
+		<property name="etudiantManager" ref="etudiantManager">
+			<description>Le service d'accès à la base de donnée</description>
+		</property>
+	</bean>
+
+<!-- LE BEAN UTILISANT LE WS POUR RECUPERER TOUTES LES INFOS DE L'ETUDIANT -->
+	<bean id="etudiantManager"
+		class="org.esupportail.mondossierweb.domain.beans.EtudiantAmue"
+		scope="session">
+		<description>
+			bean qui permet d'aller chercher les infos sur l'étudiant via le WS de l'Amue
+		</description>
+		<property name="config" ref="config">
+			<description>le bean de configuration</description>
+		</property>
+		<property name="service" ref="daoService">
+			<description>Le service.</description>
+		</property>
+		<property name="photo" ref="photo">
+			<description>Pour récupérer les photos</description>
+		</property>
+		<property name="emailConverter" ref="emailConverter">
+			<description>
+				le bean de complétion de l'adresse email
+			</description>
+		</property>
+	</bean> 
+
+<!-- 
+	LE BEAN UTILISANT LES WS AMUE + RENNES1 POUR RECUPERER TOUTES LES INFOS DE L'ETUDIANT
+	Utilise le WS apo-cri-web
+	Décommenter et commenter celui du dessus pour utiliser
+-->
+<!--
+	<bean id="etudiantManager"
+		class="org.esupportail.mondossierweb.domain.beans.EtudiantAmueR1"
+		scope="session">
+		<description>
+			bean qui permet d'aller chercher les infos sur l'étudiant via le WS de l'Amue
+		</description>
+		<property name="config" ref="config">
+			<description>le bean de configuration</description>
+		</property>
+		<property name="service" ref="daoService">
+			<description>Le service.</description>
+		</property>
+		<property name="photo" ref="photo">
+			<description>Pour récupérer les photos</description>
+		</property>
+		<property name="emailConverter" ref="emailConverter">
+			<description>
+				le bean de complétion de l'adresse email
+			</description>
+		</property>
+		<property name="serviceDossierEtudiant" ref="daoServiceDossierEtudiant">
+			<description>Le DaoService pour les infos du dossier etudiant.</description>
+		</property>
+	</bean> 
+-->
+
+	
+
+	<!-- Bean Photo Empty 	-->
+	<bean id="photo"
+		class="org.esupportail.mondossierweb.web.photo.PhotoEmptyImpl"
+		scope="session">
+	</bean>
+
+	
+	<!-- Bean Photo pour Nancy2 -->
+	<!--  
+	<bean id="photo"
+	class="org.esupportail.mondossierweb.web.photo.PhotoNancy2ImplCodInd"
+		scope="session">
+		<property name="ressourceurl">
+		<value>http://serveur.univ-ville.fr:8080/PhotoServer/Photos/%category%/%code%?ticket=%ticket%&amp;chksum=%chksum%</value>
+		</property>
+		<property name="ticketurl">
+		<value>http://serveur.univ-ville.fr:8080/PhotoServer/getTicket?ip=%ip%&amp;mode=%mode%&amp;typ_lim=%typLim%&amp;val_lim=%valLim%&amp;client=%client%</value>
+		</property>
+		<property name="codeapp">
+		<value>00000000000000</value>
+		</property>
+	</bean>
+	-->
+</beans>

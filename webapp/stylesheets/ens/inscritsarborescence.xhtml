@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<ui:composition template="/stylesheets/template/template-ens.xhtml">
+	<ui:define name="titre">
+		Liste des inscrits
+	</ui:define>
+	<ui:define name="icones">
+		<h:outputText rendered="#{listeInscritsController.recherchecode}">
+			<span>
+				
+				<h:outputText rendered="#{listeInscritsController.recherchecodegroupe}">
+					<span>
+				<h:commandLink  action="navigationResultatRechercheGroupes">
+							<t:graphicImage align='absmiddle' value='/media/images/CMonDossierWeb/back.gif' alt='Retour' title='Retour' />
+							Retour
+				</h:commandLink>
+					</span>
+				</h:outputText>
+				<h:commandLink action="#{rechercheCodeController.enter}"
+					rendered="#{listeInscritsController.recherchecode and rechercheCodeController.rechercheParCode}">
+					<t:graphicImage align='absmiddle' value='/media/images/CMonDossierWeb/find.gif' alt='Nouvelle recherche' title='Nouvelle recherche' />
+				Nouvelle recherche
+				</h:commandLink>
+				<h:commandLink action="#{rechercheController.enter}"
+					rendered="#{!rechercheCodeController.rechercheParCode}">
+					<t:graphicImage align='absmiddle' value='/media/images/CMonDossierWeb/find.gif' alt='Nouvelle recherche' title='Nouvelle recherche' />
+					Nouvelle recherche
+				</h:commandLink>
+				</span>
+		</h:outputText>
+		<h:outputText rendered="#{!listeInscritsController.recherchecode}">
+			<span>
+				<h:commandLink action="#{rechercheController.enter}">
+					<t:graphicImage align='absmiddle' value='/media/images/CMonDossierWeb/find.gif' alt='Nouvelle recherche' title='Nouvelle recherche' />
+				Nouvelle recherche
+				</h:commandLink>
+				</span>
+		</h:outputText>
+
+		<h:outputText rendered="#{!listeInscritsController.recherchecode}">
+			<span>
+			 <h:commandLink action="#{rechercheController.retourNavigationArborescence}">
+					<t:graphicImage align='absmiddle' value='/media/images/CMonDossierWeb/back.gif' alt='Retour' title='Retour' />
+				Retour
+				</h:commandLink>
+				</span>
+		</h:outputText>
+		
+		
+	</ui:define>
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+		</ui:define>
+
+	<ui:define name="body">
+		<div class="portlet-msg-info">
+			<p>
+			<div class='uportal-channel-strong'>
+			Attention :
+			</div>
+			<p align='justify'>
+			</p>
+			<ul class='uportal-channel-text'>
+			<li>
+			Les mails des étudiants sont validés à la date de l'extraction et pourront ne plus l'être lors d'une utilisation ultérieure (l'étudiant aura pu résilier son inscription par exemple). Dans ce cas, vous recevrez un message vous indiquant que l'adresse électronique que vous utilisez est invalide.
+			</li>
+			<li>
+			La colonne IAE ? vous indique si l'étudiant a réalisé une inscription administrative pour l'étape. Dans le cas contraire, il s'agit d'une dette ou d'un crédit.
+			</li>
+			</ul>
+			
+			</p>
+		</div><br />
+	 <h:messages id="champMessages" errorStyle="color: red" />
+<table cellspacing='0' cellpadding='3' style= " border:0 ; ">
+<tr class='uportal-background-semidark'>
+<h:form id="formliengenerationinscrits">
+<td nowrap='true' class='uportal-text'>
+Année universitaire :
+</td>
+	<td nowrap='true' class='uportal-channel-strong'>
+ <h:outputText value="#{listeInscritsController.annee}"/>
+</td>
+<td>
+|
+</td>
+<td nowrap='true' class='uportal-text'>
+Libellé :
+</td>
+	<td nowrap='true' class='uportal-channel-strong'>
+ <h:outputText value="#{listeInscritsController.code}"/>
+  <h:outputText value="-#{listeInscritsController.version}" rendered="#{listeInscritsController.traiteEtape}"/>
+</td>
+	<td nowrap='true' class='uportal-channel-strong'>
+		<h:outputText value="#{listeInscritsController.libelle}"/>
+</td>
+<td>
+|
+</td>
+<td nowrap='true' class='uportal-text'>
+Nombre d'inscrits :
+</td>
+	<td nowrap='true' class='uportal-channel-strong'>
+ <h:outputText value="#{listeInscritsController.nbInscrits}"/>
+</td>
+<h:outputText rendered="#{config.utiliserTrombinoscope and listeInscritsController.photosValides}">
+<td>
+|
+</td>
+<td nowrap='true' class='uportal-channel-strong'>
+<h:commandLink style= " text-decoration:underline ; " id="linktrombi" action="#{listeInscritsController.trombinoscope}">
+Trombinoscope
+</h:commandLink>
+</td>
+</h:outputText>
+<td>
+|
+</td>
+<td nowrap='true' class='uportal-channel-strong'>
+<h:commandLink style= " text-decoration:underline ; " id="linkxsl" action="#{listeInscritsController.exportExcel}">
+Fichier Excel
+</h:commandLink>
+</td>
+<td valign='absmiddle' nowrap='true' class='uportal-channel-strong'>
+<h:commandLink id="linkxslimage" action="#{listeInscritsController.exportExcel}">
+<t:graphicImage style= " border:0 ; " value='/media/images/CMonDossierWeb/docxls.gif' alt='Fichier Excel' />
+</h:commandLink>
+</td>
+</h:form>
+</tr>
+</table>
+<br />
+
+<h:outputText rendered="#{listeInscritsController.existeInscrits}">
+
+
+<h:form rendered="#{config.listeScrollable}">
+	<t:dataTable id="datatable" value="#{listeInscritsController.listeInscrits}" var="ins" rows="#{config.nbEtudiantsParPage}"
+		styleClass="portlet-table"
+		headerClass="portlet-table-header"
+		rowClasses="portlet-table-body, portlet-table-alternate" >					
+
+		<ui:include src="/stylesheets/ens/listeInscrits.xhtml"/>
+	</t:dataTable>
+</h:form>
+         
+<h:form rendered="#{!config.listeScrollable}">
+	<t:dataTable id="datatable" value="#{listeInscritsController.listeInscrits}" var="ins"
+		styleClass="portlet-table"
+		headerClass="portlet-table-header"
+		rowClasses="portlet-table-body, portlet-table-alternate" >					
+		<ui:include src="/stylesheets/ens/listeInscrits.xhtml"/>
+	</t:dataTable>
+</h:form>
+
+
+
+</h:outputText>
+
+<h:outputText rendered="#{!listeInscritsController.existeInscrits}">
+	<div class="portlet-msg-info"><p>
+		<h:outputText rendered="#{listeInscritsController.traiteEtape}">
+		<b>Aucun etudiant inscrit à cette étape</b>
+		</h:outputText>
+		<h:outputText rendered="#{!listeInscritsController.traiteEtape and !listeInscritsController.recherchecodegroupe}">
+		<b>Aucun etudiant inscrit à cet élément pédagogique</b>
+		</h:outputText>
+		<h:outputText rendered="#{listeInscritsController.recherchecodegroupe}">
+			<b>Aucun etudiant inscrit à ce groupe</b>
+		</h:outputText>
+	</p></div>
+</h:outputText>
+
+
+<hr class='clear' />
+
+
+
+	</ui:define>
+</ui:composition></div>

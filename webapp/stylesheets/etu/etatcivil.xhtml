@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<ui:composition template="/stylesheets/template/template-etu.xhtml">
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+	</ui:define>		
+	<ui:define name="body">
+	   <div class="portlet-section-header">
+			Etat-civil
+		</div>
+		
+	<h:outputText rendered="#{etudiant.etatCivilRenseigne}">	
+      <br />
+		<div class="portlet-table-header">
+		   <span>GENERALITES</span>
+		</div>
+
+      
+<table width='98%'>
+<tr>
+<td valign='top' nowrap='nowrap'>   
+    
+		<table border="0" cellpadding="2" cellspacing="0" width="100%"> 
+		
+		<ui:include src="/stylesheets/etu/etatcivilidentite.xhtml"/>
+		   
+		   
+		<tr><td width="150" class="uportal-text">
+		Nationalité</td> <td class="uportal-channel-strong">
+		   <h:outputText value="#{etudiant.nationalite}"/></td></tr><tr><td>
+		</td></tr>
+         <tr>
+            <td class="uportal-text">Né(e) le</td>
+            <td class="uportal-channel-strong">
+                  <h:outputText value="#{etudiant.datenaissance}"/>
+            </td>
+         </tr>
+         <tr>
+            <td class="uportal-text">A</td>
+            <td class="uportal-channel-strong">
+                	   <h:outputText value="#{etudiant.lieunaissance}"/>
+            </td>
+         </tr>
+         <tr>
+            <td width="150" class="uportal-text">Département ou Pays</td>
+            <td class="uportal-channel-strong">
+                  <h:outputText value="#{etudiant.departementnaissance}"/>
+            </td>
+         </tr>
+      </table>
+      
+      </td>
+<td width='10%'>
+</td>
+
+<td align='right'>
+<h:outputText rendered="#{etudiant.urlphoto != ''}">
+<img width='120' height='153' src="#{etudiant.urlphoto}" alt='Photo' />
+</h:outputText>
+</td>
+
+</tr>
+</table>
+		
+		<br/>
+	   <div class="portlet-table-header">
+			<span>INSCRIPTION UNIVERSITE</span>
+		</div>
+
+      <table border="0" cellpadding="2" cellspacing="0" width="98%">
+         <tr>
+            <td width="150" class="uportal-text">Année</td>
+            <td class="uportal-channel-strong">
+                 <h:outputText value="#{etudiant.annee}"/>
+            </td>
+         </tr>
+         <tr>
+            <td class="uportal-text">Etablissement</td>
+            <td class="uportal-channel-strong">
+                <h:outputText value="#{etudiant.etablissement}"/>
+            </td>
+         </tr>
+      </table>
+		
+		<br/>
+	   <div class="portlet-table-header">
+			<span>BAC</span>
+		</div>
+
+      <table border="0" cellpadding="2" cellspacing="0" width="98%">
+      	
+      	<tr><td width="150" class="uportal-text">Bac</td>
+      	
+         <c:forEach var="bac" items="#{etudiant.listeBac}">
+        	 <td class="uportal-channel-strong">
+         		 #{bac.lib_bac}
+         	 </td>
+         </c:forEach>
+        
+         </tr>
+         
+         <tr><td width="150" class="uportal-text">Obtenu en</td>
+         <c:forEach var="bac" items="#{etudiant.listeBac}" >
+        	 <td class="uportal-channel-strong">
+         		 <h:outputText value="#{bac.daa_obt_bac_iba}"/>
+         	</td>
+         </c:forEach>
+         </tr>
+         
+         <tr><td width="150" class="uportal-text">Mention</td>
+         <c:forEach var="bac" items="#{etudiant.listeBac}" >
+        	 <td class="uportal-channel-strong">
+         		 <h:outputText value="#{bac.cod_mnb}"/>
+         	</td>
+         </c:forEach>
+         </tr>
+         
+          <tr><td class="uportal-text">Type établissement</td>
+         <c:forEach var="bac" items="#{etudiant.listeBac}" >
+        	 <td class="uportal-channel-strong">
+         		 <h:outputText value="#{bac.cod_tpe}"/>
+         	</td>
+         </c:forEach>
+         </tr>
+         
+          <tr><td class="uportal-text">Etablissement</td>
+         <c:forEach var="bac" items="#{etudiant.listeBac}" >
+        	 <td class="uportal-channel-strong">
+         		 <h:outputText value="#{bac.cod_etb}"/>
+         	</td>
+         </c:forEach>
+         </tr>
+         
+         <tr><td class="uportal-text">Département</td>
+         <c:forEach var="bac" items="#{etudiant.listeBac}" >
+        	 <td class="uportal-channel-strong">
+         		 <h:outputText value="#{bac.cod_dep}"/>
+         	</td>
+         </c:forEach>
+         </tr>
+         
+      </table>
+</h:outputText>
+<h:outputText rendered="#{!etudiant.etatCivilRenseigne}">	
+<ui:include src="/stylesheets/template/template-erreurbdd.xhtml"/>
+</h:outputText>
+	</ui:define>
+</ui:composition></div>

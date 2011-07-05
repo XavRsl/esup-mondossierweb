@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/stylesheets/template/template-ens.xhtml">
+		<ui:define name="titre">
+		Recherche dans l'annuaire
+	</ui:define>
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+		</ui:define>
+		<ui:define name="body">
+
+				<h:form id="formRechAnnuaire">
+					<h:messages id="champMessages" errorStyle="color: red" />
+					<div class="portlet-msg-info">
+					<p align='justify' class='uportal-channel-text'>
+						La recherche s'effectue sur l'annuaire privé des étudiants.<br />
+						Veuillez entrer au moins 3 caractères.<br />
+						Vous pouvez indiquer : Le nom de l'étudiant OU le prénom de l'étudiant OU le nom suivi du prénom séparés par un espace.
+					</p>
+					</div>
+					
+				
+					
+					<table border='0' cellspacing='0' cellpadding='2' >
+						<tr>
+							<td class='uportal-label'>
+								Nom/Prénom
+							</td><td width="300">
+								<h:inputText id="nom" value="#{rechercheAnnuaireController.nom}" size='45' maxlength='30' class='uportal-input-text' />
+								
+							</td>
+						</tr>
+						<tr>
+							<td align="right">
+								<h:commandButton class='uportal-button' id="validButton" action="#{rechercheAnnuaireController.chercher}" value="Rechercher" />
+								
+							</td><td>
+								<h:commandButton class='uportal-button' action="#{rechercheAnnuaireController.retour}" value="Retour" />
+							</td>
+						</tr>
+					</table>
+					
+				</h:form>
+				<script language='javascript'>
+
+
+document.forms['formRechAnnuaire'].onkeypress =new Function("{var keycode;if (window.event) keycode = window.event.keyCode;else if (event) keycode = event.which;else return true;if (keycode == 13) { document.getElementById('formRechAnnuaire:validButton').click();return false; } else  return true; }");
+
+</script>
+				<hr class='clear' />
+		
+		</ui:define>
+	</ui:composition>
+</div>

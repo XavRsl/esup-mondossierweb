@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:ui="http://java.sun.com/jsf/facelets"><ui:composition
+	template="/stylesheets/template/template-ens.xhtml">
+	<ui:define name="titre">
+		Trombinoscope
+	</ui:define>
+	<ui:define name="icones">
+		<h:outputText rendered="#{listeInscritsController.recherchecode}">
+			<span>
+			<h:commandLink action="#{rechercheCodeController.enter}">
+				<t:graphicImage align='absmiddle' style= " border:0 ; "
+					value='/media/images/CMonDossierWeb/find.gif'
+					alt='Nouvelle recherche' title='Nouvelle recherche' />
+			Nouvelle recherche
+			</h:commandLink>
+				</span>
+		</h:outputText>
+
+		<h:outputText rendered="#{!listeInscritsController.recherchecode}">
+			<span>
+			<h:commandLink action="#{rechercheController.enter}">
+				<t:graphicImage align='absmiddle' style= " border:0 ; "
+					value='/media/images/CMonDossierWeb/find.gif'
+					alt='Nouvelle recherche' title='Nouvelle recherche' />
+			Nouvelle recherche
+			</h:commandLink>
+				</span>
+		</h:outputText>
+	</ui:define>
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+		</ui:define>
+	<ui:define name="body">
+		<h:messages id="champMessages" errorStyle="color: red" />
+		<table width="98%"><tr><td>
+		<table width="98%" cellspacing='0' cellpadding='3' border='0'>
+			<tr class='uportal-background-semidark'>
+				<h:form id="formliengenerationinscrits">
+					<td nowrap='true' class='uportal-channel-strong'>Année
+					universitaire :</td>
+					<td nowrap='true' class='uportal-text'><h:outputText
+						value="#{listeInscritsController.annee}" /></td>
+					<td>|</td>
+					<td nowrap='true' class='uportal-channel-strong'>Libellé :</td>
+					<td nowrap='true' class='uportal-text'><h:outputText
+						value="#{listeInscritsController.code}" /> <h:outputText
+						value="-#{listeInscritsController.version}"
+						rendered="#{listeInscritsController.traiteEtape}" /></td>
+					<td nowrap='true' class='uportal-text'><h:outputText
+						value="#{listeInscritsController.libelle}" /></td>
+					<td>|</td>
+					<td nowrap='true' class='uportal-channel-strong'>Nombre
+					d'inscrits :</td>
+					<td nowrap='true' class='uportal-text'><h:outputText
+						value="#{listeInscritsController.nbInscrits}" /></td>
+					<td>|</td>
+					<td nowrap='true' class='uportal-channel-strong'><h:commandLink
+						id="linktrombi" style= " text-decoration:underline ; " action="navigationInscritsArborescence">
+Liste d'inscrits
+</h:commandLink></td>
+					<td id="lienPDFdownload0" >|</td>
+					<td nowrap='true' class='uportal-channel-strong'>
+					<a id="lienPDFdownload" href="javascript:display();" style= " text-decoration:underline ; " >
+PDF 
+<h:outputText rendered="#{listeInscritsController.affichageTrombiDecoupe}">
+partie <h:outputText value="#{listeInscritsController.pageVisualiseeTrombinoscope}"/> / <h:outputText value="#{listeInscritsController.nbPageTotalVisualiseeTrombinoscope}"/>
+</h:outputText>
+</a></td>
+					<td valign='absmiddle' nowrap='true' class='uportal-channel-strong'>
+						<a id="lienPDFdownload2" href="javascript:display();">
+						<t:graphicImage style= " border:0 ; "
+							value='/media/images/CMonDossierWeb/docpdf.gif'
+							alt='Fichier pdf' />
+						</a>
+						
+						<h:commandLink
+						id="linkpdf" action="#{listeInscritsController.genererPdf}"></h:commandLink>
+					</td>
+				</h:form>
+				
+			</tr>
+		</table>
+		</td><td id="waitbar" align="center" style="display:none">
+		
+		<h:outputText rendered="#{!listeInscritsController.download}">
+		<table><tr><td align="center">
+		<FONT size="1">Création Pdf En Cours</FONT></td></tr><tr><td align="center">
+		<object 
+	codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0"
+	width="120" height="16">
+   <param name="eanim" value="!e-anim:wait"/>
+   <param name="movie" value="wait.swf"/>
+   <param name="quality" value="high"/>
+   <embed src="${facesContext.externalContext.request.contextPath}/media/images/CMonDossierWeb/wait.swf"
+	 quality="high"
+	 pluginspage="http://www.macromedia.com/go/getflashplayer"
+	 type="application/x-shockwave-flash"
+ 	 width="120" height="16">
+    </embed>
+	</object> </td></tr><tr><td align="center">
+	<FONT size="1">Veuillez patienter</FONT>
+		</td></tr></table>
+		<!-- <t:graphicImage style= " border:0 ; " 
+		value='/media/images/CMonDossierWeb/waitbar.gif'
+		alt='Encours' /> -->
+		</h:outputText>
+		
+		</td>
+		
+		</tr></table>
+		<br />
+<h:form rendered="#{listeInscritsController.affichageTrombiDecoupe}">
+<table width="800"><tr>
+
+<td width="50" align="left">
+<h:commandLink style= " text-decoration:underline ; " action="#{listeInscritsController.naviguationTrombinoscope}" rendered="#{!listeInscritsController.affichageTrombiDecoupePremierePage}">
+  			<f:param name="action" value="precedent"/>
+  			<f:param name="pageEnCours" value="#{listeInscritsController.pageVisualiseeTrombinoscope}"/>
+     <b>PRECEDENT</b>
+     </h:commandLink>
+</td>
+
+<td align="center"> partie <h:outputText value="#{listeInscritsController.pageVisualiseeTrombinoscope}"/> / <h:outputText value="#{listeInscritsController.nbPageTotalVisualiseeTrombinoscope}"/> </td>
+
+<td width="50" align="right" >
+<h:commandLink style= " text-decoration:underline ; " action="#{listeInscritsController.naviguationTrombinoscope}" rendered="#{!listeInscritsController.affichageTrombiDecoupeDernierePage}">
+  			<f:param name="action" value="suivant"/>
+  			<f:param name="pageEnCours" value="#{listeInscritsController.pageVisualiseeTrombinoscope}"/>
+     <b>SUIVANT</b>
+     </h:commandLink>
+</td>
+
+</tr></table> 
+<br />
+</h:form>
+		<table>
+
+			<c:forEach var="linscrits"
+				items="#{listeInscritsController.listeInscritsTrombi}">
+				<tr>
+
+					<c:forEach var="inscrit" items="#{linscrits}">
+						<td>
+
+
+
+						<div class='blocPhoto'><h:form>
+							<h:commandLink action="#{etatCivilController.lienEnterTrombi}">
+								<f:param name="idparam" value="#{inscrit.cod_etu}" />
+								<img width='120' border="0" height='153' src="#{inscrit.urlphoto}"
+									alt='Photo' />
+							</h:commandLink>
+						</h:form> <b> <h:outputText value="#{inscrit.lib_nom_pat_ind}" /> </b> <br />
+						<b> <h:outputText value="#{inscrit.lib_pr1_ind}" /> </b> <br />
+						<h:outputText value="#{inscrit.cod_etu}" /> <br />
+						</div>
+
+
+
+
+						</td>
+					</c:forEach>
+				</tr>
+			</c:forEach>
+
+		</table>
+<script language='javascript'>
+
+		function display(){
+		document.getElementById("lienPDFdownload0").style.display = "none";
+		document.getElementById("lienPDFdownload").style.display = "none";
+		document.getElementById("lienPDFdownload2").style.display = "none";
+		document.getElementById("waitbar").style.display = "";
+		document.getElementById('formliengenerationinscrits:linkpdf').onclick();
+		
+		 }
+		 
+		
+		
+		 
+		  
+		 
+		</script>
+		<hr class='clear' />
+
+
+	</ui:define>
+</ui:composition></div>

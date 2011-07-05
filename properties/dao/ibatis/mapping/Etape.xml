@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Etape">
+
+<resultMap id="inscrit" class="org.esupportail.mondossierweb.domain.beans.Inscrit">
+<result property="cod_ind" column="cod_ind"/>
+<result property="cod_etu" column="cod_etu"/>
+<result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+<result property="lib_pr1_ind" column="lib_pr1_ind"/>
+<result property="date_nai_ind" column="date_nai_ind"/>
+<result property="iae" column="iae"/>
+</resultMap>
+
+<resultMap id="inscritJuin" class="org.esupportail.mondossierweb.domain.beans.Inscrit">
+<result property="cod_ind" column="cod_ind"/>
+<result property="cod_etu" column="cod_etu"/>
+<result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+<result property="lib_pr1_ind" column="lib_pr1_ind"/>
+<result property="date_nai_ind" column="date_nai_ind"/>
+<result property="iae" column="iae"/>
+<result property="resj" column="resj"/>
+<result property="notej" column="notej"/>
+</resultMap>
+
+<resultMap id="inscritSep" class="org.esupportail.mondossierweb.domain.beans.Inscrit">
+<result property="cod_ind" column="cod_ind"/>
+<result property="cod_etu" column="cod_etu"/>
+<result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+<result property="lib_pr1_ind" column="lib_pr1_ind"/>
+<result property="date_nai_ind" column="date_nai_ind"/>
+<result property="iae" column="iae"/>
+<result property="ress" column="ress"/>
+<result property="notes" column="notes"/>
+</resultMap>
+
+<resultMap id="inscritJuinSep" class="org.esupportail.mondossierweb.domain.beans.Inscrit">
+<result property="cod_ind" column="cod_ind"/>
+<result property="cod_etu" column="cod_etu"/>
+<result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+<result property="lib_pr1_ind" column="lib_pr1_ind"/>
+<result property="date_nai_ind" column="date_nai_ind"/>
+<result property="iae" column="iae"/>
+<result property="resj" column="resj"/>
+<result property="notej" column="notej"/>
+<result property="ress" column="ress"/>
+<result property="notes" column="notes"/>
+</resultMap>
+
+
+<resultMap id="resultEtape" class="org.esupportail.mondossierweb.domain.beans.Etape">
+<result property="code" column="cod_etp"/>
+<result property="version" column="cod_vrs_vet"/>
+<result property="libelle" column="lib_web_vet"/>
+</resultMap>
+
+
+<select id="checkEtape" resultClass="java.lang.Integer">
+select count(*) 
+from apogee.resultat_vet 
+where cod_etp = #code# and cod_vrs_vet = #version# and cod_anu = #annee# 
+</select>
+
+<select id="getLibelle" resultClass="java.lang.String">
+select lib_web_vet 
+from version_etape 
+where cod_etp = #code#
+and cod_vrs_vet = #version#
+</select>
+
+<select id="getInscrits" resultMap="inscrit">
+select i.cod_ind,i.cod_etu, i.lib_nom_pat_ind, i.lib_pr1_ind,
+to_char(i.date_nai_ind,'DD/MM/YYYY') date_nai_ind,  
+decode(rj.tem_iae_ko_vet,0,'O','N') iae
+from apogee.individu i , apogee.resultat_vet rj
+where rj.tem_iae_ko_vet in ('0','2') 
+and rj.cod_etp = #code# 
+and rj.cod_vrs_vet = #version#  
+and rj.cod_anu = #annee# 
+and rj.cod_ses in ('0','1') and rj.cod_adm = '1' 
+and i.cod_ind = rj.cod_ind 
+order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
+</select>
+
+<select id="getInscritsJuin" resultMap="inscritJuin">
+select i.cod_ind,i.cod_etu, i.lib_nom_pat_ind, i.lib_pr1_ind,
+to_char(i.date_nai_ind,'DD/MM/YYYY') date_nai_ind,  
+decode(rj.tem_iae_ko_vet,0,'O','N') iae,
+nvl(decode(to_char(rj.not_vet),null,rj.not_sub_vet,to_char(rj.not_vet)),' ') notej , 
+nvl(rj.cod_tre,' ') resj 
+from apogee.individu i , apogee.resultat_vet rj
+where rj.tem_iae_ko_vet in ('0','2') 
+and rj.cod_etp = #code# 
+and rj.cod_vrs_vet = #version#  
+and rj.cod_anu = #annee# 
+and rj.cod_ses in ('0','1') and rj.cod_adm = '1' 
+and i.cod_ind = rj.cod_ind 
+order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
+</select>
+
+<select id="getInscritsSep" resultMap="inscritSep">
+select i.cod_ind,i.cod_etu, i.lib_nom_pat_ind, i.lib_pr1_ind,
+to_char(i.date_nai_ind,'DD/MM/YYYY') date_nai_ind,  
+decode(rj.tem_iae_ko_vet,0,'O','N') iae, 
+nvl(decode(to_char(rs.not_vet),null,rs.not_sub_vet,to_char(rs.not_vet)),' ') notes ,
+nvl(rs.cod_tre,' ') ress 
+from apogee.individu i , apogee.resultat_vet rj
+left outer join apogee.resultat_vet rs on ( rs.cod_ind = rj.cod_ind  
+		and rs.tem_iae_ko_vet in ('0','2') 
+		and rs.cod_etp = rj.cod_etp 
+		and rs.cod_vrs_vet = rj.cod_vrs_vet 
+		and rs.cod_anu = rj.cod_anu 
+		and rs.cod_ses = '2' 
+		and rs.cod_adm = '1') 
+where rj.tem_iae_ko_vet in ('0','2') 
+and rj.cod_etp = #code# 
+and rj.cod_vrs_vet = #version#  
+and rj.cod_anu = #annee# 
+and rj.cod_ses in ('0','1') and rj.cod_adm = '1' 
+and i.cod_ind = rj.cod_ind 
+order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
+</select>
+
+<select id="getInscritsJuinSep" resultMap="inscritJuinSep">
+select i.cod_ind,i.cod_etu, i.lib_nom_pat_ind, i.lib_pr1_ind,
+to_char(i.date_nai_ind,'DD/MM/YYYY') date_nai_ind,  
+decode(rj.tem_iae_ko_vet,0,'O','N') iae,
+nvl(decode(to_char(rj.not_vet),null,rj.not_sub_vet,to_char(rj.not_vet)),' ') notej , 
+nvl(rj.cod_tre,' ') resj ,
+nvl(decode(to_char(rs.not_vet),null,rs.not_sub_vet,to_char(rs.not_vet)),' ') notes ,
+nvl(rs.cod_tre,' ') ress 
+from apogee.individu i , apogee.resultat_vet rj 
+left outer join apogee.resultat_vet rs on ( rs.cod_ind = rj.cod_ind  
+		and rs.tem_iae_ko_vet in ('0','2') 
+		and rs.cod_etp = rj.cod_etp 
+		and rs.cod_vrs_vet = rj.cod_vrs_vet 
+		and rs.cod_anu = rj.cod_anu 
+		and rs.cod_ses = '2' 
+		and rs.cod_adm = '1') 
+where rj.tem_iae_ko_vet in ('0','2') 
+and rj.cod_etp = #code# 
+and rj.cod_vrs_vet = #version#  
+and rj.cod_anu = #annee# 
+and rj.cod_ses in ('0','1') and rj.cod_adm = '1' 
+and i.cod_ind = rj.cod_ind 
+order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
+</select>
+
+<select id="getEtape" resultMap="resultEtape">
+select vfv.cod_etp, vfv.cod_vrs_vet, ve.lib_web_vet
+from vdi_fractionner_vet vfv, etape e,version_etape ve, version_diplome vdi  
+where (#anneeencours# >= vfv.DAA_DEB_RCT_VET and vfv.DAA_FIN_RCT_VET >= #anneeencours#) 
+and e.cod_etp = vfv.cod_etp 
+and ve.cod_etp = e.cod_etp
+and ve.cod_vrs_vet = vfv.cod_vrs_vet
+and vdi.cod_dip = vfv.cod_dip and vdi.cod_vrs_vdi = vfv.cod_vrs_vdi 
+and vdi.cod_dip = #code# and vdi.cod_vrs_vdi = #version# 
+order by ve.lib_web_vet 
+</select>
+
+<select id="getFormationEnCours" resultClass="java.lang.String">
+    select LIB_WEB_VET
+    from ins_adm_etp ins, etape e, version_etape ve
+    where e.cod_etp = ins.cod_etp 
+    and ve.cod_etp = e.cod_etp
+    and ve.cod_vrs_vet = ins.cod_vrs_vet
+    and ins.cod_ind = #value#
+    and   eta_iae = 'E'
+    ORDER BY COD_ANU DESC
+</select>
+</sqlMap>
+
+	

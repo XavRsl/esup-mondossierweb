@@ -1,0 +1,478 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /**<a name="line.1"></a>
+<FONT color="green">002</FONT>     * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.<a name="line.2"></a>
+<FONT color="green">003</FONT>     */<a name="line.3"></a>
+<FONT color="green">004</FONT>    package org.esupportail.commons.utils.strings;<a name="line.4"></a>
+<FONT color="green">005</FONT>    <a name="line.5"></a>
+<FONT color="green">006</FONT>    import java.util.Hashtable;<a name="line.6"></a>
+<FONT color="green">007</FONT>    import java.util.Map;<a name="line.7"></a>
+<FONT color="green">008</FONT>    <a name="line.8"></a>
+<FONT color="green">009</FONT>    /**<a name="line.9"></a>
+<FONT color="green">010</FONT>     * A class to decode HTML entities to UTF-8.<a name="line.10"></a>
+<FONT color="green">011</FONT>     */<a name="line.11"></a>
+<FONT color="green">012</FONT>    public class NcrDecoder {<a name="line.12"></a>
+<FONT color="green">013</FONT>    <a name="line.13"></a>
+<FONT color="green">014</FONT>            /** Magic number. */<a name="line.14"></a>
+<FONT color="green">015</FONT>            private static final int TEN = 10;<a name="line.15"></a>
+<FONT color="green">016</FONT>            /** Magic number. */<a name="line.16"></a>
+<FONT color="green">017</FONT>            private static final int SIXTEEN = 16;<a name="line.17"></a>
+<FONT color="green">018</FONT>    <a name="line.18"></a>
+<FONT color="green">019</FONT>            /**<a name="line.19"></a>
+<FONT color="green">020</FONT>             * The entities to decode.<a name="line.20"></a>
+<FONT color="green">021</FONT>             */<a name="line.21"></a>
+<FONT color="green">022</FONT>            private static Map&lt;String, String&gt; entities;<a name="line.22"></a>
+<FONT color="green">023</FONT>    <a name="line.23"></a>
+<FONT color="green">024</FONT>            /**<a name="line.24"></a>
+<FONT color="green">025</FONT>             * Constructor.<a name="line.25"></a>
+<FONT color="green">026</FONT>             */<a name="line.26"></a>
+<FONT color="green">027</FONT>            private NcrDecoder() {<a name="line.27"></a>
+<FONT color="green">028</FONT>                    super();<a name="line.28"></a>
+<FONT color="green">029</FONT>            }<a name="line.29"></a>
+<FONT color="green">030</FONT>    <a name="line.30"></a>
+<FONT color="green">031</FONT>            /**<a name="line.31"></a>
+<FONT color="green">032</FONT>             * @return the entities to decode.<a name="line.32"></a>
+<FONT color="green">033</FONT>             */<a name="line.33"></a>
+<FONT color="green">034</FONT>            private static synchronized Map&lt;String, String&gt; getEntities() {<a name="line.34"></a>
+<FONT color="green">035</FONT>                    if (entities == null) {<a name="line.35"></a>
+<FONT color="green">036</FONT>                            entities = new Hashtable&lt;String, String&gt;();<a name="line.36"></a>
+<FONT color="green">037</FONT>                            entities.put("quot", "\"");<a name="line.37"></a>
+<FONT color="green">038</FONT>                            entities.put("amp", "&amp;amp;");<a name="line.38"></a>
+<FONT color="green">039</FONT>                            entities.put("lt", "&amp;lt;");<a name="line.39"></a>
+<FONT color="green">040</FONT>                            entities.put("gt", "&amp;gt;");<a name="line.40"></a>
+<FONT color="green">041</FONT>                            entities.put("nbsp", " ");<a name="line.41"></a>
+<FONT color="green">042</FONT>                            entities.put("iexcl", "¡");<a name="line.42"></a>
+<FONT color="green">043</FONT>                            entities.put("cent", "¢");<a name="line.43"></a>
+<FONT color="green">044</FONT>                            entities.put("pound", "£");<a name="line.44"></a>
+<FONT color="green">045</FONT>                            entities.put("curren", "¤");<a name="line.45"></a>
+<FONT color="green">046</FONT>                            entities.put("yen", "¥");<a name="line.46"></a>
+<FONT color="green">047</FONT>                            entities.put("brvbar", "¦");<a name="line.47"></a>
+<FONT color="green">048</FONT>                            entities.put("sect", "§");<a name="line.48"></a>
+<FONT color="green">049</FONT>                            entities.put("uml", "¨");<a name="line.49"></a>
+<FONT color="green">050</FONT>                            entities.put("copy", "©");<a name="line.50"></a>
+<FONT color="green">051</FONT>                            entities.put("ordf", "ª");<a name="line.51"></a>
+<FONT color="green">052</FONT>                            entities.put("laquo", "«");<a name="line.52"></a>
+<FONT color="green">053</FONT>                            entities.put("not", "¬");<a name="line.53"></a>
+<FONT color="green">054</FONT>                            entities.put("shy", "­");<a name="line.54"></a>
+<FONT color="green">055</FONT>                            entities.put("reg", "®");<a name="line.55"></a>
+<FONT color="green">056</FONT>                            entities.put("macr", "¯");<a name="line.56"></a>
+<FONT color="green">057</FONT>                            entities.put("deg", "°");<a name="line.57"></a>
+<FONT color="green">058</FONT>                            entities.put("plusmn", "±");<a name="line.58"></a>
+<FONT color="green">059</FONT>                            entities.put("sup2", "²");<a name="line.59"></a>
+<FONT color="green">060</FONT>                            entities.put("sup3", "³");<a name="line.60"></a>
+<FONT color="green">061</FONT>                            entities.put("acute", "´");<a name="line.61"></a>
+<FONT color="green">062</FONT>                            entities.put("micro", "µ");<a name="line.62"></a>
+<FONT color="green">063</FONT>                            entities.put("para", "¶");<a name="line.63"></a>
+<FONT color="green">064</FONT>                            entities.put("middot", "·");<a name="line.64"></a>
+<FONT color="green">065</FONT>                            entities.put("cedil", "¸");<a name="line.65"></a>
+<FONT color="green">066</FONT>                            entities.put("sup1", "¹");<a name="line.66"></a>
+<FONT color="green">067</FONT>                            entities.put("ordm", "º");<a name="line.67"></a>
+<FONT color="green">068</FONT>                            entities.put("raquo", "»");<a name="line.68"></a>
+<FONT color="green">069</FONT>                            entities.put("frac14", "¼");<a name="line.69"></a>
+<FONT color="green">070</FONT>                            entities.put("frac12", "½");<a name="line.70"></a>
+<FONT color="green">071</FONT>                            entities.put("frac34", "¾");<a name="line.71"></a>
+<FONT color="green">072</FONT>                            entities.put("iquest", "¿");<a name="line.72"></a>
+<FONT color="green">073</FONT>                            entities.put("Agrave", "À");<a name="line.73"></a>
+<FONT color="green">074</FONT>                            entities.put("Aacute", "Á");<a name="line.74"></a>
+<FONT color="green">075</FONT>                            entities.put("Acirc", "Â");<a name="line.75"></a>
+<FONT color="green">076</FONT>                            entities.put("Atilde", "Ã");<a name="line.76"></a>
+<FONT color="green">077</FONT>                            entities.put("Auml", "Ä");<a name="line.77"></a>
+<FONT color="green">078</FONT>                            entities.put("Aring", "Å");<a name="line.78"></a>
+<FONT color="green">079</FONT>                            entities.put("AElig", "Æ");<a name="line.79"></a>
+<FONT color="green">080</FONT>                            entities.put("Ccedil", "Ç");<a name="line.80"></a>
+<FONT color="green">081</FONT>                            entities.put("Egrave", "È");<a name="line.81"></a>
+<FONT color="green">082</FONT>                            entities.put("Eacute", "É");<a name="line.82"></a>
+<FONT color="green">083</FONT>                            entities.put("Ecirc", "Ê");<a name="line.83"></a>
+<FONT color="green">084</FONT>                            entities.put("Euml", "Ë");<a name="line.84"></a>
+<FONT color="green">085</FONT>                            entities.put("Igrave", "Ì");<a name="line.85"></a>
+<FONT color="green">086</FONT>                            entities.put("Iacute", "Í");<a name="line.86"></a>
+<FONT color="green">087</FONT>                            entities.put("Icirc", "Î");<a name="line.87"></a>
+<FONT color="green">088</FONT>                            entities.put("Iuml", "Ï");<a name="line.88"></a>
+<FONT color="green">089</FONT>                            entities.put("ETH", "Ð");<a name="line.89"></a>
+<FONT color="green">090</FONT>                            entities.put("Ntilde", "Ñ");<a name="line.90"></a>
+<FONT color="green">091</FONT>                            entities.put("Ograve", "Ò");<a name="line.91"></a>
+<FONT color="green">092</FONT>                            entities.put("Oacute", "Ó");<a name="line.92"></a>
+<FONT color="green">093</FONT>                            entities.put("Ocirc", "Ô");<a name="line.93"></a>
+<FONT color="green">094</FONT>                            entities.put("Otilde", "Õ");<a name="line.94"></a>
+<FONT color="green">095</FONT>                            entities.put("Ouml", "Ö");<a name="line.95"></a>
+<FONT color="green">096</FONT>                            entities.put("times", "×");<a name="line.96"></a>
+<FONT color="green">097</FONT>                            entities.put("Oslash", "Ø");<a name="line.97"></a>
+<FONT color="green">098</FONT>                            entities.put("Ugrave", "Ù");<a name="line.98"></a>
+<FONT color="green">099</FONT>                            entities.put("Uacute", "Ú");<a name="line.99"></a>
+<FONT color="green">100</FONT>                            entities.put("Ucirc", "Û");<a name="line.100"></a>
+<FONT color="green">101</FONT>                            entities.put("Uuml", "Ü");<a name="line.101"></a>
+<FONT color="green">102</FONT>                            entities.put("Yacute", "Ý");<a name="line.102"></a>
+<FONT color="green">103</FONT>                            entities.put("THORN", "Þ");<a name="line.103"></a>
+<FONT color="green">104</FONT>                            entities.put("szlig", "ß");<a name="line.104"></a>
+<FONT color="green">105</FONT>                            entities.put("agrave", "à");<a name="line.105"></a>
+<FONT color="green">106</FONT>                            entities.put("aacute", "á");<a name="line.106"></a>
+<FONT color="green">107</FONT>                            entities.put("acirc", "â");<a name="line.107"></a>
+<FONT color="green">108</FONT>                            entities.put("atilde", "ã");<a name="line.108"></a>
+<FONT color="green">109</FONT>                            entities.put("auml", "ä");<a name="line.109"></a>
+<FONT color="green">110</FONT>                            entities.put("aring", "å");<a name="line.110"></a>
+<FONT color="green">111</FONT>                            entities.put("aelig", "æ");<a name="line.111"></a>
+<FONT color="green">112</FONT>                            entities.put("ccedil", "ç");<a name="line.112"></a>
+<FONT color="green">113</FONT>                            entities.put("egrave", "è");<a name="line.113"></a>
+<FONT color="green">114</FONT>                            entities.put("eacute", "é");<a name="line.114"></a>
+<FONT color="green">115</FONT>                            entities.put("ecirc", "ê");<a name="line.115"></a>
+<FONT color="green">116</FONT>                            entities.put("euml", "ë");<a name="line.116"></a>
+<FONT color="green">117</FONT>                            entities.put("igrave", "ì");<a name="line.117"></a>
+<FONT color="green">118</FONT>                            entities.put("iacute", "í");<a name="line.118"></a>
+<FONT color="green">119</FONT>                            entities.put("icirc", "î");<a name="line.119"></a>
+<FONT color="green">120</FONT>                            entities.put("iuml", "ï");<a name="line.120"></a>
+<FONT color="green">121</FONT>                            entities.put("eth", "ð");<a name="line.121"></a>
+<FONT color="green">122</FONT>                            entities.put("ntilde", "ñ");<a name="line.122"></a>
+<FONT color="green">123</FONT>                            entities.put("ograve", "ò");<a name="line.123"></a>
+<FONT color="green">124</FONT>                            entities.put("oacute", "ó");<a name="line.124"></a>
+<FONT color="green">125</FONT>                            entities.put("ocirc", "ô");<a name="line.125"></a>
+<FONT color="green">126</FONT>                            entities.put("otilde", "õ");<a name="line.126"></a>
+<FONT color="green">127</FONT>                            entities.put("ouml", "ö");<a name="line.127"></a>
+<FONT color="green">128</FONT>                            entities.put("divide", "÷");<a name="line.128"></a>
+<FONT color="green">129</FONT>                            entities.put("oslash", "ø");<a name="line.129"></a>
+<FONT color="green">130</FONT>                            entities.put("ugrave", "ù");<a name="line.130"></a>
+<FONT color="green">131</FONT>                            entities.put("uacute", "ú");<a name="line.131"></a>
+<FONT color="green">132</FONT>                            entities.put("ucirc", "û");<a name="line.132"></a>
+<FONT color="green">133</FONT>                            entities.put("uuml", "ü");<a name="line.133"></a>
+<FONT color="green">134</FONT>                            entities.put("yacute", "ý");<a name="line.134"></a>
+<FONT color="green">135</FONT>                            entities.put("thorn", "þ");<a name="line.135"></a>
+<FONT color="green">136</FONT>                            entities.put("yuml", "ÿ");<a name="line.136"></a>
+<FONT color="green">137</FONT>                            entities.put("apos", "'");<a name="line.137"></a>
+<FONT color="green">138</FONT>                    }<a name="line.138"></a>
+<FONT color="green">139</FONT>                    return entities;<a name="line.139"></a>
+<FONT color="green">140</FONT>            }<a name="line.140"></a>
+<FONT color="green">141</FONT>    <a name="line.141"></a>
+<FONT color="green">142</FONT>    //      /**<a name="line.142"></a>
+<FONT color="green">143</FONT>    //       * @return the entities to decode.<a name="line.143"></a>
+<FONT color="green">144</FONT>    //       */<a name="line.144"></a>
+<FONT color="green">145</FONT>    //      private static synchronized Map&lt;String, String&gt; getEntities() {<a name="line.145"></a>
+<FONT color="green">146</FONT>    //              if (entities == null) {<a name="line.146"></a>
+<FONT color="green">147</FONT>    //                      entities = new Hashtable&lt;String, String&gt;();<a name="line.147"></a>
+<FONT color="green">148</FONT>    //                      //Quotation mark<a name="line.148"></a>
+<FONT color="green">149</FONT>    //                      entities.put("quot", "\"");<a name="line.149"></a>
+<FONT color="green">150</FONT>    //                      //Ampersand<a name="line.150"></a>
+<FONT color="green">151</FONT>    //                      entities.put("amp", "\u0026");<a name="line.151"></a>
+<FONT color="green">152</FONT>    //                      //Less than<a name="line.152"></a>
+<FONT color="green">153</FONT>    //                      entities.put("lt", "\u003C");<a name="line.153"></a>
+<FONT color="green">154</FONT>    //                      //Greater than<a name="line.154"></a>
+<FONT color="green">155</FONT>    //                      entities.put("gt", "\u003E");<a name="line.155"></a>
+<FONT color="green">156</FONT>    //                      //Nonbreaking space<a name="line.156"></a>
+<FONT color="green">157</FONT>    //                      entities.put("nbsp", "\u00A0");<a name="line.157"></a>
+<FONT color="green">158</FONT>    //                      //Inverted exclamation point<a name="line.158"></a>
+<FONT color="green">159</FONT>    //                      entities.put("iexcl", "\u00A1");<a name="line.159"></a>
+<FONT color="green">160</FONT>    //                      //Cent sign<a name="line.160"></a>
+<FONT color="green">161</FONT>    //                      entities.put("cent", "\u00A2");<a name="line.161"></a>
+<FONT color="green">162</FONT>    //                      //Pound sign<a name="line.162"></a>
+<FONT color="green">163</FONT>    //                      entities.put("pound", "\u00A3");<a name="line.163"></a>
+<FONT color="green">164</FONT>    //                      //General currency sign<a name="line.164"></a>
+<FONT color="green">165</FONT>    //                      entities.put("curren", "\u00A4");<a name="line.165"></a>
+<FONT color="green">166</FONT>    //                      //Yen sign<a name="line.166"></a>
+<FONT color="green">167</FONT>    //                      entities.put("yen", "\u00A5");<a name="line.167"></a>
+<FONT color="green">168</FONT>    //                      //Broken vertical bar<a name="line.168"></a>
+<FONT color="green">169</FONT>    //                      entities.put("brvbar", "\u00A6");<a name="line.169"></a>
+<FONT color="green">170</FONT>    //                      //Section sign<a name="line.170"></a>
+<FONT color="green">171</FONT>    //                      entities.put("sect", "\u00A7");<a name="line.171"></a>
+<FONT color="green">172</FONT>    //                      //Umlaut<a name="line.172"></a>
+<FONT color="green">173</FONT>    //                      entities.put("uml", "\u00A8");<a name="line.173"></a>
+<FONT color="green">174</FONT>    //                      //Copyright<a name="line.174"></a>
+<FONT color="green">175</FONT>    //                      entities.put("copy", "\u00A9");<a name="line.175"></a>
+<FONT color="green">176</FONT>    //                      //Feminine ordinal<a name="line.176"></a>
+<FONT color="green">177</FONT>    //                      entities.put("ordf", "\u00AA");<a name="line.177"></a>
+<FONT color="green">178</FONT>    //                      //Left angle quote<a name="line.178"></a>
+<FONT color="green">179</FONT>    //                      entities.put("laquo", "\u00AB");<a name="line.179"></a>
+<FONT color="green">180</FONT>    //                      //Not sign<a name="line.180"></a>
+<FONT color="green">181</FONT>    //                      entities.put("not", "\u00AC");<a name="line.181"></a>
+<FONT color="green">182</FONT>    //                      //Soft hyphen<a name="line.182"></a>
+<FONT color="green">183</FONT>    //                      entities.put("shy", "\u00AD");<a name="line.183"></a>
+<FONT color="green">184</FONT>    //                      //Registered trademark<a name="line.184"></a>
+<FONT color="green">185</FONT>    //                      entities.put("reg", "\u00AE");<a name="line.185"></a>
+<FONT color="green">186</FONT>    //                      //Macron accent<a name="line.186"></a>
+<FONT color="green">187</FONT>    //                      entities.put("macr", "\u00AF");<a name="line.187"></a>
+<FONT color="green">188</FONT>    //                      //Degree sign<a name="line.188"></a>
+<FONT color="green">189</FONT>    //                      entities.put("deg", "\u00B0");<a name="line.189"></a>
+<FONT color="green">190</FONT>    //                      //Plus or minus<a name="line.190"></a>
+<FONT color="green">191</FONT>    //                      entities.put("plusmn", "\u00B1");<a name="line.191"></a>
+<FONT color="green">192</FONT>    //                      //Superscript 2<a name="line.192"></a>
+<FONT color="green">193</FONT>    //                      entities.put("sup2", "\u00B2");<a name="line.193"></a>
+<FONT color="green">194</FONT>    //                      //Superscript 3<a name="line.194"></a>
+<FONT color="green">195</FONT>    //                      entities.put("sup3", "\u00B3");<a name="line.195"></a>
+<FONT color="green">196</FONT>    //                      //Acute accent<a name="line.196"></a>
+<FONT color="green">197</FONT>    //                      entities.put("acute", "\u00B4");<a name="line.197"></a>
+<FONT color="green">198</FONT>    //                      //Micro sign (Greek mu)<a name="line.198"></a>
+<FONT color="green">199</FONT>    //                      entities.put("micro", "\u00B5");<a name="line.199"></a>
+<FONT color="green">200</FONT>    //                      //Paragraph sign<a name="line.200"></a>
+<FONT color="green">201</FONT>    //                      entities.put("para", "\u00B6");<a name="line.201"></a>
+<FONT color="green">202</FONT>    //                      //Middle dot<a name="line.202"></a>
+<FONT color="green">203</FONT>    //                      entities.put("middot", "\u00B7");<a name="line.203"></a>
+<FONT color="green">204</FONT>    //                      //Cedilla<a name="line.204"></a>
+<FONT color="green">205</FONT>    //                      entities.put("cedil", "\u00B8");<a name="line.205"></a>
+<FONT color="green">206</FONT>    //                      //Superscript 1<a name="line.206"></a>
+<FONT color="green">207</FONT>    //                      entities.put("sup1", "\u00B9");<a name="line.207"></a>
+<FONT color="green">208</FONT>    //                      //Masculine ordinal<a name="line.208"></a>
+<FONT color="green">209</FONT>    //                      entities.put("ordm", "\u00BA");<a name="line.209"></a>
+<FONT color="green">210</FONT>    //                      //Right angle quote<a name="line.210"></a>
+<FONT color="green">211</FONT>    //                      entities.put("raquo", "\u00BB");<a name="line.211"></a>
+<FONT color="green">212</FONT>    //                      //Fraction one-fourth<a name="line.212"></a>
+<FONT color="green">213</FONT>    //                      entities.put("frac14", "\u00BC");<a name="line.213"></a>
+<FONT color="green">214</FONT>    //                      //Fraction one-half<a name="line.214"></a>
+<FONT color="green">215</FONT>    //                      entities.put("frac12", "\u00BD");<a name="line.215"></a>
+<FONT color="green">216</FONT>    //                      //Fraction three-fourths<a name="line.216"></a>
+<FONT color="green">217</FONT>    //                      entities.put("frac34", "\u00BE");<a name="line.217"></a>
+<FONT color="green">218</FONT>    //                      //Inverted question mark<a name="line.218"></a>
+<FONT color="green">219</FONT>    //                      entities.put("iquest", "\u00BF");<a name="line.219"></a>
+<FONT color="green">220</FONT>    //                      //Capital A, grave accent<a name="line.220"></a>
+<FONT color="green">221</FONT>    //                      entities.put("Agrave", "\u00C0");<a name="line.221"></a>
+<FONT color="green">222</FONT>    //                      //Capital A, acute accent<a name="line.222"></a>
+<FONT color="green">223</FONT>    //                      entities.put("Aacute", "\u00C1");<a name="line.223"></a>
+<FONT color="green">224</FONT>    //                      //Capital A, circumflex accent<a name="line.224"></a>
+<FONT color="green">225</FONT>    //                      entities.put("Acirc", "\u00C2");<a name="line.225"></a>
+<FONT color="green">226</FONT>    //                      //Capital A, tilde<a name="line.226"></a>
+<FONT color="green">227</FONT>    //                      entities.put("Atilde", "\u00C3");<a name="line.227"></a>
+<FONT color="green">228</FONT>    //                      //Capital A, umlaut<a name="line.228"></a>
+<FONT color="green">229</FONT>    //                      entities.put("Auml", "\u00C4");<a name="line.229"></a>
+<FONT color="green">230</FONT>    //                      //Capital A, ring<a name="line.230"></a>
+<FONT color="green">231</FONT>    //                      entities.put("Aring", "\u00C5");<a name="line.231"></a>
+<FONT color="green">232</FONT>    //                      //Capital AE ligature<a name="line.232"></a>
+<FONT color="green">233</FONT>    //                      entities.put("AElig", "\u00C6");<a name="line.233"></a>
+<FONT color="green">234</FONT>    //                      //Capital C, cedilla<a name="line.234"></a>
+<FONT color="green">235</FONT>    //                      entities.put("Ccedil", "\u00C7");<a name="line.235"></a>
+<FONT color="green">236</FONT>    //                      //Capital E, grave accent<a name="line.236"></a>
+<FONT color="green">237</FONT>    //                      entities.put("Egrave", "\u00C8");<a name="line.237"></a>
+<FONT color="green">238</FONT>    //                      //Capital E, acute accent<a name="line.238"></a>
+<FONT color="green">239</FONT>    //                      entities.put("Eacute", "\u00C9");<a name="line.239"></a>
+<FONT color="green">240</FONT>    //                      //Capital E, circumflex accent<a name="line.240"></a>
+<FONT color="green">241</FONT>    //                      entities.put("Ecirc", "\u00CA");<a name="line.241"></a>
+<FONT color="green">242</FONT>    //                      //Capital E, umlaut<a name="line.242"></a>
+<FONT color="green">243</FONT>    //                      entities.put("Euml", "\u00CB");<a name="line.243"></a>
+<FONT color="green">244</FONT>    //                      //Capital I, grave accent<a name="line.244"></a>
+<FONT color="green">245</FONT>    //                      entities.put("Igrave", "\u00CC");<a name="line.245"></a>
+<FONT color="green">246</FONT>    //                      //Capital I, acute accent<a name="line.246"></a>
+<FONT color="green">247</FONT>    //                      entities.put("Iacute", "\u00CD");<a name="line.247"></a>
+<FONT color="green">248</FONT>    //                      //Capital I, circumflex accent<a name="line.248"></a>
+<FONT color="green">249</FONT>    //                      entities.put("Icirc", "\u00CE");<a name="line.249"></a>
+<FONT color="green">250</FONT>    //                      //Capital I, umlaut<a name="line.250"></a>
+<FONT color="green">251</FONT>    //                      entities.put("Iuml", "\u00CF");<a name="line.251"></a>
+<FONT color="green">252</FONT>    //                      //Capital eth, Icelandic<a name="line.252"></a>
+<FONT color="green">253</FONT>    //                      entities.put("ETH", "\u00D0");<a name="line.253"></a>
+<FONT color="green">254</FONT>    //                      //Capital N, tilde<a name="line.254"></a>
+<FONT color="green">255</FONT>    //                      entities.put("Ntilde", "\u00D1");<a name="line.255"></a>
+<FONT color="green">256</FONT>    //                      //Capital O, grave accent<a name="line.256"></a>
+<FONT color="green">257</FONT>    //                      entities.put("Ograve", "\u00D2");<a name="line.257"></a>
+<FONT color="green">258</FONT>    //                      //Capital O, acute accent<a name="line.258"></a>
+<FONT color="green">259</FONT>    //                      entities.put("Oacute", "\u00D3");<a name="line.259"></a>
+<FONT color="green">260</FONT>    //                      //Capital O, circumflex accent<a name="line.260"></a>
+<FONT color="green">261</FONT>    //                      entities.put("Ocirc", "\u00D4");<a name="line.261"></a>
+<FONT color="green">262</FONT>    //                      //Capital O, tilde<a name="line.262"></a>
+<FONT color="green">263</FONT>    //                      entities.put("Otilde", "\u00D5");<a name="line.263"></a>
+<FONT color="green">264</FONT>    //                      //Capital O, umlaut<a name="line.264"></a>
+<FONT color="green">265</FONT>    //                      entities.put("Ouml", "\u00D6");<a name="line.265"></a>
+<FONT color="green">266</FONT>    //                      //Multiply sign<a name="line.266"></a>
+<FONT color="green">267</FONT>    //                      entities.put("times", "\u00D7");<a name="line.267"></a>
+<FONT color="green">268</FONT>    //                      //Capital O, slash<a name="line.268"></a>
+<FONT color="green">269</FONT>    //                      entities.put("Oslash", "\u00D8");<a name="line.269"></a>
+<FONT color="green">270</FONT>    //                      //Capital U, grave accent<a name="line.270"></a>
+<FONT color="green">271</FONT>    //                      entities.put("Ugrave", "\u00D9");<a name="line.271"></a>
+<FONT color="green">272</FONT>    //                      //Capital U, acute accent<a name="line.272"></a>
+<FONT color="green">273</FONT>    //                      entities.put("Uacute", "\u00DA");<a name="line.273"></a>
+<FONT color="green">274</FONT>    //                      //Capital U, circumflex accent<a name="line.274"></a>
+<FONT color="green">275</FONT>    //                      entities.put("Ucirc", "\u00DB");<a name="line.275"></a>
+<FONT color="green">276</FONT>    //                      //Capital U, umlaut<a name="line.276"></a>
+<FONT color="green">277</FONT>    //                      entities.put("Uuml", "\u00DC");<a name="line.277"></a>
+<FONT color="green">278</FONT>    //                      //Capital Y, acute accent<a name="line.278"></a>
+<FONT color="green">279</FONT>    //                      entities.put("Yacute", "\u00DD");<a name="line.279"></a>
+<FONT color="green">280</FONT>    //                      //Capital thorn, Icelandic<a name="line.280"></a>
+<FONT color="green">281</FONT>    //                      entities.put("THORN", "\u00DE");<a name="line.281"></a>
+<FONT color="green">282</FONT>    //                      //Small sz ligature, German<a name="line.282"></a>
+<FONT color="green">283</FONT>    //                      entities.put("szlig", "\u00DF");<a name="line.283"></a>
+<FONT color="green">284</FONT>    //                      //Small a, grave accent<a name="line.284"></a>
+<FONT color="green">285</FONT>    //                      entities.put("agrave", "\u00E0");<a name="line.285"></a>
+<FONT color="green">286</FONT>    //                      //Small a, acute accent<a name="line.286"></a>
+<FONT color="green">287</FONT>    //                      entities.put("aacute", "\u00E1");<a name="line.287"></a>
+<FONT color="green">288</FONT>    //                      //Small a, circumflex accent<a name="line.288"></a>
+<FONT color="green">289</FONT>    //                      entities.put("acirc", "\u00E2");<a name="line.289"></a>
+<FONT color="green">290</FONT>    //                      //Small a, tilde<a name="line.290"></a>
+<FONT color="green">291</FONT>    //                      entities.put("atilde", "\u00E3");<a name="line.291"></a>
+<FONT color="green">292</FONT>    //                      //Small a, umlaut<a name="line.292"></a>
+<FONT color="green">293</FONT>    //                      entities.put("auml", "\u00E4");<a name="line.293"></a>
+<FONT color="green">294</FONT>    //                      //Small a, ring<a name="line.294"></a>
+<FONT color="green">295</FONT>    //                      entities.put("aring", "\u00E5");<a name="line.295"></a>
+<FONT color="green">296</FONT>    //                      //Small ae ligature<a name="line.296"></a>
+<FONT color="green">297</FONT>    //                      entities.put("aelig", "\u00E6");<a name="line.297"></a>
+<FONT color="green">298</FONT>    //                      //Small c, cedilla<a name="line.298"></a>
+<FONT color="green">299</FONT>    //                      entities.put("ccedil", "\u00E7");<a name="line.299"></a>
+<FONT color="green">300</FONT>    //                      //Small e, grave accent<a name="line.300"></a>
+<FONT color="green">301</FONT>    //                      entities.put("egrave", "\u00E8");<a name="line.301"></a>
+<FONT color="green">302</FONT>    //                      //Small e, acute accent<a name="line.302"></a>
+<FONT color="green">303</FONT>    //                      entities.put("eacute", "\u00E9");<a name="line.303"></a>
+<FONT color="green">304</FONT>    //                      //Small e, circumflex accent<a name="line.304"></a>
+<FONT color="green">305</FONT>    //                      entities.put("ecirc", "\u00EA");<a name="line.305"></a>
+<FONT color="green">306</FONT>    //                      //Small e, umlaut<a name="line.306"></a>
+<FONT color="green">307</FONT>    //                      entities.put("euml", "\u00EB");<a name="line.307"></a>
+<FONT color="green">308</FONT>    //                      //Small i, grave accent<a name="line.308"></a>
+<FONT color="green">309</FONT>    //                      entities.put("igrave", "\u00EC");<a name="line.309"></a>
+<FONT color="green">310</FONT>    //                      //Small i, acute accent<a name="line.310"></a>
+<FONT color="green">311</FONT>    //                      entities.put("iacute", "\u00ED");<a name="line.311"></a>
+<FONT color="green">312</FONT>    //                      //Small i, circumflex accent<a name="line.312"></a>
+<FONT color="green">313</FONT>    //                      entities.put("icirc", "\u00EE");<a name="line.313"></a>
+<FONT color="green">314</FONT>    //                      //Small i, umlaut<a name="line.314"></a>
+<FONT color="green">315</FONT>    //                      entities.put("iuml", "\u00EF");<a name="line.315"></a>
+<FONT color="green">316</FONT>    //                      //Small eth, Icelandic<a name="line.316"></a>
+<FONT color="green">317</FONT>    //                      entities.put("eth", "\u00F0");<a name="line.317"></a>
+<FONT color="green">318</FONT>    //                      //Small n, tilde<a name="line.318"></a>
+<FONT color="green">319</FONT>    //                      entities.put("ntilde", "\u00F1");<a name="line.319"></a>
+<FONT color="green">320</FONT>    //                      //Small o, grave accent<a name="line.320"></a>
+<FONT color="green">321</FONT>    //                      entities.put("ograve", "\u00F2");<a name="line.321"></a>
+<FONT color="green">322</FONT>    //                      //Small o, acute accent<a name="line.322"></a>
+<FONT color="green">323</FONT>    //                      entities.put("oacute", "\u00F3");<a name="line.323"></a>
+<FONT color="green">324</FONT>    //                      //Small o, circumflex accent<a name="line.324"></a>
+<FONT color="green">325</FONT>    //                      entities.put("ocirc", "\u00F4");<a name="line.325"></a>
+<FONT color="green">326</FONT>    //                      //Small o, tilde<a name="line.326"></a>
+<FONT color="green">327</FONT>    //                      entities.put("otilde", "\u00F5");<a name="line.327"></a>
+<FONT color="green">328</FONT>    //                      //Small o, umlaut<a name="line.328"></a>
+<FONT color="green">329</FONT>    //                      entities.put("ouml", "\u00F6");<a name="line.329"></a>
+<FONT color="green">330</FONT>    //                      //Division sign<a name="line.330"></a>
+<FONT color="green">331</FONT>    //                      entities.put("divide", "\u00F7");<a name="line.331"></a>
+<FONT color="green">332</FONT>    //                      //Small o, slash<a name="line.332"></a>
+<FONT color="green">333</FONT>    //                      entities.put("oslash", "\u00F8");<a name="line.333"></a>
+<FONT color="green">334</FONT>    //                      //Small u, grave accent<a name="line.334"></a>
+<FONT color="green">335</FONT>    //                      entities.put("ugrave", "\u00F9");<a name="line.335"></a>
+<FONT color="green">336</FONT>    //                      //Small u, acute accent<a name="line.336"></a>
+<FONT color="green">337</FONT>    //                      entities.put("uacute", "\u00FA");<a name="line.337"></a>
+<FONT color="green">338</FONT>    //                      //Small u, circumflex accent<a name="line.338"></a>
+<FONT color="green">339</FONT>    //                      entities.put("ucirc", "\u00FB");<a name="line.339"></a>
+<FONT color="green">340</FONT>    //                      //Small u, umlaut<a name="line.340"></a>
+<FONT color="green">341</FONT>    //                      entities.put("uuml", "\u00FC");<a name="line.341"></a>
+<FONT color="green">342</FONT>    //                      //Small y, acute accent<a name="line.342"></a>
+<FONT color="green">343</FONT>    //                      entities.put("yacute", "\u00FD");<a name="line.343"></a>
+<FONT color="green">344</FONT>    //                      //Small thorn, Icelandic<a name="line.344"></a>
+<FONT color="green">345</FONT>    //                      entities.put("thorn", "\u00FE");<a name="line.345"></a>
+<FONT color="green">346</FONT>    //                      //Small y, umlaut<a name="line.346"></a>
+<FONT color="green">347</FONT>    //                      entities.put("yuml", "\u00FF");<a name="line.347"></a>
+<FONT color="green">348</FONT>    //                      //apos<a name="line.348"></a>
+<FONT color="green">349</FONT>    //                      entities.put("apos", "'");<a name="line.349"></a>
+<FONT color="green">350</FONT>    //              }<a name="line.350"></a>
+<FONT color="green">351</FONT>    //              return entities;<a name="line.351"></a>
+<FONT color="green">352</FONT>    //      }<a name="line.352"></a>
+<FONT color="green">353</FONT>    //<a name="line.353"></a>
+<FONT color="green">354</FONT>            /**<a name="line.354"></a>
+<FONT color="green">355</FONT>             * Decode a String from HTML to UTF-8.<a name="line.355"></a>
+<FONT color="green">356</FONT>             * @param str<a name="line.356"></a>
+<FONT color="green">357</FONT>             * @return the decoded string.<a name="line.357"></a>
+<FONT color="green">358</FONT>             */<a name="line.358"></a>
+<FONT color="green">359</FONT>            public static String decode(final String str) {<a name="line.359"></a>
+<FONT color="green">360</FONT>                    if (str == null) {<a name="line.360"></a>
+<FONT color="green">361</FONT>                            return null;<a name="line.361"></a>
+<FONT color="green">362</FONT>                    }<a name="line.362"></a>
+<FONT color="green">363</FONT>                    StringBuffer ostr = new StringBuffer();<a name="line.363"></a>
+<FONT color="green">364</FONT>                    int i1 = 0;<a name="line.364"></a>
+<FONT color="green">365</FONT>                    int i2 = 0;<a name="line.365"></a>
+<FONT color="green">366</FONT>                    while (i2 &lt; str.length()) {<a name="line.366"></a>
+<FONT color="green">367</FONT>                            i1 = str.indexOf("&amp;", i2);<a name="line.367"></a>
+<FONT color="green">368</FONT>                            if (i1 == -1 ) {<a name="line.368"></a>
+<FONT color="green">369</FONT>                                    ostr.append(str.substring(i2, str.length()));<a name="line.369"></a>
+<FONT color="green">370</FONT>                                    break;<a name="line.370"></a>
+<FONT color="green">371</FONT>                            }<a name="line.371"></a>
+<FONT color="green">372</FONT>                            ostr.append(str.substring(i2, i1));<a name="line.372"></a>
+<FONT color="green">373</FONT>                            i2 = str.indexOf(";", i1);<a name="line.373"></a>
+<FONT color="green">374</FONT>                            if (i2 == -1 ) {<a name="line.374"></a>
+<FONT color="green">375</FONT>                                    ostr.append(str.substring(i1, str.length()));<a name="line.375"></a>
+<FONT color="green">376</FONT>                                    break;<a name="line.376"></a>
+<FONT color="green">377</FONT>                            }<a name="line.377"></a>
+<FONT color="green">378</FONT>                            String tok = str.substring(i1 + 1, i2);<a name="line.378"></a>
+<FONT color="green">379</FONT>                            if (tok.charAt(0) == '#') {<a name="line.379"></a>
+<FONT color="green">380</FONT>                                    tok = tok.substring(1);<a name="line.380"></a>
+<FONT color="green">381</FONT>                                    try {<a name="line.381"></a>
+<FONT color="green">382</FONT>                                            int radix = TEN;<a name="line.382"></a>
+<FONT color="green">383</FONT>                                            if (tok.trim().charAt(0) == 'x') {<a name="line.383"></a>
+<FONT color="green">384</FONT>                                                    radix = SIXTEEN;<a name="line.384"></a>
+<FONT color="green">385</FONT>                                                    tok = tok.substring(1, tok.length());<a name="line.385"></a>
+<FONT color="green">386</FONT>                                            }<a name="line.386"></a>
+<FONT color="green">387</FONT>                                            ostr.append((char) Integer.parseInt(tok, radix));<a name="line.387"></a>
+<FONT color="green">388</FONT>                                    } catch (NumberFormatException exp) {<a name="line.388"></a>
+<FONT color="green">389</FONT>                                            ostr.append('?');<a name="line.389"></a>
+<FONT color="green">390</FONT>                                    }<a name="line.390"></a>
+<FONT color="green">391</FONT>                            } else {<a name="line.391"></a>
+<FONT color="green">392</FONT>                                    String decodedEntity = getEntities().get(tok);<a name="line.392"></a>
+<FONT color="green">393</FONT>                                    if (decodedEntity != null) {<a name="line.393"></a>
+<FONT color="green">394</FONT>                                            ostr.append(decodedEntity);<a name="line.394"></a>
+<FONT color="green">395</FONT>                                    } else {<a name="line.395"></a>
+<FONT color="green">396</FONT>                                            ostr.append("???&amp;" + tok + ";???");<a name="line.396"></a>
+<FONT color="green">397</FONT>                                    }<a name="line.397"></a>
+<FONT color="green">398</FONT>                            }<a name="line.398"></a>
+<FONT color="green">399</FONT>                            i2++;<a name="line.399"></a>
+<FONT color="green">400</FONT>                    }<a name="line.400"></a>
+<FONT color="green">401</FONT>                    return ostr.toString();<a name="line.401"></a>
+<FONT color="green">402</FONT>            }<a name="line.402"></a>
+<FONT color="green">403</FONT>    <a name="line.403"></a>
+<FONT color="green">404</FONT>            /**<a name="line.404"></a>
+<FONT color="green">405</FONT>             * @param args<a name="line.405"></a>
+<FONT color="green">406</FONT>             */<a name="line.406"></a>
+<FONT color="green">407</FONT>            public static void main(final String [] args) {<a name="line.407"></a>
+<FONT color="green">408</FONT>                    System.err.println(NcrDecoder.decode("Le webmail de l&amp;apos;universit&amp;#233; ..."));<a name="line.408"></a>
+<FONT color="green">409</FONT>            }<a name="line.409"></a>
+<FONT color="green">410</FONT>            <a name="line.410"></a>
+<FONT color="green">411</FONT>    }<a name="line.411"></a>
+<FONT color="green">412</FONT>    <a name="line.412"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

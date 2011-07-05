@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"><ui:composition
+	template="/stylesheets/template/template-etu.xhtml">
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<div class="portlet-section-header">
+		<div class="portlet-block-left">	
+			<h:form id="formImageRetour2">
+				<h:commandLink id="linkretour" action="#{notesController.retour}">
+					<t:graphicImage align='absmiddle' value="/media/images/CMonDossierWeb/back.gif" />
+					Retour
+				</h:commandLink>
+			</h:form>
+		</div>
+			<h:form>
+			<div style="float:right;" class="portlet-block-right">	
+				
+				<ui:include src="/stylesheets/etu/lienafficheridentite.xhtml"/>
+				
+			</div>
+			Détail des notes
+			
+				<h:commandLink id="link" action="#{notesController.exportPdf}" rendered="#{config.notesPDF}">
+					<t:graphicImage value="/media/images/CMonDossierWeb/docpdf.gif"  />
+				</h:commandLink>
+			
+			</h:form>	
+		</div>
+		<div  id="identiteEtudiant" style="display:none;">
+			<ui:include src="/stylesheets/etu/identite.xhtml"/>
+			<br />
+		</div>
+			<h:outputText rendered="#{etudiant.notesRenseignees}">	
+				<h:form rendered="#{sessionController.enseignant}">
+					<br />
+					<div class="portlet-msg-info">
+					<h:commandButton class='portlet-form-button' action="#{notesController.changerVue}" value="Voir comme un étudiant" rendered="#{!notesController.vueEtudiant}" />
+					<h:commandButton class='portlet-form-button' action="#{notesController.changerVue}" value="Voir comme un enseignant" rendered="#{notesController.vueEtudiant}" />
+					Cette option vous permet de vérifier ce que l'étudiant verra lorsqu'il consultera ses résultats.
+					Vous êtes actuellement en 
+					<h:outputText value=" VUE ENSEIGNANT" rendered="#{!notesController.vueEtudiant}" />
+					<h:outputText value=" VUE ETUDIANT" rendered="#{notesController.vueEtudiant}" />
+		</div>
+				</h:form>
+			</h:outputText>
+		<br />
+		<div class="portlet-table-header">
+			<span>ELEMENTS ET EPREUVES</span>
+		</div>
+		<br />
+		<h:outputText rendered="#{!etudiant.deliberationTerminee}">
+			<div class="portlet-msg-info">
+			#{config.msgResultatsNonDefinitifs}
+			</div>
+		</h:outputText>
+
+
+		
+
+		<h:form>
+			<t:dataTable id="tableel" value="#{etudiant.elementsPedagogiques}" rowIndexVar="rowindexElp"
+				var="el" cellpadding="5" border="0" width="100%"
+				styleClass="portlet-table"
+				headerClass="portlet-table-header"
+				rowClasses="portlet-table-body, portlet-table-alternate" >					
+				<t:column>
+					<f:facet name="header">
+						Année
+					</f:facet>
+					<h:outputText rendered="#{rowindexElp == 0 or el.annee != 'epreuve'}">
+						<b>#{el.annee}</b>
+					</h:outputText>
+				</t:column>
+
+				<t:column>
+					<f:facet name="header">
+						Code
+					</f:facet>
+					<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+						<b>#{el.code}</b>
+					</h:outputText>
+
+					<h:outputText rendered="#{el.annee == 'epreuve'}">
+						<i>#{el.code}</i>
+					</h:outputText>
+
+					<h:outputText
+						rendered="#{(el.level != 1) and (el.annee != 'epreuve')}"
+						value="#{el.code}" />
+				</t:column>
+
+				<t:column>
+					<f:facet name="header">
+						Libellé
+					</f:facet>
+					<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+						<b><h:outputText value="#{el.libelle}" escape="false"/></b>
+					</h:outputText>
+					<h:outputText rendered="#{el.annee == 'epreuve'}">
+						<i><h:outputText value="#{el.libelle}" escape="false"/></i>
+					</h:outputText>
+					<h:outputText
+						rendered="#{(el.level != 1) and (el.annee != 'epreuve')}" value="#{el.libelle}" escape="false"/>
+				</t:column>
+
+				<t:column>
+					<f:facet name="header">
+						Session1
+					</f:facet>
+					<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+						<b>#{el.note1}<h:outputText value="/#{el.bareme1}" rendered="#{el.bareme1 != 0  and el.bareme1 != 20}"/></b>
+					</h:outputText>
+
+					<h:outputText rendered="#{el.annee == 'epreuve'}">
+						<i>#{el.note1}<h:outputText value="/#{el.bareme1}" rendered="#{el.bareme1 != 0  and el.bareme1 != 20}"/></i>
+					</h:outputText>
+
+					<h:outputText
+						rendered="#{(el.level != 1) and (el.annee != 'epreuve')}"
+						value="#{el.note1}" />
+				</t:column>
+
+				<t:column>
+					<f:facet name="header">
+						Résultat
+					</f:facet>
+					<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+						<b>#{el.res1}</b>
+					</h:outputText>
+
+					<h:outputText rendered="#{el.annee == 'epreuve'}">
+						<i>#{el.res1}</i>
+					</h:outputText>
+
+					<h:outputText
+						rendered="#{(el.level != 1) and (el.annee != 'epreuve')}"
+						value="#{el.res1}" />
+				</t:column>
+
+				<t:column>
+					<f:facet name="header">
+						Session2
+					</f:facet>
+					<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+						<b>#{el.note2}<h:outputText value="/#{el.bareme2}" rendered="#{el.bareme2 != 0  and el.bareme2 != 20}"/></b>
+					</h:outputText>
+
+					<h:outputText rendered="#{el.annee == 'epreuve'}">
+						<i>#{el.note2}<h:outputText value="/#{el.bareme2}" rendered="#{el.bareme2 != 0  and el.bareme2 != 20}"/></i>
+					</h:outputText>
+
+					<h:outputText
+						rendered="#{(el.level != 1) and (el.annee != 'epreuve')}"
+						value="#{el.note2}" />
+				</t:column>
+
+				<t:column>
+					<f:facet name="header">
+						Résultat
+					</f:facet>
+					<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+						<b>#{el.res2}</b>
+					</h:outputText>
+
+					<h:outputText rendered="#{el.annee == 'epreuve'}">
+						<i>#{el.res2}</i>
+					</h:outputText>
+
+					<h:outputText
+						rendered="#{(el.level != 1) and (el.annee != 'epreuve')}"
+						value="#{el.res2}" />
+				</t:column>
+				
+				<t:column rendered="#{config.affRangEtudiant}">
+					<f:facet name="header">Rang</f:facet>
+					<h:outputText value="#{el.rang}"/>
+				</t:column> 
+				
+				<t:column rendered="#{config.affECTSEtudiant}">
+					<f:facet name="header">ECTS</f:facet>
+					<h:outputText value="#{el.ects}"/>
+				</t:column> 
+
+			</t:dataTable>
+		</h:form>
+
+		<h:outputText rendered="#{!etudiant.notesEtapeRenseignees}">
+			<div class="portlet-msg-info">
+				<div class="portlet-section-subheader2">
+					Aucun résultat disponible
+				</div>
+			</div>
+		</h:outputText>
+		
+		<h:outputText rendered="#{etudiant.significationResultatsUtilisee}">
+			<br />
+			<div class="portlet-table-header">
+				<span>Informations</span>
+			</div>
+			<br />
+			<div class="portlet-msg-info">
+				<p>Signification des codes résultats :</p>
+				<h:outputText value="#{etudiant.grilleSignficationResultats}" escape="false"/>
+				<br />
+			</div>
+		</h:outputText>
+
+		
+
+
+	</ui:define>
+</ui:composition></div>

@@ -1,0 +1,216 @@
+***************
+* version 2.4-4 (24/02/11)
+* -Suppression du bean pour utiliser iBATIS à la place des WS.
+* -Modification insertion signature dans certificat de scolarité => supression du parametre ImageDPI dans monDossierWeb.xml
+* -passage a la version la plus récente des methodes des connecteurs APOGEE.
+* -passage en apo-webservicesclient420la.jar
+* -test codInd non null dans RechercheAnnuaireController pour eviter plantage de la recherche ldap si un codetu est manquant pour un étudiant.
+* -Correction d'un bug sur le nom du diplome dans le certificat de scolarité
+***************
+* version 2.4-3 (11/02/11)
+* -Ajout du paramètre temoinCtlValCadEpr qui doit prendre la valeur du témoin (O ou N) pour laquelle on veut que les notes aux épreuves soient visibles même si l'état de délibération n'est pas dans la liste de ceux définis
+* -La signature des certificats est récupérée dans IMG_TAM_STD si TEM_CES_STD=T, dans IMG_SIG_STD si TEM_CES_STD=S. Il s'agit de colonnes de la table SIGN_TAMP_DIGITALISE.
+* -Correction d'un bug sur CodCIN au niveau de la récupération du calendrier.
+* -Gestion d'un bug lors de la non-récupération du codetu après avoir pourtant récupéré l'étudiant dans le ldap.
+***************
+* version 2.4-2 (01/02/11)
+* -trie par ordre alphabetique des listes d'inscrits aux groupes
+* -Correction d'une requête pour la recherche d'éléments à partir d'un autre élément dans l'arborescence.
+* -Gestion des cas d'appels aux méthodes récupérant des paramètre de type numérique depuis la page xhtml dans le cas ou le paramètre est récupéré vide (preciserEtape() de NotesController.java par exemple).
+***************
+* version 0.2.4-1 (13/12/10)
+* -ajout du détail de l'inscription pédagogique depuis la page des 'Inscriptions' pour une IA sur l'année universitaire en cours
+* -ajout de la possibilite de trier les notes sur le tem_fictif (voir monDossierWeb.xml, property temoinFictif)
+* -affichage 'Aucun diplome' quand aucun diplome n'est remonté dans l'ongle 'notes et résultats' du dossier.
+* -Ajout de la recherche de groupes via l'écran de recherche par code.
+* -Ajout de la recherche de groupes en parcourant l'arborescence.
+* -Utilisation des libellé web pour les diplomes et les étapes
+* -Possibilité d'afficher la mention dans la page des notes et résultats
+* -Gestion du cas ou CodEpr = CodElpPere dans la méthode de récupération des notes pour éviter les boucles infini
+***************
+* version 0.2.3-4(29/09/10)
+* GMA - 17/09/2010
+* Modifications sur la partie Rennes 1
+* - remplacement du cod_ind par cod_etu
+* - maj de setNotesElpEpr et setNotesElpEprEnCours (gestion des nouvelles infos)
+* - ajout ResExtractionR1DTO pour palier pb WS amue
+* - ajout DossierEtudiantR1.xml pour récupérer le calendrier d'examen avec gestion de la publication type Rennes 1
+* 
+* Autres modifications sur classes communes
+* - ajout des méthodes getAnneeResEnCours() et getAnneeUniversitaireResEnCours() qui récupérent la dernière année de Résultat ouverte dans IDaoService et Annees.xml
+* - ajout du CodCin (Centre d'incompatibilité) dans Examen + resultCalendrier dans Calendrier.xml
+* - ajout List<ResExtractionR1DTO> getResultats(ParamRequeteDTO param) et List<ResExtractionR1DTO> getResultatsDetail(ParamRequeteDTO param) dans IDaoServiceDossierEtudiant
+* - ajout methodes dans DaoServiceDossierEtudiantIbatisImpl
+* - ajout des requete iBatis dans DossierEtudiant.xml
+* - ajout des méthodes getExamensEtape() et getPageInfos() dans IDaoService pour récupérer le calendrier d'examen avec gestion de la publication type Rennes 1
+* - ajout methodes dans DaoServiceIbatisImpl
+* - ajout des requete iBatis dans Calendrier.xml
+***************
+* version 0.2.3-3(22/09/10)
+* -Comparaison ldap du type de l'utilisateur maintenant insensible à la casse
+***************
+* version 0.2.3-2(07/09/10)
+* -prise en compte du paiement de l'inscription avant de proposer le téléchargement du pdf a l'étudiant.
+* -utilisation de témoin null lors de la récupération de notes via Apogee-extraction (pour un utilisateur étudiant)
+***************
+* version 0.2.3-1(16/07/10)
+* -correction d'un bug lors de la generation du certificat de scolarite
+* -gestion des notes retournées "null" par le WS amue.
+***************
+* version 0.2.2-9(29/06/10)
+* -correction de l'affichage des notes en cas de correspondance.
+* version 0.2.2-8(21/06/10)
+* -correction bug des Ws lorsqu'on modifie une adresse indiquée en France alors que le codePostal est vide.
+* -blocage d'envoi de mail pour certaines exceptions.
+* -modification de la css des header du tableau du calendrier des épreuves.
+* -gestion du cas ou la Nature du Résultat à l'épreuve n'est pas indiquée
+* -************
+* version 0.2.2-7(18/06/10)
+* -correction bug d'affichage en cas de resultat d'admissibilité'
+* -************
+* version 0.2.2-6(17/06/10)
+* -Gestion du lancement de recherches simultanées dans l'annuaire. On demande à la premiere recherche de s'arrêter avant de lancer la seconde. (maj RechercheAnnuaireController.java). Cela Evite un bug dans l'affichage des résultats de recherche.
+* -MAJ lib WS en 410lj
+* -affichage de la correspondance meme si l'ELP n'est pas dans un état compris dans la liste des témoins paramétrés.
+* -correction d'un bug sur l'afficage des notes en deuxieme session quand l'etat est T en 1er session
+* -passage de Custom_fr.properties dans messages_fr.properties
+************
+* version 0.2.2-5(04/06/10)
+* -Maj apo-webservicesclient.jar en apo-webservicesclient410lf.jar
+* -L'application se base maintenant sur le cod_etu plutôt que sur le cod_ind. MonDossierWeb.xml contient donc maintenant attributLdapCodEtu dans le bean Security.
+* -Modification de DaoCodeLoginEtudiantImplNancy2, car le ldap de Nancy2 stocke le codInd et non le codetu. On passe donc par le WS de l'AMUE pour récupérer le cod_etu à partir du codInd récupéré dans le ldap.
+* -application.properties est, du coup, légérement modifié.
+* -correctif affichage des notes quand résultat sans signification.
+* -ajout du rang dans le détail des notes si affRangEtudiant=true
+* -ajout des informations crédit ECTS dans le détail des notes si affECTSEtudiant=true
+* -affichage de l'année pour les PRC dans le détails de notes.
+* -notification de la version de l'application en page d'accueil etudiant et enseignant. Information récupérée de build-devel.xml
+* -ajout de toString() sur RechercheController, NotesController, PhotoImpl (utile en cas d'erreur)
+* -MAJ configUrlsServices-example.properties pour la distribution
+* -Dans le détails de notes, affichage des infos sur l'elp quand l'état de délibération est retourné null par le WS de l'AMUE car il sagit des VAC.
+* -Dans l'impression PDF Certificat de scolarité : diplôme et code étape étaient inversés, le code ine est maintenant en minuscule
+* -Modification des méthodes composant l'interface photoserver. Elle prennent en paramètres : codind, codetu. De cette manière la personne qui implémente choisi l'attribut qui lui est utile parmis les 2.
+* -Correction des LOG.error dans EtudiantAMUE qui pouvaient engendrer un StackOverFlow quand la méthode du WS recupererIdentifiantsEtudiant plantait, on bouclait sur getCodInd de la classe Etudiant.
+* -Correction d'un bug lors du clic sur le bouton Retour de la page des inscrits après retour arrière du navigateur (après qu'une nouvelle recherche ait été effectuée).
+* -Correction d'un bug lors de l'actualisation (F5) d'une page de recherche dans l'arborescence précédée d'un retour navigateur.
+* -Si le WS pour récupérer l'Etat civil ne fonctionne pas, affichage d'un message d'erreur sur la page de départ : résultatAnnuaire, ListeEtudiant, Trombinoscope ou rechercheParCodeEtudiant.
+* -Gestion de la non récupération du codEtu lors de la recherche dans l'annuaire. Ceci afin d'éviter qu'aucun étudiant ne soit remonté si le problème ne se produit que sur un seul.
+* -Amélioration de la gestion des erreurs (redirection propre pour l'utilisateur et envois mail) en cas de non disponibilité des WS.
+* -suppression du trim() avant le lancement de la recherche dans l'annuaire par nom. Comme cela on recherche les personnes avec 2 lettres dans le nom en ajoutant un espace a la fin
+* -Externalisation des chaines de caractères présentes dans les PDF/XLS
+* -Possibilité d'insérer un filigrane dans le pdf des notes.
+************
+* version 0.2.1-2(10/02/10)
+* -ajout de Thread.sleep(100) dans boucle while en attente de l'arret du download ou la génération de la liste des inscrits dans le controller ListeInscritsController
+************
+* version 0.2.1-1(27/01/10)
+* -dans detailnotes.xml : el.level == 1  devient (el.level == 1) and (el.annee != 'epreuve')  pour éviter un affichage double dans le cas ou une épreuve aurait un level=1. Cas rencontré à Rennes avec une extraction Apogée.
+* -modification affichage des notes de épreuves pour l'étudiant. Si témoin MCC n'est pas coché on affiche les notes même si l'étatAvc n'est pas ok. On affiche également si le témoin etatAvc de l'ELP père est ok.
+* -correction dans EtudiantAMUE pour ne pas afficher les notes des étapes annulées.
+* -correction d'un bug possible de concurrence d'accès lors de la génération du trombinoscope en PDF
+* -correction d'un bug survenant lors du clic sur une composante qand celle ci contient une apostrophe
+************
+* version 0.2.0-2(11/01/10)
+* -correction d'un bug sur la proposition de téléchargement des certificats quand plusieurs incriptions à la même étape pour des années différentes. 
+************
+* version 0.2.0-1(21/12/09)
+* -correction d'un bug sur l'identification de l'utilisateur.
+* -MAJ pour utilisation esup-commons (depuis le SVN de cru)
+* -Attention méthode de download a changé (voir Controller avec méthode exportPdf())
+* -Implémentation du bean de récupération de l'identifiant a changé
+* -Attention : esup-commons contient deux jar en java 1.6. Penser a les retélécharger en 1.5 si besoin : bcmail-jdk15-144.jar et bcprov-jdk15-144.jar
+* -dans le classe DownloadUtils de esup-commons , changer "/stylesheets/[^/]*$" en "/stylesheets/.*" pour que le download en Servlet marche.
+* -ajout de parametre smtp dans application.properties
+************
+* version 0.1.9-4(10/11/2009)
+* -correction sur l'affichage des Etapes lors de la recherche dans l'arborescence.
+* -ajout de balise <p> pour englober le contenu de msg-info afin d'éviter des bugs d'affichage.
+************
+* version 0.1.9-3(08/11/2009)
+* -ajout application-servlet.xml dans la distribution
+************
+* version 0.1.9-2(07/11/2009)
+* -On tente de récupérer les groupes uportal (pour identifier l'utilisateur) que si la liste des groupes est non vide dans monDossierWeb.xml
+* -supression d'un jar uportal-ws 
+************
+* version 0.1.9-1(13/10/2009)
+* -Correction d'un bug d'affichage des notes aux étapes quand pas d'IADM pour l'étape.
+* -Correction d'un bug d'affichage des notes aux ELP et EPR.
+* -Amélioration du paramétrage de récupération du login a partir du codind et inversement. Il suffit de configurer Mellogin.xml OU application.properties (si on fait sa propre classe)
+* -Affichage du barème quand barème différent de 20
+* -Légère modification du rendu visuel.(plus de css en -etu ou -ens ; uniquement des css uportal)
+* -Correction d'un bug pouvant survenir lors du download de fichier.
+* -Ajout du paramètre loginApogee pour activer/désactiver la recherche du login utilisateur dans Apogee.
+* -Ajout methode toString aux bean Etudiant et SessionController pour avoir de la visibilité lors d'une erreur.
+* -Amélioration du stockage des résultats et notes d'un étudiant en mémoire pour éviter de rappeler le WS pour des infos déjà retournées. 
+* -Plus utile de commenter/décommenter le bean dataSource dans dao.xml. On indique dataSourcePool  ou  dataSourceIbatis dans application.properties
+************
+* version 0.1.8-1(29/06/2009)
+* -ajout possibilité de logguer les connexions sur l'appli (et dans un fichier de log séparé) : voir monDossierWeb.xml et log4j.properties
+* -ajout de la possibilité de donner une liste de login à exclure de l'application (voir MonDossierWeb.xml).
+* -correction de bug lors de la modification d'une adresse à l'étranger pour une autre adresse à l'étranger.
+* -correction du nommage de variable et de méthode avec accent dans Etudiant.java : "icationRésul" devient "icationResul"
+* -correction de la taille des champs adresse pour la modification de l'adresse.
+* -gestion du cas ou un elp a son propre code en ElpSup retourné par le WS dans l'affichage des notes.
+* -ajout des points du jury (entre parenthèses) lors de la visualisation des notes.
+* -parametre sourceResultat (monDossierWeb.xml) étendu à la premiere page de notes (etape et diplome)
+* -passage des styles des pages xhtml codés en dur en css. Du css est fourni en exemple dans : webapp/media/style/.Renommer la page css principal en esup-mondossierweb.css pour l'utilisation en servlet.
+* -ajout de la possibilités de générer le calendrier des examens en pdf
+* -ajout fonctionnalités facultatives :
+*  - utilisation calendrier des examens type "Rennes1"
+*  - utilisation calendrier de rentrée type "Rennes 1"
+*  - utilisation des habilitations Apogée
+* -voir readmeR1.txt pour détails
+************
+* version 0.1.7-4(07/04/20009)
+* -correction bug au niveau de l'affichage des notes quand un diplome n'a pas de résultat.
+************
+* version 0.1.7-3(25/03/20009)
+* -correction bug. editionCertifaiction = false n'affiche plus le lien.
+* -correction bug au niveau de l'incrustation des images dans les pdf
+************
+* version 0.1.7-2(17/03/20009)
+* -correction bug lié aux apostrophes dans le nom des commposantes
+************
+* version 0.1.7-1(16/03/20009)
+* -corrections de bugs liés au WS
+* -passage à esup_commons v1.0 via le SVN d'esup-commons
+************
+* version 0.1.6-1(03/003/2009)
+* -ajout de la génération du certificat de scolarité.
+************
+* version 0.1.5-3(21/11/2008)
+* -Meilleure prise en compte des attributs ldap pour la recherche dans l'annuaire. 
+* On récupère ceux indiqués pour le bean Security dans monDossierWeb.xml pour la recherche.
+************
+* version 0.1.5-2(07/11/2008)
+* -Le bean daoLoginCodeEtudiant est aussi utilisé pour récupérer les logins des inscrits.
+************
+* version 0.1.5-1(03/11/2008)
+* -correction d'un bug a la connexion dans le cas d'une erreur ldap.
+* -mise jour WS amue 3.70laj (correction de problèmes à l'affichage des notes)
+* -possibilité d'utiliser des requetes iBATIS au lieu du WS pour récupérer la plupart des informations du dossier étudiants (en modifiant monDossierWeb.xml).
+************
+* version 0.1.4-1(24/07/2008)
+* -utilisation de la nouvelle version du WS de l'AMUE (3.70lp)
+* -espaces et tirets autorisés lors de la recherche dans l'annuaire.
+* -possibilité de configurer le témoin de délibération des notes visibles de l'étudiant (A : avant délibération, E : en cours, T: terminée).
+* -possibilité d'afficher le rang de l'étudiant sur la page 'Notes et Résultats'.
+* -correction de quelques bug d'affichage.
+************
+* version 0.1.3-1(02/04/2008)
+* -possibilité de configurer le mapping des attributs ldap avec le cod_ind et le type utilisateur via le bean Security (monDossierweb.xml)
+* -Si la récupération du cod_ind de l'étudiant via le ldap de reussi pas, on passe automatiquement par une requete SQL.
+************
+* version 0.1.2-1(15/02/2008)
+* -ajout du numéo de telephone portable et de l'email personnel dans l'onglet adresse.
+************
+* version 0.1.0-2(13/02/2008)
+* -nouvelle version du WS (jar).
+* -ajout de jmx
+* -correction d'un bug dans l'affichage des épreuves (DEF , COMP et reportée).
+* -modification de quelques affichages.
+************
+* version 0.1.0-1(06/11/2007)
+* -version de base
+************

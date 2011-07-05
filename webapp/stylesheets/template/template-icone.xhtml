@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:composition>
+		<span>
+				<h:commandLink id="linkmenu" action="navigationIndexEns" rendered="#{sessionController.enseignant}">
+					<t:graphicImage align='absmiddle' value="/media/images/CMonDossierWeb/home.gif" alt='Retour au sommaire' title='Retour au sommaire' />
+					Retour au sommaire
+				</h:commandLink>
+				
+			</span>
+	</ui:composition>
+	
+</div>

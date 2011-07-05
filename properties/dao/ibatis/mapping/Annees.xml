@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Annees">
+
+<select id="getAnneeEnCours" resultClass="java.lang.String">
+select cod_anu 
+from annee_uni 
+where eta_anu_iae = 'O'
+</select>
+
+<select id="getAnneeUniversitaireEnCours" resultClass="java.lang.String">
+select cod_anu||'/'||to_char(to_number(cod_anu)+1)
+from annee_uni 
+where eta_anu_iae = 'O'
+</select>
+
+<select id="getAnneeResEnCours" resultClass="java.lang.String">
+select max(cod_anu)
+from annee_uni
+where eta_anu_res = 'O'
+</select>
+
+<select id="getAnneeUniversitaireResEnCours" resultClass="java.lang.String">
+select max(cod_anu)||'/'||to_char(to_number(max(cod_anu))+1)
+from annee_uni 
+where eta_anu_res = 'O'
+</select>
+
+</sqlMap>
+
+	

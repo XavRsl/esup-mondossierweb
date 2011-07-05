@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:e="http://commons.esup-portail.org"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+ <ui:composition template="/stylesheets/template/template-ens.xhtml">
+  <ui:define name="titre">
+   Liste d'étudiants
+  </ui:define>
+  <ui:define name="iconesommaire">
+   <ui:include src="/stylesheets/template/template-icone.xhtml" />
+  </ui:define>
+  <ui:define name="body">
+   
+   <h:form id="formRechercheApogee">
+    <h:messages id="champMessages" errorStyle="color: red"  />
+    <div class="portlet-msg-info">
+     
+     <p align='justify' class='uportal-channel-text'>
+      Vous allez constituer une liste d'inscrits à un élément ou à une étape Apogée à l'aide de son code (et éventuellement de sa version dans le cas d'une étape).
+     </p>
+    </div>
+    <table cellspacing='0' cellpadding='4' border='0'>
+     <tr>
+      <td class='uportal-label'>
+       Année universitaire
+      </td>
+      <td align="left">
+       <h:inputText id="annee" value ="#{rechercheCodeController.annee}" size='4' maxlength='4' class='uportal-input-text' onkeyup="javascript:verifAnnee();"/>
+      </td>
+     </tr>
+     <tr>
+      <td class='uportal-label'>
+       Type de liste
+      </td>
+      <td align="left">
+       <h:selectOneMenu value="#{rechercheCodeController.type}" id="liste" onchange="displayVersion()" class='uportal-button'>
+        <f:selectItem itemValue="Etape" itemLabel="Etape"/>
+        <f:selectItem itemValue="Element pedagogique" itemLabel="Elément pédagogique"/>
+        <f:selectItem itemValue="Groupe" itemLabel="Groupe"/>
+       </h:selectOneMenu>
+       
+      </td>
+     </tr>
+     <tr>
+      <td class='uportal-label'>
+       Code
+      </td>
+      <td align="left">
+       <h:inputText value ="#{rechercheCodeController.code}" size='15'
+        maxlength='10' id="code" class='uportal-input-text' onkeyup="javascript:verifCode();"/>
+      </td>
+      <td id='textGroupe' style='visibility: hidden;' class='uportal-label'>
+       (indiquer le code de l'élément père correspondant)
+      </td>
+     </tr>
+     <tr id='prefversion' style='visibility: visible;'>
+      <td class='uportal-label'>
+       Version
+      </td>
+      <td align="left">
+       <h:inputText value ="#{rechercheCodeController.version}" id="version" size='15'
+        maxlength='10' class='uportal-input-text'/>
+      </td>
+      <td></td>
+     </tr>
+    </table>
+    <p align='justify' class='uportal-channel-text'>
+     Vous pouvez compléter votre recherche en cochant certains critères ci-dessous : par exemple "étape d'appartenance", pour visualiser à quelle année de diplôme l'étudiant est rattaché, ou "résultats de session1" pour extraire la liste des résultats de la session 1 de l'année universitaire sélectionnée...
+    </p>
+    <table cellspacing='0' cellpadding='4' border='0'>
+     <tr>
+      <td id='prefSession1' style='visibility: visible;' class='uportal-label'>
+       <h:selectBooleanCheckbox
+        title="Session1"
+        value="#{rechercheCodeController.session1}" >
+       </h:selectBooleanCheckbox>
+       Résultats de session 1
+      </td>
+      <td id='prefSession2' style='visibility: visible;' class='uportal-label'>
+       <h:selectBooleanCheckbox
+        title="Session2"
+        value="#{rechercheCodeController.session2}" >
+       </h:selectBooleanCheckbox>
+       Résultats de session 2
+      </td>
+      
+      <td id='prefetape' style='visibility: visible;' class='uportal-label'>
+       <h:selectBooleanCheckbox
+        title="Etape"
+        value="#{rechercheCodeController.etape}" >
+       </h:selectBooleanCheckbox>
+       Etape d'appartenance
+      </td>
+      
+      
+     </tr>
+     <tr>
+      <td colspan='3'>
+      </td>
+     </tr>
+     <tr>
+      <td align="right">
+       <h:commandButton class='uportal-button' id="validButton" action="#{rechercheCodeController.chercher}" value="Rechercher" />
+       
+      </td><td>
+       <h:commandButton class='uportal-button' id="retourButton" action="#{rechercheCodeController.retour}" value="Retour" /> 
+      </td>
+     </tr>
+    </table>
+   </h:form>
+   <script language='javascript'>
+    function displayVersion() { 
+    if (document.getElementById("formRechercheApogee:liste").value == 'Etape') {
+    document.getElementById("prefversion").style.visibility = 'visible'; 
+    document.getElementById("prefetape").style.visibility = 'hidden';
+    document.getElementById("textGroupe").style.visibility = 'hidden';
+    document.getElementById("prefSession1").style.visibility = 'visible';
+    document.getElementById("prefSession2").style.visibility = 'visible';
+    }
+    
+    if (document.getElementById("formRechercheApogee:liste").value == 'Element pedagogique') {
+    document.getElementById("prefversion").style.visibility = 'hidden';
+    document.getElementById("prefetape").style.visibility = 'visible';
+    document.getElementById("textGroupe").style.visibility = 'hidden';
+    document.getElementById("prefSession1").style.visibility = 'visible';
+    document.getElementById("prefSession2").style.visibility = 'visible';
+    } 
+    
+    if (document.getElementById("formRechercheApogee:liste").value == 'Groupe') {
+    document.getElementById("prefversion").style.visibility = 'hidden';
+    document.getElementById("prefetape").style.visibility = 'hidden';
+    document.getElementById("textGroupe").style.visibility = 'visible';
+    document.getElementById("prefSession1").style.visibility = 'hidden';
+    document.getElementById("prefSession2").style.visibility = 'hidden';
+    } 
+    
+    } 
+    displayVersion();
+    
+    
+    document.forms['formRechercheApogee'].onkeypress =new Function("{var keycode;if (window.event) keycode = window.event.keyCode;else if (event) keycode = event.which;else return true;if (keycode == 13) { document.getElementById('formRechercheApogee:validButton').click();return false; } else  return true; }");
+    
+   </script>
+   <hr class='clear' />
+   
+   
+   
+  </ui:define>
+ </ui:composition></div>

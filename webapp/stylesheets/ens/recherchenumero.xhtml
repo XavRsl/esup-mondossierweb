@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/stylesheets/template/template-ens.xhtml">
+	<ui:define name="titre">
+		Recherche par numéro étudiant
+	</ui:define>
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+		</ui:define>
+	<ui:define name="body">
+
+<h:form id="formRechDossierWeb">
+<h:messages id="champMessages" errorStyle="color: red"  />
+		<div class="portlet-msg-info">
+			
+			<p align='justify' class='uportal-channel-text'>
+			Saisissez le numéro étudiant de la personne recherchée.
+			</p>
+		</div>
+ 
+ 
+ <table border='0' cellspacing='0' cellpadding='2' >
+  <tr>
+   <td class='uportal-label'>
+Numéro Etudiant
+   </td><td width="300">
+<h:inputText id="numero" value="#{rechercheNumeroController.codetu}" size='15' maxlength='12' class='uportal-input-text'/>
+   </td>
+  </tr>
+  <tr>
+   <td align="right">
+    <h:commandButton class='uportal-button' id="validButton" action="#{rechercheNumeroController.chercher}" value="Rechercher" />
+
+   </td><td>
+    <h:commandButton class='uportal-button' action="#{rechercheNumeroController.retour}" value="Retour" />    
+ </td>
+</tr>
+</table>
+ 
+ 
+ 
+</h:form>
+<script language='javascript'>
+
+document.forms['formRechDossierWeb'].onkeypress =new Function("{var keycode;if (window.event) keycode = window.event.keyCode;else if (event) keycode = event.which;else return true;if (keycode == 13) { document.getElementById('formRechDossierWeb:validButton').click();return false; } else  return true; }");
+
+</script>
+<hr class='clear' />
+
+
+	</ui:define>
+</ui:composition></div>

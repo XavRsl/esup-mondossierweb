@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/stylesheets/template/template-ens.xhtml">
+	<ui:define name="titre">
+		Liste d'étudiants
+	</ui:define>
+	<ui:define name="iconesommaire">
+		<ui:include src="/stylesheets/template/template-icone.xhtml" />
+		</ui:define>
+	<ui:define name="body">
+
+<h:form id="formRechercheApogee">
+<h:messages id="champMessages" errorStyle="color: red"  />
+		<div class="portlet-msg-info">
+			
+			<p align='justify' class='uportal-channel-text'>
+			Vous allez constituer une liste d'inscrits à un élément ou à un diplôme Apogée à l'aide d'un arbre de recherche.
+			</p>
+		</div>
+<table cellspacing='0' cellpadding='4' border='0'>
+<tr>
+<td class='uportal-label'>
+Année universitaire
+</td>
+<td>
+<h:inputText id="annee" value ="#{rechercheController.annee}" size='4' maxlength='4' class='uportal-input-text' onkeyup="javascript:verifAnnee(event);"/>
+<FONT COLOR="RED"><h:outputText id="anneeAlert" value=""/></FONT>
+</td>
+</tr>
+<tr>
+<td class='uportal-label'>
+Type de liste
+</td>
+<td>
+<h:selectOneMenu value="#{rechercheController.type}" id="liste" onchange="displayVersion()" class='uportal-button'>
+	 <f:selectItem itemValue="Etape" itemLabel="Etape ou diplôme"/>
+	  <f:selectItem itemValue="Element pedagogique" itemLabel="Elément pédagogique"/>
+      <f:selectItem itemValue="Groupe" itemLabel="Groupe"/>
+</h:selectOneMenu>
+</td>
+</tr>
+</table>
+<div class="portlet-sub-section">
+Vous pouvez compléter votre recherche en cochant certains critères ci-dessous : par exemple "étape d'appartenance", pour visualiser à quelle année de diplôme l'étudiant est rattaché, ou "résultats de session1" pour extraire la liste des résultats de la session 1 de l'année universitaire sélectionnée...
+</div>
+<table cellspacing='0' cellpadding='4' border='0'>
+<tr>
+ <td id='prefSession1' class='uportal-label'>
+<h:selectBooleanCheckbox
+ title="Session1"
+  value="#{rechercheController.session1}" >
+</h:selectBooleanCheckbox>
+Résultats de session 1
+</td>
+ <td id='prefSession2' class='uportal-label'>
+<h:selectBooleanCheckbox
+ title="Session2"
+  value="#{rechercheController.session2}" >
+</h:selectBooleanCheckbox>
+Résultats de session 2
+</td>
+<td id='prefetape' style='visibility: visible;' class='uportal-label'>
+<h:selectBooleanCheckbox
+ title="Etape"
+  value="#{rechercheController.etape}" >
+</h:selectBooleanCheckbox>
+Etape d'appartenance
+</td>
+</tr>
+<tr>
+<td colspan='3'>
+</td>
+</tr>
+<tr>
+<td align="right">
+ <h:commandButton class='uportal-button' id="validButton" action="#{rechercheController.chercher}" type="submit" value="Rechercher" />
+ </td><td>
+  <h:commandButton class='uportal-button' action="#{rechercheController.retour}" value="Retour" /> 
+</td>
+</tr>
+</table>
+</h:form>
+<script language='javascript'>
+function verifAnnee(event) {
+	if(document.getElementById("formRechercheApogee:annee").value=='') {
+	document.getElementById("formRechercheApogee:anneeAlert").innerHTML="Veuillez entrer une année";
+	}else{
+	document.getElementById("formRechercheApogee:anneeAlert").innerHTML='';
+    }
+	
+}
+function displayVersion() { 
+	if (document.getElementById("formRechercheApogee:liste").value == 'Etape') {
+		document.getElementById("prefetape").style.visibility = 'hidden';
+	}else {
+		document.getElementById("prefetape").style.visibility = 'visible';
+		if (document.getElementById("formRechercheApogee:liste").value == 'Groupe') {
+		  document.getElementById("prefSession1").style.visibility = 'hidden';
+		  document.getElementById("prefSession2").style.visibility = 'hidden';
+		  document.getElementById("prefetape").style.visibility = 'hidden';
+		}
+	} 
+
+} 
+
+
+displayVersion();
+
+
+document.forms['formRechercheApogee'].onkeypress =new Function("{var keycode;if (window.event) keycode = window.event.keyCode;else if (event) keycode = event.which;else return true;if (keycode == 13) { document.getElementById('formRechercheApogee:validButton').click();return false; } else  return true; }");
+
+</script>
+<hr class='clear' />
+
+
+
+
+
+
+
+	</ui:define>
+</ui:composition></div>

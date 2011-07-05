@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<ui:composition	template="/stylesheets/template/template-etu.xhtml">
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+
+		<div class="portlet-section-header">
+			<h:form>
+			<div style="float:right;" class="portlet-block-right">	
+				
+				<ui:include src="/stylesheets/etu/lienafficheridentite.xhtml"/>
+				
+			</div>
+			Notes et résultats	
+			
+			<h:commandLink id="link" action="#{notesController.exportPdf}" rendered="#{config.notesPDF}">
+				<t:graphicImage value="/media/images/CMonDossierWeb/docpdf.gif"  />
+			</h:commandLink> 
+			
+			
+			</h:form>
+		</div>	
+		
+		<div  id="identiteEtudiant" style="display:none;">
+			<ui:include src="/stylesheets/etu/identite.xhtml"/>
+			<br />
+		</div>
+		
+			<h:outputText rendered="#{etudiant.notesRenseignees}">	
+				<h:form rendered="#{sessionController.enseignant}">
+					<br />
+					<div class="portlet-msg-info">
+					<h:commandButton class='portlet-form-button' action="#{notesController.changerVue}" value="Voir comme un étudiant" rendered="#{!notesController.vueEtudiant}" />
+					<h:commandButton class='portlet-form-button' action="#{notesController.changerVue}" value="Voir comme un enseignant" rendered="#{notesController.vueEtudiant}" />
+					Cette option vous permet de vérifier ce que l'étudiant verra lorsqu'il consultera ses résultats.
+					Vous êtes actuellement en 
+					<h:outputText value=" VUE ENSEIGNANT" rendered="#{!notesController.vueEtudiant}" />
+					<h:outputText value=" VUE ETUDIANT" rendered="#{notesController.vueEtudiant}" />
+					</div>
+				</h:form>
+			</h:outputText>
+<h:outputText rendered="#{etudiant.notesRenseignees}">	
+	<br />
+	<div class="portlet-table-header">
+			<span>DIPLOMES</span>
+		</div>
+	<br />
+
+<h:form>
+<t:dataTable id="tabledip" value="#{etudiant.diplomes}" var="dip" width="98%" 
+	styleClass="portlet-table"
+	headerClass="portlet-table-header"
+	rowClasses="portlet-table-body, portlet-table-alternate" >					
+
+	<t:column width="13%">
+		<f:facet name="header">Année</f:facet>
+		<h:outputText value="#{dip.annee}"/>
+	</t:column> 
+    
+	<t:column width="15%">
+		<f:facet name="header">Code/Vers</f:facet>
+		<h:outputText value="#{dip.cod_dip}"/>/<h:outputText value="#{dip.cod_vrs_vdi}"/>
+	</t:column> 
+    
+	<t:column width="30%">
+		<f:facet name="header">Diplôme</f:facet>
+		<h:outputText value="#{dip.lib_web_vdi}"/>
+	</t:column> 
+    
+	<t:column width="13%">
+		<f:facet name="header">Session</f:facet>
+		<t:dataTable styleClass="portlet-subtable" id="tableres1" value="#{dip.resultats}" var="res">
+			<t:column>
+		   		<h:outputText value="#{res.session}"/>
+			</t:column>
+		</t:dataTable>
+    </t:column> 
+    
+    <t:column width="8%">
+    	<f:facet name="header">Note</f:facet>
+		<t:dataTable styleClass="portlet-subtable" id="tableres1" value="#{dip.resultats}" var="res">
+			<t:column>
+				<h:outputText value="#{res.note}"/><h:outputText value="/#{res.bareme}" rendered="#{res.bareme != 0  and res.bareme != 20}"/> 
+			</t:column>
+		</t:dataTable>
+    </t:column> 
+    
+    <t:column width="8%">
+    	<f:facet name="header">Résultat</f:facet>
+		<t:dataTable styleClass="portlet-subtable" id="tableres1" value="#{dip.resultats}" var="res">
+			<t:column>
+				<h:outputText value="#{res.admission}"/>
+			</t:column>
+		</t:dataTable>
+    </t:column> 
+	
+	<t:column width="5%" rendered="#{config.affMentionEtudiant}">
+		<f:facet name="header">Mention</f:facet>
+		<t:dataTable styleClass="portlet-subtable" id="tablemention" value="#{dip.resultats}" var="res">
+			<t:column>
+				<h:outputText value="#{res.codMention}"/>
+			</t:column>
+		</t:dataTable>
+	</t:column> 
+    
+	<t:column width="8%" rendered="#{config.affRangEtudiant}">
+		<f:facet name="header">Rang</f:facet>
+		<h:outputText value="#{dip.rang}"/>
+	</t:column> 
+    
+</t:dataTable>
+	<h:outputText rendered="#{!etudiant.existeDip}">
+		<div class="portlet-msg-info">
+			<div class="portlet-section-subheader2">
+				Aucun diplôme.
+			</div>
+		</div>
+	</h:outputText>
+</h:form>
+
+	<br />
+	<div class="portlet-table-header">
+			<span>ETAPES</span>
+		</div>
+	<br />
+	
+<h:form>
+<t:dataTable id="tabledip" value="#{etudiant.etapes}" var="etape" width="98%" rowIndexVar="rowindex"
+	styleClass="portlet-table"
+	headerClass="portlet-table-header"
+	rowClasses="portlet-table-body, portlet-table-alternate" >					
+
+	<t:column width="13%">
+		<f:facet name="header">Année</f:facet>
+		<h:outputText value="#{etape.annee}"/>
+	</t:column> 
+	    
+	<t:column width="15%">
+		<f:facet name="header">Code/vers</f:facet>
+		<h:commandLink action="#{notesController.preciserEtape}" rendered="#{etape.rang != 'NC'}">
+			<f:param name="row" value="#{rowindex}"/>
+			<t:graphicImage style= " border:0 ; " alt='Dossier Etudiant' value='/media/images/CMonDossierWeb/folderopen.gif' />	
+			<u><h:outputText value="#{etape.code}"/>/<h:outputText value="#{etape.version}"/></u>
+	   	</h:commandLink>
+		<h:outputText rendered="#{etape.rang == 'NC'}">
+			<t:graphicImage style= " border:0 ; " alt='Dossier Etudiant' value='/media/images/CMonDossierWeb/folderopen.gif' />	
+			<h:outputText value="#{etape.code}"/>/<h:outputText value="#{etape.version}"/>
+		</h:outputText>
+    </t:column> 
+    
+	<t:column width="30%">
+		<f:facet name="header">Etape</f:facet>
+		<h:commandLink action="#{notesController.preciserEtape}" rendered="#{etape.rang != 'NC'}">
+			<f:param name="row" value="#{rowindex}"/>
+			<h:outputText value="#{etape.libelle}"/>
+		</h:commandLink>
+		<h:outputText rendered="#{etape.rang == 'NC'}">
+			<h:outputText value="#{etape.libelle}"/>
+		</h:outputText>
+	</t:column> 
+    
+	<t:column width="13%">
+		<f:facet name="header">Session</f:facet>
+		<t:dataTable styleClass="portlet-subtable" id="tableres1" value="#{etape.resultats}" var="res">
+			<t:column>
+				<h:outputText value="#{res.session}"/>
+			</t:column>
+		</t:dataTable>
+	</t:column> 
+    
+	<t:column width="8%">
+		<f:facet name="header">Note</f:facet>
+		<t:dataTable styleClass="portlet-subtable" id="tableres1" value="#{etape.resultats}" var="res">
+			<t:column>
+				<h:outputText value="#{res.note}"/><h:outputText value="/#{res.bareme}" rendered="#{res.bareme != 0  and res.bareme != 20}"/> 
+			</t:column>
+		</t:dataTable>
+    </t:column> 
+    
+    <t:column width="8%">
+    	<f:facet name="header">Résultat</f:facet>
+		<t:dataTable styleClass="portlet-subtable" id="tableres1" value="#{etape.resultats}" var="res">
+			<t:column>
+				<h:outputText value="#{res.admission}"/>
+			</t:column>
+		</t:dataTable>
+	</t:column> 
+    
+	<t:column width="5%" rendered="#{config.affMentionEtudiant}">
+		<f:facet name="header">Mention</f:facet>
+		<t:dataTable styleClass="portlet-subtable" id="tablemention1" value="#{etape.resultats}" var="res">
+			<t:column>
+				<h:outputText value="#{res.codMention}"/>
+			</t:column>
+		</t:dataTable>
+	</t:column> 
+	
+	<t:column width="8%" rendered="#{config.affRangEtudiant}">
+		<f:facet name="header">Rang</f:facet>
+		<h:outputText value="#{etape.rang}"/>
+	</t:column> 
+</t:dataTable> 
+</h:form>
+
+		<h:outputText rendered="#{etudiant.significationResultatsUtilisee}">
+			<br />
+			<div class="portlet-table-header">
+				<span>INFORMATIONS</span>
+			</div>
+			<br />
+			<div class="portlet-msg-info">
+				<p>Signification des codes résultats :</p>
+				<h:outputText value="#{etudiant.grilleSignficationResultats}" escape="false"/>
+				<br />
+			</div>
+		</h:outputText>
+</h:outputText>
+<h:outputText rendered="#{!etudiant.notesRenseignees}">	
+<ui:include src="/stylesheets/template/template-erreurbdd.xhtml"/>
+</h:outputText>
+
+	</ui:define>
+</ui:composition>
+</div>

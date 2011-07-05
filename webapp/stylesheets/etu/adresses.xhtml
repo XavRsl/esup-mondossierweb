@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/stylesheets/template/template-etu.xhtml">
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		
+		<div class="portlet-section-header">
+			<div style="float:right;" class="portlet-block-right">	
+				
+				<ui:include src="/stylesheets/etu/lienafficheridentite.xhtml"/>
+				
+			</div>	
+			Adresses
+			
+			
+			
+		</div>	
+		
+		
+		<div  id="identiteEtudiant" style="display:none;">
+			<ui:include src="/stylesheets/etu/identite.xhtml"/>
+			<br />
+		</div>
+<br />
+<h:form>
+<h:messages id="champMessages" errorStyle="color: red"  />	
+
+		<h:outputText rendered="#{etudiant.adressesRenseignees}">		
+			<div class="portlet-table-header">
+				ADRESSE ANNUELLE #{etudiant.anu}	
+			</div>	
+
+<table class="portlet-table2">
+	<tr>
+		<td width='150' class='uportal-text'>
+		Adresse
+		</td>
+		<td class='uportal-channel-strong'>
+		#{etudiant.adresseannuelle1}
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td class='uportal-channel-strong'>
+		#{etudiant.adresseannuelle2} #{etudiant.adresseannuelle3}
+		</td>
+	</tr>
+	<tr>
+		<td class='uportal-text'>
+		Ville
+		</td>
+		<td class='uportal-channel-strong'>
+		#{etudiant.adresseannuelleetranger} #{etudiant.adresseannuellecp} - #{etudiant.villeannuelle}
+		</td>
+	</tr>
+	<tr>
+		<td class='uportal-text'>
+		Pays
+		</td>
+		<td class='uportal-channel-strong'>
+		#{etudiant.paysannuel}
+		</td>
+	</tr>
+	<tr>
+		<td class='uportal-text'>
+		Téléphone
+		</td>
+		<td class='uportal-channel-strong'>
+		#{etudiant.numerotelannuel}
+		</td>
+	</tr>
+</table>
+
+<br />
+
+			<div class="portlet-table-header">
+				ADRESSE FIXE	
+			</div>	
+
+<table class="portlet-table2">
+	<tr>
+		<td width='150' class='uportal-text'>
+		Adresse
+		</td>
+		<td class='uportal-channel-strong'>
+		#{etudiant.adressefixe1}
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td class='uportal-channel-strong'>
+		#{etudiant.adressefixe2} #{etudiant.adressefixe3}
+		</td>
+	</tr>
+	<tr>
+		<td class='uportal-text'>
+		Ville
+		</td>
+		<td class='uportal-channel-strong'>
+		#{etudiant.adressefixeetranger} #{etudiant.adressefixecp} - #{etudiant.villefixe}
+		</td>
+	</tr>
+	<tr>
+		<td class='uportal-text'>
+		Pays
+		</td>
+		<td class='uportal-channel-strong'>
+		#{etudiant.paysfixe}
+		</td>
+	</tr>
+	<tr>
+		<td class='uportal-text'>
+		Téléphone
+		</td>
+		<td class='uportal-channel-strong'>
+		#{etudiant.numerotelfixe}
+		</td>
+	</tr>
+</table>
+<br />
+			<div class="portlet-table-header">
+				AUTRES	
+			</div>	
+
+<table class="portlet-table2">
+<h:outputText rendered="#{!sessionController.enseignant}">
+	<tr>
+		<td width='150' class='uportal-text'>
+		Email personnel
+		</td>
+		<td class='uportal-channel-strong'>
+		#{etudiant.emailPerso}
+		</td>
+	</tr>
+</h:outputText>
+	<tr>
+		<td width='150' class='uportal-text'>
+		Tel. portable
+		</td>
+		<td class='uportal-channel-strong'>
+		#{etudiant.telPortable}
+		</td>
+	</tr>
+</table>
+<br />
+<h:outputText rendered="#{!sessionController.enseignant and config.modificationAdresses}">
+	<div class="portlet-sub-section">
+		<h:commandButton class='uportal-button' action="#{adressesController.modifierAdresses}" value="MODIFIER VOS ADRESSES"/>
+	</div>
+</h:outputText>
+
+</h:outputText>
+
+<h:outputText rendered="#{!etudiant.adressesRenseignees}">	
+	<ui:include src="/stylesheets/template/template-erreurbdd.xhtml"/>
+</h:outputText>
+
+</h:form>
+</ui:define>
+</ui:composition>
+</div>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+
+	
+
+<!-- dataSource pour utiliser un pool Tomcat de connexion a la BD-->
+	<bean id="dataSourcePool" lazy-init="true" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiName" value="${db.pool}"/>
+    </bean>
+
+	<!-- dataSource Simple de connexion a la BD -->
+<bean id="dataSourceIbatis" lazy-init="true"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${db.driver}"/>
+		<property name="url" value="${db.url}"/>
+		<property name="username" value="${db.username}"/>
+		<property name="password" value="${db.password}"/>
+	</bean> 
+	
+
+	
+	<bean id="daoService"
+		class="org.esupportail.mondossierweb.dao.DaoServiceIBatisImpl">
+		<description>
+			Bean listant les service necessitant l'accès à une BDD ou à des donneés externes à l'application.
+		</description>
+		<property name="dataSource" ref="${db.method}" />
+		
+		<property name="daoCodeLogin">
+			<ref local="daoCodeLoginEtudiant" />
+			</property>
+		<property name="daoLoginCode">
+			<ref local="daoLoginCodeEtudiant" />
+			</property>	
+		<property name="sqlMapClientTemplate"
+			ref="sqlMapClientTemplate" />
+	</bean>
+	
+	<bean id="daoServiceDossierEtudiant"
+		class="org.esupportail.mondossierweb.dao.DaoServiceDossierEtudiantIbatisImpl">
+		<description>
+			Bean listant les service necessitant l'accès à une BDD pour récupérer les informations du dossier etudiant.
+		</description>
+		<property name="dataSource" ref="${db.method}"/>
+		
+		<property name="sqlMapClientTemplate"
+			ref="sqlMapClientTemplate" />
+	</bean>
+	
+	<bean id="daoCodeLoginEtudiant"
+		class="org.esupportail.mondossierweb.dao.${codetu.login}">
+		<description>
+			Bean permettant de récupérer le codind d'un étudiant.
+		</description>
+		<property name="ldapService" ref="ldapService">
+			<description>le service ldap</description>
+		</property>
+		<property name="dataSource" ref="${db.method}" />
+		
+		<property name="sqlMapClientTemplate"
+			ref="sqlMapClientTemplate" />
+	</bean>
+	
+	<bean id="daoLoginCodeEtudiant"
+		class="org.esupportail.mondossierweb.dao.${login.codetu}">
+		<description>
+			Bean permettant de récupérer le login d'un étudiant.
+		</description>
+		<property name="dataSource" ref="${db.method}"/>
+		
+		<property name="sqlMapClientTemplate"
+			ref="sqlMapClientTemplate" />
+	</bean>
+
+	<bean id="sqlMapClientTemplate"
+		class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	
+	<bean id="sqlMapClient"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation"
+			value="classpath:/properties/dao/ibatis/ibatis.config.xml" />
+		<property name="dataSource" ref="${db.method}" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="${db.method}" />
+		
+	</bean>
+
+
+
+
+	<bean id="databaseManagerStore"
+		class="org.esupportail.commons.services.database.EmptyDatabaseManagerStoreImpl">
+		<description>
+			This bean is the sore of database managers.
+		</description>
+	</bean>
+
+
+
+</beans>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Groupes">
+    
+    <resultMap id="inscrit" class="org.esupportail.mondossierweb.domain.beans.Inscrit">
+        <result property="cod_ind" column="cod_ind"/>
+        <result property="cod_etu" column="cod_etu"/>
+        <result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+        <result property="lib_pr1_ind" column="lib_pr1_ind"/>
+        <result property="date_nai_ind" column="date_nai_ind"/>
+    </resultMap>
+
+<select id="getInscritsGroupe" resultMap="inscrit">
+    select i.cod_ind,i.cod_etu, i.lib_nom_pat_ind, i.lib_pr1_ind,
+    to_char(i.date_nai_ind,'DD/MM/YYYY') date_nai_ind
+    from IND_AFFECTE_GPE ind, GROUPE g, individu i
+    where ind.COD_GPE = g.cod_gpe 
+    and i.cod_ind = ind.cod_ind
+    and g.COD_GPE = #code#
+    and ind.COD_ANU= #anneeencours#
+    order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
+</select>
+    
+    <select id="getCleGroupe" resultClass="java.lang.String">
+        select G.COD_GPE
+        from  GROUPE g
+        where g.COD_EXT_GPE = #code#
+        and nls_upper(g.LIB_GPE) = nls_upper(#libelle#)
+    </select> 
+    
+    <select id="getLibelleGroupe" resultClass="java.lang.String">
+        select G.LIB_GPE
+        from  GROUPE g
+        where G.COD_GPE = #value#
+    </select> 
+
+</sqlMap>
+
+	

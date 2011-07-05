@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<ui:composition template="/stylesheets/template/template-ens.xhtml">
+	<ui:define name="titre">
+		Résultat de la recherche de groupes
+	</ui:define>
+	<ui:define name="icones">
+		<span>
+			<h:commandLink id="linkmodifrecherche2"  rendered="#{rechercheCodeController.rechercheParCode}" action="#{rechercheCodeController.enter}">
+					<t:graphicImage align='absmiddle' value='/media/images/CMonDossierWeb/modify.gif' alt='Modifier la recherche' title='Modifier la recherche' />					
+						Modifier la recherche
+			</h:commandLink>
+			<h:commandLink id="linkretourArbo"  rendered="#{!rechercheCodeController.rechercheParCode}" action="navigationElementsArborescence">
+					<t:graphicImage align='absmiddle' value='/media/images/CMonDossierWeb/back.gif' alt='Retour' title='Retour' />					
+						Retour
+			</h:commandLink>
+		</span>
+		
+
+	</ui:define>
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+
+
+<h:form id="formGroupes">
+	<h:messages id="champMessages" errorStyle="color: red" />
+	<div class="portlet-msg-info">
+		<p>
+			<b>Recherche sur : </b>#{rechercheCodeController.annee} - #{rechercheCodeController.code} 
+		</p>
+	</div><br />
+	
+	<c:forEach var="elp" items="#{rechercheCodeController.listeElpDeCollection}" >
+		
+		
+	<table class="portlet-table">
+		<tr class="uportal-background-semidark">
+			<td colspan="6" align="center" class="uportal-channel-strong">
+				#{elp.codElp} - #{elp.libElp}
+			</td>
+		</tr>
+		<tr>
+			<th class="portlet-table-header"></th>
+			<th class="portlet-table-header">Code Collection</th>
+			<th class="portlet-table-header">Code Groupe</th>
+			<th class="portlet-table-header">Libellé Groupe</th>
+			<th class="portlet-table-header">Capacité Max Groupe</th>
+			<th class="portlet-table-header">Capacité Intermédiaire</th>
+		</tr>
+		
+			
+		
+		<c:forEach var="coll" items="#{elp.listeCollection}" >
+			<tr><td>
+				<t:graphicImage style= " border:0 ; " alt='voir groupes' value='/media/images/CMonDossierWeb/foldermini.gif' />	
+			</td>
+
+			<td>
+				<div class="grasSouligne">#{coll.codCollection}</div>
+			</td><td>
+			</td><td></td>
+				<td></td>
+			</tr>
+			
+			<c:forEach var="groupe" items="#{coll.listeGroupes}" >
+				<tr><td>
+					
+				</td><td>
+					
+				</td><td>
+					<h:commandLink action="#{rechercheCodeController.validGroupe}">
+						<f:param name="code" value="#{groupe.cleGroupe}"/>
+					<div class="grasSouligne">#{groupe.codGroupe}</div>
+					</h:commandLink>
+				</td><td>
+					<h:commandLink action="#{rechercheCodeController.validGroupe}">
+						<f:param name="code" value="#{groupe.cleGroupe}"/>
+					<div class="grasSouligne">#{groupe.libGroupe}</div>
+					</h:commandLink>
+				</td><td align="center">
+					<div class="grasSouligne">#{groupe.capMaxGpe}</div>
+				</td><td align="center">
+					<div class="grasSouligne">
+						<h:outputText rendered="#{groupe.affCapIntGpe}">
+						#{groupe.capIntGpe}
+						</h:outputText>
+					</div>
+				</td>
+				</tr>
+			</c:forEach>
+			
+		</c:forEach>
+	</table>
+	
+	</c:forEach>
+	
+
+<br />
+	<h:outputText rendered="#{!rechercheCodeController.existeGroupe}">
+		<div class="portlet-msg-info">
+			<div class="portlet-section-subheader2">
+				Aucun groupe pour cet ELP.
+			</div>
+		</div>
+	</h:outputText>
+	
+	<h:outputText rendered="#{rechercheCodeController.existeGroupe}">
+	<div class="portlet-msg-info">
+		<p>Une collection est un regroupement de groupes.</p>
+		
+		<p>Une collection peut être commune à plusieurs ELP.</p>
+		
+	</div>
+	</h:outputText>
+
+
+
+<br />
+
+</h:form>
+<hr class='clear' />
+
+
+</ui:define>
+</ui:composition>
+</div>

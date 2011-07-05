@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+		
+		<tr><td width="150" class="uportal-text">
+		Dossier</td> <td class="uportal-channel-strong">
+		   <h:outputText value="#{etudiant.cod_etu}"/></td></tr><tr>
+		<td width="150" class="uportal-text">
+		NNE</td> <td class="uportal-channel-strong">
+		   <h:outputText value="#{etudiant.cod_nne}"/></td></tr><tr>
+		<td width="150" class="uportal-text">
+		Nom et Prénom</td> <td class="uportal-channel-strong">
+		   <h:outputText value="#{etudiant.nom}"/></td></tr><tr>
+		<td width="150" class="uportal-text">
+		Email</td> <td class="uportal-channel-strong">
+		<a href="mailto:#{etudiant.email}" style= " text-decoration:underline ; ">#{etudiant.email}</a>
+		   </td></tr>
+		   
+		   
+	</div>

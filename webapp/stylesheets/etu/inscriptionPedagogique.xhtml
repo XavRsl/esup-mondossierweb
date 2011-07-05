@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://commons.esup-portail.org"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<ui:composition template="/stylesheets/template/template-etu.xhtml">
+	<ui:define name="iconesommaire">
+			<ui:include src="/stylesheets/template/template-icone.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+	
+		<div class="portlet-section-header">
+			
+			<div class="portlet-block-left">	
+				<h:form id="formRetourIP">
+					<h:commandLink id="linkretourIP" action="#{inscriptionsController.retour}">
+						<t:graphicImage align='absmiddle' value="/media/images/CMonDossierWeb/back.gif" />
+						Retour
+					</h:commandLink>
+				</h:form>
+			</div>
+			
+			<div style="float:right;" class="portlet-block-right">	
+				
+				<ui:include src="/stylesheets/etu/lienafficheridentite.xhtml"/>
+				
+			</div>
+			
+			Inscription Pedagogique
+			
+		</div>
+		
+		<div  id="identiteEtudiant" style="display:none;">
+			<ui:include src="/stylesheets/etu/identite.xhtml"/>
+				<br />
+		</div>
+		<br />
+		<h:outputText rendered="#{etudiant.inscriptionsRenseignees}">
+	
+
+			<div class="portlet-table-header">
+				<span>ELEMENTS ET EPREUVES</span>
+			</div>
+			
+	
+			<h:form>
+				<t:dataTable id="tableel" value="#{etudiant.elementsInscriptionPedagogique}" rowIndexVar="rowindexElp"
+					var="el" cellpadding="5" border="0" width="100%"
+					styleClass="portlet-table"
+					headerClass="portlet-table-header"
+					rowClasses="portlet-table-body, portlet-table-alternate" >					
+					
+					
+					<t:column>
+						<f:facet name="header">
+							Code
+						</f:facet>
+						<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+							<b>#{el.code}</b>
+						</h:outputText>
+						
+						<h:outputText rendered="#{el.annee == 'epreuve'}">
+							<i>#{el.code}</i>
+						</h:outputText>
+						
+						<h:outputText
+							rendered="#{(el.level != 1) and (el.annee != 'epreuve')}"
+							value="#{el.code}" />
+					</t:column>
+					
+					<t:column>
+						<f:facet name="header">
+							Libellé
+						</f:facet>
+						<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+							<b><h:outputText value="#{el.libelle}" escape="false"/></b>
+						</h:outputText>
+						<h:outputText rendered="#{el.annee == 'epreuve'}">
+							<i><h:outputText value="#{el.libelle}" escape="false"/></i>
+						</h:outputText>
+						<h:outputText
+							rendered="#{(el.level != 1) and (el.annee != 'epreuve')}" value="#{el.libelle}" escape="false"/>
+					</t:column>
+					
+
+					<t:column rendered="#{config.affECTSEtudiant}">
+						<f:facet name="header">ECTS</f:facet>
+						<h:outputText value="#{el.ects}"/>
+					</t:column> 
+					
+				</t:dataTable>
+			</h:form>
+			
+
+		</h:outputText>
+		
+		<h:outputText rendered="#{!etudiant.inscriptionPedagogiqueRenseignees}">
+			<div class="portlet-msg-info">
+				<div class="portlet-section-subheader2">
+					Aucune inscription pédagogique disponible pour cette inscription administrative
+				</div>
+			</div>
+		</h:outputText>
+
+
+</ui:define>
+	</ui:composition>
+
+
+</div>

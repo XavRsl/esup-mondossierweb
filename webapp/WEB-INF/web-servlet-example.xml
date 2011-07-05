@@ -1,0 +1,320 @@
+<?xml version="1.0"?>
+
+<!--
+	/webapp/WEB-INF/web-servlet-example.xml
+	The main configuration file of the application for servlet installations.
+	Copy this file to /webapp/WEB-INF/web.xml and edit at least the CAS properties.
+-->
+
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>esup-mondossierweb</display-name>
+
+	<context-param>
+		<description>
+			The location of the main configuration file of the Spring framework.
+		</description>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:/properties/applicationContext.xml
+		</param-value>
+	</context-param>
+
+<context-param>
+<param-name>webAppRootKey</param-name>
+<param-value>esup-mondossierweb</param-value>
+</context-param>
+
+<context-param>
+<param-name>log4jConfigLocation</param-name>
+<param-value>
+classpath:/log4j.properties
+</param-value>
+</context-param>
+
+<listener>
+<listener-class>
+org.springframework.web.util.Log4jConfigListener
+</listener-class>
+</listener>
+
+	<context-param>
+		<description>
+			The location of the main configuration file of the JSF
+			framework.
+		</description>
+		<param-name>javax.faces.CONFIG_FILES</param-name>
+		<param-value>
+			/WEB-INF/classes/properties/jsf/commons-render-kit.xml,/WEB-INF/classes/properties/jsf/navigation-rules.xml,/WEB-INF/classes/properties/jsf/application.xml,/WEB-INF/classes/properties/jsf/fck-faces-config.xml
+		</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+	</context-param>
+	
+
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+	
+<context-param>
+        <param-name>facelets.LIBRARIES</param-name>
+        <param-value>/WEB-INF/tomahawk.taglib.xml</param-value>
+    </context-param>
+	<context-param>
+		<param-name>facelets.facelets.DEVELOPMENT</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+
+	<context-param>
+		<param-name>org.fckfaces.CUSTOM_CONFIGURATIONS_PATH</param-name>
+		<param-value>/media/FCKeditor/custom-fckconfig.js</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.apache.myfaces.PRETTY_HTML</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.apache.myfaces.ALLOW_JAVASCRIPT</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.apache.myfaces.DETECT_JAVASCRIPT</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.apache.myfaces.AUTO_SCROLL</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.apache.myfaces.ADD_RESOURCE_CLASS</param-name>
+		<param-value>
+			org.apache.myfaces.renderkit.html.util.DefaultAddResource
+		</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>
+			org.apache.myfaces.CHECK_EXTENSIONS_FILTER
+		</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+		<description>The logout URL of the CAS server.</description>
+		<param-name>edu.yale.its.tp.cas.client.logoutUrl</param-name>
+		<!-- param-value  https://cas.domain.edu/logout?service=%s -->
+		<param-value>
+			https://auth.univ-ville.fr/logout?service=%s
+		</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>onload-config</param-name>
+		<param-value>/WEB-INF/onload-config.xml</param-value>
+	</context-param>
+
+	<listener>
+		<display-name>RequestContextListener</display-name>
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>
+			org.apache.myfaces.webapp.StartupServletContextListener
+		</listener-class>
+	</listener>
+
+	<filter>
+		<description>
+			The CAS filter, used to authenticate users.
+		</description>
+		<display-name>CASFilter</display-name>
+		<filter-name>CAS Filter</filter-name>
+		<filter-class>
+			edu.yale.its.tp.cas.client.filter.CASFilter
+		</filter-class>
+		<init-param>
+			<param-name>
+				edu.yale.its.tp.cas.client.filter.loginUrl
+			</param-name>
+			<!-- param value https://cas.domain.edu/login -->
+			<param-value>https://auth.univ-ville.fr/login</param-value>
+		</init-param>
+		<init-param>
+			<param-name>
+				edu.yale.its.tp.cas.client.filter.validateUrl
+			</param-name>
+			<!--  param-value    https://cas.domain.edu/serviceValidate -->
+			<param-value>
+				https://auth.univ-ville.fr/serviceValidate
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>
+				edu.yale.its.tp.cas.client.filter.serverName
+			</param-name>
+			<param-value>
+				${tomcat.host}:${tomcat.port}
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>
+				edu.yale.its.tp.cas.client.filter.wrapRequest
+			</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CAS Filter</filter-name>
+		<url-pattern>/stylesheets/login.faces</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<description>
+			This filter is needed to use some Tomahawk extentions.
+		</description>
+		<display-name>MyFacesExtensionsFilter</display-name>
+		<filter-name>MyFacesExtensionsFilter</filter-name>
+		<filter-class>
+			org.apache.myfaces.webapp.filter.ExtensionsFilter
+		</filter-class>
+		<init-param>
+			<description>
+				The maximum size of uploaded files.
+			</description>
+			<param-name>maxFileSize</param-name>
+			<param-value>20m</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>MyFacesExtensionsFilter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>MyFacesExtensionsFilter</filter-name>
+		<servlet-name>esup-mondossierweb</servlet-name>
+	</filter-mapping>
+	<filter-mapping>
+        <filter-name>MyFacesExtensionsFilter</filter-name>
+        <url-pattern>/faces/myFacesExtensionResource/*</url-pattern>
+    </filter-mapping>
+
+	<servlet>
+		<description>
+			The main servlet of the application. This class inherits
+			from the MyFaces implementation and handles exceptions
+			thrown for specific exception handling.
+		</description>
+		<display-name>esup-mondossierweb</display-name>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>
+			org.esupportail.commons.web.servlet.FacesServlet
+		</servlet-class>
+		<init-param>
+			<param-name>default-view</param-name>
+			<param-value>/stylesheets/welcome.faces</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>xfire</servlet-name>
+		<servlet-class>
+			org.esupportail.commons.web.servlet.XFireServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>xfire</servlet-name>
+		<url-pattern>/xfire/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Download Servlet</servlet-name>
+		<servlet-class>
+			org.esupportail.commons.web.servlet.DownloadServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Download Servlet</servlet-name>
+		<url-pattern>/download</url-pattern>
+	</servlet-mapping>
+
+	<security-constraint>
+		<display-name>Protection of the raw XHTML pages</display-name>
+		<web-resource-collection>
+			<web-resource-name>Raw JSF XHTML Pages</web-resource-name>
+			<description>
+				All the XHTML pages of the application.
+			</description>
+			<url-pattern>/stylesheets/login.xhtml</url-pattern>
+			<url-pattern>/stylesheets/welcome.xhtml</url-pattern>
+			<url-pattern>/stylesheets/ens/composantsarborescence.xhtml</url-pattern>
+			<url-pattern>/stylesheets/ens/diplomesarborescence.xhtml</url-pattern>
+			<url-pattern>/stylesheets/ens/elementsarborescence.xhtml</url-pattern>
+			<url-pattern>/stylesheets/ens/inscritsarborescence.xhtml</url-pattern>
+			<url-pattern>/stylesheets/ens/listeInscrits.xhtml</url-pattern>
+			<url-pattern>/stylesheets/ens/rechercheannuaire.xhtml</url-pattern>
+			<url-pattern>/stylesheets/ens/recherchecodearborescence.xhtml</url-pattern>
+			<url-pattern>/stylesheets/ens/recherchearborescence.xhtml</url-pattern>
+			<url-pattern>/stylesheets/ens/recherchenumero.xhtml</url-pattern>
+			<url-pattern>/stylesheets/ens/resultatrechercheannuaire.xhtml</url-pattern>
+			<url-pattern>/stylesheets/ens/trombinoscope.xhtml</url-pattern>
+			<url-pattern>/stylesheets/ens/welcome.xhtml</url-pattern>
+			<url-pattern>/stylesheets/error/acces-interdit.xhtml</url-pattern>
+			<url-pattern>/stylesheets/error/exception.xhtml</url-pattern>
+			<url-pattern>/stylesheets/error/exceptionBdd.xhtml</url-pattern>
+			<url-pattern>/stylesheets/error/maintenance.xhtml</url-pattern>
+			<url-pattern>/stylesheets/error/connexion.xhtml</url-pattern>
+			<url-pattern>/stylesheets/etu/adresses.xhtml</url-pattern>
+			<url-pattern>/stylesheets/etu/modifieradresses.xhtml</url-pattern>
+			<url-pattern>/stylesheets/etu/calendrier.xhtml</url-pattern>
+			<url-pattern>/stylesheets/etu/detailnotes.xhtml</url-pattern>
+			<url-pattern>/stylesheets/etu/etatcivil.xhtml</url-pattern>
+			<url-pattern>/stylesheets/etu/etatcivilidentite.xhtml</url-pattern>
+			<url-pattern>/stylesheets/etu/identite.xhtml</url-pattern>
+			<url-pattern>/stylesheets/etu/identitelienafficher.xhtml</url-pattern>
+			<url-pattern>/stylesheets/etu/identitelienmasquer.xhtml</url-pattern>
+			<url-pattern>/stylesheets/etu/inscriptions.xhtml</url-pattern>
+			<url-pattern>/stylesheets/etu/modifieradresses.xhtml</url-pattern>
+			<url-pattern>/stylesheets/etu/notes.xhtml</url-pattern>
+			<url-pattern>/stylesheets/etu/welcome.xhtml</url-pattern>
+			<url-pattern>/stylesheets/template/template-contact.xhtml</url-pattern>
+			<url-pattern>/stylesheets/template/template-ens.xhtml</url-pattern>
+			<url-pattern>/stylesheets/template/template-erreurbdd.xhtml</url-pattern>
+			<url-pattern>/stylesheets/template/template-etu.xhtml</url-pattern>
+			<url-pattern>/stylesheets/template/template-icone.xhtml</url-pattern>
+			<url-pattern>/stylesheets/template/template-menu.xhtml</url-pattern>
+			<url-pattern>/stylesheets/template/template-page.xhtml</url-pattern>
+			<url-pattern>/stylesheets/template/template-portlet.xhtml</url-pattern>
+			<url-pattern>/stylesheets/template/template-servlet.xhtml</url-pattern>
+			<url-pattern>/stylesheets/template/template.xhtml</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>No roles, so no direct access</description>
+		</auth-constraint>
+	</security-constraint>
+
+</web-app>
