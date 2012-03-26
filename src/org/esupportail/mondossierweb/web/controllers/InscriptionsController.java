@@ -23,12 +23,10 @@ import org.esupportail.commons.utils.BeanUtils;
 import org.esupportail.commons.utils.DownloadUtils;
 import org.esupportail.mondossierweb.dao.DaoServiceIBatisImpl;
 import org.esupportail.mondossierweb.domain.beans.Config;
-import org.esupportail.mondossierweb.domain.beans.Diplome;
 import org.esupportail.mondossierweb.domain.beans.Etape;
 import org.esupportail.mondossierweb.domain.beans.Etudiant;
 import org.esupportail.mondossierweb.domain.beans.Inscription;
 import org.esupportail.mondossierweb.domain.beans.Signataire;
-import org.esupportail.mondossierweb.dto.ObjetRecherche;
 import org.esupportail.mondossierweb.web.navigation.View;
 
 import com.lowagie.text.BadElementException;
@@ -79,7 +77,26 @@ public class InscriptionsController extends AbstractContextAwareController {
 	 * l'index de l'etape selectionnee.
 	 */
 	private int selectedRow;
-
+	/**
+	 * annee universitaire en cours
+	 */
+	private String anneeEnCours;
+	/**
+	 * map des autorisations des certificats
+	 */
+	private Map<String, Boolean> autorisationCertificats;
+	/**
+	 * identifiant de l'étudiant auquel correspond la Map autorisationCertificats
+	 */
+	private String codetuMapAutorisationsCert;
+	/**
+	 * map des autorisations de consultation des IP
+	 */
+	private Map<String, Boolean> autorisationIP;
+	/**
+	 * identifiant de l'étudiant auquel correspond la Map autorisationIP
+	 */
+	private String codetuMapAutorisationsIP;
 	/**
 	 * marges.
 	 */
@@ -106,6 +123,7 @@ public class InscriptionsController extends AbstractContextAwareController {
 	 * @return la vue des inscriptions.
 	 */
 	public String enter() {
+		etudiant = etatcivilcontroller.getEtudiant();
 		return View.INSCRIPTIONS;
 	}
 
@@ -113,68 +131,82 @@ public class InscriptionsController extends AbstractContextAwareController {
 		return View.INSCRIPTIONS;
 	}
 	public Map<String, Boolean> getCertScolAutorisations() {
-		Config config = (Config)  BeanUtils.getBean("config");
-		DaoServiceIBatisImpl daoService = (DaoServiceIBatisImpl) BeanUtils.getBean("daoService");
-		String anneeEnCours = daoService.getAnneeUniversitaireEnCours();
-		Map<String, Boolean> res = new HashMap<String, Boolean>();
-		Etudiant etu = getEtatcivilcontroller().getEtudiant();
-		boucleInscriptions : for (Inscription ins : etu.getLinsciae()) {
-			//System.out.println("#-"+ins.getLib_etp()+" "+ins.getCod_anu()+ " => substring : "+ins.getCod_anu().substring(0, 4)+ " _ "+anneeEnCours);
-
-			// autoriser ou non la generation de certificats de scolarite.
-			if (!config.isCertificatScolaritePDF()) {
-				res.put(ins.getCodEtpCodAnuConcat(), false);
-				break boucleInscriptions;
-			}
-			// autoriser ou non les personnels à imprimer les certificats.
-			if (!config.isCertScolAutorisePersonnel() && getSessionController().isEnseignant()) {
-				res.put(ins.getCodEtpCodAnuConcat(), false);
-				break boucleInscriptions;
-			}
-			// autorise l'édition de certificat de scolarité uniquement pour l'année en cours.
-			if (!config.isCertificatScolariteTouteAnnee() && !ins.getCod_anu().equals(anneeEnCours)) {
-				res.put(ins.getCodEtpCodAnuConcat(), false);
-				break boucleInscriptions;
-			}
-			if (!config.getCertScolTypDiplomeDesactive().isEmpty()) {
-				// interdit les certificats pour certains types de diplomes
-				ObjetRecherche objRch = new ObjetRecherche();
-				objRch.setCode(ins.getCod_etp());
-				objRch.setVersion(ins.getCod_vrs_vet());
-				objRch.setAnneeencours(ins.getCod_anu());
-				String codeTypeDiplome = daoService.getCodeTypeDiplome(ins.getCod_dip());
-
-				if (config.getCertScolTypDiplomeDesactive().contains(codeTypeDiplome)) {
-					res.put(ins.getCodEtpCodAnuConcat(), false);
-					break boucleInscriptions;
-				}
-			}
-			//interdit l'edition de certificat pour les étudiants si l'inscription n'est pas payée
-			if (!ins.isEstEnRegle() && !getSessionController().isEnseignant()){
-				res.put(ins.getCodEtpCodAnuConcat(), false);
-				break boucleInscriptions;
-			}
-			res.put(ins.getCodEtpCodAnuConcat(), true);
+		if(!etudiant.getCod_etu().equals(codetuMapAutorisationsCert)){
+			//on reinitialise pour le cas d'un user Enseignant qui peut consulter plusieurs dossiers à la suite
+			autorisationCertificats=null;
 		}
-		return res;
+		if (autorisationCertificats == null){
+			Config config = (Config)  BeanUtils.getBean("config");
+			DaoServiceIBatisImpl daoService = (DaoServiceIBatisImpl) BeanUtils.getBean("daoService");
+			if (anneeEnCours == null){
+				anneeEnCours = daoService.getAnneeUniversitaireEnCours();
+			}
+			autorisationCertificats = new HashMap<String, Boolean>();
+			Etudiant etu = getEtatcivilcontroller().getEtudiant();
+
+			for (Inscription ins : etu.getLinsciae()) {
+				boolean mapUpdated = false;
+				// autoriser ou non la generation de certificats de scolarite.
+				if (!config.isCertificatScolaritePDF()) {
+					autorisationCertificats.put(ins.getCodEtpCodAnuConcat(), false);
+					mapUpdated=true;
+				}
+				// autoriser ou non les personnels à imprimer les certificats.
+				if (!mapUpdated && !config.isCertScolAutorisePersonnel() && getSessionController().isEnseignant()) {
+					autorisationCertificats.put(ins.getCodEtpCodAnuConcat(), false);
+					mapUpdated=true;
+				}
+				// autorise l'édition de certificat de scolarité uniquement pour l'année en cours.
+				if (!mapUpdated && !config.isCertificatScolariteTouteAnnee() && !ins.getCod_anu().equals(anneeEnCours)) {
+					autorisationCertificats.put(ins.getCodEtpCodAnuConcat(), false);
+					mapUpdated=true;
+				}
+				if (!mapUpdated && !config.getCertScolTypDiplomeDesactive().isEmpty()) {
+					// interdit les certificats pour certains types de diplomes
+					String codeTypeDiplome = daoService.getCodeTypeDiplome(ins.getCod_dip());
+
+					if (config.getCertScolTypDiplomeDesactive().contains(codeTypeDiplome)) {
+						autorisationCertificats.put(ins.getCodEtpCodAnuConcat(), false);
+						mapUpdated=true;
+					}
+				}
+				//interdit l'edition de certificat pour les étudiants si l'inscription n'est pas payée
+				if (!mapUpdated && !ins.isEstEnRegle() && !getSessionController().isEnseignant()){
+					autorisationCertificats.put(ins.getCodEtpCodAnuConcat(), false);
+					mapUpdated=true;
+				}
+				if(!mapUpdated)
+					autorisationCertificats.put(ins.getCodEtpCodAnuConcat(), true);
+			}
+
+		}
+		codetuMapAutorisationsCert = etudiant.getCod_etu();
+		return autorisationCertificats;
 	}
 
 	public Map<String, Boolean> getIpAutorisations() {
-		DaoServiceIBatisImpl daoService = (DaoServiceIBatisImpl) BeanUtils.getBean("daoService");
-		String anneeEnCours = daoService.getAnneeUniversitaireEnCours();
-		Map<String, Boolean> res = new HashMap<String, Boolean>();
-		Etudiant etu = getEtatcivilcontroller().getEtudiant();
-		for (Inscription ins : etu.getLinsciae()) {
-			// autoriser ou non la visualisation du détail de l'IP.
-			//System.out.println(ins.getLib_etp()+" "+ins.getCod_anu()+ " => substring : "+ins.getCod_anu().substring(0, 4)+ " _ "+anneeEnCours);
-			if (ins.getCod_anu().equals(anneeEnCours)) {
-				res.put(ins.getCodEtpCodAnuConcat(), true);
+		if(!etudiant.getCod_etu().equals(codetuMapAutorisationsIP)){
+			//on reinitialise pour le cas d'un user Enseignant qui peut consulter plusieurs dossiers à la suite
+			autorisationIP=null;
+		}
+		if (autorisationIP == null){
+			if (anneeEnCours == null){
+				DaoServiceIBatisImpl daoService = (DaoServiceIBatisImpl) BeanUtils.getBean("daoService");
+				anneeEnCours = daoService.getAnneeUniversitaireEnCours();
+			}
+			autorisationIP = new HashMap<String, Boolean>();
+			for (Inscription ins : etudiant.getLinsciae()) {
+				// autoriser ou non la visualisation du détail de l'IP.
+				if (ins.getCod_anu().equals(anneeEnCours)) {
+					autorisationIP.put(ins.getCodEtpCodAnuConcat(), true);
 
-			}else{
-				res.put(ins.getCodEtpCodAnuConcat(), false);
+				}else{
+					autorisationIP.put(ins.getCodEtpCodAnuConcat(), false);
+				}
 			}
 		}
-		return res;
+		codetuMapAutorisationsIP = etudiant.getCod_etu();
+		return autorisationIP;
 	}
 
 	public String preciserEtapeInscription() {
@@ -184,7 +216,7 @@ public class InscriptionsController extends AbstractContextAwareController {
 		if(row != null && !row.equals("")){
 			selectedRow = new Integer(row);
 
-			etudiant = etatcivilcontroller.getEtudiant();
+			//etudiant = etatcivilcontroller.getEtudiant();
 
 			Etape selectedEtape = new Etape(etudiant.getLinsciae().get(selectedRow).getCod_etp(),
 					etudiant.getLinsciae().get(selectedRow).getCod_vrs_vet(),
@@ -280,12 +312,7 @@ public class InscriptionsController extends AbstractContextAwareController {
 		try {
 			Config config = (Config)  BeanUtils.getBean("config");
 			DaoServiceIBatisImpl daoService = (DaoServiceIBatisImpl) BeanUtils.getBean("daoService");
-			ObjetRecherche objRch = new ObjetRecherche();
-			objRch.setCode(inscription.getCod_etp());
-			objRch.setVersion(inscription.getCod_vrs_vet());
-			objRch.setAnneeencours(inscription.getCod_anu());
-			//Diplome diplome = daoService.getDiplomeByEtape(objRch).get(0);
-
+		
 			Signataire signataire = daoService.getSignataire(config.getCertScolCodeSignataire());
 
 			//ajout image test
@@ -365,12 +392,12 @@ public class InscriptionsController extends AbstractContextAwareController {
 				tableSignataire.addCell(makeCellSignataire("", normal));
 				LOG.debug(signataire.getImg_sig_std().toString());
 				Image imageSignature = Image.getInstance(signataire.getImg_sig_std());
-				
+
 				float scaleRatio = 40 / imageSignature.height(); 
 				float newWidth=scaleRatio * imageSignature.width();
 				imageSignature.scaleAbsolute(newWidth, 40);
 				imageSignature.setAbsolutePosition(100, 750);
-				
+
 				PdfPCell cellSignature = new PdfPCell();
 				cellSignature.setBorder(0);
 				cellSignature.setImage(imageSignature);

@@ -1,4 +1,8 @@
 ***************
+* version 2.4-8 (01/03/12)
+* -Correction d'un bug sur l'affichage du lien de téléchargement des certificats.
+* -Optimisation du controller : InscriptionsController
+***************
 * version 2.4-7 (12/12/11)
 * -Correction d'un bug qui affichait toujours la place à l'examen dans les pdf même si affNumPlaceExamen = false
 * -Correction pour bien afficher le lien 'Nous contacter' pour les utilisateurs de type 'étudiant'.
