@@ -1157,15 +1157,17 @@ public class EtudiantAmue implements IEtudiant {
 					sourceResultat="Apogee";
 				}
 			}
-			ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v4(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, temoin, "toutes", "tous");
-
-			if(temoin != null){
-				setNotesElpEpr(e, et, cpdto,temoin);
-			}else{
-				//29/01/10
-				//on est dans le cas d'une extraction apogée
+			
+			// 07/12/11 récupération du fonctionnement identique à la récupéraition des notes pour les étudiants.
+			if(sourceResultat.compareTo("Apogee-extraction")==0){
+				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v4(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, temoin, "toutes", "tous");
 				setNotesElpEpr(e, et, cpdto,"AET");
+			}else{
+				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v4(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, "AET", "toutes", "tous");
+				setNotesElpEpr(e, et, cpdto,temoin);
 			}
+			
+			
 
 		} catch (WebBaseException ex) {
 			//on catch le cas ou les inscriptions aux elp de l'étape ne soient pas effectués.
