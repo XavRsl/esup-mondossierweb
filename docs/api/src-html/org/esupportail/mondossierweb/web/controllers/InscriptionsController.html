@@ -135,7 +135,7 @@
 <FONT color="green">132</FONT>                                    break boucleInscriptions;<a name="line.132"></a>
 <FONT color="green">133</FONT>                            }<a name="line.133"></a>
 <FONT color="green">134</FONT>                            // autorise l'édition de certificat de scolarité uniquement pour l'année en cours.<a name="line.134"></a>
-<FONT color="green">135</FONT>                            if (!ins.getCod_anu().equals(anneeEnCours)) {<a name="line.135"></a>
+<FONT color="green">135</FONT>                            if (!config.isCertificatScolariteTouteAnnee() &amp;&amp; !ins.getCod_anu().equals(anneeEnCours)) {<a name="line.135"></a>
 <FONT color="green">136</FONT>                                    res.put(ins.getCodEtpCodAnuConcat(), false);<a name="line.136"></a>
 <FONT color="green">137</FONT>                                    break boucleInscriptions;<a name="line.137"></a>
 <FONT color="green">138</FONT>                            }<a name="line.138"></a>

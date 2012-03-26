@@ -132,7 +132,7 @@ public class InscriptionsController extends AbstractContextAwareController {
 				break boucleInscriptions;
 			}
 			// autorise l'édition de certificat de scolarité uniquement pour l'année en cours.
-			if (!ins.getCod_anu().equals(anneeEnCours)) {
+			if (!config.isCertificatScolariteTouteAnnee() && !ins.getCod_anu().equals(anneeEnCours)) {
 				res.put(ins.getCodEtpCodAnuConcat(), false);
 				break boucleInscriptions;
 			}

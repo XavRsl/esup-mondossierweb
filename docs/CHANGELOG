@@ -1,4 +1,9 @@
 ***************
+* version 2.4-5 (03/11/11)
+* -Mise à jour librairie WS apogée en 420lh
+* -Mise à jour des librairie el-api et el-impl.
+* -Possibilité d'activer l'édition des certificats pour toutes les années et plus seulement pour l'année en cours (en option dans monDossierWeb.xml).
+***************
 * version 2.4-4 (24/02/11)
 * -Suppression du bean pour utiliser iBATIS à la place des WS.
 * -Modification insertion signature dans certificat de scolarité => supression du parametre ImageDPI dans monDossierWeb.xml

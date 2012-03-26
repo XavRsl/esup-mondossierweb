@@ -170,6 +170,10 @@
 		<description>Edition pdf des certificats de scolarité : true pour l'activer, false sinon </description>
 		<value>false</value>
 		</property>
+		<property name="certificatScolariteTouteAnnee">
+			<description>Indiquer true si on veut permettre l'édition des certificats de scolarité pour toutes les années et plus seulement pour l'année en cours.</description>
+			<value>false</value>
+		</property>
 		<property name="certScolAutorisePersonnel">
 		<description>Autoriser les personnels à imprimer les certificats de scolarité.</description>
 		<value>true</value>

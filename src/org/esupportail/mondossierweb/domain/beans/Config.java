@@ -161,6 +161,10 @@ public class Config {
 	 */
 	private boolean certificatScolaritePDF;
 	/**
+	 * Autoriser l'édition des certificats de scolarité pour toutes les années et pas seulement l'année en cours.
+	 */
+	private boolean certificatScolariteTouteAnnee;
+	/**
 	 * Autoriser les personnels à imprimer les certificats de scolarité.
 	 */
 	private boolean certScolAutorisePersonnel;
@@ -696,6 +700,17 @@ public class Config {
 	@ManagedAttribute
 	public void setTemoinCtlValCadEpr(String temoinCtlValCadEpr) {
 		this.temoinCtlValCadEpr = temoinCtlValCadEpr;
+	}
+
+	@ManagedAttribute
+	public boolean isCertificatScolariteTouteAnnee() {
+		return certificatScolariteTouteAnnee;
+	}
+
+	@ManagedAttribute
+	public void setCertificatScolariteTouteAnnee(
+			boolean certificatScolariteTouteAnnee) {
+		this.certificatScolariteTouteAnnee = certificatScolariteTouteAnnee;
 	}
 	
 	
