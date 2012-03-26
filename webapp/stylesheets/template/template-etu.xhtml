@@ -31,13 +31,15 @@
 				</h:commandLink>
 				</span>
 			
+		</h:outputText>
+		
 			<h:outputText rendered="#{!sessionController.enseignant}">
 				<span>
 						<ui:include src="/stylesheets/template/template-contact.xhtml"/>
 					</span>
 			</h:outputText>
 		
-		</h:outputText>
+		
 	</ui:define>
 	<ui:define name="menu">
 		<ui:include src="/stylesheets/template/template-menu.xhtml"/>

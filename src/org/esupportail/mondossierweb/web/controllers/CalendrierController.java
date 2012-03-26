@@ -272,11 +272,19 @@ public class CalendrierController extends AbstractContextAwareController {
 
 			if(etudiant.getCalendrier()!=null && etudiant.getCalendrier().size()>0){
 
-				PdfPTable table2 = new PdfPTable(7);
-
-				table2.setWidthPercentage(98);
-				int [] tabWidth = {15,10,10,40,30,10,60};
-				table2.setWidths(tabWidth);
+				PdfPTable table2;
+				
+				if(config.isAffNumPlaceExamen()) {
+					table2 = new PdfPTable(7);
+					table2.setWidthPercentage(98);
+					int [] tabWidth = {15,10,10,40,30,10,60};
+					table2.setWidths(tabWidth);
+				}else{
+					table2 = new PdfPTable(6);
+					table2.setWidthPercentage(98);
+					int [] tabWidth = {15,10,10,45,30,65};
+					table2.setWidths(tabWidth);
+				}
 
 				Paragraph p1 = new Paragraph(getString("PDF.DATE"),normalbig);
 				Paragraph p2 = new Paragraph(getString("PDF.HEURE"),normalbig);
@@ -291,7 +299,7 @@ public class CalendrierController extends AbstractContextAwareController {
 				PdfPCell ct3 = new PdfPCell(p3);
 				PdfPCell ct4 = new PdfPCell(p4);
 				PdfPCell ct5 = new PdfPCell(p5);
-				PdfPCell ct6 = new PdfPCell(p6);
+				PdfPCell ct6 =  new PdfPCell(p6);
 				PdfPCell ct7 = new PdfPCell(p7);
 
 				ct1.setBorder(Rectangle.BOTTOM); ct1.setBorderColorBottom(Color.black);
@@ -307,7 +315,8 @@ public class CalendrierController extends AbstractContextAwareController {
 				table2.addCell(ct3);
 				table2.addCell(ct4);
 				table2.addCell(ct5);
-				table2.addCell(ct6);
+				if(config.isAffNumPlaceExamen())
+					table2.addCell(ct6);
 				table2.addCell(ct7);
 
 
@@ -347,7 +356,8 @@ public class CalendrierController extends AbstractContextAwareController {
 					table2.addCell(celltext3);
 					table2.addCell(celltext4);
 					table2.addCell(celltext5);
-					table2.addCell(celltext6);
+					if(config.isAffNumPlaceExamen())
+						table2.addCell(celltext6);
 					table2.addCell(celltext7);
 
 					/*PdfPCell celltext4 = new PdfPCell(table3);

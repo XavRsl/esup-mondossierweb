@@ -1,4 +1,9 @@
 ***************
+* version 2.4-7 (12/12/11)
+* -Correction d'un bug qui affichait toujours la place à l'examen dans les pdf même si affNumPlaceExamen = false
+* -Correction pour bien afficher le lien 'Nous contacter' pour les utilisateurs de type 'étudiant'.
+* -Correction d'un bug sur le formulaire de 'parcourir arborescence' pour afficher correctement les cases à cocher lors du changement de type de liste
+***************
 * version 2.4-6 (07/12/11)
 * -Mise à jour de la récupération des notes aux Elp/Epr pour les enseignants pour coller à la récupération destinée aux étudiants.
 ***************

@@ -94,17 +94,24 @@ function verifAnnee(event) {
 	
 }
 function displayVersion() { 
+	
 	if (document.getElementById("formRechercheApogee:liste").value == 'Etape') {
 		document.getElementById("prefetape").style.visibility = 'hidden';
-	}else {
-		document.getElementById("prefetape").style.visibility = 'visible';
-		if (document.getElementById("formRechercheApogee:liste").value == 'Groupe') {
+		document.getElementById("prefSession1").style.visibility = 'visible';
+		document.getElementById("prefSession2").style.visibility = 'visible';
+	}
+	
+	if (document.getElementById("formRechercheApogee:liste").value == 'Element pedagogique') {
+	   document.getElementById("prefetape").style.visibility = 'visible';
+	   document.getElementById("prefSession1").style.visibility = 'visible';
+	    document.getElementById("prefSession2").style.visibility = 'visible';
+	}
+	
+	if (document.getElementById("formRechercheApogee:liste").value == 'Groupe') {
 		  document.getElementById("prefSession1").style.visibility = 'hidden';
 		  document.getElementById("prefSession2").style.visibility = 'hidden';
 		  document.getElementById("prefetape").style.visibility = 'hidden';
-		}
-	} 
-
+	}
 } 
 
 
