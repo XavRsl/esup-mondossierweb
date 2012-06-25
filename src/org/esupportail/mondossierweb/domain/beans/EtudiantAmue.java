@@ -14,11 +14,11 @@ import gouv.education.apogee.commun.servicesmetiers.PedagogiqueMetierServiceInte
 import gouv.education.apogee.commun.transverse.dto.administratif.CursusExterneDTO;
 import gouv.education.apogee.commun.transverse.dto.administratif.CursusExternesEtTransfertsDTO;
 import gouv.education.apogee.commun.transverse.dto.administratif.InsAdmEtpDTO2;
-import gouv.education.apogee.commun.transverse.dto.etudiant.AdresseDTO;
+import gouv.education.apogee.commun.transverse.dto.etudiant.AdresseDTO2;
 import gouv.education.apogee.commun.transverse.dto.etudiant.AdresseMajDTO;
 import gouv.education.apogee.commun.transverse.dto.etudiant.CommuneDTO;
 import gouv.education.apogee.commun.transverse.dto.etudiant.CommuneMajDTO;
-import gouv.education.apogee.commun.transverse.dto.etudiant.CoordonneesDTO;
+import gouv.education.apogee.commun.transverse.dto.etudiant.CoordonneesDTO2;
 import gouv.education.apogee.commun.transverse.dto.etudiant.CoordonneesMajDTO;
 import gouv.education.apogee.commun.transverse.dto.etudiant.IdentifiantsEtudiantDTO;
 import gouv.education.apogee.commun.transverse.dto.etudiant.IndBacDTO;
@@ -300,14 +300,14 @@ public class EtudiantAmue implements IEtudiant {
 			String annee = annees[annees.length - 1];
 			//récupération des coordonnées :
 
-			CoordonneesDTO cdto = monProxyEtu.recupererAdressesEtudiant(e.getCod_etu(), annee, "N");
+			CoordonneesDTO2 cdto = monProxyEtu.recupererAdressesEtudiant_v2(e.getCod_etu(), annee, "N");
 
 			//récupération des adresses, annuelle et fixe :
 			annee = cdto.getAnnee();
 			e.setEmailPerso(cdto.getEmail());
 			e.setTelPortable(cdto.getNumTelPortable());
-			AdresseDTO ada = cdto.getAdresseAnnuelle();
-			AdresseDTO adf = cdto.getAdresseFixe();
+			AdresseDTO2 ada = cdto.getAdresseAnnuelle();
+			AdresseDTO2 adf = cdto.getAdresseFixe();
 
 			if (ada != null) {
 
@@ -394,10 +394,10 @@ public class EtudiantAmue implements IEtudiant {
 			//recup de l'ancienne et modif dessus:
 			String[] annees =  monProxyAdministratif.recupererAnneesIa(e.getCod_etu(), null);
 			String annee = annees[annees.length - 1];
-			CoordonneesDTO cdto = monProxyEtu.recupererAdressesEtudiant(e.getCod_etu(), annee , "N");
+			CoordonneesDTO2 cdto = monProxyEtu.recupererAdressesEtudiant_v2(e.getCod_etu(), annee , "N");
 
-			//AdresseDTO ad1 = cdto.getAdresseAnnuelle();
-			//AdresseDTO ad2 = cdto.getAdresseFixe();
+			//AdresseDTO2 ad1 = cdto.getAdresseAnnuelle();
+			//AdresseDTO2 ad2 = cdto.getAdresseFixe();
 
 			AdresseMajDTO adanmaj = new AdresseMajDTO();
 			AdresseMajDTO adfixmaj = new AdresseMajDTO();
@@ -1104,14 +1104,14 @@ public class EtudiantAmue implements IEtudiant {
 			if(sourceResultat.compareTo("Apogee-extraction")==0){
 				//07/09/10
 				//on prend le témoin pour Apogee-extraction
-				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v4(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, temoin, "toutes", "tous");
+				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v5(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, temoin, "toutes", "tous");
 				//29/01/10
 				//on est dans le cas d'une extraction apogée
 				setNotesElpEpr(e, et, cpdto,"AET");
 			}else{
 				//29/01/10
 				//On récupère pour tout les états de délibération et on fera le trie après
-				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v4(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, "AET", "toutes", "tous");
+				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v5(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, "AET", "toutes", "tous");
 				setNotesElpEpr(e, et, cpdto,temoin);
 			}
 
@@ -1160,10 +1160,10 @@ public class EtudiantAmue implements IEtudiant {
 			
 			// 07/12/11 récupération du fonctionnement identique à la récupéraition des notes pour les étudiants.
 			if(sourceResultat.compareTo("Apogee-extraction")==0){
-				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v4(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, temoin, "toutes", "tous");
+				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v5(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, temoin, "toutes", "tous");
 				setNotesElpEpr(e, et, cpdto,"AET");
 			}else{
-				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v4(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, "AET", "toutes", "tous");
+				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v5(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, "AET", "toutes", "tous");
 				setNotesElpEpr(e, et, cpdto,temoin);
 			}
 			

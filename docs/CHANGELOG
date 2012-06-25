@@ -1,4 +1,7 @@
 ***************
+* version 2.4-9 (22/06/12)
+* -Mise à jour pour WebService 430lk
+***************
 * version 2.4-8 (01/03/12)
 * -Correction d'un bug sur l'affichage du lien de téléchargement des certificats.
 * -Optimisation du controller : InscriptionsController

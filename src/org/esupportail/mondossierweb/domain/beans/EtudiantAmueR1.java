@@ -16,6 +16,7 @@ import gouv.education.apogee.commun.transverse.dto.etudiant.IndBacDTO;
 import gouv.education.apogee.commun.transverse.dto.etudiant.InfoAdmEtuDTO;
 import gouv.education.apogee.commun.transverse.dto.etudiant.TypeHebergementCourtDTO;
 import gouv.education.apogee.commun.transverse.dto.pedagogique.ContratPedagogiqueResultatElpEprDTO2;
+import gouv.education.apogee.commun.transverse.dto.pedagogique.ContratPedagogiqueResultatElpEprDTO4;
 import gouv.education.apogee.commun.transverse.dto.pedagogique.ContratPedagogiqueResultatVdiVetDTO;
 import gouv.education.apogee.commun.transverse.dto.pedagogique.EpreuveElpDTO2;
 import gouv.education.apogee.commun.transverse.dto.pedagogique.EtapeResVdiVetDTO;
@@ -509,7 +510,7 @@ public class EtudiantAmueR1 extends EtudiantAmue {
 					temoin="T";
 				}
 				
-				ContratPedagogiqueResultatElpEprDTO2[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v2(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), "Apogee", temoin, "toutes", "tous");
+				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v5(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), "Apogee", temoin, "toutes", "tous");
 
 				setNotesElpEpr(e, et, cpdto, temoin);
 
@@ -544,7 +545,7 @@ public class EtudiantAmueR1 extends EtudiantAmue {
 					temoin="AET";
 				}
 				
-				ContratPedagogiqueResultatElpEprDTO2[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v2(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), "Apogee", temoin, "toutes", "tous");
+				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v5(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), "Apogee", temoin, "toutes", "tous");
 
 				setNotesElpEpr(e, et, cpdto, temoin);
 
@@ -745,6 +746,7 @@ public class EtudiantAmueR1 extends EtudiantAmue {
 						ElementPedagogique eltEnCours = new ElementPedagogique();
 						if (resdetail.getTypObjMnp().equalsIgnoreCase("EPR")) {
 							eltEnCours.setCode("");
+							//eltEnCours.setAnnee("epreuve");
 							eltEnCours.setAnnee("epreuve");
 						} else {
 							eltEnCours.setCode(resdetail.getCodObjMnp());
@@ -870,7 +872,7 @@ public class EtudiantAmueR1 extends EtudiantAmue {
 	private boolean isObjMnpEtape(Etudiant e, ResExtractionR1DTO res, Etape et) {
 		
 		try {
-			ContratPedagogiqueResultatElpEprDTO2[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v2(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), "Aucun", "", "", "");
+			ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v5(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), "Aucun", "", "", "");
 		
 			if (cpdto != null && cpdto.length > 0) {
 				for (int i = 0; i < cpdto.length; i++ ) {
@@ -1137,6 +1139,7 @@ public class EtudiantAmueR1 extends EtudiantAmue {
 							elp2.setLibelle(epreuve.getEpreuve().getLibEpr());
 							elp2.setCode(epreuve.getEpreuve().getCodEpr());
 							elp2.setLevel(elp.getLevel() + 1);
+							//elp2.setAnnee("epreuve");
 							elp2.setAnnee("epreuve");
 							elp2.setCodElpSup(elp.getCode());
 							elp2.setNote1("");
