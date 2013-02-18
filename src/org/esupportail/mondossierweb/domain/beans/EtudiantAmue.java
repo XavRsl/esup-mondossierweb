@@ -148,7 +148,7 @@ public class EtudiantAmue implements IEtudiant {
 	 * @see org.esupportail.mondossierweb.domain.beans.IEtudiant#setPhoto(org.esupportail.mondossierweb.domain.beans.Etudiant)
 	 */
 	public void setPhoto(Etudiant e){
-		e.setUrlphoto(photo.getUrlPhoto(e.getCod_ind(),e.getCod_etu()));
+			e.setUrlphoto(photo.getUrlPhoto(e.getCod_ind(),e.getCod_etu()));
 	}
 	/**
 	 * va chercher et renseigne les informations concernant l'état-civil de 
@@ -168,9 +168,17 @@ public class EtudiantAmue implements IEtudiant {
 
 			e.setCod_ind(idetu.getCodInd().toString());
 
-			e.setCod_nne(idetu.getNumeroINE() + idetu.getCleINE());
+			//Modification 20/04/2012 gestion des codine null
+			if(idetu.getNumeroINE() != null && idetu.getCleINE() != null ){
+				e.setCod_nne(idetu.getNumeroINE() + idetu.getCleINE());
+			}else{
+				e.setCod_nne("");
+			}
 
-			setPhoto(e);
+			//Modification 21/02/2012. Pour ne renseigner la photo que si elle n'est pas renseignée.
+			//setPhoto(e);
+			e.getUrlphoto();
+			
 
 			if (!config.isRecupAnnuaire()) {
 				// on passe par iBATIS pour récupérer l'e-mail.
@@ -301,7 +309,7 @@ public class EtudiantAmue implements IEtudiant {
 			//récupération des coordonnées :
 
 			CoordonneesDTO2 cdto = monProxyEtu.recupererAdressesEtudiant_v2(e.getCod_etu(), annee, "N");
-
+		
 			//récupération des adresses, annuelle et fixe :
 			annee = cdto.getAnnee();
 			e.setEmailPerso(cdto.getEmail());
@@ -396,8 +404,8 @@ public class EtudiantAmue implements IEtudiant {
 			String annee = annees[annees.length - 1];
 			CoordonneesDTO2 cdto = monProxyEtu.recupererAdressesEtudiant_v2(e.getCod_etu(), annee , "N");
 
-			//AdresseDTO2 ad1 = cdto.getAdresseAnnuelle();
-			//AdresseDTO2 ad2 = cdto.getAdresseFixe();
+			//AdresseDTO ad1 = cdto.getAdresseAnnuelle();
+			//AdresseDTO ad2 = cdto.getAdresseFixe();
 
 			AdresseMajDTO adanmaj = new AdresseMajDTO();
 			AdresseMajDTO adfixmaj = new AdresseMajDTO();
@@ -449,7 +457,6 @@ public class EtudiantAmue implements IEtudiant {
 			cdtomaj.setNumTelPortable(e.getTelPortable());
 			cdtomaj.setAdresseAnnuelle(adanmaj);
 			cdtomaj.setAdresseFixe(adfixmaj);
-
 
 			monProxyEtu.mettreAJourAdressesEtudiant(cdtomaj, e.getCod_etu());
 
@@ -593,7 +600,8 @@ public class EtudiantAmue implements IEtudiant {
 
 					if (cext.getEtablissement() != null && cext.getTypeAutreDiplome() != null) {
 						insc.setLib_etb(cext.getEtablissement().getLibEtb());
-						insc.setCod_dac(cext.getTypeAutreDiplome().getCodeTypeDiplome());
+						// 24/04/2012 utilisation du libTypeDiplome a la place du CodeTypeDiplome
+						insc.setCod_dac(cext.getTypeAutreDiplome().getLibTypeDiplome());
 						insc.setLib_cmt_dac(cext.getCommentaire());
 						if (cext.getTemObtentionDip() != null && cext.getTemObtentionDip().equals("N") ) {
 							insc.setRes("AJOURNE");
@@ -854,6 +862,8 @@ public class EtudiantAmue implements IEtudiant {
 					d.setLib_web_vdi(rdto.getDiplome().getLibWebVdi());
 					d.setCod_dip(rdto.getDiplome().getCodDip());
 					d.setCod_vrs_vdi(rdto.getDiplome().getCodVrsVdi().toString());
+					//System.out.println("coddip : "+d.getCod_dip() + " " + d.getLib_web_vdi());
+					//System.out.println("vrsdip : "+d.getCod_vrs_vdi());
 
 					int annee2 = new Integer(rdto.getAnnee()) + 1;
 
@@ -918,9 +928,9 @@ public class EtudiantAmue implements IEtudiant {
 							}
 						}
 						//ajout du diplome si on a au moins un résultat
-						e.getDiplomes().add(0, d);
+						//e.getDiplomes().add(0, d);
 					}
-
+					e.getDiplomes().add(0, d);
 				}
 				//information sur les etapes:
 				EtapeResVdiVetDTO[] etapes = rdto.getEtapes();
@@ -939,7 +949,12 @@ public class EtudiantAmue implements IEtudiant {
 							et.setCode(etape.getEtape().getCodEtp());
 							et.setVersion(etape.getEtape().getCodVrsVet().toString());
 							et.setLibelle(etape.getEtape().getLibWebVet());
-
+							
+							//ajout 16/02/2012 pour WS exposés pour la version mobile en HttpInvoker
+							et.setCod_dip(rdto.getDiplome().getCodDip());
+							et.setVers_dip(rdto.getDiplome().getCodVrsVdi());
+							//System.out.println("etcoddip : "+et.getCod_dip());
+							//System.out.println("etvrsdip : "+et.getVers_dip());
 
 							//résultats de l'étape:
 							ResultatVetDTO[] tabresetape = etape.getResultatVet();
@@ -1202,6 +1217,7 @@ public class EtudiantAmue implements IEtudiant {
 					elp.setCodElpSup(reedto[i].getCodElpSup());
 					elp.setLibelle(reedto[i].getElp().getLibElp());
 					elp.setAnnee("");
+					elp.setEpreuve(false);
 
 
 					if (reedto[i].getElp().getNatureElp().getCodNel().equals("FICM")) {
@@ -1394,7 +1410,12 @@ public class EtudiantAmue implements IEtudiant {
 							elp2.setLibelle(epreuve.getEpreuve().getLibEpr());
 							elp2.setCode(epreuve.getEpreuve().getCodEpr());
 							elp2.setLevel(elp.getLevel() + 1);
-							elp2.setAnnee("epreuve");
+							
+							//Modif 20/02/2012 pour les WS HttpInvoker
+							//elp2.setAnnee("epreuve");
+							elp2.setAnnee("");
+							elp2.setEpreuve(true);
+							
 							elp2.setCodElpSup(elp.getCode());
 							elp2.setNote1("");
 							elp2.setBareme1(0);
@@ -1497,11 +1518,11 @@ public class EtudiantAmue implements IEtudiant {
 				while (i < e.getElementsPedagogiques().size()) {
 					suppr = false;
 					ElementPedagogique elp = e.getElementsPedagogiques().get(i);
-					if (elp.getAnnee().equals("epreuve")) {
+					if (elp.isEpreuve()) {
 						ElementPedagogique elp0 = e.getElementsPedagogiques().get(i - 1);
 						if (i < (e.getElementsPedagogiques().size() - 1)) {
 							ElementPedagogique elp1 = e.getElementsPedagogiques().get(i + 1);
-							if (!elp0.getAnnee().equals("epreuve") && !elp1.getAnnee().equals("epreuve")) {
+							if (!elp0.isEpreuve() && !elp1.isEpreuve()) {
 								if (elp0.getNote1().equals(elp.getNote1()) && elp0.getNote2().equals(elp.getNote2())) {
 									//on supprime l'element i
 									e.getElementsPedagogiques().remove(i);
@@ -1509,7 +1530,7 @@ public class EtudiantAmue implements IEtudiant {
 								}
 							}
 						} else {
-							if (!elp0.getAnnee().equals("epreuve") && elp0.getNote1().equals(elp.getNote1()) && elp0.getNote2().equals(elp.getNote2())) {
+							if (!elp0.isEpreuve() && elp0.getNote1().equals(elp.getNote1()) && elp0.getNote2().equals(elp.getNote2())) {
 								//on supprime l'element i
 								e.getElementsPedagogiques().remove(i);
 								suppr = true;

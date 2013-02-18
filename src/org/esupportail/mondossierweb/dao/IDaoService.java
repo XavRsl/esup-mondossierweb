@@ -289,7 +289,7 @@ public interface IDaoService {
 	 * @param r
 	 * @return le codGpe du groupe
 	 */
-	String getCleGroupe(ObjetRecherche r);
+	String getCleGroupe(ParamRequeteDTO r);
 	/**
 	 * 
 	 * @param r

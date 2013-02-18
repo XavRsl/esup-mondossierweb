@@ -58,19 +58,24 @@
 	    <t:column>
 	    	<f:facet name="header">Etape</f:facet>
 			
-	    	<h:outputText value="#{ins.lib_etp}"/> 
-	    	<h:commandLink rendered="#{inscriptionsController.ipAutorisations[ins.codEtpCodAnuConcat]}" action="#{inscriptionsController.preciserEtapeInscription}">
-	    		<u>_Inscription Pédagogique_</u>
-	    		<f:param name="row" value="#{rowindex}"/>
-	    	</h:commandLink>
-	    	
-	    	<t:div rendered="#{inscriptionsController.certScolAutorisations[ins.codEtpCodAnuConcat]}" >
-	    		<h:commandLink action="#{inscriptionsController.exportPdf}">
-	    			Téléchargez le certificat de scolarité 
-	    			<t:graphicImage value="/media/images/CMonDossierWeb/docpdf.gif" style= " border:0 ; " />
-	    			<f:param name="row" value="#{rowindex}"/>
-	    		</h:commandLink>
-	    	</t:div>
+			<t:div width="100%">
+				<t:div style= "float: right ;" >
+					<h:commandLink  width="100%" align="right" rendered="#{inscriptionsController.ipAutorisations[ins.codEtpCodAnuConcat]}" action="#{inscriptionsController.preciserEtapeInscription}">
+						<t:graphicImage value="/media/images/CMonDossierWeb/ip.gif" style= " border:0 ; " />
+						<f:param name="row" value="#{rowindex}"/>
+					</h:commandLink>
+				</t:div>
+				
+	    			<h:outputText value="#{ins.lib_etp}"/> 
+
+	    			<t:div rendered="#{inscriptionsController.certScolAutorisations[ins.codEtpCodAnuConcat]}" >
+	    				<h:commandLink action="#{inscriptionsController.exportPdf}">
+	    					Téléchargez le certificat de scolarité 
+	    					<t:graphicImage value="/media/images/CMonDossierWeb/docpdf.gif" style= " border:0 ; " />
+	    					<f:param name="row" value="#{rowindex}"/>
+	    				</h:commandLink>
+	    			</t:div>
+			</t:div>
 	    </t:column> 
 	    
 	</t:dataTable> 

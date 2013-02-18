@@ -1,6 +1,25 @@
 ***************
-* version 2.4-9 (22/06/12)
-* -Mise à jour pour WebService 430lk
+* version 2.5-3 (28/08/2012)
+* -Correction dans la récupération des Groupes (pour récupérer le bon COD_GPE).
+***************
+* version 2.5-2 (21/06/2012)
+* -gestion WS 430lk.
+***************
+* version 2.5-1 (20/04/2012)
+* -Gestion cod_ine null dans la visualisation de l'état-civil.
+* -Ajout d'un icone pour le lien Inscription pédagogique
+* -Dans 'Autres Cursus' utilisation du libTypeDiplome a la place du CodeTypeDiplome
+* -Dans le cas de la non utilisation de l'annuaire apogee, gestion du cas ou le login est non recupéré pour ne pas afficher une adresse contenant simplement l'extension extMail.
+***************
+* version 2.5-0 (21/02/2012)
+* -Ajout d'un service HttpInvoker exposant 5 services :
+*   -recuperation du codetu depuis le login
+*   -recuperation de l'état civil
+*   -recuperation du calendrier
+*   -recuperation des notes aux diplomes
+*   -recupération des notes aux ELPs
+* -Amélioration de l'objet ElementPedagogique (boolean isEtape ajouté)
+* -bean etudiantManager est passé en scope 'session'
 ***************
 * version 2.4-8 (01/03/12)
 * -Correction d'un bug sur l'affichage du lien de téléchargement des certificats.

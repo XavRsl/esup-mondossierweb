@@ -76,7 +76,7 @@
 					<f:facet name="header">
 						Année
 					</f:facet>
-					<h:outputText rendered="#{rowindexElp == 0 or el.annee != 'epreuve'}">
+					<h:outputText rendered="#{rowindexElp == 0 or !el.epreuve}">
 						<b>#{el.annee}</b>
 					</h:outputText>
 				</t:column>
@@ -85,16 +85,16 @@
 					<f:facet name="header">
 						Code
 					</f:facet>
-					<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+					<h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
 						<b>#{el.code}</b>
 					</h:outputText>
 
-					<h:outputText rendered="#{el.annee == 'epreuve'}">
+					<h:outputText rendered="#{el.epreuve}">
 						<i>#{el.code}</i>
 					</h:outputText>
 
 					<h:outputText
-						rendered="#{(el.level != 1) and (el.annee != 'epreuve')}"
+						rendered="#{(el.level != 1) and (!el.epreuve)}"
 						value="#{el.code}" />
 				</t:column>
 
@@ -102,30 +102,30 @@
 					<f:facet name="header">
 						Libellé
 					</f:facet>
-					<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+					<h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
 						<b><h:outputText value="#{el.libelle}" escape="false"/></b>
 					</h:outputText>
-					<h:outputText rendered="#{el.annee == 'epreuve'}">
+					<h:outputText rendered="#{el.epreuve}">
 						<i><h:outputText value="#{el.libelle}" escape="false"/></i>
 					</h:outputText>
 					<h:outputText
-						rendered="#{(el.level != 1) and (el.annee != 'epreuve')}" value="#{el.libelle}" escape="false"/>
+						rendered="#{(el.level != 1) and (!el.epreuve)}" value="#{el.libelle}" escape="false"/>
 				</t:column>
 
 				<t:column>
 					<f:facet name="header">
 						Session1
 					</f:facet>
-					<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+					<h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
 						<b>#{el.note1}<h:outputText value="/#{el.bareme1}" rendered="#{el.bareme1 != 0  and el.bareme1 != 20}"/></b>
 					</h:outputText>
 
-					<h:outputText rendered="#{el.annee == 'epreuve'}">
+					<h:outputText rendered="#{el.epreuve}">
 						<i>#{el.note1}<h:outputText value="/#{el.bareme1}" rendered="#{el.bareme1 != 0  and el.bareme1 != 20}"/></i>
 					</h:outputText>
 
 					<h:outputText
-						rendered="#{(el.level != 1) and (el.annee != 'epreuve')}"
+						rendered="#{(el.level != 1) and (!el.epreuve)}"
 						value="#{el.note1}" />
 				</t:column>
 
@@ -133,16 +133,16 @@
 					<f:facet name="header">
 						Résultat
 					</f:facet>
-					<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+					<h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
 						<b>#{el.res1}</b>
 					</h:outputText>
 
-					<h:outputText rendered="#{el.annee == 'epreuve'}">
+					<h:outputText rendered="#{el.epreuve}">
 						<i>#{el.res1}</i>
 					</h:outputText>
 
 					<h:outputText
-						rendered="#{(el.level != 1) and (el.annee != 'epreuve')}"
+						rendered="#{(el.level != 1) and (!el.epreuve)}"
 						value="#{el.res1}" />
 				</t:column>
 
@@ -150,16 +150,16 @@
 					<f:facet name="header">
 						Session2
 					</f:facet>
-					<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+					<h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
 						<b>#{el.note2}<h:outputText value="/#{el.bareme2}" rendered="#{el.bareme2 != 0  and el.bareme2 != 20}"/></b>
 					</h:outputText>
 
-					<h:outputText rendered="#{el.annee == 'epreuve'}">
+					<h:outputText rendered="#{el.epreuve}">
 						<i>#{el.note2}<h:outputText value="/#{el.bareme2}" rendered="#{el.bareme2 != 0  and el.bareme2 != 20}"/></i>
 					</h:outputText>
 
 					<h:outputText
-						rendered="#{(el.level != 1) and (el.annee != 'epreuve')}"
+						rendered="#{(el.level != 1) and (!el.epreuve)}"
 						value="#{el.note2}" />
 				</t:column>
 
@@ -167,16 +167,16 @@
 					<f:facet name="header">
 						Résultat
 					</f:facet>
-					<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+					<h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
 						<b>#{el.res2}</b>
 					</h:outputText>
 
-					<h:outputText rendered="#{el.annee == 'epreuve'}">
+					<h:outputText rendered="#{el.epreuve}">
 						<i>#{el.res2}</i>
 					</h:outputText>
 
 					<h:outputText
-						rendered="#{(el.level != 1) and (el.annee != 'epreuve')}"
+						rendered="#{(el.level != 1) and (!el.epreuve)}"
 						value="#{el.res2}" />
 				</t:column>
 				

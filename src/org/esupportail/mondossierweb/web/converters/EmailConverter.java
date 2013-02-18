@@ -28,7 +28,8 @@ public class EmailConverter {
 	 * @return l'adresse mail.
 	 */
 	public String getMail(final String login) {
-		if (config.getExtMail() != null && !config.getExtMail().equals("")) {
+		//25/04/2012 Gestion du cas ou le login est null ou vide
+		if (login != null && !login.equals("") && config.getExtMail() != null && !config.getExtMail().equals("")) {
 			return login + config.getExtMail();
 		}
 		return "";	

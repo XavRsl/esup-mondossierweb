@@ -7,11 +7,12 @@ package org.esupportail.mondossierweb.dao;
 import java.util.List;
 import java.util.Map;
 
+
+
 import org.esupportail.commons.services.ldap.LdapUser;
 import org.esupportail.commons.services.ldap.LdapUserService;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.commons.utils.BeanUtils;
 import org.esupportail.mondossierweb.services.authentification.ISecurity;
 import org.esupportail.mondossierweb.web.navigation.View;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
@@ -33,6 +34,10 @@ public class DaoCodeLoginEtudiantImplLdapBasic extends SqlMapClientDaoSupport im
 	 */
 	private LdapUserService ldapService;
 	/**
+	 * Bean security
+	 */
+	private ISecurity security;
+	/**
 	 * constructeur vide.
 	 */
 	public DaoCodeLoginEtudiantImplLdapBasic() {
@@ -48,19 +53,27 @@ public class DaoCodeLoginEtudiantImplLdapBasic extends SqlMapClientDaoSupport im
 		try {
 			LdapUser ldapuser = ldapService.getLdapUser(login);
 			Map mattributs = ldapuser.getAttributes();
-			ISecurity security = (ISecurity)  BeanUtils.getBean("security");
+			
+			LOG.info("Recuperation CODETU DEPUIS LOGIN "+ login+" - "+ldapuser.getId()+"-"+ldapuser.getAttributeNames());
+			
+			//ISecurity security = (ISecurity)  BeanUtils.getBean("security");
+			
 			String attrCodEtu = security.getAttributLdapCodEtu();
+			LOG.info(attrCodEtu);
 			if (attrCodEtu != null && !attrCodEtu.equals("")){
-				List<String> llogin = (List<String>) mattributs.get(attrCodEtu);
-				if (llogin != null && llogin.get(0) != null ) {
-					return llogin.get(0);
+				List<String> lcodetu = (List<String>) mattributs.get(attrCodEtu);
+				LOG.info("-"+lcodetu);
+				LOG.info("=="+lcodetu.get(0));
+				if (lcodetu != null && lcodetu.get(0) != null ) {
+					LOG.info("=>"+lcodetu.get(0));
+					return lcodetu.get(0);
 				}
 			}
 		} catch (Exception e) {
 			LOG.error(e);
 			
 		}
-		LOG.error("probleme de récupération du cod_etu depuis le login via le ldap. \n->Essai via Apogee est une requete SQL.");
+		LOG.error("probleme de récupération du cod_etu depuis le login via le ldap. ");
 
 		return View.ERROR;
 	}
@@ -71,6 +84,14 @@ public class DaoCodeLoginEtudiantImplLdapBasic extends SqlMapClientDaoSupport im
 
 	public void setLdapService(LdapUserService ldapService) {
 		this.ldapService = ldapService;
+	}
+
+	public ISecurity getSecurity() {
+		return security;
+	}
+
+	public void setSecurity(ISecurity security) {
+		this.security = security;
 	}
 
 

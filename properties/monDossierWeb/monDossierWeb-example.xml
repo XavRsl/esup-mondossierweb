@@ -395,7 +395,7 @@
 	<!--  
 	<bean id="photo"
 	class="org.esupportail.mondossierweb.web.photo.PhotoNancy2ImplCodInd"
-		scope="session">
+	scope="session">
 		<property name="ressourceurl">
 		<value>http://serveur.univ-ville.fr:8080/PhotoServer/Photos/%category%/%code%?ticket=%ticket%&amp;chksum=%chksum%</value>
 		</property>

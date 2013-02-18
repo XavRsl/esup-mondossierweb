@@ -3,6 +3,7 @@
  */
 package org.esupportail.mondossierweb.domain.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,9 @@ import java.util.List;
  * représente une étape.
  * @author Charlie Dubois
  */
-public class Etape {
+public class Etape implements Serializable {
 
+	private static final long serialVersionUID = -4920377897525522629L;
 	/**
 	 * code de l'étape.
 	 */
@@ -28,6 +30,14 @@ public class Etape {
 	 * libellé de l'étape.
 	 */
 	private String libelle;
+	/**
+	 * code du diplôme père.
+	 */
+	private String cod_dip;
+	/**
+	 * version du diplome père;
+	 */
+	private int vers_dip;
 	/**
 	 * le rang de l'étudiant pour son résultat a l'étape.
 	 */
@@ -105,5 +115,18 @@ public class Etape {
 	public void setRang(String rang) {
 		this.rang = rang;
 	}
+	public String getCod_dip() {
+		return cod_dip;
+	}
+	public void setCod_dip(String cod_dip) {
+		this.cod_dip = cod_dip;
+	}
+	public int getVers_dip() {
+		return vers_dip;
+	}
+	public void setVers_dip(int vers_dip) {
+		this.vers_dip = vers_dip;
+	}
+	
 	
 }

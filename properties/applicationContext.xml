@@ -17,8 +17,8 @@
      class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 	<property name="locations">
 		<list>
-		<value>WEB-INF/classes/properties/application.properties</value>
-		<value>WEB-INF/classes/properties/version.properties</value>
+			<value>classpath:/properties/application.properties</value>
+			<value>classpath:/properties/version.properties</value>
 		</list>
      </property> 
 	</bean> 
@@ -44,5 +44,9 @@
 	<import resource="monDossierWeb/monDossierWeb.xml" />
 
 	<import resource="specific/specific.xml" />
+	
+	<import resource="web/services.xml" />
+
+
 
 </beans>

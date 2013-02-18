@@ -261,6 +261,32 @@ org.springframework.web.util.Log4jConfigListener
 		<servlet-name>Download Servlet</servlet-name>
 		<url-pattern>/download</url-pattern>
 	</servlet-mapping>
+	
+	
+	<!-- HTTP Invoker -->
+	<servlet>
+		<servlet-name>remoteServicesExporter</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>remoteServicesExporter</servlet-name>
+		<url-pattern>/service/*</url-pattern>
+	</servlet-mapping>
+	<!-- END HTTP Invoker -->
+	
+	<!-- Spring security -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/service/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- END spring security -->
 
 	<security-constraint>
 		<display-name>Protection of the raw XHTML pages</display-name>

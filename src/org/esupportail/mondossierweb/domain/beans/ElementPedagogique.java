@@ -2,11 +2,16 @@
  * ESUP-Portail MONDOSSIERWEB - Copyright (c) 2007 ESUP-Portail consortium
  */
 package org.esupportail.mondossierweb.domain.beans;
+
+import java.io.Serializable;
+
 /**
  * représente un élément pédagogique.
  * @author Charlie Dubois
  */
-public class ElementPedagogique {
+public class ElementPedagogique implements Serializable {
+	
+	private static final long serialVersionUID = 5197935378325878240L;
 	/**
 	 * code de l'élément pédagogique.
 	 */
@@ -19,6 +24,10 @@ public class ElementPedagogique {
 	 * libellé de l'élément pédagogique.
 	 */
 	private String libelle;
+	/**
+	 * vrai si l'elp est une epreuve
+	 */
+	private boolean isEpreuve;
 	/**
 	 * note session de juin.
 	 */
@@ -177,6 +186,12 @@ public class ElementPedagogique {
 	}
 	public void setTemFictif(String temFictif) {
 		this.temFictif = temFictif;
+	}
+	public boolean isEpreuve() {
+		return isEpreuve;
+	}
+	public void setEpreuve(boolean isEpreuve) {
+		this.isEpreuve = isEpreuve;
 	}
 	
 	

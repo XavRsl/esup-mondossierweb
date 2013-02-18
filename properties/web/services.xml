@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	
+
+	<!-- HTTP Invoker -->
+	<bean name="remoteServicesExporter" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter" scope="session">
+		<property name="service" ref="webServicesMobile"/>
+		<property name="serviceInterface" value="org.esupportail.mondossierweb.web.services.WebServicesMobile"/>
+	</bean>
+	
+	
+	<!-- /HTTP Invoker  -->
+	
+	<bean id="webServicesMobile"
+		class="org.esupportail.mondossierweb.web.services.WebServicesMobileImpl"
+		scope="session">
+		<description>
+			A bean to store services HttpInvoker.
+		</description>
+		<property name="service" ref="daoService">
+			<description>Le service.</description>
+		</property>
+		<property name="etudiantManager" ref="etudiantManager">
+			<description>Le service d'accès à la base de donnée</description>
+		</property>
+	</bean>
+	
+	
+	<!-- Security -->
+	<security:http>
+		<security:http-basic />
+		<security:intercept-url pattern="/service" access="ROLE_USER" />
+	</security:http>
+	
+	<security:authentication-provider>
+		<security:user-service>
+			<security:user name="mdwwsuser" password="mdwwspwd" authorities="ROLE_USER" />
+		</security:user-service>
+	</security:authentication-provider>
+
+	
+	
+	
+
+</beans>

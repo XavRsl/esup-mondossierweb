@@ -3,6 +3,7 @@
  */
 package org.esupportail.mondossierweb.domain.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import java.util.List;
  * Diplôme.
  * @author Charlie Dubois
  */
-public class Diplome {
+public class Diplome implements Serializable{
+
+	private static final long serialVersionUID = -725836072091894826L;
 	/**
 	 * code de la composante a laquelle appartient le diplôme.
 	 */

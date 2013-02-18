@@ -25,10 +25,12 @@ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
 </select>
     
     <select id="getCleGroupe" resultClass="java.lang.String">
-        select G.COD_GPE
-        from  GROUPE g
-        where g.COD_EXT_GPE = #code#
-        and nls_upper(g.LIB_GPE) = nls_upper(#libelle#)
+        select g.COD_GPE
+        from  GROUPE g, GPE_OBJ gpo, COLLECTION col
+        where g.COD_GPE = gpo.COD_GPE and col.COD_COL = g.COD_COL
+        and g.COD_EXT_GPE = #chaine1#
+        and col.COD_EXT_COL = #chaine2#
+        and gpo.COD_ELP = #chaine3#
     </select> 
     
     <select id="getLibelleGroupe" resultClass="java.lang.String">

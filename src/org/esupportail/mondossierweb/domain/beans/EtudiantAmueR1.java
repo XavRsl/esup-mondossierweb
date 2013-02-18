@@ -747,7 +747,7 @@ public class EtudiantAmueR1 extends EtudiantAmue {
 						if (resdetail.getTypObjMnp().equalsIgnoreCase("EPR")) {
 							eltEnCours.setCode("");
 							//eltEnCours.setAnnee("epreuve");
-							eltEnCours.setAnnee("epreuve");
+							eltEnCours.setEpreuve(true);
 						} else {
 							eltEnCours.setCode(resdetail.getCodObjMnp());
 							eltEnCours.setEcts(resdetail.getNbrCrdObjMnp());
@@ -1140,7 +1140,7 @@ public class EtudiantAmueR1 extends EtudiantAmue {
 							elp2.setCode(epreuve.getEpreuve().getCodEpr());
 							elp2.setLevel(elp.getLevel() + 1);
 							//elp2.setAnnee("epreuve");
-							elp2.setAnnee("epreuve");
+							elp2.setEpreuve(true);
 							elp2.setCodElpSup(elp.getCode());
 							elp2.setNote1("");
 							elp2.setBareme1(0);
@@ -1254,11 +1254,11 @@ public class EtudiantAmueR1 extends EtudiantAmue {
 				while (i < e.getElementsPedagogiques().size()) {
 					suppr = false;
 					ElementPedagogique elp = e.getElementsPedagogiques().get(i);
-					if (elp.getAnnee().equals("epreuve")) {
+					if (elp.isEpreuve()) {
 						ElementPedagogique elp0 = e.getElementsPedagogiques().get(i - 1);
 						if (i < (e.getElementsPedagogiques().size() - 1)) {
 							ElementPedagogique elp1 = e.getElementsPedagogiques().get(i + 1);
-							if (!elp0.getAnnee().equals("epreuve") && !elp1.getAnnee().equals("epreuve")) {
+							if (!elp0.isEpreuve() && !elp1.isEpreuve()) {
 								if (elp0.getNote1().equals(elp.getNote1()) && elp0.getNote2().equals(elp.getNote2())) {
 									//on supprime l'element i
 									e.getElementsPedagogiques().remove(i);
@@ -1266,7 +1266,7 @@ public class EtudiantAmueR1 extends EtudiantAmue {
 								}
 							}
 						} else {
-							if (!elp0.getAnnee().equals("epreuve") && elp0.getNote1().equals(elp.getNote1()) && elp0.getNote2().equals(elp.getNote2())) {
+							if (!elp0.isEpreuve() && elp0.getNote1().equals(elp.getNote1()) && elp0.getNote2().equals(elp.getNote2())) {
 								//on supprime l'element i
 								e.getElementsPedagogiques().remove(i);
 								suppr = true;

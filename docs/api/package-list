@@ -55,6 +55,7 @@ org.esupportail.mondossierweb.web.controllers
 org.esupportail.mondossierweb.web.converters
 org.esupportail.mondossierweb.web.navigation
 org.esupportail.mondossierweb.web.photo
+org.esupportail.mondossierweb.web.services
 org.fckfaces.component.html
 org.fckfaces.renderkit.html
 org.fckfaces.taglib.html

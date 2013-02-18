@@ -600,10 +600,12 @@ public class DaoServiceIBatisImpl extends SqlMapClientDaoSupport implements IDao
 						groupe.setLibGroupe(gd2.getLibGpe());
 						
 						//on récupère le codeGpe a la main car il est pas retourne par le WS.
-						ObjetRecherche or = new ObjetRecherche();
-						or.setCode(groupe.getCodGroupe());
-						or.setLibelle(groupe.getLibGroupe());
-						groupe.setCleGroupe(getCleGroupe(or));
+						ParamRequeteDTO param = new ParamRequeteDTO();
+						param.setChaine1(groupe.getCodGroupe());
+						param.setChaine2(collection.getCodCollection());
+						param.setChaine3(elp.getCodElp());
+						groupe.setCleGroupe(getCleGroupe(param));
+						
 						
 						if(gd2.getCapaciteGpe() != null){
 							if(gd2.getCapaciteGpe().getCapMaxGpe() != null){
@@ -648,7 +650,7 @@ public class DaoServiceIBatisImpl extends SqlMapClientDaoSupport implements IDao
 
 
 
-	public String getCleGroupe(ObjetRecherche r) {
+	public String getCleGroupe(ParamRequeteDTO r) {
 		return (String) getSqlMapClientTemplate().queryForObject("Groupes.getCleGroupe", r);
 		
 	}

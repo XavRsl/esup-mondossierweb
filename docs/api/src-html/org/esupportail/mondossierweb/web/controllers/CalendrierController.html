@@ -275,199 +275,209 @@
 <FONT color="green">272</FONT>    <a name="line.272"></a>
 <FONT color="green">273</FONT>                            if(etudiant.getCalendrier()!=null &amp;&amp; etudiant.getCalendrier().size()&gt;0){<a name="line.273"></a>
 <FONT color="green">274</FONT>    <a name="line.274"></a>
-<FONT color="green">275</FONT>                                    PdfPTable table2 = new PdfPTable(7);<a name="line.275"></a>
-<FONT color="green">276</FONT>    <a name="line.276"></a>
-<FONT color="green">277</FONT>                                    table2.setWidthPercentage(98);<a name="line.277"></a>
-<FONT color="green">278</FONT>                                    int [] tabWidth = {15,10,10,40,30,10,60};<a name="line.278"></a>
-<FONT color="green">279</FONT>                                    table2.setWidths(tabWidth);<a name="line.279"></a>
-<FONT color="green">280</FONT>    <a name="line.280"></a>
-<FONT color="green">281</FONT>                                    Paragraph p1 = new Paragraph(getString("PDF.DATE"),normalbig);<a name="line.281"></a>
-<FONT color="green">282</FONT>                                    Paragraph p2 = new Paragraph(getString("PDF.HEURE"),normalbig);<a name="line.282"></a>
-<FONT color="green">283</FONT>                                    Paragraph p3 = new Paragraph(getString("PDF.DUREE"),normalbig);<a name="line.283"></a>
-<FONT color="green">284</FONT>                                    Paragraph p4 = new Paragraph(getString("PDF.BATIMENT"),normalbig);<a name="line.284"></a>
-<FONT color="green">285</FONT>                                    Paragraph p5 = new Paragraph(getString("PDF.SALLE"),normalbig);<a name="line.285"></a>
-<FONT color="green">286</FONT>                                    Paragraph p6 = new Paragraph(getString("PDF.PLACE"),normalbig);<a name="line.286"></a>
-<FONT color="green">287</FONT>                                    Paragraph p7 = new Paragraph(getString("PDF.EXAMEN"),normalbig);<a name="line.287"></a>
+<FONT color="green">275</FONT>                                    PdfPTable table2;<a name="line.275"></a>
+<FONT color="green">276</FONT>                                    <a name="line.276"></a>
+<FONT color="green">277</FONT>                                    if(config.isAffNumPlaceExamen()) {<a name="line.277"></a>
+<FONT color="green">278</FONT>                                            table2 = new PdfPTable(7);<a name="line.278"></a>
+<FONT color="green">279</FONT>                                            table2.setWidthPercentage(98);<a name="line.279"></a>
+<FONT color="green">280</FONT>                                            int [] tabWidth = {15,10,10,40,30,10,60};<a name="line.280"></a>
+<FONT color="green">281</FONT>                                            table2.setWidths(tabWidth);<a name="line.281"></a>
+<FONT color="green">282</FONT>                                    }else{<a name="line.282"></a>
+<FONT color="green">283</FONT>                                            table2 = new PdfPTable(6);<a name="line.283"></a>
+<FONT color="green">284</FONT>                                            table2.setWidthPercentage(98);<a name="line.284"></a>
+<FONT color="green">285</FONT>                                            int [] tabWidth = {15,10,10,45,30,65};<a name="line.285"></a>
+<FONT color="green">286</FONT>                                            table2.setWidths(tabWidth);<a name="line.286"></a>
+<FONT color="green">287</FONT>                                    }<a name="line.287"></a>
 <FONT color="green">288</FONT>    <a name="line.288"></a>
-<FONT color="green">289</FONT>                                    PdfPCell ct1 = new PdfPCell(p1);<a name="line.289"></a>
-<FONT color="green">290</FONT>                                    PdfPCell ct2 = new PdfPCell(p2);<a name="line.290"></a>
-<FONT color="green">291</FONT>                                    PdfPCell ct3 = new PdfPCell(p3);<a name="line.291"></a>
-<FONT color="green">292</FONT>                                    PdfPCell ct4 = new PdfPCell(p4);<a name="line.292"></a>
-<FONT color="green">293</FONT>                                    PdfPCell ct5 = new PdfPCell(p5);<a name="line.293"></a>
-<FONT color="green">294</FONT>                                    PdfPCell ct6 = new PdfPCell(p6);<a name="line.294"></a>
-<FONT color="green">295</FONT>                                    PdfPCell ct7 = new PdfPCell(p7);<a name="line.295"></a>
+<FONT color="green">289</FONT>                                    Paragraph p1 = new Paragraph(getString("PDF.DATE"),normalbig);<a name="line.289"></a>
+<FONT color="green">290</FONT>                                    Paragraph p2 = new Paragraph(getString("PDF.HEURE"),normalbig);<a name="line.290"></a>
+<FONT color="green">291</FONT>                                    Paragraph p3 = new Paragraph(getString("PDF.DUREE"),normalbig);<a name="line.291"></a>
+<FONT color="green">292</FONT>                                    Paragraph p4 = new Paragraph(getString("PDF.BATIMENT"),normalbig);<a name="line.292"></a>
+<FONT color="green">293</FONT>                                    Paragraph p5 = new Paragraph(getString("PDF.SALLE"),normalbig);<a name="line.293"></a>
+<FONT color="green">294</FONT>                                    Paragraph p6 = new Paragraph(getString("PDF.PLACE"),normalbig);<a name="line.294"></a>
+<FONT color="green">295</FONT>                                    Paragraph p7 = new Paragraph(getString("PDF.EXAMEN"),normalbig);<a name="line.295"></a>
 <FONT color="green">296</FONT>    <a name="line.296"></a>
-<FONT color="green">297</FONT>                                    ct1.setBorder(Rectangle.BOTTOM); ct1.setBorderColorBottom(Color.black);<a name="line.297"></a>
-<FONT color="green">298</FONT>                                    ct2.setBorder(Rectangle.BOTTOM); ct2.setBorderColorBottom(Color.black);<a name="line.298"></a>
-<FONT color="green">299</FONT>                                    ct3.setBorder(Rectangle.BOTTOM); ct2.setBorderColorBottom(Color.black);<a name="line.299"></a>
-<FONT color="green">300</FONT>                                    ct4.setBorder(Rectangle.BOTTOM); ct1.setBorderColorBottom(Color.black);<a name="line.300"></a>
-<FONT color="green">301</FONT>                                    ct5.setBorder(Rectangle.BOTTOM); ct2.setBorderColorBottom(Color.black);<a name="line.301"></a>
-<FONT color="green">302</FONT>                                    ct6.setBorder(Rectangle.BOTTOM); ct2.setBorderColorBottom(Color.black);<a name="line.302"></a>
-<FONT color="green">303</FONT>                                    ct7.setBorder(Rectangle.BOTTOM); ct2.setBorderColorBottom(Color.black);<a name="line.303"></a>
+<FONT color="green">297</FONT>                                    PdfPCell ct1 = new PdfPCell(p1);<a name="line.297"></a>
+<FONT color="green">298</FONT>                                    PdfPCell ct2 = new PdfPCell(p2);<a name="line.298"></a>
+<FONT color="green">299</FONT>                                    PdfPCell ct3 = new PdfPCell(p3);<a name="line.299"></a>
+<FONT color="green">300</FONT>                                    PdfPCell ct4 = new PdfPCell(p4);<a name="line.300"></a>
+<FONT color="green">301</FONT>                                    PdfPCell ct5 = new PdfPCell(p5);<a name="line.301"></a>
+<FONT color="green">302</FONT>                                    PdfPCell ct6 =  new PdfPCell(p6);<a name="line.302"></a>
+<FONT color="green">303</FONT>                                    PdfPCell ct7 = new PdfPCell(p7);<a name="line.303"></a>
 <FONT color="green">304</FONT>    <a name="line.304"></a>
-<FONT color="green">305</FONT>                                    table2.addCell(ct1);<a name="line.305"></a>
-<FONT color="green">306</FONT>                                    table2.addCell(ct2);<a name="line.306"></a>
-<FONT color="green">307</FONT>                                    table2.addCell(ct3);<a name="line.307"></a>
-<FONT color="green">308</FONT>                                    table2.addCell(ct4);<a name="line.308"></a>
-<FONT color="green">309</FONT>                                    table2.addCell(ct5);<a name="line.309"></a>
-<FONT color="green">310</FONT>                                    table2.addCell(ct6);<a name="line.310"></a>
-<FONT color="green">311</FONT>                                    table2.addCell(ct7);<a name="line.311"></a>
+<FONT color="green">305</FONT>                                    ct1.setBorder(Rectangle.BOTTOM); ct1.setBorderColorBottom(Color.black);<a name="line.305"></a>
+<FONT color="green">306</FONT>                                    ct2.setBorder(Rectangle.BOTTOM); ct2.setBorderColorBottom(Color.black);<a name="line.306"></a>
+<FONT color="green">307</FONT>                                    ct3.setBorder(Rectangle.BOTTOM); ct2.setBorderColorBottom(Color.black);<a name="line.307"></a>
+<FONT color="green">308</FONT>                                    ct4.setBorder(Rectangle.BOTTOM); ct1.setBorderColorBottom(Color.black);<a name="line.308"></a>
+<FONT color="green">309</FONT>                                    ct5.setBorder(Rectangle.BOTTOM); ct2.setBorderColorBottom(Color.black);<a name="line.309"></a>
+<FONT color="green">310</FONT>                                    ct6.setBorder(Rectangle.BOTTOM); ct2.setBorderColorBottom(Color.black);<a name="line.310"></a>
+<FONT color="green">311</FONT>                                    ct7.setBorder(Rectangle.BOTTOM); ct2.setBorderColorBottom(Color.black);<a name="line.311"></a>
 <FONT color="green">312</FONT>    <a name="line.312"></a>
-<FONT color="green">313</FONT>    <a name="line.313"></a>
-<FONT color="green">314</FONT>    <a name="line.314"></a>
-<FONT color="green">315</FONT>    <a name="line.315"></a>
-<FONT color="green">316</FONT>                                    for (int i = 0; i &lt; etudiant.getCalendrier().size(); i++) {<a name="line.316"></a>
-<FONT color="green">317</FONT>                                            Paragraph pa = new Paragraph(etudiant.getCalendrier().get(i).getDate(), normal);<a name="line.317"></a>
-<FONT color="green">318</FONT>                                            PdfPCell celltext = new PdfPCell(pa);<a name="line.318"></a>
-<FONT color="green">319</FONT>                                            celltext.setBorder(Rectangle.NO_BORDER);<a name="line.319"></a>
-<FONT color="green">320</FONT>    <a name="line.320"></a>
-<FONT color="green">321</FONT>                                            Paragraph pa2 = new Paragraph(etudiant.getCalendrier().get(i).getHeure(), normal);<a name="line.321"></a>
-<FONT color="green">322</FONT>                                            PdfPCell celltext2 = new PdfPCell(pa2);<a name="line.322"></a>
-<FONT color="green">323</FONT>                                            celltext2.setBorder(Rectangle.NO_BORDER);<a name="line.323"></a>
+<FONT color="green">313</FONT>                                    table2.addCell(ct1);<a name="line.313"></a>
+<FONT color="green">314</FONT>                                    table2.addCell(ct2);<a name="line.314"></a>
+<FONT color="green">315</FONT>                                    table2.addCell(ct3);<a name="line.315"></a>
+<FONT color="green">316</FONT>                                    table2.addCell(ct4);<a name="line.316"></a>
+<FONT color="green">317</FONT>                                    table2.addCell(ct5);<a name="line.317"></a>
+<FONT color="green">318</FONT>                                    if(config.isAffNumPlaceExamen())<a name="line.318"></a>
+<FONT color="green">319</FONT>                                            table2.addCell(ct6);<a name="line.319"></a>
+<FONT color="green">320</FONT>                                    table2.addCell(ct7);<a name="line.320"></a>
+<FONT color="green">321</FONT>    <a name="line.321"></a>
+<FONT color="green">322</FONT>    <a name="line.322"></a>
+<FONT color="green">323</FONT>    <a name="line.323"></a>
 <FONT color="green">324</FONT>    <a name="line.324"></a>
-<FONT color="green">325</FONT>                                            Paragraph pa3 = new Paragraph(etudiant.getCalendrier().get(i).getDuree(), normal);<a name="line.325"></a>
-<FONT color="green">326</FONT>                                            PdfPCell celltext3 = new PdfPCell(pa3);<a name="line.326"></a>
-<FONT color="green">327</FONT>                                            celltext3.setBorder(Rectangle.NO_BORDER);<a name="line.327"></a>
-<FONT color="green">328</FONT>    <a name="line.328"></a>
-<FONT color="green">329</FONT>                                            Paragraph pa4 = new Paragraph(etudiant.getCalendrier().get(i).getBatiment(), normal);<a name="line.329"></a>
-<FONT color="green">330</FONT>                                            PdfPCell celltext4 = new PdfPCell(pa4);<a name="line.330"></a>
-<FONT color="green">331</FONT>                                            celltext4.setBorder(Rectangle.NO_BORDER);<a name="line.331"></a>
-<FONT color="green">332</FONT>    <a name="line.332"></a>
-<FONT color="green">333</FONT>                                            Paragraph pa5 = new Paragraph(etudiant.getCalendrier().get(i).getSalle(), normal);<a name="line.333"></a>
-<FONT color="green">334</FONT>                                            PdfPCell celltext5 = new PdfPCell(pa5);<a name="line.334"></a>
-<FONT color="green">335</FONT>                                            celltext5.setBorder(Rectangle.NO_BORDER);<a name="line.335"></a>
-<FONT color="green">336</FONT>    <a name="line.336"></a>
-<FONT color="green">337</FONT>                                            Paragraph pa6 = new Paragraph(etudiant.getCalendrier().get(i).getPlace(), normal);<a name="line.337"></a>
-<FONT color="green">338</FONT>                                            PdfPCell celltext6 = new PdfPCell(pa6);<a name="line.338"></a>
-<FONT color="green">339</FONT>                                            celltext6.setBorder(Rectangle.NO_BORDER);<a name="line.339"></a>
-<FONT color="green">340</FONT>    <a name="line.340"></a>
-<FONT color="green">341</FONT>                                            Paragraph pa7 = new Paragraph(etudiant.getCalendrier().get(i).getEpreuve(), normal);<a name="line.341"></a>
-<FONT color="green">342</FONT>                                            PdfPCell celltext7 = new PdfPCell(pa7);<a name="line.342"></a>
-<FONT color="green">343</FONT>                                            celltext7.setBorder(Rectangle.NO_BORDER);<a name="line.343"></a>
-<FONT color="green">344</FONT>    <a name="line.344"></a>
-<FONT color="green">345</FONT>                                            table2.addCell(celltext);<a name="line.345"></a>
-<FONT color="green">346</FONT>                                            table2.addCell(celltext2);<a name="line.346"></a>
-<FONT color="green">347</FONT>                                            table2.addCell(celltext3);<a name="line.347"></a>
-<FONT color="green">348</FONT>                                            table2.addCell(celltext4);<a name="line.348"></a>
-<FONT color="green">349</FONT>                                            table2.addCell(celltext5);<a name="line.349"></a>
-<FONT color="green">350</FONT>                                            table2.addCell(celltext6);<a name="line.350"></a>
-<FONT color="green">351</FONT>                                            table2.addCell(celltext7);<a name="line.351"></a>
-<FONT color="green">352</FONT>    <a name="line.352"></a>
-<FONT color="green">353</FONT>                                            /*PdfPCell celltext4 = new PdfPCell(table3);<a name="line.353"></a>
-<FONT color="green">354</FONT>                                    celltext4.setBorder(Rectangle.NO_BORDER);<a name="line.354"></a>
-<FONT color="green">355</FONT>                                    table2.addCell(celltext4);*/<a name="line.355"></a>
-<FONT color="green">356</FONT>    <a name="line.356"></a>
-<FONT color="green">357</FONT>                                    }<a name="line.357"></a>
-<FONT color="green">358</FONT>                                    document.add(table);<a name="line.358"></a>
-<FONT color="green">359</FONT>                                    document.add(table2);<a name="line.359"></a>
-<FONT color="green">360</FONT>                                    document.add(new Paragraph("\n"));<a name="line.360"></a>
-<FONT color="green">361</FONT>                            }else{<a name="line.361"></a>
+<FONT color="green">325</FONT>                                    for (int i = 0; i &lt; etudiant.getCalendrier().size(); i++) {<a name="line.325"></a>
+<FONT color="green">326</FONT>                                            Paragraph pa = new Paragraph(etudiant.getCalendrier().get(i).getDate(), normal);<a name="line.326"></a>
+<FONT color="green">327</FONT>                                            PdfPCell celltext = new PdfPCell(pa);<a name="line.327"></a>
+<FONT color="green">328</FONT>                                            celltext.setBorder(Rectangle.NO_BORDER);<a name="line.328"></a>
+<FONT color="green">329</FONT>    <a name="line.329"></a>
+<FONT color="green">330</FONT>                                            Paragraph pa2 = new Paragraph(etudiant.getCalendrier().get(i).getHeure(), normal);<a name="line.330"></a>
+<FONT color="green">331</FONT>                                            PdfPCell celltext2 = new PdfPCell(pa2);<a name="line.331"></a>
+<FONT color="green">332</FONT>                                            celltext2.setBorder(Rectangle.NO_BORDER);<a name="line.332"></a>
+<FONT color="green">333</FONT>    <a name="line.333"></a>
+<FONT color="green">334</FONT>                                            Paragraph pa3 = new Paragraph(etudiant.getCalendrier().get(i).getDuree(), normal);<a name="line.334"></a>
+<FONT color="green">335</FONT>                                            PdfPCell celltext3 = new PdfPCell(pa3);<a name="line.335"></a>
+<FONT color="green">336</FONT>                                            celltext3.setBorder(Rectangle.NO_BORDER);<a name="line.336"></a>
+<FONT color="green">337</FONT>    <a name="line.337"></a>
+<FONT color="green">338</FONT>                                            Paragraph pa4 = new Paragraph(etudiant.getCalendrier().get(i).getBatiment(), normal);<a name="line.338"></a>
+<FONT color="green">339</FONT>                                            PdfPCell celltext4 = new PdfPCell(pa4);<a name="line.339"></a>
+<FONT color="green">340</FONT>                                            celltext4.setBorder(Rectangle.NO_BORDER);<a name="line.340"></a>
+<FONT color="green">341</FONT>    <a name="line.341"></a>
+<FONT color="green">342</FONT>                                            Paragraph pa5 = new Paragraph(etudiant.getCalendrier().get(i).getSalle(), normal);<a name="line.342"></a>
+<FONT color="green">343</FONT>                                            PdfPCell celltext5 = new PdfPCell(pa5);<a name="line.343"></a>
+<FONT color="green">344</FONT>                                            celltext5.setBorder(Rectangle.NO_BORDER);<a name="line.344"></a>
+<FONT color="green">345</FONT>    <a name="line.345"></a>
+<FONT color="green">346</FONT>                                            Paragraph pa6 = new Paragraph(etudiant.getCalendrier().get(i).getPlace(), normal);<a name="line.346"></a>
+<FONT color="green">347</FONT>                                            PdfPCell celltext6 = new PdfPCell(pa6);<a name="line.347"></a>
+<FONT color="green">348</FONT>                                            celltext6.setBorder(Rectangle.NO_BORDER);<a name="line.348"></a>
+<FONT color="green">349</FONT>    <a name="line.349"></a>
+<FONT color="green">350</FONT>                                            Paragraph pa7 = new Paragraph(etudiant.getCalendrier().get(i).getEpreuve(), normal);<a name="line.350"></a>
+<FONT color="green">351</FONT>                                            PdfPCell celltext7 = new PdfPCell(pa7);<a name="line.351"></a>
+<FONT color="green">352</FONT>                                            celltext7.setBorder(Rectangle.NO_BORDER);<a name="line.352"></a>
+<FONT color="green">353</FONT>    <a name="line.353"></a>
+<FONT color="green">354</FONT>                                            table2.addCell(celltext);<a name="line.354"></a>
+<FONT color="green">355</FONT>                                            table2.addCell(celltext2);<a name="line.355"></a>
+<FONT color="green">356</FONT>                                            table2.addCell(celltext3);<a name="line.356"></a>
+<FONT color="green">357</FONT>                                            table2.addCell(celltext4);<a name="line.357"></a>
+<FONT color="green">358</FONT>                                            table2.addCell(celltext5);<a name="line.358"></a>
+<FONT color="green">359</FONT>                                            if(config.isAffNumPlaceExamen())<a name="line.359"></a>
+<FONT color="green">360</FONT>                                                    table2.addCell(celltext6);<a name="line.360"></a>
+<FONT color="green">361</FONT>                                            table2.addCell(celltext7);<a name="line.361"></a>
 <FONT color="green">362</FONT>    <a name="line.362"></a>
-<FONT color="green">363</FONT>    <a name="line.363"></a>
-<FONT color="green">364</FONT>                                    document.add(table);<a name="line.364"></a>
-<FONT color="green">365</FONT>                                    Paragraph pinfo = new Paragraph("      "+getString("PDF.SUBTITLE.NOCALENDRIER"), normalbig);<a name="line.365"></a>
-<FONT color="green">366</FONT>                                    pinfo.indentationLeft();<a name="line.366"></a>
-<FONT color="green">367</FONT>                                    document.add(pinfo);<a name="line.367"></a>
-<FONT color="green">368</FONT>                                    document.add(new Paragraph("\n"));<a name="line.368"></a>
-<FONT color="green">369</FONT>                            }<a name="line.369"></a>
-<FONT color="green">370</FONT>    <a name="line.370"></a>
-<FONT color="green">371</FONT>    <a name="line.371"></a>
+<FONT color="green">363</FONT>                                            /*PdfPCell celltext4 = new PdfPCell(table3);<a name="line.363"></a>
+<FONT color="green">364</FONT>                                    celltext4.setBorder(Rectangle.NO_BORDER);<a name="line.364"></a>
+<FONT color="green">365</FONT>                                    table2.addCell(celltext4);*/<a name="line.365"></a>
+<FONT color="green">366</FONT>    <a name="line.366"></a>
+<FONT color="green">367</FONT>                                    }<a name="line.367"></a>
+<FONT color="green">368</FONT>                                    document.add(table);<a name="line.368"></a>
+<FONT color="green">369</FONT>                                    document.add(table2);<a name="line.369"></a>
+<FONT color="green">370</FONT>                                    document.add(new Paragraph("\n"));<a name="line.370"></a>
+<FONT color="green">371</FONT>                            }else{<a name="line.371"></a>
 <FONT color="green">372</FONT>    <a name="line.372"></a>
 <FONT color="green">373</FONT>    <a name="line.373"></a>
-<FONT color="green">374</FONT>    <a name="line.374"></a>
-<FONT color="green">375</FONT>    <a name="line.375"></a>
-<FONT color="green">376</FONT>                    } catch (BadElementException e) {<a name="line.376"></a>
-<FONT color="green">377</FONT>                            LOG.error(e);<a name="line.377"></a>
-<FONT color="green">378</FONT>                    } catch (MalformedURLException e) {<a name="line.378"></a>
-<FONT color="green">379</FONT>                            LOG.error(e);<a name="line.379"></a>
-<FONT color="green">380</FONT>                    } catch (IOException e) {<a name="line.380"></a>
-<FONT color="green">381</FONT>                            LOG.error(e);<a name="line.381"></a>
-<FONT color="green">382</FONT>                    } catch (DocumentException e) {<a name="line.382"></a>
-<FONT color="green">383</FONT>                            LOG.error(e);<a name="line.383"></a>
-<FONT color="green">384</FONT>                    }<a name="line.384"></a>
-<FONT color="green">385</FONT>                    // step 6: fermeture du document.<a name="line.385"></a>
-<FONT color="green">386</FONT>                    document.close();<a name="line.386"></a>
-<FONT color="green">387</FONT>    <a name="line.387"></a>
-<FONT color="green">388</FONT>    <a name="line.388"></a>
-<FONT color="green">389</FONT>            }<a name="line.389"></a>
-<FONT color="green">390</FONT>    <a name="line.390"></a>
-<FONT color="green">391</FONT>    <a name="line.391"></a>
-<FONT color="green">392</FONT>    <a name="line.392"></a>
-<FONT color="green">393</FONT>    <a name="line.393"></a>
-<FONT color="green">394</FONT>    <a name="line.394"></a>
-<FONT color="green">395</FONT>    <a name="line.395"></a>
-<FONT color="green">396</FONT>    <a name="line.396"></a>
+<FONT color="green">374</FONT>                                    document.add(table);<a name="line.374"></a>
+<FONT color="green">375</FONT>                                    Paragraph pinfo = new Paragraph("      "+getString("PDF.SUBTITLE.NOCALENDRIER"), normalbig);<a name="line.375"></a>
+<FONT color="green">376</FONT>                                    pinfo.indentationLeft();<a name="line.376"></a>
+<FONT color="green">377</FONT>                                    document.add(pinfo);<a name="line.377"></a>
+<FONT color="green">378</FONT>                                    document.add(new Paragraph("\n"));<a name="line.378"></a>
+<FONT color="green">379</FONT>                            }<a name="line.379"></a>
+<FONT color="green">380</FONT>    <a name="line.380"></a>
+<FONT color="green">381</FONT>    <a name="line.381"></a>
+<FONT color="green">382</FONT>    <a name="line.382"></a>
+<FONT color="green">383</FONT>    <a name="line.383"></a>
+<FONT color="green">384</FONT>    <a name="line.384"></a>
+<FONT color="green">385</FONT>    <a name="line.385"></a>
+<FONT color="green">386</FONT>                    } catch (BadElementException e) {<a name="line.386"></a>
+<FONT color="green">387</FONT>                            LOG.error(e);<a name="line.387"></a>
+<FONT color="green">388</FONT>                    } catch (MalformedURLException e) {<a name="line.388"></a>
+<FONT color="green">389</FONT>                            LOG.error(e);<a name="line.389"></a>
+<FONT color="green">390</FONT>                    } catch (IOException e) {<a name="line.390"></a>
+<FONT color="green">391</FONT>                            LOG.error(e);<a name="line.391"></a>
+<FONT color="green">392</FONT>                    } catch (DocumentException e) {<a name="line.392"></a>
+<FONT color="green">393</FONT>                            LOG.error(e);<a name="line.393"></a>
+<FONT color="green">394</FONT>                    }<a name="line.394"></a>
+<FONT color="green">395</FONT>                    // step 6: fermeture du document.<a name="line.395"></a>
+<FONT color="green">396</FONT>                    document.close();<a name="line.396"></a>
 <FONT color="green">397</FONT>    <a name="line.397"></a>
-<FONT color="green">398</FONT>            /**<a name="line.398"></a>
-<FONT color="green">399</FONT>             * configure le document pdf.<a name="line.399"></a>
-<FONT color="green">400</FONT>             * @param width<a name="line.400"></a>
-<FONT color="green">401</FONT>             * @param height<a name="line.401"></a>
-<FONT color="green">402</FONT>             * @param margin<a name="line.402"></a>
-<FONT color="green">403</FONT>             * @return doc<a name="line.403"></a>
-<FONT color="green">404</FONT>             */<a name="line.404"></a>
-<FONT color="green">405</FONT>            private Document configureDocument(final float margin) {<a name="line.405"></a>
+<FONT color="green">398</FONT>    <a name="line.398"></a>
+<FONT color="green">399</FONT>            }<a name="line.399"></a>
+<FONT color="green">400</FONT>    <a name="line.400"></a>
+<FONT color="green">401</FONT>    <a name="line.401"></a>
+<FONT color="green">402</FONT>    <a name="line.402"></a>
+<FONT color="green">403</FONT>    <a name="line.403"></a>
+<FONT color="green">404</FONT>    <a name="line.404"></a>
+<FONT color="green">405</FONT>    <a name="line.405"></a>
 <FONT color="green">406</FONT>    <a name="line.406"></a>
-<FONT color="green">407</FONT>                    Document document = new Document();<a name="line.407"></a>
-<FONT color="green">408</FONT>    <a name="line.408"></a>
-<FONT color="green">409</FONT>                    document.setPageSize(PageSize.A4.rotate());<a name="line.409"></a>
-<FONT color="green">410</FONT>                    float marginPage = (margin / 2.54f) * 72f;<a name="line.410"></a>
-<FONT color="green">411</FONT>                    document.setMargins(marginPage, marginPage, marginPage, marginPage);<a name="line.411"></a>
-<FONT color="green">412</FONT>    <a name="line.412"></a>
-<FONT color="green">413</FONT>                    return document;<a name="line.413"></a>
-<FONT color="green">414</FONT>            }<a name="line.414"></a>
-<FONT color="green">415</FONT>    <a name="line.415"></a>
-<FONT color="green">416</FONT>            /**<a name="line.416"></a>
-<FONT color="green">417</FONT>             * @return etatcivilcontroller.<a name="line.417"></a>
-<FONT color="green">418</FONT>             */<a name="line.418"></a>
-<FONT color="green">419</FONT>            public EtatCivilController getEtatcivilcontroller() {<a name="line.419"></a>
-<FONT color="green">420</FONT>                    return etatcivilcontroller;<a name="line.420"></a>
-<FONT color="green">421</FONT>            }<a name="line.421"></a>
+<FONT color="green">407</FONT>    <a name="line.407"></a>
+<FONT color="green">408</FONT>            /**<a name="line.408"></a>
+<FONT color="green">409</FONT>             * configure le document pdf.<a name="line.409"></a>
+<FONT color="green">410</FONT>             * @param width<a name="line.410"></a>
+<FONT color="green">411</FONT>             * @param height<a name="line.411"></a>
+<FONT color="green">412</FONT>             * @param margin<a name="line.412"></a>
+<FONT color="green">413</FONT>             * @return doc<a name="line.413"></a>
+<FONT color="green">414</FONT>             */<a name="line.414"></a>
+<FONT color="green">415</FONT>            private Document configureDocument(final float margin) {<a name="line.415"></a>
+<FONT color="green">416</FONT>    <a name="line.416"></a>
+<FONT color="green">417</FONT>                    Document document = new Document();<a name="line.417"></a>
+<FONT color="green">418</FONT>    <a name="line.418"></a>
+<FONT color="green">419</FONT>                    document.setPageSize(PageSize.A4.rotate());<a name="line.419"></a>
+<FONT color="green">420</FONT>                    float marginPage = (margin / 2.54f) * 72f;<a name="line.420"></a>
+<FONT color="green">421</FONT>                    document.setMargins(marginPage, marginPage, marginPage, marginPage);<a name="line.421"></a>
 <FONT color="green">422</FONT>    <a name="line.422"></a>
-<FONT color="green">423</FONT>            /**<a name="line.423"></a>
-<FONT color="green">424</FONT>             * @param etatcivilcontroller<a name="line.424"></a>
-<FONT color="green">425</FONT>             */<a name="line.425"></a>
-<FONT color="green">426</FONT>            public void setEtatcivilcontroller(final EtatCivilController etatcivilcontroller) {<a name="line.426"></a>
-<FONT color="green">427</FONT>                    this.etatcivilcontroller = etatcivilcontroller;<a name="line.427"></a>
-<FONT color="green">428</FONT>            }<a name="line.428"></a>
-<FONT color="green">429</FONT>    <a name="line.429"></a>
-<FONT color="green">430</FONT>            /**<a name="line.430"></a>
-<FONT color="green">431</FONT>             * <a name="line.431"></a>
-<FONT color="green">432</FONT>             * @return etudiant<a name="line.432"></a>
-<FONT color="green">433</FONT>             */<a name="line.433"></a>
-<FONT color="green">434</FONT>            public Etudiant getEtudiant() {<a name="line.434"></a>
-<FONT color="green">435</FONT>                    return etudiant;<a name="line.435"></a>
-<FONT color="green">436</FONT>            }<a name="line.436"></a>
-<FONT color="green">437</FONT>    <a name="line.437"></a>
-<FONT color="green">438</FONT>            /**<a name="line.438"></a>
-<FONT color="green">439</FONT>             * <a name="line.439"></a>
-<FONT color="green">440</FONT>             * @param etudiant<a name="line.440"></a>
-<FONT color="green">441</FONT>             */<a name="line.441"></a>
-<FONT color="green">442</FONT>            public void setEtudiant(Etudiant etudiant) {<a name="line.442"></a>
-<FONT color="green">443</FONT>                    this.etudiant = etudiant;<a name="line.443"></a>
-<FONT color="green">444</FONT>            }<a name="line.444"></a>
-<FONT color="green">445</FONT>    <a name="line.445"></a>
-<FONT color="green">446</FONT>            /**<a name="line.446"></a>
-<FONT color="green">447</FONT>             * <a name="line.447"></a>
-<FONT color="green">448</FONT>             * @return config<a name="line.448"></a>
-<FONT color="green">449</FONT>             */<a name="line.449"></a>
-<FONT color="green">450</FONT>            public Config getConfig() {<a name="line.450"></a>
-<FONT color="green">451</FONT>                    return config;<a name="line.451"></a>
-<FONT color="green">452</FONT>            }<a name="line.452"></a>
-<FONT color="green">453</FONT>    <a name="line.453"></a>
-<FONT color="green">454</FONT>            /**<a name="line.454"></a>
-<FONT color="green">455</FONT>             * <a name="line.455"></a>
-<FONT color="green">456</FONT>             * @param config<a name="line.456"></a>
-<FONT color="green">457</FONT>             */<a name="line.457"></a>
-<FONT color="green">458</FONT>            public void setConfig(Config config) {<a name="line.458"></a>
-<FONT color="green">459</FONT>                    this.config = config;<a name="line.459"></a>
-<FONT color="green">460</FONT>            }<a name="line.460"></a>
-<FONT color="green">461</FONT>    <a name="line.461"></a>
-<FONT color="green">462</FONT>    <a name="line.462"></a>
+<FONT color="green">423</FONT>                    return document;<a name="line.423"></a>
+<FONT color="green">424</FONT>            }<a name="line.424"></a>
+<FONT color="green">425</FONT>    <a name="line.425"></a>
+<FONT color="green">426</FONT>            /**<a name="line.426"></a>
+<FONT color="green">427</FONT>             * @return etatcivilcontroller.<a name="line.427"></a>
+<FONT color="green">428</FONT>             */<a name="line.428"></a>
+<FONT color="green">429</FONT>            public EtatCivilController getEtatcivilcontroller() {<a name="line.429"></a>
+<FONT color="green">430</FONT>                    return etatcivilcontroller;<a name="line.430"></a>
+<FONT color="green">431</FONT>            }<a name="line.431"></a>
+<FONT color="green">432</FONT>    <a name="line.432"></a>
+<FONT color="green">433</FONT>            /**<a name="line.433"></a>
+<FONT color="green">434</FONT>             * @param etatcivilcontroller<a name="line.434"></a>
+<FONT color="green">435</FONT>             */<a name="line.435"></a>
+<FONT color="green">436</FONT>            public void setEtatcivilcontroller(final EtatCivilController etatcivilcontroller) {<a name="line.436"></a>
+<FONT color="green">437</FONT>                    this.etatcivilcontroller = etatcivilcontroller;<a name="line.437"></a>
+<FONT color="green">438</FONT>            }<a name="line.438"></a>
+<FONT color="green">439</FONT>    <a name="line.439"></a>
+<FONT color="green">440</FONT>            /**<a name="line.440"></a>
+<FONT color="green">441</FONT>             * <a name="line.441"></a>
+<FONT color="green">442</FONT>             * @return etudiant<a name="line.442"></a>
+<FONT color="green">443</FONT>             */<a name="line.443"></a>
+<FONT color="green">444</FONT>            public Etudiant getEtudiant() {<a name="line.444"></a>
+<FONT color="green">445</FONT>                    return etudiant;<a name="line.445"></a>
+<FONT color="green">446</FONT>            }<a name="line.446"></a>
+<FONT color="green">447</FONT>    <a name="line.447"></a>
+<FONT color="green">448</FONT>            /**<a name="line.448"></a>
+<FONT color="green">449</FONT>             * <a name="line.449"></a>
+<FONT color="green">450</FONT>             * @param etudiant<a name="line.450"></a>
+<FONT color="green">451</FONT>             */<a name="line.451"></a>
+<FONT color="green">452</FONT>            public void setEtudiant(Etudiant etudiant) {<a name="line.452"></a>
+<FONT color="green">453</FONT>                    this.etudiant = etudiant;<a name="line.453"></a>
+<FONT color="green">454</FONT>            }<a name="line.454"></a>
+<FONT color="green">455</FONT>    <a name="line.455"></a>
+<FONT color="green">456</FONT>            /**<a name="line.456"></a>
+<FONT color="green">457</FONT>             * <a name="line.457"></a>
+<FONT color="green">458</FONT>             * @return config<a name="line.458"></a>
+<FONT color="green">459</FONT>             */<a name="line.459"></a>
+<FONT color="green">460</FONT>            public Config getConfig() {<a name="line.460"></a>
+<FONT color="green">461</FONT>                    return config;<a name="line.461"></a>
+<FONT color="green">462</FONT>            }<a name="line.462"></a>
 <FONT color="green">463</FONT>    <a name="line.463"></a>
-<FONT color="green">464</FONT>    <a name="line.464"></a>
-<FONT color="green">465</FONT>    <a name="line.465"></a>
-<FONT color="green">466</FONT>    <a name="line.466"></a>
-<FONT color="green">467</FONT>    }<a name="line.467"></a>
+<FONT color="green">464</FONT>            /**<a name="line.464"></a>
+<FONT color="green">465</FONT>             * <a name="line.465"></a>
+<FONT color="green">466</FONT>             * @param config<a name="line.466"></a>
+<FONT color="green">467</FONT>             */<a name="line.467"></a>
+<FONT color="green">468</FONT>            public void setConfig(Config config) {<a name="line.468"></a>
+<FONT color="green">469</FONT>                    this.config = config;<a name="line.469"></a>
+<FONT color="green">470</FONT>            }<a name="line.470"></a>
+<FONT color="green">471</FONT>    <a name="line.471"></a>
+<FONT color="green">472</FONT>    <a name="line.472"></a>
+<FONT color="green">473</FONT>    <a name="line.473"></a>
+<FONT color="green">474</FONT>    <a name="line.474"></a>
+<FONT color="green">475</FONT>    <a name="line.475"></a>
+<FONT color="green">476</FONT>    <a name="line.476"></a>
+<FONT color="green">477</FONT>    }<a name="line.477"></a>
 
 
 

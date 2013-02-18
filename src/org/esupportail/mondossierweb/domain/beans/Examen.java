@@ -3,12 +3,16 @@
  */
 package org.esupportail.mondossierweb.domain.beans;
 
+import java.io.Serializable;
+
 /**
  * classe qui représente un examen du calendrier.
  * @author Charlie Dubois
  */
-public class Examen {
+public class Examen implements Serializable {
 
+
+	private static final long serialVersionUID = -8989355093199939179L;
 	/**
 	 * date de l'événement.
 	 */

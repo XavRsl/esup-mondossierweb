@@ -346,7 +346,7 @@ public class NotesController extends AbstractContextAwareController {
 			}
 		}
 
-		//cr�ation du pied de page:
+		//creation du pied de page:
 		Phrase phra = new Phrase(partie1 + " -" + getString("PDF.PAGE"), legerita);
 		Phrase phra2 = new Phrase("- "+partie2, legerita);
 		HeaderFooter hf = new HeaderFooter(phra, phra2);
@@ -483,7 +483,8 @@ public class NotesController extends AbstractContextAwareController {
 
 			for (int i = 0; i < etudiant.getElementsPedagogiques().size(); i++) {
 				String annee = etudiant.getElementsPedagogiques().get(i).getAnnee().replaceAll(getString("PDF.REPLACE.FICM"), "");
-				annee = annee.replaceAll(getString("PDF.REPLACE.EPREUVE"), "");
+				//Inutile a partir de la modification du 20/02/2012 pour les WS httpInvoker
+				//annee = annee.replaceAll(getString("PDF.REPLACE.EPREUVE"), "");
 				Paragraph pa = new Paragraph(annee, normal);
 				PdfPCell celltext = new PdfPCell(pa);
 				celltext.setBorder(Rectangle.NO_BORDER);

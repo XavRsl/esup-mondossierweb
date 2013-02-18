@@ -6,7 +6,6 @@ package org.esupportail.mondossierweb.dao;
 
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.mondossierweb.web.navigation.View;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 
@@ -47,9 +46,9 @@ public class DaoLoginCodeEtudiantImplBasic extends SqlMapClientDaoSupport implem
 			LOG.error(e);
 		}
 		
-		LOG.error("Erreur lors de la récupération du login a partir du codetu.");
+		LOG.error("Erreur lors de la récupération du login a partir du codetu "+codetu);
 		
-		return View.ERROR;
+		return null;
 
 	}
 

@@ -3,14 +3,18 @@
  */
 package org.esupportail.mondossierweb.domain.beans;
 
+import java.io.Serializable;
+
 
 
 /**
  * classe qui réprésente le résultat d'un étudiant.
  * @author Charlie Dubois
  */
-public class Resultat {
+public class Resultat implements Serializable{
 
+	
+	private static final long serialVersionUID = 4809562988462399839L;
 		/**
 		 * la session.
 		 */

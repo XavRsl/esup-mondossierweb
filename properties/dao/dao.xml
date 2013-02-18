@@ -61,7 +61,7 @@
 			<description>le service ldap</description>
 		</property>
 		<property name="dataSource" ref="${db.method}" />
-		
+		<property name="security" ref="security" />
 		<property name="sqlMapClientTemplate"
 			ref="sqlMapClientTemplate" />
 	</bean>

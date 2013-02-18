@@ -10,7 +10,7 @@
 		class="org.esupportail.blank.services.authentication.AuthenticatorImpl">
 		<property name="authenticationService" ref="delegatingAuthenticationService" />
 		<property name="domainService" ref="domainService" />
-	</bean>
+		</bean>
 	-->
 	
 	
@@ -32,9 +32,9 @@
 	</bean>
 	
 	<!--
-	<bean id="portletOrServeltAuthenticationService" lazy-init="true"
+		<bean id="portletOrServeltAuthenticationService" lazy-init="true"
 		class="org.esupportail.commons.services.authentication.PortalOrCasFilterAuthenticationService">
 		<property name="uidPortalAttribute" value="uid" />
-	</bean>
+		</bean>
 	-->
 </beans>
