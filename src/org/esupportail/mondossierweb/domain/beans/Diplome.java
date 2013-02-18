@@ -47,6 +47,10 @@ public class Diplome implements Serializable{
 	 */
 	private String rang;
 	/**
+	 * vrai si on doit afficher le rang de l'étudiant à ce diplome.
+	 */
+	private boolean afficherRang;
+	/**
 	 * les résultats.
 	 */
 	private List<Resultat> resultats;
@@ -112,6 +116,12 @@ public class Diplome implements Serializable{
 	}
 	public void setRang(String rang) {
 		this.rang = rang;
+	}
+	public boolean isAfficherRang() {
+		return afficherRang;
+	}
+	public void setAfficherRang(boolean afficherRang) {
+		this.afficherRang = afficherRang;
 	}
 	
 	

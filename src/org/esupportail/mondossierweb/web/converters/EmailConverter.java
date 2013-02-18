@@ -9,7 +9,7 @@ import org.esupportail.mondossierweb.domain.beans.Config;
  * la classe qui permet d'obtenir l'e-mail d'un étudiant connaissant son login.
  * @author Charlie Dubois
  */
-public class EmailConverter {
+public class EmailConverter implements EmailConverterInterface{
 	/**
 	 * la bean qui contient la String de complétion de l'e-mail.
 	 */

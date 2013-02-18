@@ -145,6 +145,10 @@ public class Config {
 	 */
 	private boolean affRangEtudiant;
 	/**
+	 * la liste des codes etape dont on affiche le rang même si affRangEtudiant=false
+	 */
+	private List<String> codesEtapeAffichageRang;
+	/**
 	 * affichage ou non des informations crédits ECTS par la page du détail des notes.
 	 */
 	private boolean affECTSEtudiant;
@@ -711,6 +715,16 @@ public class Config {
 	public void setCertificatScolariteTouteAnnee(
 			boolean certificatScolariteTouteAnnee) {
 		this.certificatScolariteTouteAnnee = certificatScolariteTouteAnnee;
+	}
+
+	@ManagedAttribute
+	public List<String> getCodesEtapeAffichageRang() {
+		return codesEtapeAffichageRang;
+	}
+
+	@ManagedAttribute
+	public void setCodesEtapeAffichageRang(List<String> codesEtapeAffichageRang) {
+		this.codesEtapeAffichageRang = codesEtapeAffichageRang;
 	}
 	
 	

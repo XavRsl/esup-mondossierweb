@@ -793,6 +793,7 @@
 					debug="${compile.debug}" 
 					nowarn="${compile.nowarn}" 
 					deprecation="${compile.deprecation}" 
+					encoding="ISO-8859-1"
 					optimize="${compile.optimize}" >
 					<classpath refid="compile.classpath" />
 				</javac>
@@ -804,6 +805,7 @@
 			debug="${compile.debug}" 
 			nowarn="${compile.nowarn}" 
 			deprecation="${compile.deprecation}" 
+			encoding="ISO-8859-1"
 			optimize="${compile.optimize}">
 			<classpath refid="compile.classpath" />
 		</javac>

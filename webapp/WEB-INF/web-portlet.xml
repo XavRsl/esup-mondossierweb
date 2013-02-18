@@ -108,6 +108,14 @@
 		<param-value>/WEB-INF/onload-config.xml</param-value>
 	</context-param>
 	
+	<!-- RequestContextListener utile pour les WebServices -->
+	<listener>
+		<display-name>RequestContextListener</display-name>
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener
+		</listener-class>
+	</listener>
+	
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener

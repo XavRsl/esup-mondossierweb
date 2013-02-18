@@ -388,7 +388,7 @@ public class InscriptionsController extends AbstractContextAwareController {
 			tableSignataire.addCell(makeCellSignataire("", normal));
 			tableSignataire.addCell(makeCellSignataire(signataire.getNom_sig(), normal));
 			//ajout signature
-			if (signataire.getImg_sig_std() != null){
+			if (signataire.getImg_sig_std() != null && signataire.getImg_sig_std().length > 0){ //MODIF 09/10/2012
 				tableSignataire.addCell(makeCellSignataire("", normal));
 				LOG.debug(signataire.getImg_sig_std().toString());
 				Image imageSignature = Image.getInstance(signataire.getImg_sig_std());

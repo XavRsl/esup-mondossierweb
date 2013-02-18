@@ -13,11 +13,7 @@ import java.util.regex.Pattern;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.portlet.ActionRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.apache.myfaces.portlet.PortletUtil;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -36,7 +32,7 @@ import org.esupportail.mondossierweb.dao.IDaoService;
 import org.esupportail.mondossierweb.domain.beans.IEtudiant;
 import org.esupportail.mondossierweb.domain.beans.Inscrit;
 import org.esupportail.mondossierweb.services.authentification.Security;
-import org.esupportail.mondossierweb.web.converters.EmailConverter;
+import org.esupportail.mondossierweb.web.converters.EmailConverterInterface;
 import org.esupportail.mondossierweb.web.navigation.View;
 
 /**
@@ -74,7 +70,7 @@ public class RechercheAnnuaireController extends AbstractContextAwareController 
 	/**
 	 * Le bean de complétion de l'adresse email.
 	 */
-	private EmailConverter emailConverter;
+	private EmailConverterInterface emailConverter;
 
 	/**
 	 * le controller EtatCivil.
@@ -93,6 +89,7 @@ public class RechercheAnnuaireController extends AbstractContextAwareController 
 	private boolean stopRecherche;
 
 	private boolean recherche;
+
 
 
 	/**
@@ -172,7 +169,9 @@ public class RechercheAnnuaireController extends AbstractContextAwareController 
 
 
 								List<String> llogin2 = (List<String>) mattributs.get("uid");
-								List<String> lcn = (List<String>) mattributs.get("cn");
+								//24/10/2012 On affiche le displayName à la place du cn
+								System.out.println("display attr : "+ldapService.getSearchDisplayedAttributes().get(0));
+								List<String> lcn = (List<String>) mattributs.get(ldapService.getSearchDisplayedAttributes().get(0));
 
 								Inscrit ins = new Inscrit();
 								ins.setLogin(llogin2.get(0));
@@ -531,7 +530,7 @@ public class RechercheAnnuaireController extends AbstractContextAwareController 
 	/**
 	 * @return emailConverter
 	 */
-	public EmailConverter getEmailConverter() {
+	public EmailConverterInterface getEmailConverter() {
 		return emailConverter;
 	}
 
@@ -539,7 +538,7 @@ public class RechercheAnnuaireController extends AbstractContextAwareController 
 	/**
 	 * @param emailConverter
 	 */
-	public void setEmailConverter(final EmailConverter emailConverter) {
+	public void setEmailConverter(final EmailConverterInterface emailConverter) {
 		this.emailConverter = emailConverter;
 	}
 

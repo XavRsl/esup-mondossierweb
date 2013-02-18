@@ -50,7 +50,7 @@ import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.BeanUtils;
 import org.esupportail.mondossierweb.dao.IDaoService;
-import org.esupportail.mondossierweb.web.converters.EmailConverter;
+import org.esupportail.mondossierweb.web.converters.EmailConverterInterface;
 import org.esupportail.mondossierweb.web.photo.IPhoto;
 
 /**
@@ -99,7 +99,7 @@ public class EtudiantAmue implements IEtudiant {
 	/**
 	 * bean pour convertir un login en l'email correspondant.
 	 */
-	protected EmailConverter emailConverter;
+	protected EmailConverterInterface emailConverter;
 
 	/**
 	 * constructeur vide.
@@ -189,8 +189,14 @@ public class EtudiantAmue implements IEtudiant {
 			}
 
 			InfoAdmEtuDTO iaetu = monProxyEtu.recupererInfosAdmEtu(e.getCod_etu());
-
-			e.setNom(iaetu.getNomPatronymique() + " " + iaetu.getPrenom1());
+			
+			//MODIF POUR UTILISER LE NOM USUEL SI RENSEIGNE 19/09/2012
+			if (iaetu.getNomUsuel() != null && !iaetu.getNomUsuel().equals("")){
+				e.setNom(iaetu.getNomUsuel()+ " " + iaetu.getPrenom1());
+			}else{
+				e.setNom( iaetu.getNomPatronymique() + " " + iaetu.getPrenom1());
+			}
+			
 
 			//informations sur la naissance :
 			//la nationalité:
@@ -851,6 +857,8 @@ public class EtudiantAmue implements IEtudiant {
 
 			e.getDiplomes().clear();
 			e.getEtapes().clear();
+			//Si on a configure pour toujours afficher le rang, on affichera les rangs de l'étudiant.
+			e.setAfficherRang(config.isAffRangEtudiant());
 
 			for (int i = 0; i < resultatVdiVet.length; i++ ) {
 				//information sur le diplome:
@@ -925,6 +933,9 @@ public class EtudiantAmue implements IEtudiant {
 							d.getResultats().add(r);
 							if(res.getNbrRngEtuVdi() != null && !res.getNbrRngEtuVdi().equals("")){
 								d.setRang(res.getNbrRngEtuVdi()+"/"+res.getNbrRngEtuVdiTot());
+								//On indique si on affiche le rang du diplome.
+								d.setAfficherRang(config.isAffRangEtudiant());
+								
 							}
 						}
 						//ajout du diplome si on a au moins un résultat
@@ -1029,11 +1040,26 @@ public class EtudiantAmue implements IEtudiant {
 											}
 										}
 									}*/
+									
 									//ajout du résultat
-
 									et.getResultats().add(r);
+									
+									//ajout du rang
 									if(ret.getNbrRngEtuVet() != null && !ret.getNbrRngEtuVet().equals("")){
 										et.setRang(ret.getNbrRngEtuVet()+"/"+ret.getNbrRngEtuVetTot());
+										//On calcule si on affiche ou non le rang.
+										boolean cetteEtapeDoitEtreAffiche=false;
+										for(String codetape : config.getCodesEtapeAffichageRang()){
+											if(codetape.equals(et.getCode())){
+												cetteEtapeDoitEtreAffiche=true;
+											}
+										}
+										if(config.isAffRangEtudiant() || cetteEtapeDoitEtreAffiche){
+											//On affichera le rang de l'étape.
+											et.setAfficherRang(true);
+											//On remonte au niveau de l'étudiant qu'on affiche le rang
+											e.setAfficherRang(true);
+										}
 									}
 
 								}
@@ -1649,11 +1675,11 @@ public class EtudiantAmue implements IEtudiant {
 		this.service = service;
 	}
 
-	public EmailConverter getEmailConverter() {
+	public EmailConverterInterface getEmailConverter() {
 		return emailConverter;
 	}
 
-	public void setEmailConverter(EmailConverter emailConverter) {
+	public void setEmailConverter(EmailConverterInterface emailConverter) {
 		this.emailConverter = emailConverter;
 	}
 

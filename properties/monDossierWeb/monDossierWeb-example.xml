@@ -150,6 +150,11 @@
 			<description>[avec WS amue seulement] affichage ou non du rang de l'étudiant aux diplomes , épreuves et elp sur les pages de 'Notes et Résultats' du dossier</description>
 			<value>false</value>
 		</property>
+		<property name="codesEtapeAffichageRang">
+			<description>la liste des codes etape dont on affiche le rang même si affRangEtudiant=false</description>
+			<list>
+			</list>
+		</property>
 		<property name="affECTSEtudiant">
 			<description>[avec WS amue seulement] affichage ou non des informations crédits ECTS par la page du détail des notes</description>
 			<value>false</value>
@@ -382,8 +387,33 @@
 	</bean> 
 -->
 
+	<!-- Bean qui transforme le login en email en ajoutant 'extMail' -->
+	<bean 
+		id="emailConverter"
+		class="org.esupportail.mondossierweb.web.converters.EmailConverter">
+		<description>
+			A converter for student email.
+		</description>
+		<property name="config" ref="config">
+			<description>le bean de configuration</description>
+		</property>
+	</bean>
 	
-
+	<!-- Exemple de bean email façon université de Lorraine qui va cherche le mail dans une table à partir du login-->
+	<!-- <bean id="emailConverter"
+		class="org.esupportail.mondossierweb.web.converters.EmailConverterUnivLorraineImpl">
+		<description>
+		A converter for student email.
+		</description>
+		<property name="config" ref="config">
+		<description>le bean de configuration</description>
+		</property>
+		<property name="dataSource" ref="${db.method}" />
+		<property name="sqlMapClientTemplate"
+		ref="sqlMapClientTemplate" />
+		</bean>
+	-->
+	
 	<!-- Bean Photo Empty 	-->
 	<bean id="photo"
 		class="org.esupportail.mondossierweb.web.photo.PhotoEmptyImpl"

@@ -13,7 +13,7 @@ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
 <resultMap id="inscrit" class="org.esupportail.mondossierweb.domain.beans.Inscrit">
 <result property="cod_ind" column="cod_ind"/>
 <result property="cod_etu" column="cod_etu"/>
-<result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+<result property="lib_nom_pat_ind" column="NOM"/>
 <result property="lib_pr1_ind" column="lib_pr1_ind"/>
 <result property="date_nai_ind" column="date_nai_ind"/>
 </resultMap>
@@ -21,7 +21,7 @@ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
 <resultMap id="inscritJuin" class="org.esupportail.mondossierweb.domain.beans.Inscrit">
 <result property="cod_ind" column="cod_ind"/>
 <result property="cod_etu" column="cod_etu"/>
-<result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+<result property="lib_nom_pat_ind" column="NOM"/>
 <result property="lib_pr1_ind" column="lib_pr1_ind"/>
 <result property="date_nai_ind" column="date_nai_ind"/>
 <result property="resj" column="resj"/>
@@ -31,7 +31,7 @@ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
 <resultMap id="inscritSep" class="org.esupportail.mondossierweb.domain.beans.Inscrit">
 <result property="cod_ind" column="cod_ind"/>
 <result property="cod_etu" column="cod_etu"/>
-<result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+<result property="lib_nom_pat_ind" column="NOM"/>
 <result property="lib_pr1_ind" column="lib_pr1_ind"/>
 <result property="date_nai_ind" column="date_nai_ind"/>
 <result property="ress" column="ress"/>
@@ -41,7 +41,7 @@ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
 <resultMap id="inscritJuinSep" class="org.esupportail.mondossierweb.domain.beans.Inscrit">
 <result property="cod_ind" column="cod_ind"/>
 <result property="cod_etu" column="cod_etu"/>
-<result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+<result property="lib_nom_pat_ind" column="NOM"/>
 <result property="lib_pr1_ind" column="lib_pr1_ind"/>
 <result property="date_nai_ind" column="date_nai_ind"/>
 <result property="resj" column="resj"/>
@@ -53,7 +53,7 @@ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
 <resultMap id="inscritJuinSepEtape" class="org.esupportail.mondossierweb.domain.beans.Inscrit">
 <result property="cod_ind" column="cod_ind"/>
 <result property="cod_etu" column="cod_etu"/>
-<result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+<result property="lib_nom_pat_ind" column="NOM"/>
 <result property="lib_pr1_ind" column="lib_pr1_ind"/>
 <result property="date_nai_ind" column="date_nai_ind"/>
 <result property="resj" column="resj"/>
@@ -68,7 +68,7 @@ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
 <resultMap id="inscritEtape" class="org.esupportail.mondossierweb.domain.beans.Inscrit">
 <result property="cod_ind" column="cod_ind"/>
 <result property="cod_etu" column="cod_etu"/>
-<result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+<result property="lib_nom_pat_ind" column="NOM"/>
 <result property="lib_pr1_ind" column="lib_pr1_ind"/>
 <result property="date_nai_ind" column="date_nai_ind"/>
 <result property="cod_etp" column="cod_etp"/>
@@ -79,7 +79,7 @@ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
 <resultMap id="inscritSepEtape" class="org.esupportail.mondossierweb.domain.beans.Inscrit">
 <result property="cod_ind" column="cod_ind"/>
 <result property="cod_etu" column="cod_etu"/>
-<result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+<result property="lib_nom_pat_ind" column="NOM"/>
 <result property="lib_pr1_ind" column="lib_pr1_ind"/>
 <result property="date_nai_ind" column="date_nai_ind"/>
 <result property="ress" column="ress"/>
@@ -92,7 +92,7 @@ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
 <resultMap id="inscritJuinEtape" class="org.esupportail.mondossierweb.domain.beans.Inscrit">
 <result property="cod_ind" column="cod_ind"/>
 <result property="cod_etu" column="cod_etu"/>
-<result property="lib_nom_pat_ind" column="lib_nom_pat_ind"/>
+<result property="lib_nom_pat_ind" column="NOM"/>
 <result property="lib_pr1_ind" column="lib_pr1_ind"/>
 <result property="date_nai_ind" column="date_nai_ind"/>
 <result property="resj" column="resj"/>
@@ -114,7 +114,7 @@ select e.lib_elp from element_pedagogi e where e.cod_elp = #value#
 
 
 <select id="getInscrits" resultMap="inscrit">
-select i.cod_ind,i.cod_etu, i.lib_nom_pat_ind, i.lib_pr1_ind,
+ select i.cod_ind,i.cod_etu, decode(I.LIB_NOM_USU_IND,null,i.lib_nom_pat_ind,I.LIB_NOM_USU_IND) NOM, i.lib_pr1_ind,
 to_char(i.date_nai_ind,'DD/MM/YYYY') date_nai_ind
 from apogee.individu i, apogee.ind_contrat_elp ice
 where ice.cod_elp = #code#  
@@ -122,11 +122,11 @@ and ice.cod_anu = #annee#
 and ice.tem_prc_ice = 'N' 
 and i.cod_ind = ice.cod_ind 
 and i.cod_etu is not null
-order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
+order by NOM,i.lib_pr1_ind,i.date_nai_ind
 </select>
 
 <select id="getInscritsJuin" resultMap="inscritJuin">
-select i.cod_ind,i.cod_etu, i.lib_nom_pat_ind, i.lib_pr1_ind,
+ select i.cod_ind,i.cod_etu, decode(I.LIB_NOM_USU_IND,null,i.lib_nom_pat_ind,I.LIB_NOM_USU_IND) NOM, i.lib_pr1_ind,
 to_char(i.date_nai_ind,'DD/MM/YYYY') date_nai_ind, 
 nvl(decode(to_char(rj.not_elp),null,rj.not_sub_elp,to_char(rj.not_elp)),' ') notej, 
 nvl(rj.cod_tre,' ') resj
@@ -139,11 +139,11 @@ and rj.cod_ind = ice.cod_ind
 and rj.cod_elp = ice.cod_elp and rj.cod_anu = ice.cod_anu 
 and rj.cod_ses &lt;= '1' and rj.cod_adm = '1'
 and i.cod_etu is not null
-order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
+order by NOM,i.lib_pr1_ind,i.date_nai_ind
 </select>
 
 <select id="getInscritsSep" resultMap="inscritSep">
-select i.cod_ind,i.cod_etu, i.lib_nom_pat_ind, i.lib_pr1_ind,
+ select i.cod_ind,i.cod_etu, decode(I.LIB_NOM_USU_IND,null,i.lib_nom_pat_ind,I.LIB_NOM_USU_IND) NOM, i.lib_pr1_ind,
 to_char(i.date_nai_ind,'DD/MM/YYYY') date_nai_ind,
 nvl(decode(to_char(rs.not_elp),null,rs.not_sub_elp,to_char(rs.not_elp)),' ') notes,
 nvl(rs.cod_tre,' ') ress
@@ -156,11 +156,11 @@ and ice.cod_anu = #annee#
 and ice.tem_prc_ice = 'N' 
 and i.cod_ind = ice.cod_ind 
 and i.cod_etu is not null
-order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
+order by NOM,i.lib_pr1_ind,i.date_nai_ind
 </select>
 
 <select id="getInscritsEtape" resultMap="inscritEtape">
- select i.cod_ind,i.cod_etu, i.lib_nom_pat_ind, i.lib_pr1_ind,
+ select i.cod_ind,i.cod_etu, decode(I.LIB_NOM_USU_IND,null,i.lib_nom_pat_ind,I.LIB_NOM_USU_IND) NOM, i.lib_pr1_ind,
  to_char(i.date_nai_ind,'DD/MM/YYYY') date_nai_ind, 
  ice.cod_etp,ice.cod_vrs_vet,ve.lib_web_vet
  from apogee.individu i, apogee.ind_contrat_elp ice, apogee.etape e, version_etape ve
@@ -172,11 +172,11 @@ order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
  and ve.cod_etp = e.cod_etp
  and ve.cod_vrs_vet = ice.cod_vrs_vet
  and i.cod_etu is not null
- order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
+ order by NOM,i.lib_pr1_ind,i.date_nai_ind
 </select>
 
 <select id="getInscritsJuinSep" resultMap="inscritJuinSep">
-select i.cod_ind,i.cod_etu, i.lib_nom_pat_ind, i.lib_pr1_ind,
+ select i.cod_ind,i.cod_etu, decode(I.LIB_NOM_USU_IND,null,i.lib_nom_pat_ind,I.LIB_NOM_USU_IND) NOM, i.lib_pr1_ind,
 to_char(i.date_nai_ind,'DD/MM/YYYY') date_nai_ind, 
 nvl(decode(to_char(rj.not_elp),null,rj.not_sub_elp,to_char(rj.not_elp)),' ') notej, 
 nvl(rj.cod_tre,' ') resj,
@@ -195,11 +195,11 @@ and rj.cod_ind = ice.cod_ind
 and rj.cod_elp = ice.cod_elp and rj.cod_anu = ice.cod_anu 
 and rj.cod_ses &lt;= '1' and rj.cod_adm = '1'
 and i.cod_etu is not null
-order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
+order by NOM,i.lib_pr1_ind,i.date_nai_ind
 </select>
 
 <select id="getInscritsJuinEtape" resultMap="inscritJuinEtape">
-select i.cod_ind,i.cod_etu, i.lib_nom_pat_ind, i.lib_pr1_ind,
+ select i.cod_ind,i.cod_etu, decode(I.LIB_NOM_USU_IND,null,i.lib_nom_pat_ind,I.LIB_NOM_USU_IND) NOM, i.lib_pr1_ind,
 to_char(i.date_nai_ind,'DD/MM/YYYY') date_nai_ind, 
 nvl(decode(to_char(rj.not_elp),null,rj.not_sub_elp,to_char(rj.not_elp)),' ') notej, 
 nvl(rj.cod_tre,' ') resj,
@@ -216,11 +216,11 @@ and rj.cod_ses &lt;= '1' and rj.cod_adm = '1'
 and ve.cod_etp = e.cod_etp
 and ve.cod_vrs_vet = ice.cod_vrs_vet
 and i.cod_etu is not null
-order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
+order by NOM,i.lib_pr1_ind,i.date_nai_ind
 </select>
 
 <select id="getInscritsSepEtape" resultMap="inscritSepEtape">
-select i.cod_ind,i.cod_etu, i.lib_nom_pat_ind, i.lib_pr1_ind,
+ select i.cod_ind,i.cod_etu, decode(I.LIB_NOM_USU_IND,null,i.lib_nom_pat_ind,I.LIB_NOM_USU_IND) NOM, i.lib_pr1_ind,
 to_char(i.date_nai_ind,'DD/MM/YYYY') date_nai_ind,
 nvl(decode(to_char(rs.not_elp),null,rs.not_sub_elp,to_char(rs.not_elp)),' ') notes,
 nvl(rs.cod_tre,' ') ress,
@@ -238,11 +238,11 @@ and i.cod_ind = ice.cod_ind
 and i.cod_etu is not null
 and ve.cod_etp = e.cod_etp
 and ve.cod_vrs_vet = ice.cod_vrs_vet
-order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
+order by NOM,i.lib_pr1_ind,i.date_nai_ind
 </select>
 
 <select id="getInscritsJuinSepEtape" resultMap="inscritJuinSepEtape">
-select i.cod_ind,i.cod_etu, i.lib_nom_pat_ind, i.lib_pr1_ind,
+ select i.cod_ind,i.cod_etu, decode(I.LIB_NOM_USU_IND,null,i.lib_nom_pat_ind,I.LIB_NOM_USU_IND) NOM, i.lib_pr1_ind,
 to_char(i.date_nai_ind,'DD/MM/YYYY') date_nai_ind, 
 nvl(decode(to_char(rj.not_elp),null,rj.not_sub_elp,to_char(rj.not_elp)),' ') notej, 
 nvl(rj.cod_tre,' ') resj,
@@ -266,7 +266,7 @@ and rj.cod_ses &lt;= '1' and rj.cod_adm = '1'
 and ve.cod_etp = e.cod_etp
 and ve.cod_vrs_vet = ice.cod_vrs_vet
 and i.cod_etu is not null
-order by i.lib_nom_pat_ind,i.lib_pr1_ind,i.date_nai_ind
+order by NOM,i.lib_pr1_ind,i.date_nai_ind
 </select>
 
 <select id="getElements" resultMap="resultElement">

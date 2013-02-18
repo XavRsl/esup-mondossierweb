@@ -32,7 +32,7 @@
 <c:forEach var="comp" items="#{rechercheController.composantes.listeFils}" >
 <tr><td>
 	<h:commandLink action="#{rechercheController.chercheDiplomes}">
-  			<f:param name="co1de" value="#{comp.cod_cmp}"/>
+  			<f:param name="code" value="#{comp.cod_cmp}"/>
 		<t:graphicImage value='/media/images/CMonDossierWeb/foldermini.gif' style= " border:0 ; " alt='voir diplômes'/>
    		</h:commandLink>
    		</td><td>

@@ -50,6 +50,10 @@ public class Etape implements Serializable {
 	 * vrai si les résultat à l'épreuve sont définitifs.
 	 */
 	private boolean deliberationTerminee;
+	/**
+	 * vrai si on doit afficher le rang de l'étudiant à l'étape.
+	 */
+	private boolean afficherRang;
 	
 	/**
 	 * constructeur.
@@ -126,6 +130,12 @@ public class Etape implements Serializable {
 	}
 	public void setVers_dip(int vers_dip) {
 		this.vers_dip = vers_dip;
+	}
+	public boolean isAfficherRang() {
+		return afficherRang;
+	}
+	public void setAfficherRang(boolean afficherRang) {
+		this.afficherRang = afficherRang;
 	}
 	
 	

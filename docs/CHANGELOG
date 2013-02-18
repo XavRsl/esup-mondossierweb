@@ -1,4 +1,16 @@
 ***************
+* version 2.6-1
+* -ajout encoding dans build-commons.xml pour éviter les soucis d'encodage d'accent dans les .java
+* -ajout de RequestContextListener dans web-portlet.xml pour faire fonctionner l'exposition des WebService en mode portlet.
+* -affichage du code composante dans l'onglet inscription du dossier étudiant.
+* -correction bug quand clic sur image 'folder' dans liste des composantes.
+* -Gestion du cas d'une signature vide dans Apogée pour le signataire des certificats de scolarité. On affiche quand même le nom et le rôle du signataire
+* -Gestion du libellé vide pour le groupe recherché. On indique COD_EXT_GPE à la place de LIB_GPE dans ce cas.
+* -Si il est valué utilisation du LIB_NOM_USU_IND à la place du lib_nom_pat_ind
+* -On affiche le 1er attribut LDAP de "searchDisplayedAttributes" (ldap.xml) à la place de l'attribut cn dans le résultat de la recherche annuaire
+* -Le bean emailConverter est maintenant modifiable dans monDossierWeb.xml. Un exemple qui récupère le mail dans une table Apogée façon 'Université de Lorraine' est fourni
+* -Possibilité d'autoriser la visualisation du rang pour une liste de code_etape exclusivement.
+***************
 * version 2.5-3 (28/08/2012)
 * -Correction dans la récupération des Groupes (pour récupérer le bon COD_GPE).
 ***************

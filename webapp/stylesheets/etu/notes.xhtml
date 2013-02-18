@@ -112,9 +112,11 @@
 		</t:dataTable>
 	</t:column> 
     
-	<t:column width="8%" rendered="#{config.affRangEtudiant}">
+	<!-- On test si on affiche la colonne Rang -->
+	<t:column width="8%" rendered="#{etudiant.afficherRang}">
 		<f:facet name="header">Rang</f:facet>
-		<h:outputText value="#{dip.rang}"/>
+		<!-- On test si on affiche la valeur rang pour ce diplome -->
+		<h:outputText value="#{dip.rang}" rendered="#{dip.afficherRang}"/>
 	</t:column> 
     
 </t:dataTable>
@@ -203,10 +205,11 @@
 			</t:column>
 		</t:dataTable>
 	</t:column> 
-	
-	<t:column width="8%" rendered="#{config.affRangEtudiant}">
+	<!-- On test si on affiche la colonne Rang -->
+	<t:column width="8%" rendered="#{etudiant.afficherRang}">
 		<f:facet name="header">Rang</f:facet>
-		<h:outputText value="#{etape.rang}"/>
+		<!-- On test si on affiche la valeur rang pour cette etape -->
+		<h:outputText value="#{etape.rang}" rendered="#{etape.afficherRang}"/>
 	</t:column> 
 </t:dataTable> 
 </h:form>

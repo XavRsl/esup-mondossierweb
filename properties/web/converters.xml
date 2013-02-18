@@ -21,16 +21,7 @@
 			A converter for Locale objects.
     	</description>
 	</bean>
-	<bean 
-		id="emailConverter"
-		class="org.esupportail.mondossierweb.web.converters.EmailConverter">
-    	<description>
-			A converter for student email.
-    	</description>
-    	<property name="config" ref="config">
-			<description>le bean de configuration</description>
-		</property>
-	</bean>
+	
 	
 
 </beans>

@@ -37,7 +37,7 @@ import org.esupportail.mondossierweb.domain.beans.ElementPedagogique;
 import org.esupportail.mondossierweb.domain.beans.Etape;
 import org.esupportail.mondossierweb.domain.beans.Inscrit;
 import org.esupportail.mondossierweb.dto.ObjetRecherche;
-import org.esupportail.mondossierweb.web.converters.EmailConverter;
+import org.esupportail.mondossierweb.web.converters.EmailConverterInterface;
 import org.esupportail.mondossierweb.web.navigation.View;
 import org.esupportail.mondossierweb.web.photo.IPhoto;
 
@@ -106,7 +106,7 @@ public class ListeInscritsController extends AbstractContextAwareController {
 	/**
 	 * Le bean de complétion de l'adresse email.
 	 */
-	private EmailConverter emailConverter;
+	private EmailConverterInterface emailConverter;
 	/**
 	 * vrai si on veut interrompre la génération du pdf (car l'utilisateur en demande un autre)
 	 */
@@ -1396,14 +1396,14 @@ public class ListeInscritsController extends AbstractContextAwareController {
 	/**
 	 * @return emailConverter
 	 */
-	public EmailConverter getEmailConverter() {
+	public EmailConverterInterface getEmailConverter() {
 		return emailConverter;
 	}
 
 	/**
 	 * @param emailConverter
 	 */
-	public void setEmailConverter(final EmailConverter emailConverter) {
+	public void setEmailConverter(final EmailConverterInterface emailConverter) {
 		this.emailConverter = emailConverter;
 	}
 

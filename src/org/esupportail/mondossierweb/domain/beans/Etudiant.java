@@ -280,6 +280,11 @@ public class Etudiant implements Resettable {
 	 * vrai si un calendrier de rentrée existe.
 	 */
 	private boolean existeCalendrierRentree;
+	
+	/**
+	 * vrai si on doit afficher le rang de l'étudiant.
+	 */
+	private boolean afficherRang;
 	/**
 	 * consctructeur.
 	 *
@@ -1340,6 +1345,16 @@ public class Etudiant implements Resettable {
 			boolean inscriptionPedagogiqueRenseignees) {
 		this.inscriptionPedagogiqueRenseignees = inscriptionPedagogiqueRenseignees;
 	}
+
+	public boolean isAfficherRang() {
+		return afficherRang;
+	}
+
+	public void setAfficherRang(boolean afficherRang) {
+		this.afficherRang = afficherRang;
+	}
+
+	
 	
 
 

@@ -621,7 +621,7 @@ public class NotesController extends AbstractContextAwareController {
 			}
 		}
 
-		//cr�ation du pied de page:
+		//creation du pied de page:
 		Phrase phra = new Phrase(partie1 + " -" + getString("PDF.PAGE"), legerita);
 		Phrase phra2 = new Phrase("- "+partie2, legerita);
 		HeaderFooter hf = new HeaderFooter(phra, phra2);
@@ -687,7 +687,8 @@ public class NotesController extends AbstractContextAwareController {
 			PdfPTable table2;
 			
 			
-			if(!config.isAffRangEtudiant()){
+			//if(!config.isAffRangEtudiant()){
+			if(!etudiant.isAfficherRang()){
 				table2= new PdfPTable(4);
 			}else{
 				table2 = new PdfPTable(5);
@@ -699,11 +700,12 @@ public class NotesController extends AbstractContextAwareController {
 			if(config.isAffMentionEtudiant())
 				tailleColonneLib = 90;
 			
-			if(!config.isAffRangEtudiant()){
+			//if(!config.isAffRangEtudiant()){
+			if(!etudiant.isAfficherRang()){
 					int [] tabWidth = {26,35,tailleColonneLib,70};
 					table2.setWidths(tabWidth);
 			}else{
-					int [] tabWidth = {26,35,tailleColonneLib,70,10};
+					int [] tabWidth = {26,35,tailleColonneLib - 5,70,15};
 					table2.setWidths(tabWidth);
 			}
 
@@ -712,17 +714,16 @@ public class NotesController extends AbstractContextAwareController {
 			Paragraph p1 = new Paragraph(getString("PDF.YEAR"),normalbig);
 			Paragraph p2 = new Paragraph(getString("PDF.CODE.VERS"),normalbig);
 			Paragraph p3 = new Paragraph(getString("PDF.DIPLOME"),normalbig);
-			Paragraph prang = new Paragraph(getString("PDF.RANK"),normalbig);
+	
 
 			PdfPCell ct1 = new PdfPCell(p1);
 			PdfPCell ct2 = new PdfPCell(p2);
 			PdfPCell ct3 = new PdfPCell(p3);
-			PdfPCell ctrang = new PdfPCell(prang);
 
 			ct1.setBorder(Rectangle.BOTTOM); ct1.setBorderColorBottom(Color.black);
 			ct2.setBorder(Rectangle.BOTTOM); ct2.setBorderColorBottom(Color.black);
-			ct3.setBorder(Rectangle.BOTTOM); ct2.setBorderColorBottom(Color.black);
-			ctrang.setBorder(Rectangle.BOTTOM); ct2.setBorderColorBottom(Color.black);
+			ct3.setBorder(Rectangle.BOTTOM); ct3.setBorderColorBottom(Color.black);
+			
 
 
 			table2.addCell(ct1);
@@ -745,10 +746,14 @@ public class NotesController extends AbstractContextAwareController {
 			PdfPCell ct6 = new PdfPCell(new Paragraph(getString("PDF.RESULT"), normalbig));
 			PdfPCell ctmention = new PdfPCell(new Paragraph(getString("PDF.MENTION"), normalbig));
 			
+			
+			
 			ct4.setBorder(Rectangle.BOTTOM); ct4.setBorderColorBottom(Color.black);
 			ct5.setBorder(Rectangle.BOTTOM); ct5.setBorderColorBottom(Color.black);
 			ct6.setBorder(Rectangle.BOTTOM); ct6.setBorderColorBottom(Color.black);
 			ctmention.setBorder(Rectangle.BOTTOM); ctmention.setBorderColorBottom(Color.black);
+			
+			
 
 			table21.addCell(ct4);
 			table21.addCell(ct5);
@@ -760,8 +765,12 @@ public class NotesController extends AbstractContextAwareController {
 			PdfPCell ct7 = new PdfPCell(table21);
 			ct7.setBorder(Rectangle.BOTTOM); 
 			table2.addCell(ct7);
+			
+			PdfPCell ctrang  = new PdfPCell(new Paragraph(getString("PDF.RANK"),normalbig));
+			ctrang.setBorder(Rectangle.BOTTOM); ctrang.setBorderColorBottom(Color.black);
 
-			if(config.isAffRangEtudiant()){
+			//if(config.isAffRangEtudiant()){
+			if(etudiant.isAfficherRang()){
 				table2.addCell(ctrang);
 			}
 
@@ -782,6 +791,9 @@ public class NotesController extends AbstractContextAwareController {
 				Paragraph parang = new Paragraph(etudiant.getDiplomes().get(i).getRang(), normal);
 				PdfPCell cellrang = new PdfPCell(parang);
 				cellrang.setBorder(Rectangle.NO_BORDER);
+				
+				PdfPCell cellvide = new PdfPCell();
+				cellvide.setBorder(Rectangle.NO_BORDER);
 
 				table2.addCell(celltext);
 				table2.addCell(celltext2);
@@ -839,8 +851,14 @@ public class NotesController extends AbstractContextAwareController {
 				celltext4.setBorder(Rectangle.NO_BORDER);
 				table2.addCell(celltext4);
 				
-				if(config.isAffRangEtudiant()){
+				//if(config.isAffRangEtudiant()){
+				if(etudiant.getDiplomes().get(i).isAfficherRang()){
 					table2.addCell(cellrang);
+				}else{
+					//On insere une cellule vide si on affiche pas ce rang, alors que la colonne rang fait partie de la table
+					if(etudiant.isAfficherRang()){
+						table2.addCell(cellvide);
+					}
 				}
 				
 
@@ -864,7 +882,8 @@ public class NotesController extends AbstractContextAwareController {
 
 			PdfPTable tabletape2;
 			
-			if(!config.isAffRangEtudiant()){
+			//if(!config.isAffRangEtudiant()){
+			if(!etudiant.isAfficherRang()){
 				tabletape2= new PdfPTable(4);
 				tabletape2.setWidthPercentage(98);
 				int [] tabWidthetape = {26,35,tailleColonneLib,70};
@@ -872,7 +891,7 @@ public class NotesController extends AbstractContextAwareController {
 			}else{
 				tabletape2= new PdfPTable(5);
 				tabletape2.setWidthPercentage(98);
-				int [] tabWidthetape = {26,35,tailleColonneLib,70,10};
+				int [] tabWidthetape = {26,35,tailleColonneLib - 5 ,70,15};
 				tabletape2.setWidths(tabWidthetape);
 			}
 
@@ -886,7 +905,8 @@ public class NotesController extends AbstractContextAwareController {
 
 			tabletape2.addCell(ct7);
 
-			if(config.isAffRangEtudiant()){
+			//if(!config.isAffRangEtudiant()){
+			if(etudiant.isAfficherRang()){
 				tabletape2.addCell(ctrang);
 			}
 
@@ -910,6 +930,8 @@ public class NotesController extends AbstractContextAwareController {
 				PdfPCell cellEtapeRang = new PdfPCell(parEtapeRang);
 				cellEtapeRang.setBorder(Rectangle.NO_BORDER);
 
+				PdfPCell cellvide = new PdfPCell();
+				cellvide.setBorder(Rectangle.NO_BORDER);
 
 				PdfPTable table3; 
 				
@@ -962,8 +984,13 @@ public class NotesController extends AbstractContextAwareController {
 				celltext4.setBorder(Rectangle.NO_BORDER);
 				tabletape2.addCell(celltext4);
 
-				if(config.isAffRangEtudiant()){
+				//if(config.isAffRangEtudiant()){
+				if(etudiant.getEtapes().get(i).isAfficherRang()){
 					tabletape2.addCell(cellEtapeRang);
+				}else{
+					if(etudiant.isAfficherRang()){
+						tabletape2.addCell(cellvide);
+					}
 				}
 
 			}

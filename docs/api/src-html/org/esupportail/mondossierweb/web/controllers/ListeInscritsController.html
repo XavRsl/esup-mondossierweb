@@ -40,7 +40,7 @@
 <FONT color="green">037</FONT>    import org.esupportail.mondossierweb.domain.beans.Etape;<a name="line.37"></a>
 <FONT color="green">038</FONT>    import org.esupportail.mondossierweb.domain.beans.Inscrit;<a name="line.38"></a>
 <FONT color="green">039</FONT>    import org.esupportail.mondossierweb.dto.ObjetRecherche;<a name="line.39"></a>
-<FONT color="green">040</FONT>    import org.esupportail.mondossierweb.web.converters.EmailConverter;<a name="line.40"></a>
+<FONT color="green">040</FONT>    import org.esupportail.mondossierweb.web.converters.EmailConverterInterface;<a name="line.40"></a>
 <FONT color="green">041</FONT>    import org.esupportail.mondossierweb.web.navigation.View;<a name="line.41"></a>
 <FONT color="green">042</FONT>    import org.esupportail.mondossierweb.web.photo.IPhoto;<a name="line.42"></a>
 <FONT color="green">043</FONT>    <a name="line.43"></a>
@@ -109,7 +109,7 @@
 <FONT color="green">106</FONT>            /**<a name="line.106"></a>
 <FONT color="green">107</FONT>             * Le bean de complétion de l'adresse email.<a name="line.107"></a>
 <FONT color="green">108</FONT>             */<a name="line.108"></a>
-<FONT color="green">109</FONT>            private EmailConverter emailConverter;<a name="line.109"></a>
+<FONT color="green">109</FONT>            private EmailConverterInterface emailConverter;<a name="line.109"></a>
 <FONT color="green">110</FONT>            /**<a name="line.110"></a>
 <FONT color="green">111</FONT>             * vrai si on veut interrompre la génération du pdf (car l'utilisateur en demande un autre)<a name="line.111"></a>
 <FONT color="green">112</FONT>             */<a name="line.112"></a>
@@ -1399,14 +1399,14 @@
 <FONT color="green">1396</FONT>            /**<a name="line.1396"></a>
 <FONT color="green">1397</FONT>             * @return emailConverter<a name="line.1397"></a>
 <FONT color="green">1398</FONT>             */<a name="line.1398"></a>
-<FONT color="green">1399</FONT>            public EmailConverter getEmailConverter() {<a name="line.1399"></a>
+<FONT color="green">1399</FONT>            public EmailConverterInterface getEmailConverter() {<a name="line.1399"></a>
 <FONT color="green">1400</FONT>                    return emailConverter;<a name="line.1400"></a>
 <FONT color="green">1401</FONT>            }<a name="line.1401"></a>
 <FONT color="green">1402</FONT>    <a name="line.1402"></a>
 <FONT color="green">1403</FONT>            /**<a name="line.1403"></a>
 <FONT color="green">1404</FONT>             * @param emailConverter<a name="line.1404"></a>
 <FONT color="green">1405</FONT>             */<a name="line.1405"></a>
-<FONT color="green">1406</FONT>            public void setEmailConverter(final EmailConverter emailConverter) {<a name="line.1406"></a>
+<FONT color="green">1406</FONT>            public void setEmailConverter(final EmailConverterInterface emailConverter) {<a name="line.1406"></a>
 <FONT color="green">1407</FONT>                    this.emailConverter = emailConverter;<a name="line.1407"></a>
 <FONT color="green">1408</FONT>            }<a name="line.1408"></a>
 <FONT color="green">1409</FONT>    <a name="line.1409"></a>

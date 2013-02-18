@@ -64,8 +64,8 @@
 				The LDAP attributes to display when searching for users.
 			</description>
 			<list>
-				<value>cn</value>
 				<value>displayName</value>
+				<value>cn</value>
 				<value>employeeType</value>
 				<value>departmentNumber</value>
 			</list>

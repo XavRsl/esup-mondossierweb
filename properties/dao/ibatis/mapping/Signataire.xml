@@ -21,7 +21,7 @@
 	<select id="getSignataire" resultMap="signataire">
 		select sig.COD_SIG, sig.NOM_SIG, sig.QUA_SIG, PKB_CRY1.decryptLob(decode(std.TEM_CES_STD,'T',std.IMG_TAM_STD,std.IMG_SIG_STD),UTL_RAW.cast_to_raw('CLEFAPOGEE123456')) as IMG_SIG_STD
 		from APOGEE.SIGNATAIRE sig, APOGEE.SIGN_TAMP_DIGITALISE std
-		where sig.COD_SIG = std.COD_SIG
+		where sig.COD_SIG = std.COD_SIG (+)
 		and sig.COD_SIG = #value#
 	</select>
 	

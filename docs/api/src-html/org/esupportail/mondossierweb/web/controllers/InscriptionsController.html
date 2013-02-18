@@ -391,7 +391,7 @@
 <FONT color="green">388</FONT>                            tableSignataire.addCell(makeCellSignataire("", normal));<a name="line.388"></a>
 <FONT color="green">389</FONT>                            tableSignataire.addCell(makeCellSignataire(signataire.getNom_sig(), normal));<a name="line.389"></a>
 <FONT color="green">390</FONT>                            //ajout signature<a name="line.390"></a>
-<FONT color="green">391</FONT>                            if (signataire.getImg_sig_std() != null){<a name="line.391"></a>
+<FONT color="green">391</FONT>                            if (signataire.getImg_sig_std() != null &amp;&amp; signataire.getImg_sig_std().length &gt; 0){ //MODIF 09/10/2012<a name="line.391"></a>
 <FONT color="green">392</FONT>                                    tableSignataire.addCell(makeCellSignataire("", normal));<a name="line.392"></a>
 <FONT color="green">393</FONT>                                    LOG.debug(signataire.getImg_sig_std().toString());<a name="line.393"></a>
 <FONT color="green">394</FONT>                                    Image imageSignature = Image.getInstance(signataire.getImg_sig_std());<a name="line.394"></a>
