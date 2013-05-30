@@ -12,7 +12,7 @@
 	<t:column>
 
  
-  		<h:commandLink action="#{etatCivilController.lienEnter}">
+  		<h:commandLink action="#{etatCivilController.lienEnter}" rendered="#{ins.cod_etu!=null}">
   			<f:param name="idparam" value="#{ins.cod_etu}"/>
 			<t:graphicImage alt='Dossier Etudiant' value='/media/images/CMonDossierWeb/folderopen.gif' />
 		</h:commandLink>
@@ -25,9 +25,9 @@
 <t:column>
  <f:facet name="header">Dossier</f:facet>
 		
-  		<h:commandLink action="#{etatCivilController.lienEnter}">
+  		<h:commandLink action="#{etatCivilController.lienEnter}" rendered="#{ins.cod_etu!=null}">
   			<f:param name="idparam" value="#{ins.cod_etu}"/>
-     <h:outputText value="#{ins.cod_etu}"/>
+     		<h:outputText value="#{ins.cod_etu}"/>
      </h:commandLink>
 	
     </t:column> 

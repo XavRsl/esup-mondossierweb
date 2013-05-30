@@ -17,6 +17,7 @@ import gouv.education.apogee.commun.transverse.dto.scolarite.CollectionDTO2;
 import gouv.education.apogee.commun.transverse.dto.scolarite.ElementPedagogiDTO;
 import gouv.education.apogee.commun.transverse.dto.scolarite.GroupeDTO;
 import gouv.education.apogee.commun.transverse.dto.scolarite.RecupererGroupeDTO;
+import gouv.education.apogee.commun.transverse.exception.WebBaseException;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -165,8 +166,14 @@ public class DaoServiceIBatisImpl extends SqlMapClientDaoSupport implements IDao
 	 * @see org.esupportail.mondossierweb.dao.IDaoService#getCommunes(java.lang.String)
 	 */
 	public CommuneDTO[] getCommunes(final String codp) {
-		//return monProxyGeo.recupererCommune(null, null, null);
-		return monProxyGeo.recupererCommune(codp,  "O", "T");
+
+		CommuneDTO[] cdto =  null;
+		try{
+			cdto=monProxyGeo.recupererCommune(codp,  "O", "T");
+		}catch(WebBaseException e ){
+			LOG.error("Problème à la récupération de communes pour le code postal : "+codp);
+		}
+		return cdto;
 	}
 
 
@@ -175,13 +182,18 @@ public class DaoServiceIBatisImpl extends SqlMapClientDaoSupport implements IDao
 	 */
 	public String[] getCommune(final String codp) {
 		//return monProxyGeo.recupererCommune(null, null, null);
-		CommuneDTO[]cdto = monProxyGeo.recupererCommune(codp, "O", "T");
-		CommuneDTO c = cdto[0];
-		String[] ville = new String[3];
-		ville[0] = c.getLibCommune();
-		ville[1] = c.getCodeCommune();
-		ville[2] = c.getCodePostal();
-
+		CommuneDTO[]cdto = null;
+		String[] ville = null;
+		try{
+			cdto=monProxyGeo.recupererCommune(codp, "O", "T");
+			CommuneDTO c = cdto[0];
+			ville = new String[3];
+			ville[0] = c.getLibCommune();
+			ville[1] = c.getCodeCommune();
+			ville[2] = c.getCodePostal();
+		}catch(WebBaseException e ){
+			LOG.error("Problème à la récupération de la commune pour le code postal : "+codp);
+		}
 		return ville;
 
 	}
@@ -402,7 +414,7 @@ public class DaoServiceIBatisImpl extends SqlMapClientDaoSupport implements IDao
 	public String getCodeTypeDiplome(String codDip){
 		return (String) getSqlMapClientTemplate().queryForObject("Diplomes.getCodeTypeDiplome", codDip);
 	}
-	
+
 	/*public List<Diplome> getDiplomeByEtape(ObjetRecherche o) {
 		return getSqlMapClientTemplate().queryForList("Diplomes.getDiplomeByEtape", o);
 	}*/
@@ -584,7 +596,7 @@ public class DaoServiceIBatisImpl extends SqlMapClientDaoSupport implements IDao
 			//On parcourt les ELP
 			for(ElementPedagogiDTO elp : recupererGroupeDTO.getListElementPedagogi()){
 				ElpDeCollection el = new ElpDeCollection(elp.getCodElp(), elp.getLibElp());
-				
+
 				List<CollectionDeGroupes> listeCollection = new LinkedList<CollectionDeGroupes>();
 
 				//On parcourt les collections de l'ELP
@@ -592,21 +604,21 @@ public class DaoServiceIBatisImpl extends SqlMapClientDaoSupport implements IDao
 					CollectionDeGroupes collection = new CollectionDeGroupes(cd2.getCodExtCol());
 
 					List<Groupe> listegroupe = new LinkedList<Groupe>();
-					
+
 					//On parcourt les groupes de la collection
 					for(GroupeDTO gd2 : cd2.getListGroupe()){
 						//On récupère les infos sur le groupe
 						Groupe groupe = new Groupe(gd2.getCodExtGpe());
 						groupe.setLibGroupe(gd2.getLibGpe());
-						
+
 						//on récupère le codeGpe a la main car il est pas retourne par le WS.
 						ParamRequeteDTO param = new ParamRequeteDTO();
 						param.setChaine1(groupe.getCodGroupe());
 						param.setChaine2(collection.getCodCollection());
 						param.setChaine3(elp.getCodElp());
 						groupe.setCleGroupe(getCleGroupe(param));
-						
-						
+
+
 						if(gd2.getCapaciteGpe() != null){
 							if(gd2.getCapaciteGpe().getCapMaxGpe() != null){
 								groupe.setCapMaxGpe(gd2.getCapaciteGpe().getCapMaxGpe());
@@ -652,18 +664,18 @@ public class DaoServiceIBatisImpl extends SqlMapClientDaoSupport implements IDao
 
 	public String getCleGroupe(ParamRequeteDTO r) {
 		return (String) getSqlMapClientTemplate().queryForObject("Groupes.getCleGroupe", r);
-		
+
 	}
 
 
 
 	public String getLibelleGroupe(String codgpe) {
 		return (String) getSqlMapClientTemplate().queryForObject("Groupes.getLibelleGroupe", codgpe);
-		
+
 	}
 
 
-	
+
 
 }
 

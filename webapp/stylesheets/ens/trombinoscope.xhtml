@@ -151,11 +151,15 @@ partie <h:outputText value="#{listeInscritsController.pageVisualiseeTrombinoscop
 
 
 						<div class='blocPhoto'><h:form>
-							<h:commandLink action="#{etatCivilController.lienEnterTrombi}">
+							<h:commandLink rendered="#{inscrit.cod_etu!=null}" action="#{etatCivilController.lienEnterTrombi}">
 								<f:param name="idparam" value="#{inscrit.cod_etu}" />
 								<img width='120' border="0" height='153' src="#{inscrit.urlphoto}"
 									alt='Photo' />
 							</h:commandLink>
+							<h:outputText rendered="#{inscrit.cod_etu==null}" >
+							<img width='120' border="0" height='153' src="#{inscrit.urlphoto}"
+									alt='Photo' />
+							</h:outputText>
 						</h:form> <b> <h:outputText value="#{inscrit.lib_nom_pat_ind}" /> </b> <br />
 						<b> <h:outputText value="#{inscrit.lib_pr1_ind}" /> </b> <br />
 						<h:outputText value="#{inscrit.cod_etu}" /> <br />

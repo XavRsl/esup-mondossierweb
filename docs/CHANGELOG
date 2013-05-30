@@ -1,4 +1,10 @@
 ***************
+* version 2.6-6 (19/04/2013)
+* -Correction de bugs lorsqu'un étudiant d'une liste d'inscrits n'a pas de cod_etu.
+***************
+* version 2.6-5 (18/04/2013)
+* -Correction d'un bug sur la récupération des villes/codePostaux lors de la modification de l'adresse par l'étudiant
+***************
 * version 2.6-4 (28/03/2013)
 * -Correction du bug dans le cas d'une étape en dette lors de la récupération des notes à cette étape
 ***************

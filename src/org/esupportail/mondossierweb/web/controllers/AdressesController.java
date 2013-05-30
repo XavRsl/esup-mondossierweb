@@ -289,7 +289,7 @@ public class AdressesController extends AbstractContextAwareController {
 			boolFixeEtranger = false;
 			if(adfixecp!= null && !adfixecp.equals("") && Pattern.matches("[0-9]*",adfixecp))
 				cdtofixe = service.getCommunes(adfixecp);
-			
+
 		} else  {
 			boolFixeEtranger = true;
 		}
@@ -473,33 +473,36 @@ public class AdressesController extends AbstractContextAwareController {
 			cdtoan = service.getCommunes(adancp);
 			String ville1 = "";
 			lvillesan.clear();
-			for (int i = 0; i < cdtoan.length; i++) {
+			if(cdtoan!=null){
+				for (int i = 0; i < cdtoan.length; i++) {
 
-				boolean insere = false;
-				int j = 0;
-				while (!insere && j < lvillesan.size()) {
-					if (lvillesan.get(j).getLabel().compareTo(cdtoan[i].getLibCommune()) > 0) {
-						lvillesan.add(j, new SelectItem(cdtoan[i].getLibCommune(), cdtoan[i].getLibCommune()));
-						insere = true;
-					}
-					if (lvillesan.get(j).getLabel().equals(cdtoan[i].getLibCommune())) {
-						insere = true;
+					boolean insere = false;
+					int j = 0;
+					while (!insere && j < lvillesan.size()) {
+						if (lvillesan.get(j).getLabel().compareTo(cdtoan[i].getLibCommune()) > 0) {
+							lvillesan.add(j, new SelectItem(cdtoan[i].getLibCommune(), cdtoan[i].getLibCommune()));
+							insere = true;
+						}
+						if (lvillesan.get(j).getLabel().equals(cdtoan[i].getLibCommune())) {
+							insere = true;
+						}
+						if (!insere) {
+							j++;
+						}
 					}
 					if (!insere) {
-						j++;
+						lvillesan.add(new SelectItem(cdtoan[i].getLibCommune(), cdtoan[i].getLibCommune()));
+					}
+					//Pour afficher le CP de la premiere ville directement
+					if (j == 0 && !cdtoan[i].getLibCommune().equals(ville1)) {
+						adancp = cdtoan[i].getCodePostal();
+						ville1 = cdtoan[i].getLibCommune();
 					}
 				}
-				if (!insere) {
-					lvillesan.add(new SelectItem(cdtoan[i].getLibCommune(), cdtoan[i].getLibCommune()));
-				}
-				//Pour afficher le CP de la premiere ville directement
-				if (j == 0 && !cdtoan[i].getLibCommune().equals(ville1)) {
-					adancp = cdtoan[i].getCodePostal();
-					ville1 = cdtoan[i].getLibCommune();
-				}
+				adanville = lvillesan.get(0).getLabel();
 			}
 
-			adanville = lvillesan.get(0).getLabel();
+
 
 		} else {
 			String message = "Le code être composé d'au moins 2 chiffres";
@@ -518,13 +521,15 @@ public class AdressesController extends AbstractContextAwareController {
 	public String majCpVilleAnnuelle() {
 		boolean trouve = false;
 		int i = 0;
-		while (i < cdtoan.length && !trouve) {
+		if(cdtoan!=null){
+			while (i < cdtoan.length && !trouve) {
 
-			if (cdtoan[i].getLibCommune().equals(adanville)) {
-				adancp = cdtoan[i].getCodePostal();
-				trouve = true;
+				if (cdtoan[i].getLibCommune().equals(adanville)) {
+					adancp = cdtoan[i].getCodePostal();
+					trouve = true;
+				}
+				i++;
 			}
-			i++;
 		}
 		return View.MODIFIER_ADRESSES;
 	}
@@ -538,32 +543,34 @@ public class AdressesController extends AbstractContextAwareController {
 			cdtofixe = service.getCommunes(adfixecp);
 			String ville1 = "";
 			lvillesfixe.clear();
-			for (int i = 0; i < cdtofixe.length; i++) {
-				boolean insere = false;
-				int j = 0;
-				while (!insere && j < lvillesfixe.size()) {
-					if (lvillesfixe.get(j).getLabel().compareTo(cdtofixe[i].getLibCommune()) > 0) {
-						lvillesfixe.add(j, new SelectItem(cdtofixe[i].getLibCommune(), cdtofixe[i].getLibCommune()));
-						insere = true;
-					}
-					if (lvillesfixe.get(j).getLabel().equals(cdtofixe[i].getLibCommune())) {
-						insere = true;
+			if(cdtofixe!=null){
+				for (int i = 0; i < cdtofixe.length; i++) {
+					boolean insere = false;
+					int j = 0;
+					while (!insere && j < lvillesfixe.size()) {
+						if (lvillesfixe.get(j).getLabel().compareTo(cdtofixe[i].getLibCommune()) > 0) {
+							lvillesfixe.add(j, new SelectItem(cdtofixe[i].getLibCommune(), cdtofixe[i].getLibCommune()));
+							insere = true;
+						}
+						if (lvillesfixe.get(j).getLabel().equals(cdtofixe[i].getLibCommune())) {
+							insere = true;
+						}
+						if (!insere) {
+							j++;
+						}
 					}
 					if (!insere) {
-						j++;
+						lvillesfixe.add(new SelectItem(cdtofixe[i].getLibCommune(), cdtofixe[i].getLibCommune()));
+					}
+					// Pour afficher le CP de la premiere ville directement
+					if (j == 0 && !cdtofixe[i].getLibCommune().equals(ville1)) {
+						adfixecp = cdtofixe[i].getCodePostal();
+						ville1 = cdtofixe[i].getLibCommune();
 					}
 				}
-				if (!insere) {
-					lvillesfixe.add(new SelectItem(cdtofixe[i].getLibCommune(), cdtofixe[i].getLibCommune()));
-				}
-				// Pour afficher le CP de la premiere ville directement
-				if (j == 0 && !cdtofixe[i].getLibCommune().equals(ville1)) {
-					adfixecp = cdtofixe[i].getCodePostal();
-					ville1 = cdtofixe[i].getLibCommune();
-				}
-			}
 
-			adfixeville = lvillesfixe.get(0).getLabel();
+				adfixeville = lvillesfixe.get(0).getLabel();
+			}
 		} else {
 			String message = "Le code être composé d'au moins 2 chiffres";
 			FacesMessage messageX = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
@@ -580,13 +587,15 @@ public class AdressesController extends AbstractContextAwareController {
 	public String majCpVilleFixe() {
 		boolean trouve = false;
 		int i = 0;
-		while (i < cdtofixe.length && !trouve) {
+		if(cdtofixe!=null){
+			while (i < cdtofixe.length && !trouve) {
 
-			if (cdtofixe[i].getLibCommune().equals(adfixeville)) {
-				adfixecp = cdtofixe[i].getCodePostal();
-				trouve = true;
+				if (cdtofixe[i].getLibCommune().equals(adfixeville)) {
+					adfixecp = cdtofixe[i].getCodePostal();
+					trouve = true;
+				}
+				i++;
 			}
-			i++;
 		}
 		return View.MODIFIER_ADRESSES;
 	}

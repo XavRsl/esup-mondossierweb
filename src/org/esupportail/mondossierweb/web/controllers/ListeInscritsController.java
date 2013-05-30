@@ -337,6 +337,7 @@ public class ListeInscritsController extends AbstractContextAwareController {
 			}
 		}
 
+		
 		setLoginInscrits();
 		setMailInscrits();
 
@@ -358,6 +359,7 @@ public class ListeInscritsController extends AbstractContextAwareController {
 	 */
 	private void setLoginInscrits() {
 		for (Inscrit i : listeInscrits) {
+			if(i.getCod_etu()!=null)
 			i.setLogin(service.getLoginFromCodEtu(i.getCod_etu()));
 		}
 	}
@@ -368,7 +370,8 @@ public class ListeInscritsController extends AbstractContextAwareController {
 	 */
 	private void setMailInscrits() {
 		for (Inscrit i : listeInscrits) {
-			i.setEmail(emailConverter.getMail(i.getLogin()));
+			if(i.getLogin()!=null)
+				i.setEmail(emailConverter.getMail(i.getLogin()));
 		}
 	}
 
