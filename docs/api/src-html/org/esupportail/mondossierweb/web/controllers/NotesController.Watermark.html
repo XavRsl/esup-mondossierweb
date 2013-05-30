@@ -417,15 +417,15 @@
 <FONT color="green">414</FONT>                            <a name="line.414"></a>
 <FONT color="green">415</FONT>                            <a name="line.415"></a>
 <FONT color="green">416</FONT>                            <a name="line.416"></a>
-<FONT color="green">417</FONT>                            if(!config.isAffRangEtudiant() &amp;&amp; !config.isAffECTSEtudiant()){<a name="line.417"></a>
+<FONT color="green">417</FONT>                            if((!config.isAffRangEtudiant() &amp;&amp; !etudiant.isAfficherRangElpEpr())&amp;&amp; !config.isAffECTSEtudiant()){<a name="line.417"></a>
 <FONT color="green">418</FONT>                                    //NI isAffRangEtudiant  NI isAffECTSEtudiant<a name="line.418"></a>
 <FONT color="green">419</FONT>                                    table2= new PdfPTable(7);<a name="line.419"></a>
 <FONT color="green">420</FONT>                                    table2.setWidthPercentage(98);<a name="line.420"></a>
 <FONT color="green">421</FONT>                                    int [] tabWidth = {26,35,110,25,25,25,25};<a name="line.421"></a>
 <FONT color="green">422</FONT>                                    table2.setWidths(tabWidth);<a name="line.422"></a>
 <FONT color="green">423</FONT>                            }else{<a name="line.423"></a>
-<FONT color="green">424</FONT>                                    if((config.isAffRangEtudiant() &amp;&amp; !config.isAffECTSEtudiant()) ||<a name="line.424"></a>
-<FONT color="green">425</FONT>                                                    (!config.isAffRangEtudiant() &amp;&amp; config.isAffECTSEtudiant())){<a name="line.425"></a>
+<FONT color="green">424</FONT>                                    if(((config.isAffRangEtudiant() || etudiant.isAfficherRangElpEpr()) &amp;&amp; !config.isAffECTSEtudiant()) ||<a name="line.424"></a>
+<FONT color="green">425</FONT>                                                    ((!config.isAffRangEtudiant()&amp;&amp; !etudiant.isAfficherRangElpEpr()) &amp;&amp; config.isAffECTSEtudiant())){<a name="line.425"></a>
 <FONT color="green">426</FONT>                                            //isAffRangEtudiant  OU isAffECTSEtudiant<a name="line.426"></a>
 <FONT color="green">427</FONT>                                            table2= new PdfPTable(8);<a name="line.427"></a>
 <FONT color="green">428</FONT>                                            table2.setWidthPercentage(98);<a name="line.428"></a>
@@ -476,7 +476,7 @@
 <FONT color="green">473</FONT>                            table2.addCell(ct5);<a name="line.473"></a>
 <FONT color="green">474</FONT>                            table2.addCell(ct6);<a name="line.474"></a>
 <FONT color="green">475</FONT>                            table2.addCell(ct7);<a name="line.475"></a>
-<FONT color="green">476</FONT>                            if(config.isAffRangEtudiant()){<a name="line.476"></a>
+<FONT color="green">476</FONT>                            if((config.isAffRangEtudiant() || etudiant.isAfficherRangElpEpr())){<a name="line.476"></a>
 <FONT color="green">477</FONT>                                    table2.addCell(cellRang);<a name="line.477"></a>
 <FONT color="green">478</FONT>                            }<a name="line.478"></a>
 <FONT color="green">479</FONT>                            if(config.isAffECTSEtudiant()){<a name="line.479"></a>
@@ -527,7 +527,7 @@
 <FONT color="green">524</FONT>                                    table2.addCell(celltext8);<a name="line.524"></a>
 <FONT color="green">525</FONT>    <a name="line.525"></a>
 <FONT color="green">526</FONT>                                    <a name="line.526"></a>
-<FONT color="green">527</FONT>                                    if(config.isAffRangEtudiant()){<a name="line.527"></a>
+<FONT color="green">527</FONT>                                    if((config.isAffRangEtudiant() || etudiant.isAfficherRangElpEpr())){<a name="line.527"></a>
 <FONT color="green">528</FONT>                                            Paragraph parRang2 = new Paragraph(etudiant.getElementsPedagogiques().get(i).getRang(), normal);<a name="line.528"></a>
 <FONT color="green">529</FONT>                                            PdfPCell cellRang2 = new PdfPCell(parRang2);<a name="line.529"></a>
 <FONT color="green">530</FONT>                                            cellRang2.setBorder(Rectangle.NO_BORDER);<a name="line.530"></a>

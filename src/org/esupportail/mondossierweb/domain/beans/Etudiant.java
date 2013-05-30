@@ -280,7 +280,7 @@ public class Etudiant implements Resettable {
 	 * vrai si un calendrier de rentrée existe.
 	 */
 	private boolean existeCalendrierRentree;
-	
+
 	/**
 	 * vrai si on doit afficher le rang de l'étudiant.
 	 */
@@ -453,8 +453,8 @@ public class Etudiant implements Resettable {
 		//2-on récupère les infos du cache.
 		diplomes = new LinkedList<Diplome>(cacheResultats.getResultVdiVet().get(rang).getDiplomes());
 		etapes = new LinkedList<Etape>(cacheResultats.getResultVdiVet().get(rang).getEtapes());
-		
-		
+
+
 	}
 
 	/**
@@ -496,9 +496,9 @@ public class Etudiant implements Resettable {
 			recupererCacheResultatVdiVet(new Integer(rang));
 		}
 	}
-	
-	
-	
+
+
+
 	/**
 	 * 
 	 * @param etape
@@ -529,12 +529,12 @@ public class Etudiant implements Resettable {
 		if(!enCache){
 			return null;
 		}
-		
+
 		return ""+rang;
 
 	}
-	
-	
+
+
 	/**
 	 * On complète les infos du cache pour les Résultats aux elp et epr.
 	 * @param vueEtudiant
@@ -545,10 +545,10 @@ public class Etudiant implements Resettable {
 		cree.setEtape(etape);
 		cree.setElementsPedagogiques(new LinkedList<ElementPedagogique>(elementsPedagogiques));
 		cacheResultats.getResultElpEpr().add(cree);
-		
+
 	}
-	
-	
+
+
 	/**
 	 * récupère les résultat aux Elp et Epr dans le cache (en s'indexant sur le rang)
 	 * @param rang
@@ -558,17 +558,17 @@ public class Etudiant implements Resettable {
 		if(elementsPedagogiques!=null){
 			elementsPedagogiques.clear();
 		}
-		
-		
+
+
 		//2-on récupère les infos du cache.
 		elementsPedagogiques = new LinkedList<ElementPedagogique>(cacheResultats.getResultElpEpr().get(rang).getElementsPedagogiques());
-		
-		
+
+
 	}
-	
-	
+
+
 	public void renseigneNotesElpEpr(int index) {
-		
+
 		//On regarde si on a pas déjà les infos dans le cache:
 		String rang = getRangNotesEtResultatsEnCache(etapes.get(index),true);
 
@@ -582,7 +582,7 @@ public class Etudiant implements Resettable {
 			}else{
 				recupererCacheResultatVdiVet(new Integer(rangNoteGlobal));
 			}
-			
+
 			etudiantManager.setNotesElpEpr(this, etapes.get(index));
 			//AJOUT DES INFOS recupérées dans le cache. true car on est en vue Etudiant
 			ajouterCacheResultatElpEpr(etapes.get(index), true);
@@ -590,9 +590,9 @@ public class Etudiant implements Resettable {
 			//on récupére les infos du cache grace au rang :
 			recupererCacheResultatElpEpr(new Integer(rang));
 		}
-	
+
 	}
-	
+
 	public void renseigneNotesElpEprVueEnseignant(int index) {
 		//On regarde si on a pas déjà les infos dans le cache:
 		String rang = getRangNotesEtResultatsEnCache(etapes.get(index),false);
@@ -607,7 +607,7 @@ public class Etudiant implements Resettable {
 			}else{
 				recupererCacheResultatVdiVet(new Integer(rangNoteGlobal));
 			}
-			
+
 			etudiantManager.setNotesElpEprEnseignant(this, etapes.get(index));
 			//AJOUT DES INFOS recupérées dans le cache. false car on est en vue Enseignant
 			ajouterCacheResultatElpEpr(etapes.get(index), false);
@@ -615,8 +615,8 @@ public class Etudiant implements Resettable {
 			//on récupére les infos du cache grace au rang :
 			recupererCacheResultatElpEpr(new Integer(rang));
 		}
-		
-	
+
+
 	}
 
 	public void recupererCacheIP(int rang){
@@ -624,15 +624,15 @@ public class Etudiant implements Resettable {
 		if(elementsInscriptionPedagogique!=null){
 			elementsInscriptionPedagogique.clear();
 		}
-		
-		
+
+
 		//2-on récupère les infos du cache.
 		elementsInscriptionPedagogique = new LinkedList<ElementPedagogique>(cacheResultats.getResultElpEpr().get(rang).getElementsPedagogiques());
-		
-		
+
+
 	}
-	
-	
+
+
 	/**
 	 * @return cod_ind
 	 */
@@ -1095,7 +1095,7 @@ public class Etudiant implements Resettable {
 		this.adressesRenseignees = adressesRenseignees;
 	}
 
-	
+
 	public boolean isInscriptionsRenseignees() {
 		if (inscriptionsRenseignees) {
 			//on vérifie que le lib_etb est effectivement renseigné:
@@ -1161,6 +1161,19 @@ public class Etudiant implements Resettable {
 		return notesRenseignees;
 	}
 
+	public boolean isAfficherRangElpEpr(){
+		if(elementsPedagogiques != null && elementsPedagogiques.size()>0){
+			Config config = (Config)  BeanUtils.getBean("config");
+			List<String> codesAutorises = config.getCodesEtapeAffichageRang();
+			String codeEtpEnCours = elementsPedagogiques.get(0).getCode();
+			for(String code : codesAutorises){
+				if(code.equals(codeEtpEnCours)){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	public void setNotesRenseignees(boolean notesRenseignees) {
 		this.notesRenseignees = notesRenseignees;
 	}
@@ -1354,8 +1367,8 @@ public class Etudiant implements Resettable {
 		this.afficherRang = afficherRang;
 	}
 
-	
-	
+
+
 
 
 }

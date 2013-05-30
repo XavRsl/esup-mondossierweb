@@ -180,7 +180,7 @@
 						value="#{el.res2}" />
 				</t:column>
 				
-				<t:column rendered="#{config.affRangEtudiant}">
+				<t:column rendered="#{config.affRangEtudiant or etudiant.afficherRangElpEpr}">
 					<f:facet name="header">Rang</f:facet>
 					<h:outputText value="#{el.rang}"/>
 				</t:column> 

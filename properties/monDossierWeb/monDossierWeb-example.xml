@@ -142,6 +142,15 @@
 				Laisser vide pour ne pas prendre en compte ce témoin dans l'affichage des notes aux épreuves</description>
 			<value>N</value>
 		</property>
+		<property name="typesEpreuveAffichageNote">
+			<description>la liste des code type Epreuve (COD_TEP) dont on affiche toujours la note</description>
+			<list>
+				<value>CC</value>
+				<value>CP</value>
+				<value>CT</value>
+				<value>TS</value>
+			</list>
+		</property>
 		<property name="temoinFictif">
 			<description>(O/N) Si temoinFictif est renseigné, seuls les éléments dont tem_fictif est égal à témoinFictif seront affichés dans l'écran du détail des notes</description>
 			<value></value>

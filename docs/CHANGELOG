@@ -1,5 +1,17 @@
 ***************
-* version 2.6-1
+* version 2.6-4 (28/03/2013)
+* -Correction du bug dans le cas d'une étape en dette lors de la récupération des notes à cette étape
+***************
+* version 2.6-3 (15/01/2013)
+* -Ajout du paramètre typesEpreuveAffichageNote dans monDossierWeb.xml pour conditionner l'affichage des notes aux épreuves en fonction de leur type (COD_TEP).
+* -Gestion de l'anonymat dans les notes retournées par les listes d'étudiants dans la partie 'Enseignant'.
+***************
+* version 2.6-2 (09/01/2013)
+* -La visualisation du rang pour une liste de code_etape se propage dans la vue du détail des notes.
+* -Modification de axis.jar pour correction du bug AXIS-2705 : https://issues.apache.org/jira/browse/AXIS-2705
+* -Remplacement de la librairie des WS par la plus récente : apo-webservicesclient430ly.jar
+***************
+* version 2.6-1 (28/11/2012)
 * -ajout encoding dans build-commons.xml pour éviter les soucis d'encodage d'accent dans les .java
 * -ajout de RequestContextListener dans web-portlet.xml pour faire fonctionner l'exposition des WebService en mode portlet.
 * -affichage du code composante dans l'onglet inscription du dossier étudiant.

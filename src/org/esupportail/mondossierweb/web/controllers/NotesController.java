@@ -414,15 +414,15 @@ public class NotesController extends AbstractContextAwareController {
 			
 			
 			
-			if(!config.isAffRangEtudiant() && !config.isAffECTSEtudiant()){
+			if((!config.isAffRangEtudiant() && !etudiant.isAfficherRangElpEpr())&& !config.isAffECTSEtudiant()){
 				//NI isAffRangEtudiant  NI isAffECTSEtudiant
 				table2= new PdfPTable(7);
 				table2.setWidthPercentage(98);
 				int [] tabWidth = {26,35,110,25,25,25,25};
 				table2.setWidths(tabWidth);
 			}else{
-				if((config.isAffRangEtudiant() && !config.isAffECTSEtudiant()) ||
-						(!config.isAffRangEtudiant() && config.isAffECTSEtudiant())){
+				if(((config.isAffRangEtudiant() || etudiant.isAfficherRangElpEpr()) && !config.isAffECTSEtudiant()) ||
+						((!config.isAffRangEtudiant()&& !etudiant.isAfficherRangElpEpr()) && config.isAffECTSEtudiant())){
 					//isAffRangEtudiant  OU isAffECTSEtudiant
 					table2= new PdfPTable(8);
 					table2.setWidthPercentage(98);
@@ -473,7 +473,7 @@ public class NotesController extends AbstractContextAwareController {
 			table2.addCell(ct5);
 			table2.addCell(ct6);
 			table2.addCell(ct7);
-			if(config.isAffRangEtudiant()){
+			if((config.isAffRangEtudiant() || etudiant.isAfficherRangElpEpr())){
 				table2.addCell(cellRang);
 			}
 			if(config.isAffECTSEtudiant()){
@@ -524,7 +524,7 @@ public class NotesController extends AbstractContextAwareController {
 				table2.addCell(celltext8);
 
 				
-				if(config.isAffRangEtudiant()){
+				if((config.isAffRangEtudiant() || etudiant.isAfficherRangElpEpr())){
 					Paragraph parRang2 = new Paragraph(etudiant.getElementsPedagogiques().get(i).getRang(), normal);
 					PdfPCell cellRang2 = new PdfPCell(parRang2);
 					cellRang2.setBorder(Rectangle.NO_BORDER);

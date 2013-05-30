@@ -532,6 +532,7 @@
 			build/**/*
 			properties/**/*example*.xml		
 			properties/**/*example*.properties		
+			properties/i18n/bundles/Custom*.properties
 			" />
 		<property name="commons.zip-files.exclude" value="
 			" />

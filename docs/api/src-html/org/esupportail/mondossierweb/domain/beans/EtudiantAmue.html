@@ -151,7 +151,7 @@
 <FONT color="green">148</FONT>             * @see org.esupportail.mondossierweb.domain.beans.IEtudiant#setPhoto(org.esupportail.mondossierweb.domain.beans.Etudiant)<a name="line.148"></a>
 <FONT color="green">149</FONT>             */<a name="line.149"></a>
 <FONT color="green">150</FONT>            public void setPhoto(Etudiant e){<a name="line.150"></a>
-<FONT color="green">151</FONT>                            e.setUrlphoto(photo.getUrlPhoto(e.getCod_ind(),e.getCod_etu()));<a name="line.151"></a>
+<FONT color="green">151</FONT>                    e.setUrlphoto(photo.getUrlPhoto(e.getCod_ind(),e.getCod_etu()));<a name="line.151"></a>
 <FONT color="green">152</FONT>            }<a name="line.152"></a>
 <FONT color="green">153</FONT>            /**<a name="line.153"></a>
 <FONT color="green">154</FONT>             * va chercher et renseigne les informations concernant l'état-civil de <a name="line.154"></a>
@@ -181,7 +181,7 @@
 <FONT color="green">178</FONT>                            //Modification 21/02/2012. Pour ne renseigner la photo que si elle n'est pas renseignée.<a name="line.178"></a>
 <FONT color="green">179</FONT>                            //setPhoto(e);<a name="line.179"></a>
 <FONT color="green">180</FONT>                            e.getUrlphoto();<a name="line.180"></a>
-<FONT color="green">181</FONT>                            <a name="line.181"></a>
+<FONT color="green">181</FONT>    <a name="line.181"></a>
 <FONT color="green">182</FONT>    <a name="line.182"></a>
 <FONT color="green">183</FONT>                            if (!config.isRecupAnnuaire()) {<a name="line.183"></a>
 <FONT color="green">184</FONT>                                    // on passe par iBATIS pour récupérer l'e-mail.<a name="line.184"></a>
@@ -192,14 +192,14 @@
 <FONT color="green">189</FONT>                            }<a name="line.189"></a>
 <FONT color="green">190</FONT>    <a name="line.190"></a>
 <FONT color="green">191</FONT>                            InfoAdmEtuDTO iaetu = monProxyEtu.recupererInfosAdmEtu(e.getCod_etu());<a name="line.191"></a>
-<FONT color="green">192</FONT>                            <a name="line.192"></a>
+<FONT color="green">192</FONT>    <a name="line.192"></a>
 <FONT color="green">193</FONT>                            //MODIF POUR UTILISER LE NOM USUEL SI RENSEIGNE 19/09/2012<a name="line.193"></a>
 <FONT color="green">194</FONT>                            if (iaetu.getNomUsuel() != null &amp;&amp; !iaetu.getNomUsuel().equals("")){<a name="line.194"></a>
 <FONT color="green">195</FONT>                                    e.setNom(iaetu.getNomUsuel()+ " " + iaetu.getPrenom1());<a name="line.195"></a>
 <FONT color="green">196</FONT>                            }else{<a name="line.196"></a>
 <FONT color="green">197</FONT>                                    e.setNom( iaetu.getNomPatronymique() + " " + iaetu.getPrenom1());<a name="line.197"></a>
 <FONT color="green">198</FONT>                            }<a name="line.198"></a>
-<FONT color="green">199</FONT>                            <a name="line.199"></a>
+<FONT color="green">199</FONT>    <a name="line.199"></a>
 <FONT color="green">200</FONT>    <a name="line.200"></a>
 <FONT color="green">201</FONT>                            //informations sur la naissance :<a name="line.201"></a>
 <FONT color="green">202</FONT>                            //la nationalité:<a name="line.202"></a>
@@ -311,14 +311,14 @@
 <FONT color="green">308</FONT>                     *  ++++++++++++++++++++++++++++++++++++++++++++++++++<a name="line.308"></a>
 <FONT color="green">309</FONT>                     */<a name="line.309"></a>
 <FONT color="green">310</FONT>                    try {<a name="line.310"></a>
-<FONT color="green">311</FONT>                            <a name="line.311"></a>
+<FONT color="green">311</FONT>    <a name="line.311"></a>
 <FONT color="green">312</FONT>                            String[] annees =  monProxyAdministratif.recupererAnneesIa(e.getCod_etu(), null);<a name="line.312"></a>
 <FONT color="green">313</FONT>    <a name="line.313"></a>
 <FONT color="green">314</FONT>                            String annee = annees[annees.length - 1];<a name="line.314"></a>
 <FONT color="green">315</FONT>                            //récupération des coordonnées :<a name="line.315"></a>
 <FONT color="green">316</FONT>    <a name="line.316"></a>
 <FONT color="green">317</FONT>                            CoordonneesDTO2 cdto = monProxyEtu.recupererAdressesEtudiant_v2(e.getCod_etu(), annee, "N");<a name="line.317"></a>
-<FONT color="green">318</FONT>                    <a name="line.318"></a>
+<FONT color="green">318</FONT>    <a name="line.318"></a>
 <FONT color="green">319</FONT>                            //récupération des adresses, annuelle et fixe :<a name="line.319"></a>
 <FONT color="green">320</FONT>                            annee = cdto.getAnnee();<a name="line.320"></a>
 <FONT color="green">321</FONT>                            e.setEmailPerso(cdto.getEmail());<a name="line.321"></a>
@@ -547,11 +547,11 @@
 <FONT color="green">544</FONT>                            e.getLinscdac().clear();<a name="line.544"></a>
 <FONT color="green">545</FONT>    <a name="line.545"></a>
 <FONT color="green">546</FONT>                            e.setLib_etb(service.getEtablissementDef());<a name="line.546"></a>
-<FONT color="green">547</FONT>                            <a name="line.547"></a>
+<FONT color="green">547</FONT>    <a name="line.547"></a>
 <FONT color="green">548</FONT>                            //cursus au sein de l'université:<a name="line.548"></a>
-<FONT color="green">549</FONT>                            <a name="line.549"></a>
+<FONT color="green">549</FONT>    <a name="line.549"></a>
 <FONT color="green">550</FONT>                            InsAdmEtpDTO2[] insdtotab = monProxyAdministratif.recupererIAEtapes_v2(e.getCod_etu(), "toutes", "ARE", "ARE");<a name="line.550"></a>
-<FONT color="green">551</FONT>                    <a name="line.551"></a>
+<FONT color="green">551</FONT>    <a name="line.551"></a>
 <FONT color="green">552</FONT>                            for (int i = 0; i &lt; insdtotab.length; i++) {<a name="line.552"></a>
 <FONT color="green">553</FONT>                                    Inscription insc = new Inscription();<a name="line.553"></a>
 <FONT color="green">554</FONT>                                    InsAdmEtpDTO2 insdto = insdtotab[i];<a name="line.554"></a>
@@ -573,11 +573,11 @@
 <FONT color="green">570</FONT>                                            insc.setCod_dip(insdto.getDiplome().getCodeDiplome());<a name="line.570"></a>
 <FONT color="green">571</FONT>                                            insc.setVers_dip(insdto.getDiplome().getVersionDiplome());<a name="line.571"></a>
 <FONT color="green">572</FONT>                                            insc.setLib_dip(insdto.getDiplome().getLibWebVdi());<a name="line.572"></a>
-<FONT color="green">573</FONT>                                            <a name="line.573"></a>
+<FONT color="green">573</FONT>    <a name="line.573"></a>
 <FONT color="green">574</FONT>                                            //récupération des informations sur la composante<a name="line.574"></a>
 <FONT color="green">575</FONT>                                            insc.setCod_comp(insdto.getComposante().getCodComposante());<a name="line.575"></a>
 <FONT color="green">576</FONT>                                            insc.setLib_comp(insdto.getComposante().getLibComposante());<a name="line.576"></a>
-<FONT color="green">577</FONT>                                            <a name="line.577"></a>
+<FONT color="green">577</FONT>    <a name="line.577"></a>
 <FONT color="green">578</FONT>                                            //récupération de l'état en règle de l'inscription<a name="line.578"></a>
 <FONT color="green">579</FONT>                                            if(insdto.getInscriptionPayee().equals(LIBELLE_WS_INSCRIPTION_PAYEE)){<a name="line.579"></a>
 <FONT color="green">580</FONT>                                                    insc.setEstEnRegle(true);<a name="line.580"></a>
@@ -676,14 +676,14 @@
 <FONT color="green">673</FONT>                                    }<a name="line.673"></a>
 <FONT color="green">674</FONT>                            }<a name="line.674"></a>
 <FONT color="green">675</FONT>                    }<a name="line.675"></a>
-<FONT color="green">676</FONT>                    <a name="line.676"></a>
+<FONT color="green">676</FONT>    <a name="line.676"></a>
 <FONT color="green">677</FONT>                    //si on a pas les infos en cache:<a name="line.677"></a>
 <FONT color="green">678</FONT>                    if(!enCache){<a name="line.678"></a>
-<FONT color="green">679</FONT>                                    e.getEtudiantManager().setNotesElpEpr(e, et);<a name="line.679"></a>
-<FONT color="green">680</FONT>                                    //AJOUT DES INFOS recupérées dans le cache. true car on est en vue Etudiant<a name="line.680"></a>
-<FONT color="green">681</FONT>                                    e.ajouterCacheResultatElpEpr(et, true); <a name="line.681"></a>
-<FONT color="green">682</FONT>                                    //on charge les infos récupérèes dans la liste représentant lIP:<a name="line.682"></a>
-<FONT color="green">683</FONT>                                    e.recupererCacheIP(e.getCacheResultats().getResultElpEpr().size()-1);<a name="line.683"></a>
+<FONT color="green">679</FONT>                            e.getEtudiantManager().setNotesElpEpr(e, et);<a name="line.679"></a>
+<FONT color="green">680</FONT>                            //AJOUT DES INFOS recupérées dans le cache. true car on est en vue Etudiant<a name="line.680"></a>
+<FONT color="green">681</FONT>                            e.ajouterCacheResultatElpEpr(et, true); <a name="line.681"></a>
+<FONT color="green">682</FONT>                            //on charge les infos récupérèes dans la liste représentant lIP:<a name="line.682"></a>
+<FONT color="green">683</FONT>                            e.recupererCacheIP(e.getCacheResultats().getResultElpEpr().size()-1);<a name="line.683"></a>
 <FONT color="green">684</FONT>                    }else{<a name="line.684"></a>
 <FONT color="green">685</FONT>                            //on récupére les infos du cache grace au rang :<a name="line.685"></a>
 <FONT color="green">686</FONT>                            e.recupererCacheIP(rang);<a name="line.686"></a>
@@ -744,7 +744,7 @@
 <FONT color="green">741</FONT>                                    } catch (Exception ex) {<a name="line.741"></a>
 <FONT color="green">742</FONT>                                            cpdtoExtract = null;<a name="line.742"></a>
 <FONT color="green">743</FONT>                                    }<a name="line.743"></a>
-<FONT color="green">744</FONT>                                    <a name="line.744"></a>
+<FONT color="green">744</FONT>    <a name="line.744"></a>
 <FONT color="green">745</FONT>                                    // Et on fusionne cpdtoResult et cpdtoExtract<a name="line.745"></a>
 <FONT color="green">746</FONT>                                    ArrayList&lt;ContratPedagogiqueResultatVdiVetDTO&gt; cpdtoAl = new ArrayList&lt;ContratPedagogiqueResultatVdiVetDTO&gt;();<a name="line.746"></a>
 <FONT color="green">747</FONT>                                    for (int i = 0; i &lt; cpdtoResult.length; i++ ) {<a name="line.747"></a>
@@ -889,7 +889,7 @@
 <FONT color="green">886</FONT>                                                    for (int j = 0; j &lt; tabres.length; j++ ) {<a name="line.886"></a>
 <FONT color="green">887</FONT>                                                            Resultat r = new Resultat();<a name="line.887"></a>
 <FONT color="green">888</FONT>                                                            ResultatVdiDTO res = tabres[j];<a name="line.888"></a>
-<FONT color="green">889</FONT>                                                            <a name="line.889"></a>
+<FONT color="green">889</FONT>    <a name="line.889"></a>
 <FONT color="green">890</FONT>                                                            r.setSession(res.getSession().getLibSes());<a name="line.890"></a>
 <FONT color="green">891</FONT>                                                            if(res.getNatureResultat() != null &amp;&amp; res.getNatureResultat().getCodAdm() != null &amp;&amp; res.getNatureResultat().getCodAdm().equals("0")){<a name="line.891"></a>
 <FONT color="green">892</FONT>                                                                    //on est en Admissibilité à l'étape.Pas en admission.<a name="line.892"></a>
@@ -898,13 +898,13 @@
 <FONT color="green">895</FONT>    <a name="line.895"></a>
 <FONT color="green">896</FONT>    <a name="line.896"></a>
 <FONT color="green">897</FONT>                                                            }<a name="line.897"></a>
-<FONT color="green">898</FONT>                                                            <a name="line.898"></a>
+<FONT color="green">898</FONT>    <a name="line.898"></a>
 <FONT color="green">899</FONT>                                                            //recuperation de la mention<a name="line.899"></a>
 <FONT color="green">900</FONT>                                                            if(res.getMention() != null){<a name="line.900"></a>
 <FONT color="green">901</FONT>                                                                    r.setCodMention(res.getMention().getCodMen());<a name="line.901"></a>
 <FONT color="green">902</FONT>                                                                    r.setLibMention(res.getMention().getLibMen());<a name="line.902"></a>
 <FONT color="green">903</FONT>                                                            }<a name="line.903"></a>
-<FONT color="green">904</FONT>                                                            <a name="line.904"></a>
+<FONT color="green">904</FONT>    <a name="line.904"></a>
 <FONT color="green">905</FONT>                                                            String result="";<a name="line.905"></a>
 <FONT color="green">906</FONT>                                                            if( res.getTypResultat()!=null){<a name="line.906"></a>
 <FONT color="green">907</FONT>                                                                    result= res.getTypResultat().getCodTre();<a name="line.907"></a>
@@ -938,7 +938,7 @@
 <FONT color="green">935</FONT>                                                                    d.setRang(res.getNbrRngEtuVdi()+"/"+res.getNbrRngEtuVdiTot());<a name="line.935"></a>
 <FONT color="green">936</FONT>                                                                    //On indique si on affiche le rang du diplome.<a name="line.936"></a>
 <FONT color="green">937</FONT>                                                                    d.setAfficherRang(config.isAffRangEtudiant());<a name="line.937"></a>
-<FONT color="green">938</FONT>                                                                    <a name="line.938"></a>
+<FONT color="green">938</FONT>    <a name="line.938"></a>
 <FONT color="green">939</FONT>                                                            }<a name="line.939"></a>
 <FONT color="green">940</FONT>                                                    }<a name="line.940"></a>
 <FONT color="green">941</FONT>                                                    //ajout du diplome si on a au moins un résultat<a name="line.941"></a>
@@ -963,12 +963,12 @@
 <FONT color="green">960</FONT>                                                            et.setCode(etape.getEtape().getCodEtp());<a name="line.960"></a>
 <FONT color="green">961</FONT>                                                            et.setVersion(etape.getEtape().getCodVrsVet().toString());<a name="line.961"></a>
 <FONT color="green">962</FONT>                                                            et.setLibelle(etape.getEtape().getLibWebVet());<a name="line.962"></a>
-<FONT color="green">963</FONT>                                                            <a name="line.963"></a>
+<FONT color="green">963</FONT>    <a name="line.963"></a>
 <FONT color="green">964</FONT>                                                            //ajout 16/02/2012 pour WS exposés pour la version mobile en HttpInvoker<a name="line.964"></a>
-<FONT color="green">965</FONT>                                                            et.setCod_dip(rdto.getDiplome().getCodDip());<a name="line.965"></a>
-<FONT color="green">966</FONT>                                                            et.setVers_dip(rdto.getDiplome().getCodVrsVdi());<a name="line.966"></a>
-<FONT color="green">967</FONT>                                                            //System.out.println("etcoddip : "+et.getCod_dip());<a name="line.967"></a>
-<FONT color="green">968</FONT>                                                            //System.out.println("etvrsdip : "+et.getVers_dip());<a name="line.968"></a>
+<FONT color="green">965</FONT>                                                            if(rdto.getDiplome()!= null){<a name="line.965"></a>
+<FONT color="green">966</FONT>                                                                    et.setCod_dip(rdto.getDiplome().getCodDip());<a name="line.966"></a>
+<FONT color="green">967</FONT>                                                                    et.setVers_dip(rdto.getDiplome().getCodVrsVdi());<a name="line.967"></a>
+<FONT color="green">968</FONT>                                                            }<a name="line.968"></a>
 <FONT color="green">969</FONT>    <a name="line.969"></a>
 <FONT color="green">970</FONT>                                                            //résultats de l'étape:<a name="line.970"></a>
 <FONT color="green">971</FONT>                                                            ResultatVetDTO[] tabresetape = etape.getResultatVet();<a name="line.971"></a>
@@ -995,7 +995,7 @@
 <FONT color="green">992</FONT>                                                                                    r.setCodMention(ret.getMention().getCodMen());<a name="line.992"></a>
 <FONT color="green">993</FONT>                                                                                    r.setLibMention(ret.getMention().getLibMen());<a name="line.993"></a>
 <FONT color="green">994</FONT>                                                                            }<a name="line.994"></a>
-<FONT color="green">995</FONT>                                                                            <a name="line.995"></a>
+<FONT color="green">995</FONT>    <a name="line.995"></a>
 <FONT color="green">996</FONT>                                                                            //System.out.println("session : " + ret.getSession().getLibSes()+" "+   ret.getSession().getCodSes());<a name="line.996"></a>
 <FONT color="green">997</FONT>                                                                            String result="";<a name="line.997"></a>
 <FONT color="green">998</FONT>                                                                            if(ret.getTypResultat() != null){<a name="line.998"></a>
@@ -1043,10 +1043,10 @@
 <FONT color="green">1040</FONT>                                                                                            }<a name="line.1040"></a>
 <FONT color="green">1041</FONT>                                                                                    }<a name="line.1041"></a>
 <FONT color="green">1042</FONT>                                                                            }*/<a name="line.1042"></a>
-<FONT color="green">1043</FONT>                                                                            <a name="line.1043"></a>
+<FONT color="green">1043</FONT>    <a name="line.1043"></a>
 <FONT color="green">1044</FONT>                                                                            //ajout du résultat<a name="line.1044"></a>
 <FONT color="green">1045</FONT>                                                                            et.getResultats().add(r);<a name="line.1045"></a>
-<FONT color="green">1046</FONT>                                                                            <a name="line.1046"></a>
+<FONT color="green">1046</FONT>    <a name="line.1046"></a>
 <FONT color="green">1047</FONT>                                                                            //ajout du rang<a name="line.1047"></a>
 <FONT color="green">1048</FONT>                                                                            if(ret.getNbrRngEtuVet() != null &amp;&amp; !ret.getNbrRngEtuVet().equals("")){<a name="line.1048"></a>
 <FONT color="green">1049</FONT>                                                                                    et.setRang(ret.getNbrRngEtuVet()+"/"+ret.getNbrRngEtuVetTot());<a name="line.1049"></a>
@@ -1201,7 +1201,7 @@
 <FONT color="green">1198</FONT>                                            sourceResultat="Apogee";<a name="line.1198"></a>
 <FONT color="green">1199</FONT>                                    }<a name="line.1199"></a>
 <FONT color="green">1200</FONT>                            }<a name="line.1200"></a>
-<FONT color="green">1201</FONT>                            <a name="line.1201"></a>
+<FONT color="green">1201</FONT>    <a name="line.1201"></a>
 <FONT color="green">1202</FONT>                            // 07/12/11 récupération du fonctionnement identique à la récupéraition des notes pour les étudiants.<a name="line.1202"></a>
 <FONT color="green">1203</FONT>                            if(sourceResultat.compareTo("Apogee-extraction")==0){<a name="line.1203"></a>
 <FONT color="green">1204</FONT>                                    ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v5(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, temoin, "toutes", "tous");<a name="line.1204"></a>
@@ -1210,8 +1210,8 @@
 <FONT color="green">1207</FONT>                                    ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v5(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, "AET", "toutes", "tous");<a name="line.1207"></a>
 <FONT color="green">1208</FONT>                                    setNotesElpEpr(e, et, cpdto,temoin);<a name="line.1208"></a>
 <FONT color="green">1209</FONT>                            }<a name="line.1209"></a>
-<FONT color="green">1210</FONT>                            <a name="line.1210"></a>
-<FONT color="green">1211</FONT>                            <a name="line.1211"></a>
+<FONT color="green">1210</FONT>    <a name="line.1210"></a>
+<FONT color="green">1211</FONT>    <a name="line.1211"></a>
 <FONT color="green">1212</FONT>    <a name="line.1212"></a>
 <FONT color="green">1213</FONT>                    } catch (WebBaseException ex) {<a name="line.1213"></a>
 <FONT color="green">1214</FONT>                            //on catch le cas ou les inscriptions aux elp de l'étape ne soient pas effectués.<a name="line.1214"></a>
@@ -1439,12 +1439,12 @@
 <FONT color="green">1436</FONT>                                                            elp2.setLibelle(epreuve.getEpreuve().getLibEpr());<a name="line.1436"></a>
 <FONT color="green">1437</FONT>                                                            elp2.setCode(epreuve.getEpreuve().getCodEpr());<a name="line.1437"></a>
 <FONT color="green">1438</FONT>                                                            elp2.setLevel(elp.getLevel() + 1);<a name="line.1438"></a>
-<FONT color="green">1439</FONT>                                                            <a name="line.1439"></a>
+<FONT color="green">1439</FONT>    <a name="line.1439"></a>
 <FONT color="green">1440</FONT>                                                            //Modif 20/02/2012 pour les WS HttpInvoker<a name="line.1440"></a>
 <FONT color="green">1441</FONT>                                                            //elp2.setAnnee("epreuve");<a name="line.1441"></a>
 <FONT color="green">1442</FONT>                                                            elp2.setAnnee("");<a name="line.1442"></a>
 <FONT color="green">1443</FONT>                                                            elp2.setEpreuve(true);<a name="line.1443"></a>
-<FONT color="green">1444</FONT>                                                            <a name="line.1444"></a>
+<FONT color="green">1444</FONT>    <a name="line.1444"></a>
 <FONT color="green">1445</FONT>                                                            elp2.setCodElpSup(elp.getCode());<a name="line.1445"></a>
 <FONT color="green">1446</FONT>                                                            elp2.setNote1("");<a name="line.1446"></a>
 <FONT color="green">1447</FONT>                                                            elp2.setBareme1(0);<a name="line.1447"></a>
@@ -1459,261 +1459,271 @@
 <FONT color="green">1456</FONT>    <a name="line.1456"></a>
 <FONT color="green">1457</FONT>                                                            if (repdto != null &amp;&amp; repdto.length &gt; 0) {<a name="line.1457"></a>
 <FONT color="green">1458</FONT>                                                                    for (int k = 0; k &lt; repdto.length; k++ ) {<a name="line.1458"></a>
-<FONT color="green">1459</FONT>    <a name="line.1459"></a>
-<FONT color="green">1460</FONT>                                                                            //03/02/11<a name="line.1460"></a>
-<FONT color="green">1461</FONT>                                                                            //On recupere la note si le témoin d'avc fait partie de la liste des témoins paramétrés <a name="line.1461"></a>
-<FONT color="green">1462</FONT>                                                                            //OU si le témoin d'avc de  l'elp pere fait partie de la liste des témoins paramétrés <a name="line.1462"></a>
-<FONT color="green">1463</FONT>                                                                            //OU si le témoin TemCtlValCadEpr est égal au parametre TemoinCtlValCadEpr de monDossierWeb.xml.<a name="line.1463"></a>
-<FONT color="green">1464</FONT>                                                                            boolean recuperationNote = false;<a name="line.1464"></a>
-<FONT color="green">1465</FONT>                                                                            int codsession = new Integer(repdto[k].getSession().getCodSes());<a name="line.1465"></a>
-<FONT color="green">1466</FONT>    <a name="line.1466"></a>
-<FONT color="green">1467</FONT>                                                                            if (codsession &lt; 2) {<a name="line.1467"></a>
+<FONT color="green">1459</FONT>                                                                            int codsession = new Integer(repdto[k].getSession().getCodSes());<a name="line.1459"></a>
+<FONT color="green">1460</FONT>                                                                            //09/01/13<a name="line.1460"></a>
+<FONT color="green">1461</FONT>                                                                            //On recupere la note si :<a name="line.1461"></a>
+<FONT color="green">1462</FONT>                                                                            //  On a reseigné une liste de type épreuve à afficher et le type de l'épreuve en fait partie<a name="line.1462"></a>
+<FONT color="green">1463</FONT>                                                                            //  OU SI :<a name="line.1463"></a>
+<FONT color="green">1464</FONT>                                                                            //      le témoin d'avc fait partie de la liste des témoins paramétrés <a name="line.1464"></a>
+<FONT color="green">1465</FONT>                                                                            //      OU si le témoin d'avc de  l'elp pere fait partie de la liste des témoins paramétrés <a name="line.1465"></a>
+<FONT color="green">1466</FONT>                                                                            //      OU si le témoin TemCtlValCadEpr est égal au parametre TemoinCtlValCadEpr de monDossierWeb.xml.<a name="line.1466"></a>
+<FONT color="green">1467</FONT>                                                                            boolean recuperationNote = false;<a name="line.1467"></a>
 <FONT color="green">1468</FONT>    <a name="line.1468"></a>
-<FONT color="green">1469</FONT>                                                                                    if(temoinEtatDelib.contains(repdto[k].getEtatDelib().getCodEtaAvc()) || elpEtatDelibS1OK || TemCtlValCadEpr.equals(config.getTemoinCtlValCadEpr()))<a name="line.1469"></a>
-<FONT color="green">1470</FONT>                                                                                            recuperationNote = true;<a name="line.1470"></a>
-<FONT color="green">1471</FONT>                                                                            }else{<a name="line.1471"></a>
-<FONT color="green">1472</FONT>    <a name="line.1472"></a>
-<FONT color="green">1473</FONT>                                                                                    if(temoinEtatDelib.contains(repdto[k].getEtatDelib().getCodEtaAvc()) || elpEtatDelibS2OK || TemCtlValCadEpr.equals(config.getTemoinCtlValCadEpr()))<a name="line.1473"></a>
-<FONT color="green">1474</FONT>                                                                                            recuperationNote = true;<a name="line.1474"></a>
-<FONT color="green">1475</FONT>                                                                            }<a name="line.1475"></a>
-<FONT color="green">1476</FONT>    <a name="line.1476"></a>
-<FONT color="green">1477</FONT>                                                                            //test si on recupere la note ou pas<a name="line.1477"></a>
-<FONT color="green">1478</FONT>                                                                            if(recuperationNote){<a name="line.1478"></a>
-<FONT color="green">1479</FONT>    <a name="line.1479"></a>
-<FONT color="green">1480</FONT>    <a name="line.1480"></a>
-<FONT color="green">1481</FONT>                                                                                    if (codsession &lt; 2) {<a name="line.1481"></a>
-<FONT color="green">1482</FONT>                                                                                            //1er session  : juin<a name="line.1482"></a>
-<FONT color="green">1483</FONT>                                                                                            if (repdto[k].getNotEpr() != null) {<a name="line.1483"></a>
-<FONT color="green">1484</FONT>                                                                                                    elp2.setNote1(repdto[k].getNotEpr().replaceAll(",", "."));<a name="line.1484"></a>
-<FONT color="green">1485</FONT>    <a name="line.1485"></a>
-<FONT color="green">1486</FONT>                                                                                                    //Gestion du barème:<a name="line.1486"></a>
-<FONT color="green">1487</FONT>                                                                                                    if(repdto[k].getBarNotEpr() != null){<a name="line.1487"></a>
-<FONT color="green">1488</FONT>                                                                                                            elp2.setBareme1(repdto[k].getBarNotEpr());<a name="line.1488"></a>
-<FONT color="green">1489</FONT>                                                                                                    }<a name="line.1489"></a>
-<FONT color="green">1490</FONT>                                                                                            }<a name="line.1490"></a>
-<FONT color="green">1491</FONT>                                                                                            if (elp2.getNote1() != null &amp;&amp; !elp2.getNote1().equals("")) {<a name="line.1491"></a>
-<FONT color="green">1492</FONT>                                                                                                    EprNotee = true;<a name="line.1492"></a>
-<FONT color="green">1493</FONT>                                                                                            }<a name="line.1493"></a>
-<FONT color="green">1494</FONT>    <a name="line.1494"></a>
+<FONT color="green">1469</FONT>                                                                            if(config.getTypesEpreuveAffichageNote() != null &amp;&amp; config.getTypesEpreuveAffichageNote().size()&gt;0){<a name="line.1469"></a>
+<FONT color="green">1470</FONT>                                                                                    //On a renseigné une liste de type épreuve à afficher<a name="line.1470"></a>
+<FONT color="green">1471</FONT>                                                                                    for(String typeEpreuve : config.getTypesEpreuveAffichageNote()){<a name="line.1471"></a>
+<FONT color="green">1472</FONT>                                                                                            if(typeEpreuve.equals(epreuve.getEpreuve().getTypEpreuve().getCodTep())){<a name="line.1472"></a>
+<FONT color="green">1473</FONT>                                                                                                    recuperationNote = true;<a name="line.1473"></a>
+<FONT color="green">1474</FONT>                                                                                            }<a name="line.1474"></a>
+<FONT color="green">1475</FONT>                                                                                    }<a name="line.1475"></a>
+<FONT color="green">1476</FONT>                                                                            }<a name="line.1476"></a>
+<FONT color="green">1477</FONT>                                                                            if(!recuperationNote){<a name="line.1477"></a>
+<FONT color="green">1478</FONT>                                                                                    //On n'a pas renseigné de liste de type épreuve à afficher ou celui ci n'était pas dans la liste<a name="line.1478"></a>
+<FONT color="green">1479</FONT>                                                                                    if (codsession &lt; 2) {<a name="line.1479"></a>
+<FONT color="green">1480</FONT>                                                                                            if(temoinEtatDelib.contains(repdto[k].getEtatDelib().getCodEtaAvc()) || elpEtatDelibS1OK || TemCtlValCadEpr.equals(config.getTemoinCtlValCadEpr()))<a name="line.1480"></a>
+<FONT color="green">1481</FONT>                                                                                                    recuperationNote = true;<a name="line.1481"></a>
+<FONT color="green">1482</FONT>                                                                                    }else{<a name="line.1482"></a>
+<FONT color="green">1483</FONT>                                                                                            if(temoinEtatDelib.contains(repdto[k].getEtatDelib().getCodEtaAvc()) || elpEtatDelibS2OK || TemCtlValCadEpr.equals(config.getTemoinCtlValCadEpr()))<a name="line.1483"></a>
+<FONT color="green">1484</FONT>                                                                                                    recuperationNote = true;<a name="line.1484"></a>
+<FONT color="green">1485</FONT>                                                                                    }<a name="line.1485"></a>
+<FONT color="green">1486</FONT>                                                                            }<a name="line.1486"></a>
+<FONT color="green">1487</FONT>                                                                            //test si on recupere la note ou pas<a name="line.1487"></a>
+<FONT color="green">1488</FONT>                                                                            if(recuperationNote){<a name="line.1488"></a>
+<FONT color="green">1489</FONT>    <a name="line.1489"></a>
+<FONT color="green">1490</FONT>    <a name="line.1490"></a>
+<FONT color="green">1491</FONT>                                                                                    if (codsession &lt; 2) {<a name="line.1491"></a>
+<FONT color="green">1492</FONT>                                                                                            //1er session  : juin<a name="line.1492"></a>
+<FONT color="green">1493</FONT>                                                                                            if (repdto[k].getNotEpr() != null) {<a name="line.1493"></a>
+<FONT color="green">1494</FONT>                                                                                                    elp2.setNote1(repdto[k].getNotEpr().replaceAll(",", "."));<a name="line.1494"></a>
 <FONT color="green">1495</FONT>    <a name="line.1495"></a>
-<FONT color="green">1496</FONT>                                                                                    } else {<a name="line.1496"></a>
-<FONT color="green">1497</FONT>                                                                                            //2er session  : septembre<a name="line.1497"></a>
-<FONT color="green">1498</FONT>                                                                                            if (repdto[k].getNotEpr() != null) {<a name="line.1498"></a>
-<FONT color="green">1499</FONT>                                                                                                    elp2.setNote2(repdto[k].getNotEpr().replaceAll(",", "."));<a name="line.1499"></a>
-<FONT color="green">1500</FONT>    <a name="line.1500"></a>
-<FONT color="green">1501</FONT>                                                                                                    //Gestion du barème:<a name="line.1501"></a>
-<FONT color="green">1502</FONT>                                                                                                    if(repdto[k].getBarNotEpr() != null){<a name="line.1502"></a>
-<FONT color="green">1503</FONT>                                                                                                            elp2.setBareme2(repdto[k].getBarNotEpr());<a name="line.1503"></a>
-<FONT color="green">1504</FONT>                                                                                                    }<a name="line.1504"></a>
-<FONT color="green">1505</FONT>                                                                                            }<a name="line.1505"></a>
-<FONT color="green">1506</FONT>                                                                                            if (elp2.getNote2() != null &amp;&amp; !elp2.getNote2().equals("")) {<a name="line.1506"></a>
-<FONT color="green">1507</FONT>                                                                                                    EprNotee = true;<a name="line.1507"></a>
-<FONT color="green">1508</FONT>                                                                                            }<a name="line.1508"></a>
-<FONT color="green">1509</FONT>                                                                                    }<a name="line.1509"></a>
-<FONT color="green">1510</FONT>                                                                            }<a name="line.1510"></a>
-<FONT color="green">1511</FONT>                                                                    }<a name="line.1511"></a>
-<FONT color="green">1512</FONT>                                                            }<a name="line.1512"></a>
-<FONT color="green">1513</FONT>                                                            //ajout de l'épreuve dans la liste en tant qu'élément si elle a une note<a name="line.1513"></a>
-<FONT color="green">1514</FONT>                                                            if (EprNotee) {<a name="line.1514"></a>
-<FONT color="green">1515</FONT>                                                                    liste1.add(elp2);<a name="line.1515"></a>
-<FONT color="green">1516</FONT>                                                            }<a name="line.1516"></a>
-<FONT color="green">1517</FONT>                                                    }<a name="line.1517"></a>
-<FONT color="green">1518</FONT>                                            }<a name="line.1518"></a>
-<FONT color="green">1519</FONT>                                    }<a name="line.1519"></a>
-<FONT color="green">1520</FONT>                            }<a name="line.1520"></a>
-<FONT color="green">1521</FONT>                            //ajout des éléments dans la liste de l'étudiant en commençant par la ou les racine<a name="line.1521"></a>
-<FONT color="green">1522</FONT>                            int niveauRacine = 1;<a name="line.1522"></a>
-<FONT color="green">1523</FONT>                            if (liste1.size() &gt; 0) {<a name="line.1523"></a>
-<FONT color="green">1524</FONT>                                    int i = 0;<a name="line.1524"></a>
-<FONT color="green">1525</FONT>                                    while (i &lt; liste1.size()) {<a name="line.1525"></a>
-<FONT color="green">1526</FONT>                                            ElementPedagogique el = liste1.get(i);<a name="line.1526"></a>
-<FONT color="green">1527</FONT>                                            if (el.getCodElpSup() == null || el.getCodElpSup().equals("")) {<a name="line.1527"></a>
-<FONT color="green">1528</FONT>                                                    //on a une racine:<a name="line.1528"></a>
-<FONT color="green">1529</FONT>                                                    if (!el.getAnnee().equals("FICM")) {<a name="line.1529"></a>
-<FONT color="green">1530</FONT>                                                            e.getElementsPedagogiques().add(el);<a name="line.1530"></a>
-<FONT color="green">1531</FONT>                                                    }<a name="line.1531"></a>
-<FONT color="green">1532</FONT>    <a name="line.1532"></a>
-<FONT color="green">1533</FONT>                                                    insererElmtPedagoFilsDansListe(el, liste1, e, niveauRacine);<a name="line.1533"></a>
-<FONT color="green">1534</FONT>                                            }<a name="line.1534"></a>
-<FONT color="green">1535</FONT>                                            i++;<a name="line.1535"></a>
-<FONT color="green">1536</FONT>                                    }<a name="line.1536"></a>
-<FONT color="green">1537</FONT>                            }<a name="line.1537"></a>
-<FONT color="green">1538</FONT>    <a name="line.1538"></a>
-<FONT color="green">1539</FONT>    <a name="line.1539"></a>
-<FONT color="green">1540</FONT>                            //suppression des épreuve seules et quand elles ont les mêmes notes que l'element pere:<a name="line.1540"></a>
-<FONT color="green">1541</FONT>                            if (e.getElementsPedagogiques().size() &gt; 0) {<a name="line.1541"></a>
-<FONT color="green">1542</FONT>                                    int i = 1;<a name="line.1542"></a>
-<FONT color="green">1543</FONT>                                    boolean suppr = false;<a name="line.1543"></a>
-<FONT color="green">1544</FONT>                                    while (i &lt; e.getElementsPedagogiques().size()) {<a name="line.1544"></a>
-<FONT color="green">1545</FONT>                                            suppr = false;<a name="line.1545"></a>
-<FONT color="green">1546</FONT>                                            ElementPedagogique elp = e.getElementsPedagogiques().get(i);<a name="line.1546"></a>
-<FONT color="green">1547</FONT>                                            if (elp.isEpreuve()) {<a name="line.1547"></a>
-<FONT color="green">1548</FONT>                                                    ElementPedagogique elp0 = e.getElementsPedagogiques().get(i - 1);<a name="line.1548"></a>
-<FONT color="green">1549</FONT>                                                    if (i &lt; (e.getElementsPedagogiques().size() - 1)) {<a name="line.1549"></a>
-<FONT color="green">1550</FONT>                                                            ElementPedagogique elp1 = e.getElementsPedagogiques().get(i + 1);<a name="line.1550"></a>
-<FONT color="green">1551</FONT>                                                            if (!elp0.isEpreuve() &amp;&amp; !elp1.isEpreuve()) {<a name="line.1551"></a>
-<FONT color="green">1552</FONT>                                                                    if (elp0.getNote1().equals(elp.getNote1()) &amp;&amp; elp0.getNote2().equals(elp.getNote2())) {<a name="line.1552"></a>
-<FONT color="green">1553</FONT>                                                                            //on supprime l'element i<a name="line.1553"></a>
-<FONT color="green">1554</FONT>                                                                            e.getElementsPedagogiques().remove(i);<a name="line.1554"></a>
-<FONT color="green">1555</FONT>                                                                            suppr = true;<a name="line.1555"></a>
-<FONT color="green">1556</FONT>                                                                    }<a name="line.1556"></a>
-<FONT color="green">1557</FONT>                                                            }<a name="line.1557"></a>
-<FONT color="green">1558</FONT>                                                    } else {<a name="line.1558"></a>
-<FONT color="green">1559</FONT>                                                            if (!elp0.isEpreuve() &amp;&amp; elp0.getNote1().equals(elp.getNote1()) &amp;&amp; elp0.getNote2().equals(elp.getNote2())) {<a name="line.1559"></a>
-<FONT color="green">1560</FONT>                                                                    //on supprime l'element i<a name="line.1560"></a>
-<FONT color="green">1561</FONT>                                                                    e.getElementsPedagogiques().remove(i);<a name="line.1561"></a>
-<FONT color="green">1562</FONT>                                                                    suppr = true;<a name="line.1562"></a>
-<FONT color="green">1563</FONT>                                                            }<a name="line.1563"></a>
-<FONT color="green">1564</FONT>                                                    }<a name="line.1564"></a>
-<FONT color="green">1565</FONT>                                            }<a name="line.1565"></a>
-<FONT color="green">1566</FONT>                                            if (!suppr) {<a name="line.1566"></a>
-<FONT color="green">1567</FONT>                                                    i++;<a name="line.1567"></a>
-<FONT color="green">1568</FONT>                                            }<a name="line.1568"></a>
-<FONT color="green">1569</FONT>                                    }<a name="line.1569"></a>
-<FONT color="green">1570</FONT>                            }<a name="line.1570"></a>
-<FONT color="green">1571</FONT>    <a name="line.1571"></a>
-<FONT color="green">1572</FONT>                            //indentation des libelles dans la liste:<a name="line.1572"></a>
-<FONT color="green">1573</FONT>                            if (e.getElementsPedagogiques().size() &gt; 0) {<a name="line.1573"></a>
-<FONT color="green">1574</FONT>                                    for (ElementPedagogique el : e.getElementsPedagogiques()) {<a name="line.1574"></a>
-<FONT color="green">1575</FONT>                                            int rg = new Integer(el.getLevel());<a name="line.1575"></a>
-<FONT color="green">1576</FONT>    <a name="line.1576"></a>
-<FONT color="green">1577</FONT>                                            String lib = new String(el.getLibelle());<a name="line.1577"></a>
-<FONT color="green">1578</FONT>                                            el.setLibelle("");<a name="line.1578"></a>
-<FONT color="green">1579</FONT>                                            for (int j = 2; j &lt;= rg; j++) {<a name="line.1579"></a>
-<FONT color="green">1580</FONT>                                                    el.setLibelle(el.getLibelle() + "&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;");<a name="line.1580"></a>
-<FONT color="green">1581</FONT>                                            }<a name="line.1581"></a>
-<FONT color="green">1582</FONT>    <a name="line.1582"></a>
-<FONT color="green">1583</FONT>                                            el.setLibelle(el.getLibelle() + lib);<a name="line.1583"></a>
-<FONT color="green">1584</FONT>                                    }<a name="line.1584"></a>
-<FONT color="green">1585</FONT>                            }<a name="line.1585"></a>
-<FONT color="green">1586</FONT>                            <a name="line.1586"></a>
-<FONT color="green">1587</FONT>                            //Gestion des temoins fictif si temoinFictif est renseigné dans monDossierWeb.xml<a name="line.1587"></a>
-<FONT color="green">1588</FONT>                            if(config.getTemoinFictif()!=null &amp;&amp; !config.getTemoinFictif().equals("")){<a name="line.1588"></a>
-<FONT color="green">1589</FONT>                                    if (e.getElementsPedagogiques().size() &gt; 0) {<a name="line.1589"></a>
-<FONT color="green">1590</FONT>                                            List&lt;Integer&gt; listeRangAsupprimer=new LinkedList&lt;Integer&gt;();<a name="line.1590"></a>
-<FONT color="green">1591</FONT>                                            int rang = 0;<a name="line.1591"></a>
-<FONT color="green">1592</FONT>                                            //on note les rangs des éléments à supprimer<a name="line.1592"></a>
-<FONT color="green">1593</FONT>                                            for (ElementPedagogique el : e.getElementsPedagogiques()) {<a name="line.1593"></a>
-<FONT color="green">1594</FONT>                                                    if(el.getTemFictif()!= null &amp;&amp; !el.getTemFictif().equals("") &amp;&amp; !el.getTemFictif().equals(config.getTemoinFictif())){<a name="line.1594"></a>
-<FONT color="green">1595</FONT>                                                            //on supprime l'élément de la liste<a name="line.1595"></a>
-<FONT color="green">1596</FONT>                                                            listeRangAsupprimer.add(rang);<a name="line.1596"></a>
-<FONT color="green">1597</FONT>                                                    }<a name="line.1597"></a>
-<FONT color="green">1598</FONT>                                                    rang++;<a name="line.1598"></a>
-<FONT color="green">1599</FONT>                                            }<a name="line.1599"></a>
-<FONT color="green">1600</FONT>                                            //on supprime les éléments de la liste<a name="line.1600"></a>
-<FONT color="green">1601</FONT>                                            int NbElementSupprimes = 0;<a name="line.1601"></a>
-<FONT color="green">1602</FONT>                                            for(Integer rg:listeRangAsupprimer){<a name="line.1602"></a>
-<FONT color="green">1603</FONT>                                                    e.getElementsPedagogiques().remove(rg - NbElementSupprimes);<a name="line.1603"></a>
-<FONT color="green">1604</FONT>                                                    NbElementSupprimes++;<a name="line.1604"></a>
-<FONT color="green">1605</FONT>                                            }<a name="line.1605"></a>
-<FONT color="green">1606</FONT>                                    }<a name="line.1606"></a>
-<FONT color="green">1607</FONT>                            }<a name="line.1607"></a>
-<FONT color="green">1608</FONT>                            <a name="line.1608"></a>
-<FONT color="green">1609</FONT>                            <a name="line.1609"></a>
-<FONT color="green">1610</FONT>                            //ajout de l'étape sélectionnée en début de liste:<a name="line.1610"></a>
-<FONT color="green">1611</FONT>                            ElementPedagogique ep = new ElementPedagogique();<a name="line.1611"></a>
-<FONT color="green">1612</FONT>                            //LOG.info("etape Annee : "+et.getAnnee());<a name="line.1612"></a>
-<FONT color="green">1613</FONT>                            ep.setAnnee(et.getAnnee());<a name="line.1613"></a>
-<FONT color="green">1614</FONT>                            ep.setCode(et.getCode());<a name="line.1614"></a>
-<FONT color="green">1615</FONT>                            ep.setLevel(1);<a name="line.1615"></a>
-<FONT color="green">1616</FONT>                            ep.setLibelle(et.getLibelle());<a name="line.1616"></a>
-<FONT color="green">1617</FONT>                            e.setDeliberationTerminee(et.isDeliberationTerminee());<a name="line.1617"></a>
-<FONT color="green">1618</FONT>                            if (et.getResultats().size() &gt; 0) {<a name="line.1618"></a>
-<FONT color="green">1619</FONT>                                    if (et.getResultats().get(0).getNote() != null)<a name="line.1619"></a>
-<FONT color="green">1620</FONT>                                            ep.setNote1(et.getResultats().get(0).getNote().toString());<a name="line.1620"></a>
-<FONT color="green">1621</FONT>                                    if (et.getResultats().get(0).getAdmission() != null)<a name="line.1621"></a>
-<FONT color="green">1622</FONT>                                            ep.setRes1(et.getResultats().get(0).getAdmission());<a name="line.1622"></a>
-<FONT color="green">1623</FONT>                            }<a name="line.1623"></a>
-<FONT color="green">1624</FONT>                            if (et.getResultats().size() &gt; 1) {<a name="line.1624"></a>
-<FONT color="green">1625</FONT>                                    if (et.getResultats().get(1).getNote() != null)<a name="line.1625"></a>
-<FONT color="green">1626</FONT>                                            ep.setNote2(et.getResultats().get(1).getNote().toString());<a name="line.1626"></a>
-<FONT color="green">1627</FONT>                                    if (et.getResultats().get(1).getAdmission() != null)<a name="line.1627"></a>
-<FONT color="green">1628</FONT>                                            ep.setRes2(et.getResultats().get(1).getAdmission());<a name="line.1628"></a>
-<FONT color="green">1629</FONT>                            }<a name="line.1629"></a>
-<FONT color="green">1630</FONT>                            e.getElementsPedagogiques().add(0, ep);<a name="line.1630"></a>
-<FONT color="green">1631</FONT>    <a name="line.1631"></a>
-<FONT color="green">1632</FONT>                    } catch (WebBaseException ex) {<a name="line.1632"></a>
-<FONT color="green">1633</FONT>                            LOG.error(ex);<a name="line.1633"></a>
-<FONT color="green">1634</FONT>                            LOG.error("Probleme avec le WS lors de la recherche des notes et résultats a une étape pour etudiant dont codetu est : " + e.getCod_etu());<a name="line.1634"></a>
-<FONT color="green">1635</FONT>                    }catch (Exception ex) {<a name="line.1635"></a>
-<FONT color="green">1636</FONT>                            LOG.error(ex);<a name="line.1636"></a>
-<FONT color="green">1637</FONT>                            LOG.error("Probleme avec le WS lors de la recherche des notes et résultats a une étape pour etudiant dont codetu est : " + e.getCod_etu());<a name="line.1637"></a>
-<FONT color="green">1638</FONT>                    }<a name="line.1638"></a>
-<FONT color="green">1639</FONT>            }<a name="line.1639"></a>
-<FONT color="green">1640</FONT>    <a name="line.1640"></a>
-<FONT color="green">1641</FONT>            /**<a name="line.1641"></a>
-<FONT color="green">1642</FONT>             * ajoute les éléments dans la liste d'éléments de l'étudiant en corrigeant les levels (rangs).<a name="line.1642"></a>
-<FONT color="green">1643</FONT>             * @param elp<a name="line.1643"></a>
-<FONT color="green">1644</FONT>             * @param liste1<a name="line.1644"></a>
-<FONT color="green">1645</FONT>             * @param e<a name="line.1645"></a>
-<FONT color="green">1646</FONT>             * @param niveauDuPere <a name="line.1646"></a>
-<FONT color="green">1647</FONT>             */<a name="line.1647"></a>
-<FONT color="green">1648</FONT>            protected void insererElmtPedagoFilsDansListe(ElementPedagogique elp, List&lt;ElementPedagogique&gt; liste1, Etudiant e, int niveauDuPere) {<a name="line.1648"></a>
-<FONT color="green">1649</FONT>                    for (ElementPedagogique el : liste1) {<a name="line.1649"></a>
-<FONT color="green">1650</FONT>                            if (el.getCodElpSup() != null &amp;&amp; !el.getCodElpSup().equals("")) {<a name="line.1650"></a>
-<FONT color="green">1651</FONT>                                    if (el.getCodElpSup().equals(elp.getCode()) &amp;&amp; !el.getCode().equals(elp.getCode())) {<a name="line.1651"></a>
-<FONT color="green">1652</FONT>                                            //on affiche pas les FICM :<a name="line.1652"></a>
-<FONT color="green">1653</FONT>                                            if (!el.getAnnee().equals("FICM")) {<a name="line.1653"></a>
-<FONT color="green">1654</FONT>                                                    el.setLevel(niveauDuPere + 1);<a name="line.1654"></a>
-<FONT color="green">1655</FONT>                                                    e.getElementsPedagogiques().add(el);<a name="line.1655"></a>
-<FONT color="green">1656</FONT>                                            }<a name="line.1656"></a>
-<FONT color="green">1657</FONT>                                            //On test si on est pas sur une epreuve pour eviter les boucle infini dans le cas ou codEpr=CodElpPere<a name="line.1657"></a>
-<FONT color="green">1658</FONT>                                            if(!el.getAnnee().equals("epreuve"))<a name="line.1658"></a>
-<FONT color="green">1659</FONT>                                                    insererElmtPedagoFilsDansListe(el, liste1, e, niveauDuPere + 1);<a name="line.1659"></a>
-<FONT color="green">1660</FONT>                                    }<a name="line.1660"></a>
-<FONT color="green">1661</FONT>                            }<a name="line.1661"></a>
-<FONT color="green">1662</FONT>                    }<a name="line.1662"></a>
-<FONT color="green">1663</FONT>            }<a name="line.1663"></a>
-<FONT color="green">1664</FONT>    <a name="line.1664"></a>
-<FONT color="green">1665</FONT>    <a name="line.1665"></a>
-<FONT color="green">1666</FONT>    <a name="line.1666"></a>
-<FONT color="green">1667</FONT>    <a name="line.1667"></a>
-<FONT color="green">1668</FONT>    <a name="line.1668"></a>
-<FONT color="green">1669</FONT>    <a name="line.1669"></a>
-<FONT color="green">1670</FONT>            public IDaoService getService() {<a name="line.1670"></a>
-<FONT color="green">1671</FONT>                    return service;<a name="line.1671"></a>
-<FONT color="green">1672</FONT>            }<a name="line.1672"></a>
-<FONT color="green">1673</FONT>    <a name="line.1673"></a>
-<FONT color="green">1674</FONT>            public void setService(IDaoService service) {<a name="line.1674"></a>
-<FONT color="green">1675</FONT>                    this.service = service;<a name="line.1675"></a>
-<FONT color="green">1676</FONT>            }<a name="line.1676"></a>
+<FONT color="green">1496</FONT>                                                                                                    //Gestion du barème:<a name="line.1496"></a>
+<FONT color="green">1497</FONT>                                                                                                    if(repdto[k].getBarNotEpr() != null){<a name="line.1497"></a>
+<FONT color="green">1498</FONT>                                                                                                            elp2.setBareme1(repdto[k].getBarNotEpr());<a name="line.1498"></a>
+<FONT color="green">1499</FONT>                                                                                                    }<a name="line.1499"></a>
+<FONT color="green">1500</FONT>                                                                                            }<a name="line.1500"></a>
+<FONT color="green">1501</FONT>                                                                                            if (elp2.getNote1() != null &amp;&amp; !elp2.getNote1().equals("")) {<a name="line.1501"></a>
+<FONT color="green">1502</FONT>                                                                                                    EprNotee = true;<a name="line.1502"></a>
+<FONT color="green">1503</FONT>                                                                                            }<a name="line.1503"></a>
+<FONT color="green">1504</FONT>    <a name="line.1504"></a>
+<FONT color="green">1505</FONT>    <a name="line.1505"></a>
+<FONT color="green">1506</FONT>                                                                                    } else {<a name="line.1506"></a>
+<FONT color="green">1507</FONT>                                                                                            //2er session  : septembre<a name="line.1507"></a>
+<FONT color="green">1508</FONT>                                                                                            if (repdto[k].getNotEpr() != null) {<a name="line.1508"></a>
+<FONT color="green">1509</FONT>                                                                                                    elp2.setNote2(repdto[k].getNotEpr().replaceAll(",", "."));<a name="line.1509"></a>
+<FONT color="green">1510</FONT>    <a name="line.1510"></a>
+<FONT color="green">1511</FONT>                                                                                                    //Gestion du barème:<a name="line.1511"></a>
+<FONT color="green">1512</FONT>                                                                                                    if(repdto[k].getBarNotEpr() != null){<a name="line.1512"></a>
+<FONT color="green">1513</FONT>                                                                                                            elp2.setBareme2(repdto[k].getBarNotEpr());<a name="line.1513"></a>
+<FONT color="green">1514</FONT>                                                                                                    }<a name="line.1514"></a>
+<FONT color="green">1515</FONT>                                                                                            }<a name="line.1515"></a>
+<FONT color="green">1516</FONT>                                                                                            if (elp2.getNote2() != null &amp;&amp; !elp2.getNote2().equals("")) {<a name="line.1516"></a>
+<FONT color="green">1517</FONT>                                                                                                    EprNotee = true;<a name="line.1517"></a>
+<FONT color="green">1518</FONT>                                                                                            }<a name="line.1518"></a>
+<FONT color="green">1519</FONT>                                                                                    }<a name="line.1519"></a>
+<FONT color="green">1520</FONT>                                                                            }<a name="line.1520"></a>
+<FONT color="green">1521</FONT>                                                                    }<a name="line.1521"></a>
+<FONT color="green">1522</FONT>                                                            }<a name="line.1522"></a>
+<FONT color="green">1523</FONT>                                                            //ajout de l'épreuve dans la liste en tant qu'élément si elle a une note<a name="line.1523"></a>
+<FONT color="green">1524</FONT>                                                            if (EprNotee) {<a name="line.1524"></a>
+<FONT color="green">1525</FONT>                                                                    liste1.add(elp2);<a name="line.1525"></a>
+<FONT color="green">1526</FONT>                                                            }<a name="line.1526"></a>
+<FONT color="green">1527</FONT>                                                    }<a name="line.1527"></a>
+<FONT color="green">1528</FONT>                                            }<a name="line.1528"></a>
+<FONT color="green">1529</FONT>                                    }<a name="line.1529"></a>
+<FONT color="green">1530</FONT>                            }<a name="line.1530"></a>
+<FONT color="green">1531</FONT>                            //ajout des éléments dans la liste de l'étudiant en commençant par la ou les racine<a name="line.1531"></a>
+<FONT color="green">1532</FONT>                            int niveauRacine = 1;<a name="line.1532"></a>
+<FONT color="green">1533</FONT>                            if (liste1.size() &gt; 0) {<a name="line.1533"></a>
+<FONT color="green">1534</FONT>                                    int i = 0;<a name="line.1534"></a>
+<FONT color="green">1535</FONT>                                    while (i &lt; liste1.size()) {<a name="line.1535"></a>
+<FONT color="green">1536</FONT>                                            ElementPedagogique el = liste1.get(i);<a name="line.1536"></a>
+<FONT color="green">1537</FONT>                                            if (el.getCodElpSup() == null || el.getCodElpSup().equals("")) {<a name="line.1537"></a>
+<FONT color="green">1538</FONT>                                                    //on a une racine:<a name="line.1538"></a>
+<FONT color="green">1539</FONT>                                                    if (!el.getAnnee().equals("FICM")) {<a name="line.1539"></a>
+<FONT color="green">1540</FONT>                                                            e.getElementsPedagogiques().add(el);<a name="line.1540"></a>
+<FONT color="green">1541</FONT>                                                    }<a name="line.1541"></a>
+<FONT color="green">1542</FONT>    <a name="line.1542"></a>
+<FONT color="green">1543</FONT>                                                    insererElmtPedagoFilsDansListe(el, liste1, e, niveauRacine);<a name="line.1543"></a>
+<FONT color="green">1544</FONT>                                            }<a name="line.1544"></a>
+<FONT color="green">1545</FONT>                                            i++;<a name="line.1545"></a>
+<FONT color="green">1546</FONT>                                    }<a name="line.1546"></a>
+<FONT color="green">1547</FONT>                            }<a name="line.1547"></a>
+<FONT color="green">1548</FONT>    <a name="line.1548"></a>
+<FONT color="green">1549</FONT>    <a name="line.1549"></a>
+<FONT color="green">1550</FONT>                            //suppression des épreuve seules et quand elles ont les mêmes notes que l'element pere:<a name="line.1550"></a>
+<FONT color="green">1551</FONT>                            if (e.getElementsPedagogiques().size() &gt; 0) {<a name="line.1551"></a>
+<FONT color="green">1552</FONT>                                    int i = 1;<a name="line.1552"></a>
+<FONT color="green">1553</FONT>                                    boolean suppr = false;<a name="line.1553"></a>
+<FONT color="green">1554</FONT>                                    while (i &lt; e.getElementsPedagogiques().size()) {<a name="line.1554"></a>
+<FONT color="green">1555</FONT>                                            suppr = false;<a name="line.1555"></a>
+<FONT color="green">1556</FONT>                                            ElementPedagogique elp = e.getElementsPedagogiques().get(i);<a name="line.1556"></a>
+<FONT color="green">1557</FONT>                                            if (elp.isEpreuve()) {<a name="line.1557"></a>
+<FONT color="green">1558</FONT>                                                    ElementPedagogique elp0 = e.getElementsPedagogiques().get(i - 1);<a name="line.1558"></a>
+<FONT color="green">1559</FONT>                                                    if (i &lt; (e.getElementsPedagogiques().size() - 1)) {<a name="line.1559"></a>
+<FONT color="green">1560</FONT>                                                            ElementPedagogique elp1 = e.getElementsPedagogiques().get(i + 1);<a name="line.1560"></a>
+<FONT color="green">1561</FONT>                                                            if (!elp0.isEpreuve() &amp;&amp; !elp1.isEpreuve()) {<a name="line.1561"></a>
+<FONT color="green">1562</FONT>                                                                    if (elp0.getNote1().equals(elp.getNote1()) &amp;&amp; elp0.getNote2().equals(elp.getNote2())) {<a name="line.1562"></a>
+<FONT color="green">1563</FONT>                                                                            //on supprime l'element i<a name="line.1563"></a>
+<FONT color="green">1564</FONT>                                                                            e.getElementsPedagogiques().remove(i);<a name="line.1564"></a>
+<FONT color="green">1565</FONT>                                                                            suppr = true;<a name="line.1565"></a>
+<FONT color="green">1566</FONT>                                                                    }<a name="line.1566"></a>
+<FONT color="green">1567</FONT>                                                            }<a name="line.1567"></a>
+<FONT color="green">1568</FONT>                                                    } else {<a name="line.1568"></a>
+<FONT color="green">1569</FONT>                                                            if (!elp0.isEpreuve() &amp;&amp; elp0.getNote1().equals(elp.getNote1()) &amp;&amp; elp0.getNote2().equals(elp.getNote2())) {<a name="line.1569"></a>
+<FONT color="green">1570</FONT>                                                                    //on supprime l'element i<a name="line.1570"></a>
+<FONT color="green">1571</FONT>                                                                    e.getElementsPedagogiques().remove(i);<a name="line.1571"></a>
+<FONT color="green">1572</FONT>                                                                    suppr = true;<a name="line.1572"></a>
+<FONT color="green">1573</FONT>                                                            }<a name="line.1573"></a>
+<FONT color="green">1574</FONT>                                                    }<a name="line.1574"></a>
+<FONT color="green">1575</FONT>                                            }<a name="line.1575"></a>
+<FONT color="green">1576</FONT>                                            if (!suppr) {<a name="line.1576"></a>
+<FONT color="green">1577</FONT>                                                    i++;<a name="line.1577"></a>
+<FONT color="green">1578</FONT>                                            }<a name="line.1578"></a>
+<FONT color="green">1579</FONT>                                    }<a name="line.1579"></a>
+<FONT color="green">1580</FONT>                            }<a name="line.1580"></a>
+<FONT color="green">1581</FONT>    <a name="line.1581"></a>
+<FONT color="green">1582</FONT>                            //indentation des libelles dans la liste:<a name="line.1582"></a>
+<FONT color="green">1583</FONT>                            if (e.getElementsPedagogiques().size() &gt; 0) {<a name="line.1583"></a>
+<FONT color="green">1584</FONT>                                    for (ElementPedagogique el : e.getElementsPedagogiques()) {<a name="line.1584"></a>
+<FONT color="green">1585</FONT>                                            int rg = new Integer(el.getLevel());<a name="line.1585"></a>
+<FONT color="green">1586</FONT>    <a name="line.1586"></a>
+<FONT color="green">1587</FONT>                                            String lib = new String(el.getLibelle());<a name="line.1587"></a>
+<FONT color="green">1588</FONT>                                            el.setLibelle("");<a name="line.1588"></a>
+<FONT color="green">1589</FONT>                                            for (int j = 2; j &lt;= rg; j++) {<a name="line.1589"></a>
+<FONT color="green">1590</FONT>                                                    el.setLibelle(el.getLibelle() + "&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;");<a name="line.1590"></a>
+<FONT color="green">1591</FONT>                                            }<a name="line.1591"></a>
+<FONT color="green">1592</FONT>    <a name="line.1592"></a>
+<FONT color="green">1593</FONT>                                            el.setLibelle(el.getLibelle() + lib);<a name="line.1593"></a>
+<FONT color="green">1594</FONT>                                    }<a name="line.1594"></a>
+<FONT color="green">1595</FONT>                            }<a name="line.1595"></a>
+<FONT color="green">1596</FONT>    <a name="line.1596"></a>
+<FONT color="green">1597</FONT>                            //Gestion des temoins fictif si temoinFictif est renseigné dans monDossierWeb.xml<a name="line.1597"></a>
+<FONT color="green">1598</FONT>                            if(config.getTemoinFictif()!=null &amp;&amp; !config.getTemoinFictif().equals("")){<a name="line.1598"></a>
+<FONT color="green">1599</FONT>                                    if (e.getElementsPedagogiques().size() &gt; 0) {<a name="line.1599"></a>
+<FONT color="green">1600</FONT>                                            List&lt;Integer&gt; listeRangAsupprimer=new LinkedList&lt;Integer&gt;();<a name="line.1600"></a>
+<FONT color="green">1601</FONT>                                            int rang = 0;<a name="line.1601"></a>
+<FONT color="green">1602</FONT>                                            //on note les rangs des éléments à supprimer<a name="line.1602"></a>
+<FONT color="green">1603</FONT>                                            for (ElementPedagogique el : e.getElementsPedagogiques()) {<a name="line.1603"></a>
+<FONT color="green">1604</FONT>                                                    if(el.getTemFictif()!= null &amp;&amp; !el.getTemFictif().equals("") &amp;&amp; !el.getTemFictif().equals(config.getTemoinFictif())){<a name="line.1604"></a>
+<FONT color="green">1605</FONT>                                                            //on supprime l'élément de la liste<a name="line.1605"></a>
+<FONT color="green">1606</FONT>                                                            listeRangAsupprimer.add(rang);<a name="line.1606"></a>
+<FONT color="green">1607</FONT>                                                    }<a name="line.1607"></a>
+<FONT color="green">1608</FONT>                                                    rang++;<a name="line.1608"></a>
+<FONT color="green">1609</FONT>                                            }<a name="line.1609"></a>
+<FONT color="green">1610</FONT>                                            //on supprime les éléments de la liste<a name="line.1610"></a>
+<FONT color="green">1611</FONT>                                            int NbElementSupprimes = 0;<a name="line.1611"></a>
+<FONT color="green">1612</FONT>                                            for(Integer rg:listeRangAsupprimer){<a name="line.1612"></a>
+<FONT color="green">1613</FONT>                                                    e.getElementsPedagogiques().remove(rg - NbElementSupprimes);<a name="line.1613"></a>
+<FONT color="green">1614</FONT>                                                    NbElementSupprimes++;<a name="line.1614"></a>
+<FONT color="green">1615</FONT>                                            }<a name="line.1615"></a>
+<FONT color="green">1616</FONT>                                    }<a name="line.1616"></a>
+<FONT color="green">1617</FONT>                            }<a name="line.1617"></a>
+<FONT color="green">1618</FONT>    <a name="line.1618"></a>
+<FONT color="green">1619</FONT>    <a name="line.1619"></a>
+<FONT color="green">1620</FONT>                            //ajout de l'étape sélectionnée en début de liste:<a name="line.1620"></a>
+<FONT color="green">1621</FONT>                            ElementPedagogique ep = new ElementPedagogique();<a name="line.1621"></a>
+<FONT color="green">1622</FONT>                            //LOG.info("etape Annee : "+et.getAnnee());<a name="line.1622"></a>
+<FONT color="green">1623</FONT>                            ep.setAnnee(et.getAnnee());<a name="line.1623"></a>
+<FONT color="green">1624</FONT>                            ep.setCode(et.getCode());<a name="line.1624"></a>
+<FONT color="green">1625</FONT>                            ep.setLevel(1);<a name="line.1625"></a>
+<FONT color="green">1626</FONT>                            ep.setLibelle(et.getLibelle());<a name="line.1626"></a>
+<FONT color="green">1627</FONT>                            e.setDeliberationTerminee(et.isDeliberationTerminee());<a name="line.1627"></a>
+<FONT color="green">1628</FONT>                            if (et.getResultats().size() &gt; 0) {<a name="line.1628"></a>
+<FONT color="green">1629</FONT>                                    if (et.getResultats().get(0).getNote() != null)<a name="line.1629"></a>
+<FONT color="green">1630</FONT>                                            ep.setNote1(et.getResultats().get(0).getNote().toString());<a name="line.1630"></a>
+<FONT color="green">1631</FONT>                                    if (et.getResultats().get(0).getAdmission() != null)<a name="line.1631"></a>
+<FONT color="green">1632</FONT>                                            ep.setRes1(et.getResultats().get(0).getAdmission());<a name="line.1632"></a>
+<FONT color="green">1633</FONT>                            }<a name="line.1633"></a>
+<FONT color="green">1634</FONT>                            if (et.getResultats().size() &gt; 1) {<a name="line.1634"></a>
+<FONT color="green">1635</FONT>                                    if (et.getResultats().get(1).getNote() != null)<a name="line.1635"></a>
+<FONT color="green">1636</FONT>                                            ep.setNote2(et.getResultats().get(1).getNote().toString());<a name="line.1636"></a>
+<FONT color="green">1637</FONT>                                    if (et.getResultats().get(1).getAdmission() != null)<a name="line.1637"></a>
+<FONT color="green">1638</FONT>                                            ep.setRes2(et.getResultats().get(1).getAdmission());<a name="line.1638"></a>
+<FONT color="green">1639</FONT>                            }<a name="line.1639"></a>
+<FONT color="green">1640</FONT>                            e.getElementsPedagogiques().add(0, ep);<a name="line.1640"></a>
+<FONT color="green">1641</FONT>    <a name="line.1641"></a>
+<FONT color="green">1642</FONT>                    } catch (WebBaseException ex) {<a name="line.1642"></a>
+<FONT color="green">1643</FONT>                            LOG.error(ex);<a name="line.1643"></a>
+<FONT color="green">1644</FONT>                            LOG.error("Probleme avec le WS lors de la recherche des notes et résultats a une étape pour etudiant dont codetu est : " + e.getCod_etu());<a name="line.1644"></a>
+<FONT color="green">1645</FONT>                    }catch (Exception ex) {<a name="line.1645"></a>
+<FONT color="green">1646</FONT>                            LOG.error(ex);<a name="line.1646"></a>
+<FONT color="green">1647</FONT>                            LOG.error("Probleme avec le WS lors de la recherche des notes et résultats a une étape pour etudiant dont codetu est : " + e.getCod_etu());<a name="line.1647"></a>
+<FONT color="green">1648</FONT>                    }<a name="line.1648"></a>
+<FONT color="green">1649</FONT>            }<a name="line.1649"></a>
+<FONT color="green">1650</FONT>    <a name="line.1650"></a>
+<FONT color="green">1651</FONT>            /**<a name="line.1651"></a>
+<FONT color="green">1652</FONT>             * ajoute les éléments dans la liste d'éléments de l'étudiant en corrigeant les levels (rangs).<a name="line.1652"></a>
+<FONT color="green">1653</FONT>             * @param elp<a name="line.1653"></a>
+<FONT color="green">1654</FONT>             * @param liste1<a name="line.1654"></a>
+<FONT color="green">1655</FONT>             * @param e<a name="line.1655"></a>
+<FONT color="green">1656</FONT>             * @param niveauDuPere <a name="line.1656"></a>
+<FONT color="green">1657</FONT>             */<a name="line.1657"></a>
+<FONT color="green">1658</FONT>            protected void insererElmtPedagoFilsDansListe(ElementPedagogique elp, List&lt;ElementPedagogique&gt; liste1, Etudiant e, int niveauDuPere) {<a name="line.1658"></a>
+<FONT color="green">1659</FONT>                    for (ElementPedagogique el : liste1) {<a name="line.1659"></a>
+<FONT color="green">1660</FONT>                            if (el.getCodElpSup() != null &amp;&amp; !el.getCodElpSup().equals("")) {<a name="line.1660"></a>
+<FONT color="green">1661</FONT>                                    if (el.getCodElpSup().equals(elp.getCode()) &amp;&amp; !el.getCode().equals(elp.getCode())) {<a name="line.1661"></a>
+<FONT color="green">1662</FONT>                                            //on affiche pas les FICM :<a name="line.1662"></a>
+<FONT color="green">1663</FONT>                                            if (!el.getAnnee().equals("FICM")) {<a name="line.1663"></a>
+<FONT color="green">1664</FONT>                                                    el.setLevel(niveauDuPere + 1);<a name="line.1664"></a>
+<FONT color="green">1665</FONT>                                                    e.getElementsPedagogiques().add(el);<a name="line.1665"></a>
+<FONT color="green">1666</FONT>                                            }<a name="line.1666"></a>
+<FONT color="green">1667</FONT>                                            //On test si on est pas sur une epreuve pour eviter les boucle infini dans le cas ou codEpr=CodElpPere<a name="line.1667"></a>
+<FONT color="green">1668</FONT>                                            if(!el.getAnnee().equals("epreuve"))<a name="line.1668"></a>
+<FONT color="green">1669</FONT>                                                    insererElmtPedagoFilsDansListe(el, liste1, e, niveauDuPere + 1);<a name="line.1669"></a>
+<FONT color="green">1670</FONT>                                    }<a name="line.1670"></a>
+<FONT color="green">1671</FONT>                            }<a name="line.1671"></a>
+<FONT color="green">1672</FONT>                    }<a name="line.1672"></a>
+<FONT color="green">1673</FONT>            }<a name="line.1673"></a>
+<FONT color="green">1674</FONT>    <a name="line.1674"></a>
+<FONT color="green">1675</FONT>    <a name="line.1675"></a>
+<FONT color="green">1676</FONT>    <a name="line.1676"></a>
 <FONT color="green">1677</FONT>    <a name="line.1677"></a>
-<FONT color="green">1678</FONT>            public EmailConverterInterface getEmailConverter() {<a name="line.1678"></a>
-<FONT color="green">1679</FONT>                    return emailConverter;<a name="line.1679"></a>
-<FONT color="green">1680</FONT>            }<a name="line.1680"></a>
-<FONT color="green">1681</FONT>    <a name="line.1681"></a>
-<FONT color="green">1682</FONT>            public void setEmailConverter(EmailConverterInterface emailConverter) {<a name="line.1682"></a>
-<FONT color="green">1683</FONT>                    this.emailConverter = emailConverter;<a name="line.1683"></a>
-<FONT color="green">1684</FONT>            }<a name="line.1684"></a>
-<FONT color="green">1685</FONT>    <a name="line.1685"></a>
-<FONT color="green">1686</FONT>            public Config getConfig() {<a name="line.1686"></a>
-<FONT color="green">1687</FONT>                    return config;<a name="line.1687"></a>
-<FONT color="green">1688</FONT>            }<a name="line.1688"></a>
-<FONT color="green">1689</FONT>    <a name="line.1689"></a>
-<FONT color="green">1690</FONT>            public void setConfig(Config config) {<a name="line.1690"></a>
-<FONT color="green">1691</FONT>                    this.config = config;<a name="line.1691"></a>
-<FONT color="green">1692</FONT>            }<a name="line.1692"></a>
-<FONT color="green">1693</FONT>    <a name="line.1693"></a>
-<FONT color="green">1694</FONT>            public IPhoto getPhoto() {<a name="line.1694"></a>
-<FONT color="green">1695</FONT>                    return photo;<a name="line.1695"></a>
-<FONT color="green">1696</FONT>            }<a name="line.1696"></a>
-<FONT color="green">1697</FONT>    <a name="line.1697"></a>
-<FONT color="green">1698</FONT>            public void setPhoto(IPhoto photo) {<a name="line.1698"></a>
-<FONT color="green">1699</FONT>                    this.photo = photo;<a name="line.1699"></a>
-<FONT color="green">1700</FONT>            }<a name="line.1700"></a>
-<FONT color="green">1701</FONT>    <a name="line.1701"></a>
-<FONT color="green">1702</FONT>            public void setCalendrierRentree(Etudiant etudiant) {<a name="line.1702"></a>
-<FONT color="green">1703</FONT>                    // TODO Auto-generated method stub<a name="line.1703"></a>
-<FONT color="green">1704</FONT>    <a name="line.1704"></a>
-<FONT color="green">1705</FONT>            }<a name="line.1705"></a>
-<FONT color="green">1706</FONT>    <a name="line.1706"></a>
+<FONT color="green">1678</FONT>    <a name="line.1678"></a>
+<FONT color="green">1679</FONT>    <a name="line.1679"></a>
+<FONT color="green">1680</FONT>            public IDaoService getService() {<a name="line.1680"></a>
+<FONT color="green">1681</FONT>                    return service;<a name="line.1681"></a>
+<FONT color="green">1682</FONT>            }<a name="line.1682"></a>
+<FONT color="green">1683</FONT>    <a name="line.1683"></a>
+<FONT color="green">1684</FONT>            public void setService(IDaoService service) {<a name="line.1684"></a>
+<FONT color="green">1685</FONT>                    this.service = service;<a name="line.1685"></a>
+<FONT color="green">1686</FONT>            }<a name="line.1686"></a>
+<FONT color="green">1687</FONT>    <a name="line.1687"></a>
+<FONT color="green">1688</FONT>            public EmailConverterInterface getEmailConverter() {<a name="line.1688"></a>
+<FONT color="green">1689</FONT>                    return emailConverter;<a name="line.1689"></a>
+<FONT color="green">1690</FONT>            }<a name="line.1690"></a>
+<FONT color="green">1691</FONT>    <a name="line.1691"></a>
+<FONT color="green">1692</FONT>            public void setEmailConverter(EmailConverterInterface emailConverter) {<a name="line.1692"></a>
+<FONT color="green">1693</FONT>                    this.emailConverter = emailConverter;<a name="line.1693"></a>
+<FONT color="green">1694</FONT>            }<a name="line.1694"></a>
+<FONT color="green">1695</FONT>    <a name="line.1695"></a>
+<FONT color="green">1696</FONT>            public Config getConfig() {<a name="line.1696"></a>
+<FONT color="green">1697</FONT>                    return config;<a name="line.1697"></a>
+<FONT color="green">1698</FONT>            }<a name="line.1698"></a>
+<FONT color="green">1699</FONT>    <a name="line.1699"></a>
+<FONT color="green">1700</FONT>            public void setConfig(Config config) {<a name="line.1700"></a>
+<FONT color="green">1701</FONT>                    this.config = config;<a name="line.1701"></a>
+<FONT color="green">1702</FONT>            }<a name="line.1702"></a>
+<FONT color="green">1703</FONT>    <a name="line.1703"></a>
+<FONT color="green">1704</FONT>            public IPhoto getPhoto() {<a name="line.1704"></a>
+<FONT color="green">1705</FONT>                    return photo;<a name="line.1705"></a>
+<FONT color="green">1706</FONT>            }<a name="line.1706"></a>
 <FONT color="green">1707</FONT>    <a name="line.1707"></a>
-<FONT color="green">1708</FONT>    <a name="line.1708"></a>
-<FONT color="green">1709</FONT>    <a name="line.1709"></a>
-<FONT color="green">1710</FONT>    <a name="line.1710"></a>
+<FONT color="green">1708</FONT>            public void setPhoto(IPhoto photo) {<a name="line.1708"></a>
+<FONT color="green">1709</FONT>                    this.photo = photo;<a name="line.1709"></a>
+<FONT color="green">1710</FONT>            }<a name="line.1710"></a>
 <FONT color="green">1711</FONT>    <a name="line.1711"></a>
-<FONT color="green">1712</FONT>    <a name="line.1712"></a>
-<FONT color="green">1713</FONT>    }<a name="line.1713"></a>
+<FONT color="green">1712</FONT>            public void setCalendrierRentree(Etudiant etudiant) {<a name="line.1712"></a>
+<FONT color="green">1713</FONT>                    // TODO Auto-generated method stub<a name="line.1713"></a>
+<FONT color="green">1714</FONT>    <a name="line.1714"></a>
+<FONT color="green">1715</FONT>            }<a name="line.1715"></a>
+<FONT color="green">1716</FONT>    <a name="line.1716"></a>
+<FONT color="green">1717</FONT>    <a name="line.1717"></a>
+<FONT color="green">1718</FONT>    <a name="line.1718"></a>
+<FONT color="green">1719</FONT>    <a name="line.1719"></a>
+<FONT color="green">1720</FONT>    <a name="line.1720"></a>
+<FONT color="green">1721</FONT>    <a name="line.1721"></a>
+<FONT color="green">1722</FONT>    <a name="line.1722"></a>
+<FONT color="green">1723</FONT>    }<a name="line.1723"></a>
 
 
 

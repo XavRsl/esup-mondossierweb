@@ -148,7 +148,7 @@ public class EtudiantAmue implements IEtudiant {
 	 * @see org.esupportail.mondossierweb.domain.beans.IEtudiant#setPhoto(org.esupportail.mondossierweb.domain.beans.Etudiant)
 	 */
 	public void setPhoto(Etudiant e){
-			e.setUrlphoto(photo.getUrlPhoto(e.getCod_ind(),e.getCod_etu()));
+		e.setUrlphoto(photo.getUrlPhoto(e.getCod_ind(),e.getCod_etu()));
 	}
 	/**
 	 * va chercher et renseigne les informations concernant l'état-civil de 
@@ -178,7 +178,7 @@ public class EtudiantAmue implements IEtudiant {
 			//Modification 21/02/2012. Pour ne renseigner la photo que si elle n'est pas renseignée.
 			//setPhoto(e);
 			e.getUrlphoto();
-			
+
 
 			if (!config.isRecupAnnuaire()) {
 				// on passe par iBATIS pour récupérer l'e-mail.
@@ -189,14 +189,14 @@ public class EtudiantAmue implements IEtudiant {
 			}
 
 			InfoAdmEtuDTO iaetu = monProxyEtu.recupererInfosAdmEtu(e.getCod_etu());
-			
+
 			//MODIF POUR UTILISER LE NOM USUEL SI RENSEIGNE 19/09/2012
 			if (iaetu.getNomUsuel() != null && !iaetu.getNomUsuel().equals("")){
 				e.setNom(iaetu.getNomUsuel()+ " " + iaetu.getPrenom1());
 			}else{
 				e.setNom( iaetu.getNomPatronymique() + " " + iaetu.getPrenom1());
 			}
-			
+
 
 			//informations sur la naissance :
 			//la nationalité:
@@ -308,14 +308,14 @@ public class EtudiantAmue implements IEtudiant {
 		 *  ++++++++++++++++++++++++++++++++++++++++++++++++++
 		 */
 		try {
-			
+
 			String[] annees =  monProxyAdministratif.recupererAnneesIa(e.getCod_etu(), null);
 
 			String annee = annees[annees.length - 1];
 			//récupération des coordonnées :
 
 			CoordonneesDTO2 cdto = monProxyEtu.recupererAdressesEtudiant_v2(e.getCod_etu(), annee, "N");
-		
+
 			//récupération des adresses, annuelle et fixe :
 			annee = cdto.getAnnee();
 			e.setEmailPerso(cdto.getEmail());
@@ -544,11 +544,11 @@ public class EtudiantAmue implements IEtudiant {
 			e.getLinscdac().clear();
 
 			e.setLib_etb(service.getEtablissementDef());
-			
+
 			//cursus au sein de l'université:
-			
+
 			InsAdmEtpDTO2[] insdtotab = monProxyAdministratif.recupererIAEtapes_v2(e.getCod_etu(), "toutes", "ARE", "ARE");
-		
+
 			for (int i = 0; i < insdtotab.length; i++) {
 				Inscription insc = new Inscription();
 				InsAdmEtpDTO2 insdto = insdtotab[i];
@@ -570,11 +570,11 @@ public class EtudiantAmue implements IEtudiant {
 					insc.setCod_dip(insdto.getDiplome().getCodeDiplome());
 					insc.setVers_dip(insdto.getDiplome().getVersionDiplome());
 					insc.setLib_dip(insdto.getDiplome().getLibWebVdi());
-					
+
 					//récupération des informations sur la composante
 					insc.setCod_comp(insdto.getComposante().getCodComposante());
 					insc.setLib_comp(insdto.getComposante().getLibComposante());
-					
+
 					//récupération de l'état en règle de l'inscription
 					if(insdto.getInscriptionPayee().equals(LIBELLE_WS_INSCRIPTION_PAYEE)){
 						insc.setEstEnRegle(true);
@@ -673,14 +673,14 @@ public class EtudiantAmue implements IEtudiant {
 				}
 			}
 		}
-		
+
 		//si on a pas les infos en cache:
 		if(!enCache){
-				e.getEtudiantManager().setNotesElpEpr(e, et);
-				//AJOUT DES INFOS recupérées dans le cache. true car on est en vue Etudiant
-				e.ajouterCacheResultatElpEpr(et, true);	
-				//on charge les infos récupérèes dans la liste représentant lIP:
-				e.recupererCacheIP(e.getCacheResultats().getResultElpEpr().size()-1);
+			e.getEtudiantManager().setNotesElpEpr(e, et);
+			//AJOUT DES INFOS recupérées dans le cache. true car on est en vue Etudiant
+			e.ajouterCacheResultatElpEpr(et, true);	
+			//on charge les infos récupérèes dans la liste représentant lIP:
+			e.recupererCacheIP(e.getCacheResultats().getResultElpEpr().size()-1);
 		}else{
 			//on récupére les infos du cache grace au rang :
 			e.recupererCacheIP(rang);
@@ -741,7 +741,7 @@ public class EtudiantAmue implements IEtudiant {
 				} catch (Exception ex) {
 					cpdtoExtract = null;
 				}
-				
+
 				// Et on fusionne cpdtoResult et cpdtoExtract
 				ArrayList<ContratPedagogiqueResultatVdiVetDTO> cpdtoAl = new ArrayList<ContratPedagogiqueResultatVdiVetDTO>();
 				for (int i = 0; i < cpdtoResult.length; i++ ) {
@@ -886,7 +886,7 @@ public class EtudiantAmue implements IEtudiant {
 						for (int j = 0; j < tabres.length; j++ ) {
 							Resultat r = new Resultat();
 							ResultatVdiDTO res = tabres[j];
-							
+
 							r.setSession(res.getSession().getLibSes());
 							if(res.getNatureResultat() != null && res.getNatureResultat().getCodAdm() != null && res.getNatureResultat().getCodAdm().equals("0")){
 								//on est en Admissibilité à l'étape.Pas en admission.
@@ -895,13 +895,13 @@ public class EtudiantAmue implements IEtudiant {
 
 
 							}
-							
+
 							//recuperation de la mention
 							if(res.getMention() != null){
 								r.setCodMention(res.getMention().getCodMen());
 								r.setLibMention(res.getMention().getLibMen());
 							}
-							
+
 							String result="";
 							if( res.getTypResultat()!=null){
 								result= res.getTypResultat().getCodTre();
@@ -935,7 +935,7 @@ public class EtudiantAmue implements IEtudiant {
 								d.setRang(res.getNbrRngEtuVdi()+"/"+res.getNbrRngEtuVdiTot());
 								//On indique si on affiche le rang du diplome.
 								d.setAfficherRang(config.isAffRangEtudiant());
-								
+
 							}
 						}
 						//ajout du diplome si on a au moins un résultat
@@ -960,12 +960,12 @@ public class EtudiantAmue implements IEtudiant {
 							et.setCode(etape.getEtape().getCodEtp());
 							et.setVersion(etape.getEtape().getCodVrsVet().toString());
 							et.setLibelle(etape.getEtape().getLibWebVet());
-							
+
 							//ajout 16/02/2012 pour WS exposés pour la version mobile en HttpInvoker
-							et.setCod_dip(rdto.getDiplome().getCodDip());
-							et.setVers_dip(rdto.getDiplome().getCodVrsVdi());
-							//System.out.println("etcoddip : "+et.getCod_dip());
-							//System.out.println("etvrsdip : "+et.getVers_dip());
+							if(rdto.getDiplome()!= null){
+								et.setCod_dip(rdto.getDiplome().getCodDip());
+								et.setVers_dip(rdto.getDiplome().getCodVrsVdi());
+							}
 
 							//résultats de l'étape:
 							ResultatVetDTO[] tabresetape = etape.getResultatVet();
@@ -992,7 +992,7 @@ public class EtudiantAmue implements IEtudiant {
 										r.setCodMention(ret.getMention().getCodMen());
 										r.setLibMention(ret.getMention().getLibMen());
 									}
-									
+
 									//System.out.println("session : " + ret.getSession().getLibSes()+" "+	ret.getSession().getCodSes());
 									String result="";
 									if(ret.getTypResultat() != null){
@@ -1040,10 +1040,10 @@ public class EtudiantAmue implements IEtudiant {
 											}
 										}
 									}*/
-									
+
 									//ajout du résultat
 									et.getResultats().add(r);
-									
+
 									//ajout du rang
 									if(ret.getNbrRngEtuVet() != null && !ret.getNbrRngEtuVet().equals("")){
 										et.setRang(ret.getNbrRngEtuVet()+"/"+ret.getNbrRngEtuVetTot());
@@ -1198,7 +1198,7 @@ public class EtudiantAmue implements IEtudiant {
 					sourceResultat="Apogee";
 				}
 			}
-			
+
 			// 07/12/11 récupération du fonctionnement identique à la récupéraition des notes pour les étudiants.
 			if(sourceResultat.compareTo("Apogee-extraction")==0){
 				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v5(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, temoin, "toutes", "tous");
@@ -1207,8 +1207,8 @@ public class EtudiantAmue implements IEtudiant {
 				ContratPedagogiqueResultatElpEprDTO4[] cpdto = monProxyPedagogique.recupererContratPedagogiqueResultatElpEpr_v5(e.getCod_etu(), et.getAnnee().substring(0, 4), et.getCode(), et.getVersion(), sourceResultat, "AET", "toutes", "tous");
 				setNotesElpEpr(e, et, cpdto,temoin);
 			}
-			
-			
+
+
 
 		} catch (WebBaseException ex) {
 			//on catch le cas ou les inscriptions aux elp de l'étape ne soient pas effectués.
@@ -1436,12 +1436,12 @@ public class EtudiantAmue implements IEtudiant {
 							elp2.setLibelle(epreuve.getEpreuve().getLibEpr());
 							elp2.setCode(epreuve.getEpreuve().getCodEpr());
 							elp2.setLevel(elp.getLevel() + 1);
-							
+
 							//Modif 20/02/2012 pour les WS HttpInvoker
 							//elp2.setAnnee("epreuve");
 							elp2.setAnnee("");
 							elp2.setEpreuve(true);
-							
+
 							elp2.setCodElpSup(elp.getCode());
 							elp2.setNote1("");
 							elp2.setBareme1(0);
@@ -1456,24 +1456,34 @@ public class EtudiantAmue implements IEtudiant {
 
 							if (repdto != null && repdto.length > 0) {
 								for (int k = 0; k < repdto.length; k++ ) {
-
-									//03/02/11
-									//On recupere la note si le témoin d'avc fait partie de la liste des témoins paramétrés 
-									//OU si le témoin d'avc de  l'elp pere fait partie de la liste des témoins paramétrés 
-									//OU si le témoin TemCtlValCadEpr est égal au parametre TemoinCtlValCadEpr de monDossierWeb.xml.
-									boolean recuperationNote = false;
 									int codsession = new Integer(repdto[k].getSession().getCodSes());
+									//09/01/13
+									//On recupere la note si :
+									//  On a reseigné une liste de type épreuve à afficher et le type de l'épreuve en fait partie
+									//  OU SI :
+									//      le témoin d'avc fait partie de la liste des témoins paramétrés 
+									//      OU si le témoin d'avc de  l'elp pere fait partie de la liste des témoins paramétrés 
+									//      OU si le témoin TemCtlValCadEpr est égal au parametre TemoinCtlValCadEpr de monDossierWeb.xml.
+									boolean recuperationNote = false;
 
-									if (codsession < 2) {
-
-										if(temoinEtatDelib.contains(repdto[k].getEtatDelib().getCodEtaAvc()) || elpEtatDelibS1OK || TemCtlValCadEpr.equals(config.getTemoinCtlValCadEpr()))
-											recuperationNote = true;
-									}else{
-
-										if(temoinEtatDelib.contains(repdto[k].getEtatDelib().getCodEtaAvc()) || elpEtatDelibS2OK || TemCtlValCadEpr.equals(config.getTemoinCtlValCadEpr()))
-											recuperationNote = true;
+									if(config.getTypesEpreuveAffichageNote() != null && config.getTypesEpreuveAffichageNote().size()>0){
+										//On a renseigné une liste de type épreuve à afficher
+										for(String typeEpreuve : config.getTypesEpreuveAffichageNote()){
+											if(typeEpreuve.equals(epreuve.getEpreuve().getTypEpreuve().getCodTep())){
+												recuperationNote = true;
+											}
+										}
 									}
-
+									if(!recuperationNote){
+										//On n'a pas renseigné de liste de type épreuve à afficher ou celui ci n'était pas dans la liste
+										if (codsession < 2) {
+											if(temoinEtatDelib.contains(repdto[k].getEtatDelib().getCodEtaAvc()) || elpEtatDelibS1OK || TemCtlValCadEpr.equals(config.getTemoinCtlValCadEpr()))
+												recuperationNote = true;
+										}else{
+											if(temoinEtatDelib.contains(repdto[k].getEtatDelib().getCodEtaAvc()) || elpEtatDelibS2OK || TemCtlValCadEpr.equals(config.getTemoinCtlValCadEpr()))
+												recuperationNote = true;
+										}
+									}
 									//test si on recupere la note ou pas
 									if(recuperationNote){
 
@@ -1583,7 +1593,7 @@ public class EtudiantAmue implements IEtudiant {
 					el.setLibelle(el.getLibelle() + lib);
 				}
 			}
-			
+
 			//Gestion des temoins fictif si temoinFictif est renseigné dans monDossierWeb.xml
 			if(config.getTemoinFictif()!=null && !config.getTemoinFictif().equals("")){
 				if (e.getElementsPedagogiques().size() > 0) {
@@ -1605,8 +1615,8 @@ public class EtudiantAmue implements IEtudiant {
 					}
 				}
 			}
-			
-			
+
+
 			//ajout de l'étape sélectionnée en début de liste:
 			ElementPedagogique ep = new ElementPedagogique();
 			//LOG.info("etape Annee : "+et.getAnnee());

@@ -137,6 +137,10 @@ public class Config {
 	 */
 	private String temoinCtlValCadEpr;
 	/**
+	 * la liste des types d'épreuve dont on affiche la note
+	 */
+	private List<String> typesEpreuveAffichageNote;
+	/**
 	 * Si temoinFictif est renseigné, seuls les éléments dont tem_fictif est égal à témoinFictif seront affichés dans l'écran du détail des notes
 	 */
 	private String temoinFictif;
@@ -725,6 +729,14 @@ public class Config {
 	@ManagedAttribute
 	public void setCodesEtapeAffichageRang(List<String> codesEtapeAffichageRang) {
 		this.codesEtapeAffichageRang = codesEtapeAffichageRang;
+	}
+
+	public List<String> getTypesEpreuveAffichageNote() {
+		return typesEpreuveAffichageNote;
+	}
+
+	public void setTypesEpreuveAffichageNote(List<String> typesEpreuveAffichageNote) {
+		this.typesEpreuveAffichageNote = typesEpreuveAffichageNote;
 	}
 	
 	
