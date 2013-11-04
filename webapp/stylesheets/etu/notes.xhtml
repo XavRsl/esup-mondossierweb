@@ -61,31 +61,42 @@
 	headerClass="portlet-table-header"
 	rowClasses="portlet-table-body, portlet-table-alternate" >					
 
-	<t:column width="13%">
+	<t:column width="13%" styleClass="mob-top-space">
 		<f:facet name="header">Année</f:facet>
-		<h:outputText value="#{dip.annee}"/>
+	        <span class="mob-libelle" style="display:none;">Année</span>
+         	<h:outputText value="#{dip.annee}"/>
 	</t:column> 
     
-	<t:column width="15%">
+	<t:column width="15%" styleClass="mob-hide-obj">
 		<f:facet name="header">Code/Vers</f:facet>
-		<h:outputText value="#{dip.cod_dip}"/>/<h:outputText value="#{dip.cod_vrs_vdi}"/>
+	        <span class="mob-libelle" style="display:none;">Code/Vers</span>
+         	<h:outputText value="#{dip.cod_dip}"/>/<h:outputText value="#{dip.cod_vrs_vdi}"/>
 	</t:column> 
     
 	<t:column width="30%">
 		<f:facet name="header">Diplôme</f:facet>
+                <span class="mob-libelle" style="display:none;">Diplôme</span>
 		<h:outputText value="#{dip.lib_web_vdi}"/>
 	</t:column> 
-    
-	<t:column width="13%">
+       
+	<t:column width="13%" styleClass="mob-bottom-space">
 		<f:facet name="header">Session</f:facet>
 		<t:dataTable styleClass="portlet-subtable" id="tableres1" value="#{dip.resultats}" var="res">
-			<t:column>
+			<t:column styleClass="mob-left-space">
 		   		<h:outputText value="#{res.session}"/>
+                             <span class="mob-inline-display" style="display:none;">
+                                <h:outputText value="&#160;&#160;&#160;"/>
+                                <h:outputText value="#{res.note}"/><h:outputText value="/#{res.bareme}" rendered="#{res.bareme != 0  and res.bareme != 20}"/>
+                                <h:outputText value="&#160;&#160;&#160;"/>
+                                <h:outputText value="#{res.admission}"/>
+                                <h:outputText value="&#160;&#160;&#160;"/>
+                                <h:outputText value="#{res.codMention}"/>
+                             </span>
 			</t:column>
 		</t:dataTable>
     </t:column> 
     
-    <t:column width="8%">
+    <t:column width="8%" styleClass="mob-hide-obj">
     	<f:facet name="header">Note</f:facet>
 		<t:dataTable styleClass="portlet-subtable" id="tableres1" value="#{dip.resultats}" var="res">
 			<t:column>
@@ -94,7 +105,7 @@
 		</t:dataTable>
     </t:column> 
     
-    <t:column width="8%">
+    <t:column width="8%" styleClass="mob-hide-obj">
     	<f:facet name="header">Résultat</f:facet>
 		<t:dataTable styleClass="portlet-subtable" id="tableres1" value="#{dip.resultats}" var="res">
 			<t:column>
@@ -103,7 +114,7 @@
 		</t:dataTable>
     </t:column> 
 	
-	<t:column width="5%" rendered="#{config.affMentionEtudiant}">
+	<t:column width="5%" rendered="#{config.affMentionEtudiant}" styleClass="mob-hide-obj">
 		<f:facet name="header">Mention</f:facet>
 		<t:dataTable styleClass="portlet-subtable" id="tablemention" value="#{dip.resultats}" var="res">
 			<t:column>
@@ -113,7 +124,7 @@
 	</t:column> 
     
 	<!-- On test si on affiche la colonne Rang -->
-	<t:column width="8%" rendered="#{etudiant.afficherRang}">
+	<t:column width="8%" rendered="#{etudiant.afficherRang}" styleClass="mob-hide-obj">
 		<f:facet name="header">Rang</f:facet>
 		<!-- On test si on affiche la valeur rang pour ce diplome -->
 		<h:outputText value="#{dip.rang}" rendered="#{dip.afficherRang}"/>
@@ -141,19 +152,21 @@
 	headerClass="portlet-table-header"
 	rowClasses="portlet-table-body, portlet-table-alternate" >					
 
-	<t:column width="13%">
+	<t:column width="13%" styleClass="mob-top-space">
 		<f:facet name="header">Année</f:facet>
+                <span class="mob-libelle" style="display:none;">Année</span>
 		<h:outputText value="#{etape.annee}"/>
 	</t:column> 
 	    
-	<t:column width="15%">
+	<t:column width="15%" styleClass="mob-hide-obj">
 		<f:facet name="header">Code/vers</f:facet>
+		<span class="mob-libelle" style="display:none;">Code/vers</span>
 		<h:commandLink action="#{notesController.preciserEtape}" rendered="#{etape.rang != 'NC'}">
 			<f:param name="row" value="#{rowindex}"/>
 			<t:graphicImage style= " border:0 ; " alt='Dossier Etudiant' value='/media/images/CMonDossierWeb/folderopen.gif' />	
 			<u><h:outputText value="#{etape.code}"/>/<h:outputText value="#{etape.version}"/></u>
 	   	</h:commandLink>
-		<h:outputText rendered="#{etape.rang == 'NC'}">
+                <h:outputText rendered="#{etape.rang == 'NC'}">
 			<t:graphicImage style= " border:0 ; " alt='Dossier Etudiant' value='/media/images/CMonDossierWeb/folderopen.gif' />	
 			<h:outputText value="#{etape.code}"/>/<h:outputText value="#{etape.version}"/>
 		</h:outputText>
@@ -161,7 +174,8 @@
     
 	<t:column width="30%">
 		<f:facet name="header">Etape</f:facet>
-		<h:commandLink action="#{notesController.preciserEtape}" rendered="#{etape.rang != 'NC'}">
+                <span class="mob-libelle" style="display:none;">Etape</span>
+         	<h:commandLink action="#{notesController.preciserEtape}" rendered="#{etape.rang != 'NC'}">
 			<f:param name="row" value="#{rowindex}"/>
 			<h:outputText value="#{etape.libelle}"/>
 		</h:commandLink>
@@ -170,16 +184,24 @@
 		</h:outputText>
 	</t:column> 
     
-	<t:column width="13%">
+       	<t:column width="13%" styleClass="mob-bottom-space">
 		<f:facet name="header">Session</f:facet>
 		<t:dataTable styleClass="portlet-subtable" id="tableres1" value="#{etape.resultats}" var="res">
-			<t:column>
+			<t:column styleClass="mob-left-space">
 				<h:outputText value="#{res.session}"/>
+                             <span class="mob-inline-display" style="display:none;">
+                                <h:outputText value="&#160;&#160;&#160;"/>
+                                <h:outputText value="#{res.note}"/><h:outputText value="/#{res.bareme}" rendered="#{res.bareme != 0  and res.bareme != 20}"/>
+                                <h:outputText value="&#160;&#160;&#160;"/>
+                                <h:outputText value="#{res.admission}"/>
+                                <h:outputText value="&#160;&#160;&#160;"/>
+                                <h:outputText value="#{res.codMention}"/>
+                             </span>
 			</t:column>
 		</t:dataTable>
 	</t:column> 
     
-	<t:column width="8%">
+	<t:column width="8%" styleClass="mob-hide-obj">
 		<f:facet name="header">Note</f:facet>
 		<t:dataTable styleClass="portlet-subtable" id="tableres1" value="#{etape.resultats}" var="res">
 			<t:column>
@@ -188,7 +210,7 @@
 		</t:dataTable>
     </t:column> 
     
-    <t:column width="8%">
+    <t:column width="8%" styleClass="mob-hide-obj">
     	<f:facet name="header">Résultat</f:facet>
 		<t:dataTable styleClass="portlet-subtable" id="tableres1" value="#{etape.resultats}" var="res">
 			<t:column>
@@ -197,7 +219,7 @@
 		</t:dataTable>
 	</t:column> 
     
-	<t:column width="5%" rendered="#{config.affMentionEtudiant}">
+	<t:column width="5%" rendered="#{config.affMentionEtudiant}" styleClass="mob-hide-obj">
 		<f:facet name="header">Mention</f:facet>
 		<t:dataTable styleClass="portlet-subtable" id="tablemention1" value="#{etape.resultats}" var="res">
 			<t:column>
@@ -206,7 +228,7 @@
 		</t:dataTable>
 	</t:column> 
 	<!-- On test si on affiche la colonne Rang -->
-	<t:column width="8%" rendered="#{etudiant.afficherRang}">
+	<t:column width="8%" rendered="#{etudiant.afficherRang}" styleClass="mob-hide-obj">
 		<f:facet name="header">Rang</f:facet>
 		<!-- On test si on affiche la valeur rang pour cette etape -->
 		<h:outputText value="#{etape.rang}" rendered="#{etape.afficherRang}"/>

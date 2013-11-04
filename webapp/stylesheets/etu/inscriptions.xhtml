@@ -39,29 +39,31 @@
 		rowIndexVar="rowindex" styleClass="portlet-table"
 		headerClass="portlet-table-header"
 		rowClasses="portlet-table-body, portlet-table-alternate" >					
-	
-		<t:column>
+
+		<t:column styleClass="mob-top-space">
 			<f:facet name="header">Année</f:facet>
-			<h:outputText value="#{ins.cod_anu}"/>
+		        <span class="mob-libelle" style="display:none;">Année</span>
+                 	<h:outputText value="#{ins.cod_anu}"/>
 		</t:column> 
 		
 		<!-- AFICHE LE CODE DE LA COMPOSANTE 12/09/2012 -->
 		<t:column>
 			<f:facet name="header">Composante</f:facet>
+		        <span class="mob-libelle" style="display:none;">Composante</span>
 			<h:outputText value="#{ins.cod_comp}"/>
 		</t:column> 
 	    
-	    <t:column>
+	    <t:column styleClass="mob-hide-obj">
 	    	<f:facet name="header">Code</f:facet>
-			<h:outputText value="#{ins.cod_etp}"/>
+	        <h:outputText value="#{ins.cod_etp}"/>
 	    </t:column> 
 	    
-	    <t:column>
+	    <t:column styleClass="mob-hide-obj">
 	    	<f:facet name="header">Vers.</f:facet>
 			<h:outputText value="#{ins.cod_vrs_vet}"/>
 	    </t:column> 
 	    
-	    <t:column>
+	    <t:column styleClass="mob-bottom-space">
 	    	<f:facet name="header">Etape</f:facet>
 			
 			<t:div width="100%">
@@ -72,6 +74,7 @@
 					</h:commandLink>
 				</t:div>
 				
+	                        <span class="mob-libelle" style="display:none;">Etape</span>	
 	    			<h:outputText value="#{ins.lib_etp}"/> 
 
 	    			<t:div rendered="#{inscriptionsController.certScolAutorisations[ins.codEtpCodAnuConcat]}" >

@@ -24,6 +24,10 @@ public class ElementPedagogique implements Serializable {
 	 * libellé de l'élément pédagogique.
 	 */
 	private String libelle;
+        /**
+         * libellé de l'élément pédagogique(en vue mobile, cad sans indentation).
+         */
+        private String mobLibelle;
 	/**
 	 * vrai si l'elp est une epreuve
 	 */
@@ -121,7 +125,13 @@ public class ElementPedagogique implements Serializable {
 	public void setLibelle(final String libelle) {
 		this.libelle = libelle;
 	}
-	public String getNote1() {
+	public String getMobLibelle() {
+                return mobLibelle;
+        }
+        public void setMobLibelle(final String mobLibelle) {
+                this.mobLibelle = mobLibelle;
+        }
+        public String getNote1() {
 		return note1;
 	}
 	public void setNote1(final String note1) {

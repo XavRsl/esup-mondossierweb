@@ -1589,7 +1589,7 @@ public class EtudiantAmue implements IEtudiant {
 					for (int j = 2; j <= rg; j++) {
 						el.setLibelle(el.getLibelle() + "&#160;&#160;&#160;&#160;&#160;");
 					}
-
+                                        el.setMobLibelle(lib); // ajout P1 libelle pour la vue mobile (sans indentation)
 					el.setLibelle(el.getLibelle() + lib);
 				}
 			}

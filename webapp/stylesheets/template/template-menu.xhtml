@@ -7,13 +7,13 @@
 	xmlns:t="http://myfaces.apache.org/tomahawk">
 	<h:form id="formMenu">
 			
-		<span>
+		<span class="mob-menu-etu">
 			<h:commandLink id="linketacivil1" style="text-decoration:underline" action="#{etatCivilController.enter}">
 						<t:graphicImage value="/media/images/CMonDossierWeb/info.gif" align='absmiddle' style= " border:0 ; "/>
 						Etat-Civil
 					</h:commandLink>
 			</span>
-				<span>
+				<span class="mob-menu-etu">
 					<h:commandLink id="linkadresses1" style="text-decoration:underline" action="#{adressesController.enter}">
 						<t:graphicImage align='absmiddle'  value="/media/images/CMonDossierWeb/home.gif"
 							style= " border:0 ; " />
@@ -22,7 +22,7 @@
 			</span>
 			<h:outputText rendered="#{config.affInscriptions}">	
 				
-				<span>
+				<span class="mob-menu-etu">
 					<h:commandLink id="linkinscriptions1" style="text-decoration:underline" action="#{inscriptionsController.enter}">
 						<t:graphicImage align='absmiddle'  value="/media/images/CMonDossierWeb/modify.gif"
 							style= " border:0 ; " />
@@ -32,7 +32,7 @@
 			</h:outputText>
 			
 			<h:outputText rendered="#{config.affCalendrier}">
-				<span>
+				<span class="mob-menu-etu">
 					<h:commandLink id="linkcalendrier1" style="text-decoration:underline" action="#{calendrierController.enter}">
 						<t:graphicImage value="/media/images/CMonDossierWeb/paste.gif"
 							align='absmiddle' style= " border:0 ; " />
@@ -42,7 +42,7 @@
 			</h:outputText>
 			
 			<h:outputText rendered="#{config.affCalendrierRentree}">
-				<span>
+				<span class="mob-menu-etu">
 					<h:commandLink id="linkcalendrierRent1" style="text-decoration:underline" action="#{calendrierRentreeController.enter}">
 						<t:graphicImage value="/media/images/CMonDossierWeb/paste.gif"
 							align='absmiddle' style= " border:0 ; " />
@@ -52,7 +52,7 @@
 			</h:outputText>
 			
 			<h:outputText rendered="#{config.affNotes}">
-				<span>
+				<span class="mob-menu-etu">
 					<h:commandLink id="linknotes1" style="text-decoration:underline" action="#{notesController.enter}">
 						<t:graphicImage value="/media/images/CMonDossierWeb/folder.gif"
 							align='absmiddle' style= " border:0 ; " />

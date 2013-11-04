@@ -51,50 +51,57 @@
 					headerClass="portlet-table-header"
 					rowClasses="portlet-table-body, portlet-table-alternate">
 
-					<h:column>
+					<t:column styleClass="mob-top-space">
 						<f:facet name="header">
 							Date
 						</f:facet>
+                                                <span class="mob-libelle" style="display:none;">Date</span>
 						<h:outputText value="#{ex.date}" />
-					</h:column>
+					</t:column>
 
-					<h:column>
+					<t:column>
 						<f:facet name="header">
 							Heure
 						</f:facet>
+                                                <span class="mob-libelle" style="display:none;">Heure</span>     
 						<h:outputText value="#{ex.heure}" />
-					</h:column>
+					</t:column>
 
-					<h:column>
+					<t:column>
 						<f:facet name="header">
 							Durée
 						</f:facet>
+                                                <span class="mob-libelle" style="display:none;">Durée</span>
 						<h:outputText value="#{ex.duree}" />
-					</h:column>
-					<h:column>
+					</t:column>
+					<t:column>
 						<f:facet name="header">
 							Bâtiment
 						</f:facet>
+                                                <span class="mob-libelle" style="display:none;">Bâtiment</span>
 						<h:outputText value="#{ex.batiment}" />
-					</h:column>
-					<h:column>
+					</t:column>
+					<t:column>
 						<f:facet name="header">
 							Salle
 						</f:facet>
+                                                <span class="mob-libelle" style="display:none;">Salle</span>
 						<h:outputText value="#{ex.salle}" />
-					</h:column>
-					<h:column rendered="#{config.affNumPlaceExamen}">
+					</t:column>
+					<t:column rendered="#{config.affNumPlaceExamen}">
 						<f:facet name="header">
 							Place
 						</f:facet>
+                                                <span class="mob-libelle" style="display:none;">Place</span> 
 						<h:outputText value="#{ex.place}" />
-					</h:column>
-					<h:column>
+					</t:column>
+					<t:column styleClass="mob-bottom-space">
 						<f:facet name="header">
 						Examen
 						</f:facet>
+                                                <span class="mob-libelle" style="display:none;">Examen</span>
 						<h:outputText value="#{ex.epreuve}" />
-					</h:column>
+					</t:column>
 				</t:dataTable>
 			</h:form>
 

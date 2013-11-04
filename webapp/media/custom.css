@@ -1,0 +1,65 @@
+@media screen and (max-width: 760px) {
+
+.portlet-table {
+    display: block;
+    width: 100%; 
+}
+.portlet-table th {
+    display: none;
+}
+
+.portlet-table-header {
+    visibility: hidden; 
+}
+.portlet-table-header span, .portlet-table-header td {
+    visibility: visible;
+}
+
+.portlet-table-body td, .portlet-table-alternate td {
+ display: inline-block;
+ width: 100% !important;
+}
+
+.portlet-subtable {
+    display: inline;
+}
+
+.MonDossierWeb a {
+    text-decoration: underline !important;
+}
+
+.mob-libelle {
+  display: inline-block !important; 
+  font-style: italic;
+  width: 110px;
+}
+
+.mob-inline-display {
+    display: inline !important;
+}
+
+.mob-hide-obj {
+    display: none !important; 
+}  
+
+.mob-menu-etu {
+    display: inline-block;
+    padding-bottom: 5px; 
+}
+
+.mob-top-space {
+    margin-top: 15px; 
+}
+.mob-bottom-space {
+    margin-bottom: 15px;
+}
+.mob-left-space {
+    margin-left: 15px;
+}
+
+}
+
+.MonDossierWeb {
+    background-color: #FFFFFF;
+}
+

@@ -72,11 +72,11 @@
 				styleClass="portlet-table"
 				headerClass="portlet-table-header"
 				rowClasses="portlet-table-body, portlet-table-alternate" >					
-				<t:column>
+				<t:column styleClass="mob-top-space">
 					<f:facet name="header">
 						Année
 					</f:facet>
-					<h:outputText rendered="#{rowindexElp == 0 or !el.epreuve}">
+                                	<h:outputText rendered="#{rowindexElp == 0 or !el.epreuve}">
 						<b>#{el.annee}</b>
 					</h:outputText>
 				</t:column>
@@ -85,7 +85,8 @@
 					<f:facet name="header">
 						Code
 					</f:facet>
-					<h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
+					<span class="mob-libelle" style="display:none;">Code</span>
+                                        <h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
 						<b>#{el.code}</b>
 					</h:outputText>
 
@@ -102,21 +103,30 @@
 					<f:facet name="header">
 						Libellé
 					</f:facet>
-					<h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
+				        <span class="mob-libelle" style="display:none;">Libellé</span>
+                                   	<h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
 						<b><h:outputText value="#{el.libelle}" escape="false"/></b>
 					</h:outputText>
-					<h:outputText rendered="#{el.epreuve}">
+					<h:outputText rendered="#{el.epreuve}" styleClass="mob-hide-obj">
 						<i><h:outputText value="#{el.libelle}" escape="false"/></i>
 					</h:outputText>
 					<h:outputText
-						rendered="#{(el.level != 1) and (!el.epreuve)}" value="#{el.libelle}" escape="false"/>
-				</t:column>
+						rendered="#{(el.level != 1) and (!el.epreuve)}" value="#{el.libelle}" escape="false" styleClass="mob-hide-obj"/>
+                                        <span class="mob-inline-display" style="display:none;margin-left:-5px;">
+			                <h:outputText rendered="#{el.epreuve}">
+                                                <i><h:outputText value="#{el.mobLibelle}" escape="false"/></i>
+                                        </h:outputText>
+                                        <h:outputText
+                                                rendered="#{(el.level != 1) and (!el.epreuve)}" value="#{el.mobLibelle}" escape="false"/>
+                                        </span>
+                           	</t:column>
 
 				<t:column>
 					<f:facet name="header">
 						Session1
 					</f:facet>
-					<h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
+             				<span class="mob-libelle" style="display:none;">Session1</span>
+                                        <h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
 						<b>#{el.note1}<h:outputText value="/#{el.bareme1}" rendered="#{el.bareme1 != 0  and el.bareme1 != 20}"/></b>
 					</h:outputText>
 
@@ -133,7 +143,8 @@
 					<f:facet name="header">
 						Résultat
 					</f:facet>
-					<h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
+					<span class="mob-libelle" style="display:none;"></span>
+                                        <h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
 						<b>#{el.res1}</b>
 					</h:outputText>
 
@@ -150,7 +161,8 @@
 					<f:facet name="header">
 						Session2
 					</f:facet>
-					<h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
+					<span class="mob-libelle" style="display:none;">Session2</span>
+                                        <h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
 						<b>#{el.note2}<h:outputText value="/#{el.bareme2}" rendered="#{el.bareme2 != 0  and el.bareme2 != 20}"/></b>
 					</h:outputText>
 
@@ -163,11 +175,12 @@
 						value="#{el.note2}" />
 				</t:column>
 
-				<t:column>
+				<t:column styleClass="mob-bottom-space">
 					<f:facet name="header">
 						Résultat
 					</f:facet>
-					<h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
+					<span class="mob-libelle" style="display:none;"></span>
+                                        <h:outputText rendered="#{(el.level == 1) and (!el.epreuve)}">
 						<b>#{el.res2}</b>
 					</h:outputText>
 
@@ -180,14 +193,14 @@
 						value="#{el.res2}" />
 				</t:column>
 				
-				<t:column rendered="#{config.affRangEtudiant or etudiant.afficherRangElpEpr}">
+				<t:column rendered="#{config.affRangEtudiant or etudiant.afficherRangElpEpr}" styleClass="mob-hide-obj">
 					<f:facet name="header">Rang</f:facet>
-					<h:outputText value="#{el.rang}"/>
+                                        <h:outputText value="#{el.rang}"/>
 				</t:column> 
 				
-				<t:column rendered="#{config.affECTSEtudiant}">
+				<t:column rendered="#{config.affECTSEtudiant}" styleClass="mob-hide-obj">
 					<f:facet name="header">ECTS</f:facet>
-					<h:outputText value="#{el.ects}"/>
+                                        <h:outputText value="#{el.ects}"/>
 				</t:column> 
 
 			</t:dataTable>

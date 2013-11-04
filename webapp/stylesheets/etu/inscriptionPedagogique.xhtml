@@ -55,11 +55,12 @@
 					rowClasses="portlet-table-body, portlet-table-alternate" >					
 					
 					
-					<t:column>
+					<t:column styleClass="mob-top-space">
 						<f:facet name="header">
 							Code
 						</f:facet>
-						<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
+						<span class="mob-libelle" style="display:none;">Code</span>
+                                                <h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
 							<b>#{el.code}</b>
 						</h:outputText>
 						
@@ -72,23 +73,32 @@
 							value="#{el.code}" />
 					</t:column>
 					
-					<t:column>
+					<t:column styleClass="mob-bottom-space">
 						<f:facet name="header">
 							Libellé
 						</f:facet>
+                                                <span class="mob-libelle" style="display:none;">Libellé</span>  
 						<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
 							<b><h:outputText value="#{el.libelle}" escape="false"/></b>
 						</h:outputText>
-						<h:outputText rendered="#{el.annee == 'epreuve'}">
+						<h:outputText rendered="#{el.annee == 'epreuve'}" styleClass="mob-hide-obj">
 							<i><h:outputText value="#{el.libelle}" escape="false"/></i>
 						</h:outputText>
 						<h:outputText
-							rendered="#{(el.level != 1) and (el.annee != 'epreuve')}" value="#{el.libelle}" escape="false"/>
-					</t:column>
+							rendered="#{(el.level != 1) and (el.annee != 'epreuve')}" value="#{el.libelle}" escape="false" styleClass="mob-hide-obj"/>
+				                <span class="mob-inline-display" style="display:none;margin-left:-5px;">    
+                                                <h:outputText rendered="#{el.annee == 'epreuve'}">
+                                                        <i><h:outputText value="#{el.mobLibelle}" escape="false"/></i>
+                                                </h:outputText>
+                                                <h:outputText
+                                                        rendered="#{(el.level != 1) and (el.annee != 'epreuve')}" value="#{el.mobLibelle}" escape="false"/>
+                                                </span>
+                                 	</t:column>
 					
 
-					<t:column rendered="#{config.affECTSEtudiant}">
+					<t:column rendered="#{config.affECTSEtudiant}" styleClass="mob-hide-obj">
 						<f:facet name="header">ECTS</f:facet>
+                                                <span class="mob-libelle" style="display:none;">ECTS</span>
 						<h:outputText value="#{el.ects}"/>
 					</t:column> 
 					
