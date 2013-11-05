@@ -81,8 +81,8 @@
 						<h:outputText rendered="#{(el.level == 1) and (el.annee != 'epreuve')}">
 							<b><h:outputText value="#{el.libelle}" escape="false"/></b>
 						</h:outputText>
-						<h:outputText rendered="#{el.annee == 'epreuve'}" styleClass="mob-hide-obj">
-							<i><h:outputText value="#{el.libelle}" escape="false"/></i>
+						<h:outputText rendered="#{el.annee == 'epreuve'}">
+							<i><h:outputText value="#{el.libelle}" escape="false" styleClass="mob-hide-obj"/></i>
 						</h:outputText>
 						<h:outputText
 							rendered="#{(el.level != 1) and (el.annee != 'epreuve')}" value="#{el.libelle}" escape="false" styleClass="mob-hide-obj"/>
