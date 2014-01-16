@@ -53,7 +53,7 @@
 
  <table class="portlet-table">
 <c:forEach var="el" items="#{rechercheController.objcourant.listeFils}" >
-<tr><td>
+<tr><td class="mob-top-padding">
 	<h:commandLink action="#{rechercheController.chercheElementsDepuisElement}">
   			<f:param name="code" value="#{el.code}"/>
   			<f:param name="select" value="false"/>
@@ -63,7 +63,7 @@
   			<f:param name="versobjcourant" value="#{rechercheController.objcourant.version}"/>
 		<t:graphicImage style= " border:0 ; " alt='voir diplômes' value='/media/images/CMonDossierWeb/foldermini.gif' />
    		</h:commandLink>
-   		</td><td>
+   		</td><td class="mob-top-padding">
    			<h:commandLink style= " text-decoration:underline ; " action="#{rechercheController.chercheElementsDepuisElement}">
   			<f:param name="code" value="#{el.code}"/>
   			<f:param name="select" value="false"/>
@@ -83,7 +83,7 @@
   			<f:param name="versobjcourant" value="#{rechercheController.objcourant.version}"/>
 		<h:outputText value="#{el.libelle}"/>
 		</h:commandLink>
-		</td><td>
+		</td><td class="mob-top-padding">
 			<h:commandLink style= " text-decoration:underline ; " action="#{rechercheController.chercheElementsDepuisElement}">
   			<f:param name="code" value="#{el.code}"/>
   			<f:param name="select" value="true"/>

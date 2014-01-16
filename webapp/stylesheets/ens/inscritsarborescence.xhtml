@@ -87,10 +87,10 @@ Année universitaire :
 	<td nowrap='true' class='uportal-channel-strong'>
  <h:outputText value="#{listeInscritsController.annee}"/>
 </td>
-<td>
+<td class="mob-hide-obj">
 |
 </td>
-<td nowrap='true' class='uportal-text'>
+<td nowrap='true' class='uportal-text mob-top-space'>
 Libellé :
 </td>
 	<td nowrap='true' class='uportal-channel-strong'>
@@ -100,29 +100,29 @@ Libellé :
 	<td nowrap='true' class='uportal-channel-strong'>
 		<h:outputText value="#{listeInscritsController.libelle}"/>
 </td>
-<td>
+<td class="mob-hide-obj">
 |
 </td>
-<td nowrap='true' class='uportal-text'>
+<td nowrap='true' class='uportal-text mob-top-space'>
 Nombre d'inscrits :
 </td>
 	<td nowrap='true' class='uportal-channel-strong'>
  <h:outputText value="#{listeInscritsController.nbInscrits}"/>
 </td>
 <h:outputText rendered="#{config.utiliserTrombinoscope and listeInscritsController.photosValides}">
-<td>
+<td class="mob-hide-obj">
 |
 </td>
-<td nowrap='true' class='uportal-channel-strong'>
+<td nowrap='true' class='uportal-channel-strong mob-top-space'>
 <h:commandLink style= " text-decoration:underline ; " id="linktrombi" action="#{listeInscritsController.trombinoscope}">
 Trombinoscope
 </h:commandLink>
 </td>
 </h:outputText>
-<td>
+<td  class="mob-hide-obj">
 |
 </td>
-<td nowrap='true' class='uportal-channel-strong'>
+<td nowrap='true' class='uportal-channel-strong mob-top-space'>
 <h:commandLink style= " text-decoration:underline ; " id="linkxsl" action="#{listeInscritsController.exportExcel}">
 Fichier Excel
 </h:commandLink>

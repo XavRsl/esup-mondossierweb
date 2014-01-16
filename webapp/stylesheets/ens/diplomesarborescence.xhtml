@@ -44,21 +44,21 @@
  
  <table class="portlet-table">
 <c:forEach var="dip" items="#{rechercheController.diplomes.listeFils}" >
-<tr><td>
+<tr><td class="mob-top-padding">
 	<h:commandLink action="#{rechercheController.chercheEtapesDepuisDiplome}">
   			<f:param name="code" value="#{dip.cod_dip}"/>
   			<f:param name="vers" value="#{dip.cod_vrs_vdi}"/>
   			<f:param name="codeobjcourant" value="#{rechercheController.objcourant.code}"/>
 		<t:graphicImage style= " border:0 ; " alt='voir diplômes' value='/media/images/CMonDossierWeb/foldermini.gif' />
    		</h:commandLink>
-   		</td><td>
+   		</td><td class="mob-top-padding">
    			<h:commandLink action="#{rechercheController.chercheEtapesDepuisDiplome}">
   			<f:param name="code" value="#{dip.cod_dip}"/>
   			<f:param name="vers" value="#{dip.cod_vrs_vdi}"/>
   			<f:param name="codeobjcourant" value="#{rechercheController.objcourant.code}"/>
 		  <h:outputText value="#{dip.cod_dip}"/>/<h:outputText value="#{dip.cod_vrs_vdi}"/>
     		</h:commandLink>
-		</td><td>
+		</td><td class="mob-top-padding">
 			<h:commandLink action="#{rechercheController.chercheEtapesDepuisDiplome}">
   			<f:param name="code" value="#{dip.cod_dip}"/>
   			<f:param name="vers" value="#{dip.cod_vrs_vdi}"/>

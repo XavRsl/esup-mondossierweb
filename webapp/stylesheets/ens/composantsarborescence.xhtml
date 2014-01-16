@@ -30,17 +30,17 @@
  <table class="portlet-table">
 
 <c:forEach var="comp" items="#{rechercheController.composantes.listeFils}" >
-<tr><td>
+<tr><td class="mob-top-padding">
 	<h:commandLink action="#{rechercheController.chercheDiplomes}">
   			<f:param name="code" value="#{comp.cod_cmp}"/>
 		<t:graphicImage value='/media/images/CMonDossierWeb/foldermini.gif' style= " border:0 ; " alt='voir diplômes'/>
    		</h:commandLink>
-   		</td><td>
+   		</td><td class="mob-top-padding">
    		<h:commandLink action="#{rechercheController.chercheDiplomes}">
   			<f:param name="code" value="#{comp.cod_cmp}"/>
 		<h:outputText value="#{comp.cod_cmp}"/>
 		</h:commandLink>
-		</td><td>
+		</td><td class="mob-top-padding">
 		<h:commandLink action="#{rechercheController.chercheDiplomes}">
   			<f:param name="code" value="#{comp.cod_cmp}"/>
 			<div class="grasSouligne"><h:outputText value="#{comp.lib_cmp}"/></div>

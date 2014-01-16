@@ -71,23 +71,23 @@
 			</tr>
 			
 			<c:forEach var="groupe" items="#{coll.listeGroupes}" >
-				<tr><td>
+				<tr><td class="mob-top-padding">
 					
-				</td><td>
+				</td><td class="mob-top-padding">
 					
-				</td><td>
+				</td><td class="mob-top-padding">
 					<h:commandLink action="#{rechercheCodeController.validGroupe}">
 						<f:param name="code" value="#{groupe.cleGroupe}"/>
 					<div class="grasSouligne">#{groupe.codGroupe}</div>
 					</h:commandLink>
-				</td><td>
+				</td><td class="mob-top-padding">
 					<h:commandLink action="#{rechercheCodeController.validGroupe}">
 						<f:param name="code" value="#{groupe.cleGroupe}"/>
 					<div class="grasSouligne">#{groupe.libGroupe}</div>
 					</h:commandLink>
-				</td><td align="center">
+				</td><td align="center" class="mob-top-padding">
 					<div class="grasSouligne">#{groupe.capMaxGpe}</div>
-				</td><td align="center">
+				</td><td align="center" class="mob-top-padding">
 					<div class="grasSouligne">
 						<h:outputText rendered="#{groupe.affCapIntGpe}">
 						#{groupe.capIntGpe}

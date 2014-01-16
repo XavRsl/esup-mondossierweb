@@ -15,7 +15,7 @@
     visibility: visible;
 }
 
-.portlet-table-body td, .portlet-table-alternate td {
+.portlet-table-body td, .portlet-table-alternate td, .uportal-background-semidark td {
  display: inline-block;
  width: 100% !important;
 }
@@ -24,8 +24,12 @@
     display: inline;
 }
 
-.MonDossierWeb a {
+.MonDossierWeb a, .portlet-table a {
     text-decoration: underline !important;
+}
+
+.uportal-text {
+   font-style: italic;	
 }
 
 .mob-libelle {
@@ -45,6 +49,10 @@
 .mob-menu-etu {
     display: inline-block;
     padding-bottom: 5px; 
+}
+
+.portlet-table td.mob-top-padding {
+     padding-top : 13px !important;
 }
 
 .mob-top-space {
