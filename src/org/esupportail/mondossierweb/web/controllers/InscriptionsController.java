@@ -170,8 +170,8 @@ public class InscriptionsController extends AbstractContextAwareController {
 						mapUpdated=true;
 					}
 				}
-				//interdit l'edition de certificat pour les étudiants si l'inscription n'est pas payée
-				if (!mapUpdated && !ins.isEstEnRegle() && !getSessionController().isEnseignant()){
+				//interdit l'edition de certificat si l'inscription n'est pas payée
+				if (!mapUpdated && !ins.isEstEnRegle()){
 					autorisationCertificats.put(ins.getCodEtpCodAnuConcat(), false);
 					mapUpdated=true;
 				}
